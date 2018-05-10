@@ -1,0 +1,3 @@
+Cambiar OtherAccountInfo a algo tipo SocialProfile -> Ya está cambiado en el UML y doc
+Cambiar la relación entre Business y BussinesInfo a 0..* -> Cambiado en el UML
+Cambiar Message por Chat y Mail por Message -> Cambiado en el UML
