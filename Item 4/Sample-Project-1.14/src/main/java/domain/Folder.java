@@ -1,0 +1,94 @@
+
+package domain;
+
+import java.util.Collection;
+
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+
+@Entity
+@Access(AccessType.PROPERTY)
+public class Folder extends DomainEntity {
+
+	private String	title;
+	private Boolean	systemFolders;
+
+
+	@NotBlank
+	public String getTitle() {
+		return this.title;
+	}
+
+	public void setTitle(final String title) {
+		this.title = title;
+	}
+
+	@NotNull
+	public Boolean isSystemFolders() {
+		return this.systemFolders;
+	}
+
+	@NotNull
+	public Boolean getSystemFolders() {
+		return this.systemFolders;
+	}
+
+	public void setSystemFolders(final Boolean valor) {
+		this.systemFolders = valor;
+	}
+
+
+	//Relationships
+
+	private Folder				parent;
+	private Collection<Folder>	folders;
+	private Collection<Message>	messages;
+
+
+	@Valid
+	@ManyToOne(optional = true)
+	public Folder getParent() {
+		return this.parent;
+	}
+
+	@NotNull
+	@OneToMany(mappedBy = "parent")
+	public Collection<Folder> getFolders() {
+		return this.folders;
+	}
+
+	@NotNull
+	@ManyToMany
+	public Collection<Message> getMessages() {
+		return this.messages;
+	}
+
+	public void setMessages(final Collection<Message> messages) {
+		this.messages = messages;
+	}
+
+	public void setParent(final Folder parent) {
+		this.parent = parent;
+	}
+
+	public void setFolders(final Collection<Folder> folders) {
+		this.folders = folders;
+	}
+
+	public void addMessage(final Message message) {
+		this.messages.add(message);
+	}
+
+	public void removeMessage(final Message message) {
+		if (this.messages.contains(message))
+			this.messages.remove(message);
+	}
+}
