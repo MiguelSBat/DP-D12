@@ -41,11 +41,11 @@ public class Order extends DomainEntity {
 	//Relationships
 
 	private Collection<SaleLine>	saleLines;
-	private ShippmentAddress		shippmentAddress;
+	private ShipmentAddress		shippmentAddress;
 	private ShippingInfo			shippingInfo;
-	private FacturarionData			facturationData;
+	private FacturationData			facturationData;
 	private User					user;
-	private Bussiness				bussiness;
+	private Business				bussiness;
 
 
 	@OneToMany
@@ -57,11 +57,11 @@ public class Order extends DomainEntity {
 		this.saleLines = saleLines;
 	}
 	@NotNull
-	public ShippmentAddress getShippmentAddress() {
+	public ShipmentAddress getShippmentAddress() {
 		return this.shippmentAddress;
 	}
 
-	public void setShippmentAddress(final ShippmentAddress shippmentAddress) {
+	public void setShippmentAddress(final ShipmentAddress shippmentAddress) {
 		this.shippmentAddress = shippmentAddress;
 	}
 
@@ -75,11 +75,11 @@ public class Order extends DomainEntity {
 	}
 
 	@NotNull
-	public FacturarionData getFacturationData() {
+	public FacturationData getFacturationData() {
 		return this.facturationData;
 	}
 
-	public void setFacturationData(final FacturarionData facturationData) {
+	public void setFacturationData(final FacturationData facturationData) {
 		this.facturationData = facturationData;
 	}
 
@@ -93,11 +93,11 @@ public class Order extends DomainEntity {
 	}
 
 	@ManyToOne(optional = false)
-	public Bussiness getBussiness() {
+	public Business getBussiness() {
 		return this.bussiness;
 	}
 
-	public void setBussiness(final Bussiness bussiness) {
+	public void setBussiness(final Business bussiness) {
 		this.bussiness = bussiness;
 	}
 
