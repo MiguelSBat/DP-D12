@@ -1,3 +1,5 @@
-cambiado relacion entre advertisement y business de 0.*-1 a 0.*-0..1
- añadido el parametro systemfolder a folder, e invertido la multiplicidad entre socialidentity y user
+ Cambios realizados el  14/05
+
+- cambiado relacion entre advertisement y business de 0.*-1 a 0.*-0..1
+- añadido el parametro systemfolder a folder, e invertido la multiplicidad entre socialidentity y user
 
