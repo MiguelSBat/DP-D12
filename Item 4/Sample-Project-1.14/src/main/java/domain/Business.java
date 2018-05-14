@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
@@ -80,6 +81,7 @@ public class Business extends Actor {
 	}
 
 	@URL
+	@ElementCollection
 	public Collection<String> getPhotosURL() {
 		return this.photosURL;
 	}
@@ -91,8 +93,8 @@ public class Business extends Actor {
 
 	//Relationships
 
-	private Collection<Answer>	answers;
-	private BusinessInfo		businessInfo;
+	private Collection<Answer>			answers;
+	private Collection<BusinessInfo>	businessInfos;
 
 
 	@OneToMany
@@ -105,12 +107,12 @@ public class Business extends Actor {
 	}
 
 	@OneToMany
-	public BusinessInfo getBusinessInfo() {
-		return this.businessInfo;
+	public Collection<BusinessInfo> getBusinessInfos() {
+		return this.businessInfos;
 	}
 
-	public void setBusinessInfo(final BusinessInfo businessInfo) {
-		this.businessInfo = businessInfo;
+	public void setBusinessInfos(final Collection<BusinessInfo> businessInfos) {
+		this.businessInfos = businessInfos;
 	}
 
 }

@@ -1,8 +1,6 @@
 
 package domain;
 
-import java.util.Collection;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
@@ -47,16 +45,16 @@ public class AuctionAdvertisement extends DomainEntity {
 
 	//Relationships
 
-	private Collection<User>	users;
+	private User	user;
 
 
 	@ManyToOne(optional = false)
-	public Collection<User> getUsers() {
-		return this.users;
+	public User getUser() {
+		return this.user;
 	}
 
-	public void setUsers(final Collection<User> users) {
-		this.users = users;
+	public void setUser(final User user) {
+		this.user = user;
 	}
 
 }

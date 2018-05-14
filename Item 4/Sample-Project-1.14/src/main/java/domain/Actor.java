@@ -21,11 +21,11 @@ import security.UserAccount;
 @Access(AccessType.PROPERTY)
 public class Actor extends DomainEntity {
 
-	@Email
-	@NotBlank
 	private String	emailAddress;
 
 
+	@Email
+	@NotBlank
 	public String getEmailAddress() {
 		return this.emailAddress;
 	}
@@ -37,12 +37,12 @@ public class Actor extends DomainEntity {
 
 	//Relationships
 
-	private UserAccount			userAccount;
-	private Collection<Folder>	folders;
-	private Collection<Message>	messagesSent;
-	private Collection<Message>	messagesReceived;
-	private Collection<Report>	reports;
-	private Valoration			valoration;
+	private UserAccount				userAccount;
+	private Collection<Folder>		folders;
+	private Collection<Message>		messagesSent;
+	private Collection<Message>		messagesReceived;
+	private Collection<Report>		reports;
+	private Collection<Valoration>	valorations;
 
 
 	@Valid
@@ -96,12 +96,12 @@ public class Actor extends DomainEntity {
 	}
 
 	@OneToMany
-	public Valoration getValoration() {
-		return this.valoration;
+	public Collection<Valoration> getValorations() {
+		return this.valorations;
 	}
 
-	public void setValoration(final Valoration valoration) {
-		this.valoration = valoration;
+	public void setValorations(final Collection<Valoration> valorations) {
+		this.valorations = valorations;
 	}
 
 }

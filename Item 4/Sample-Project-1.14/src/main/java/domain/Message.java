@@ -78,7 +78,7 @@ public class Message extends DomainEntity {
 		return this.recipient;
 	}
 
-	public void setRecipients(final Actor recipient) {
+	public void setRecipient(final Actor recipient) {
 		this.recipient = recipient;
 	}
 

@@ -6,9 +6,11 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -20,6 +22,7 @@ public class Advertisement extends DomainEntity {
 	private Collection<String>	tags;
 
 
+	@NotNull
 	public Date getPublicationDate() {
 		return this.publicationDate;
 	}
@@ -28,6 +31,7 @@ public class Advertisement extends DomainEntity {
 		this.publicationDate = publicationDate;
 	}
 
+	@NotNull
 	public Date getEndDate() {
 		return this.endDate;
 	}
@@ -36,6 +40,7 @@ public class Advertisement extends DomainEntity {
 		this.endDate = endDate;
 	}
 
+	@NotNull
 	public Double getPrice() {
 		return this.price;
 	}
@@ -44,20 +49,21 @@ public class Advertisement extends DomainEntity {
 		this.price = price;
 	}
 
+	@ElementCollection
 	public Collection<String> getTags() {
 		return this.tags;
 	}
 
-	public void setTag(final Collection<String> tags) {
+	public void setTags(final Collection<String> tags) {
 		this.tags = tags;
 	}
 
 
 	//Relationships
 
-	private Item		item;
-	private SaleLine	saleLine;
-	private Business	business;
+	private Item					item;
+	private Collection<SaleLine>	saleLines;
+	private Business				business;
 
 
 	@ManyToOne(optional = false)
@@ -70,12 +76,12 @@ public class Advertisement extends DomainEntity {
 	}
 
 	@OneToMany
-	public SaleLine getSaleLine() {
-		return this.saleLine;
+	public Collection<SaleLine> getSaleLines() {
+		return this.saleLines;
 	}
 
-	public void setSaleLine(final SaleLine saleLine) {
-		this.saleLine = saleLine;
+	public void setSaleLines(final Collection<SaleLine> saleLines) {
+		this.saleLines = saleLines;
 	}
 
 	@ManyToOne(optional = true)

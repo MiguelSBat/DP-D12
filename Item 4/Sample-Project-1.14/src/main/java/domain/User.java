@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
@@ -12,7 +13,6 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
-import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -45,6 +45,7 @@ public class User extends DomainEntity {
 		this.surname = surname;
 	}
 
+	@NotBlank
 	@Pattern(regexp = "^\\+?\\d+$")
 	public String getPhone() {
 		return this.phone;
@@ -80,7 +81,8 @@ public class User extends DomainEntity {
 		this.suspicious = suspicious;
 	}
 
-	@URL
+	@NotNull
+	@ElementCollection
 	public Collection<String> getPhotosURL() {
 		return this.photosURL;
 	}
@@ -92,26 +94,26 @@ public class User extends DomainEntity {
 
 	//Relationships
 
-	private SocialIdentity	socialIdentity;
-	private Review			review;
+	private Collection<SocialIdentity>	socialIdentities;
+	private Collection<Review>			reviews;
 
 
 	@OneToMany
-	public SocialIdentity getSocialIdentity() {
-		return this.socialIdentity;
+	public Collection<SocialIdentity> getSocialIdentities() {
+		return this.socialIdentities;
 	}
 
-	public void setSocialIdentity(final SocialIdentity socialIdentity) {
-		this.socialIdentity = socialIdentity;
+	public void setSocialIdentities(final Collection<SocialIdentity> socialIdentities) {
+		this.socialIdentities = socialIdentities;
 	}
 
 	@OneToMany
-	public Review getReview() {
-		return this.review;
+	public Collection<Review> getReviews() {
+		return this.reviews;
 	}
 
-	public void setReview(final Review review) {
-		this.review = review;
+	public void setReviews(final Collection<Review> reviews) {
+		this.reviews = reviews;
 	}
 
 }
