@@ -129,7 +129,7 @@
 	</bean>	
 	
 	<!-- Admin -->	
-	<bean id="admin" class="domain.Administrator">
+	<bean id="admin" class="domain.Admin">
 	<property name="userAccount" ref="userAccount1" />
 		<property name="emailAddress" value="ponsavi@acme.org" />
 		<property name="folders">
@@ -159,7 +159,7 @@
 	</bean>
 	
 	<!-- Moderator -->	
-	<bean id="Moderator1" class="domain.Customer">
+	<bean id="Moderator1" class="domain.Moderator">
 		<property name="emailAddress" value="ponsavi@acme.org" />
 		<property name="userAccount" ref="userAccount3" />
 		<property name="folders">
@@ -349,7 +349,7 @@
 	
 		<!-- Business -->
 		
-	<bean id="business1" class="domain.Agent">
+	<bean id="business1" class="domain.Business">
 		<property name="userAccount" ref="userAccount6" />
 		<property name="name" value="business1" />
 		<property name="paypalEmail" value="ponsavi@paypal.org" />
@@ -395,7 +395,7 @@
 		</property>
 	</bean>
 		
-	<bean id="business2" class="domain.Agent">
+	<bean id="business2" class="domain.Business">
 		<property name="userAccount" ref="userAccount7" />
 		<property name="name" value="business2" />
 		<property name="paypalEmail" value="ponsavi@acme.org" />
@@ -930,27 +930,183 @@
 		<!-- Valoration -->
 		
 	<bean id="valoration1" class="domain.Valoration">
-		<property name="text" value="Me acosa por el chat" />
-		<property name="weight" value="1" />
+		<property name="date" value="2018/01/15" />
+		<property name="score" value="1" />
 		<property name="actor" ref="User3" />
 	</bean>
 
 		<!-- SocialIdentity -->
+		
+	<bean id="socialIdentity1" class="domain.SocialIdentity">
+		<property name="website" value="SeriaUnaURL.com" />
+		<property name="nick" value="1" />
+		<property name="accountURL" value="CambiarPorUnaURL.com" />
+	</bean>
+	
 		<!-- Chat -->
+		
+	<bean id="chat1" class="domain.Chat">
+		<property name="text" value="I want sex with you" />
+		<property name="date" value="2018/01/15" />
+		<property name="sender" ref="User3" />		
+		<property name="receiver" ref="User1" />		
+	</bean>
 		<!-- Bid -->
+	<bean id="bid1" class="domain.Bid">
+		<property name="amount" value="250.35" />
+		<property name="User" ref="User2" />		
+		<property name="auctionAdvertisement" ref="auctionAdvertisement1" />		
+	</bean>		
+		
 		<!-- Answer -->
+		
+	<bean id="answer1" class="domain.Answer">
+		<property name="text" value="No viene en ese color" />
+		<property name="date" value="2018/01/15" />
+		<property name="question" ref="question1" />		
+	</bean>	
+		
 		<!-- Question -->
-		<!-- Advertisement -->
+
+	<bean id="question1" class="domain.Question">
+		<property name="text" value="¿La tienes en verde?" />
+		<property name="date" value="2018/01/15" />
+		<property name="user" ref="user1" />		
+		<property name="shopAdvertisement" ref="shopAdvertisement1" />		
+	</bean>
+
 		<!-- ShopAdvertisement -->
+		
+	<bean id="shopAdvertisement1" class="domain.ShopAdvertisement">
+		<property name="stock" value="100" />
+		<property name="publicationDate" value="2018/01/15" />
+		<property name="endDate" value="2030/01/15" />
+		<property name="price" value="290.50" />
+		<property name="tag" value="Consola" />
+		<property name="business" ref="business1" />
+		<property name="item1" ref="item1" />			
+		<property name="questions">
+			<list>
+				<ref bean="question1" />
+			</list>
+		</property>	
+		<property name="saleLine">
+			<list>
+				<ref bean="saleLine1" />
+			</list>
+		</property>
+	</bean>
+	
 		<!-- ExpressAdvertisement -->
+		
+	<bean id="expressAdvertisement1" class="domain.ExpressAdvertisement">
+		<property name="publicationDate" value="2018/01/15" />
+		<property name="endDate" value="2030/01/15" />
+		<property name="price" value="320.50" />
+		<property name="tag" value="Consola" />
+		<property name="user" ref="user1" />
+		<property name="business">
+			<null></null>
+		</property>
+		<property name="item1" ref="item1" />			
+		<property name="saleLine">
+			<list>
+			</list>
+		</property>
+	</bean>
 		<!-- AuctionAdvertisement -->
+		
+	<bean id="auctionAdvertisement1" class="domain.AuctionAdvertisement">
+		<property name="publicationDate" value="2018/01/15" />
+		<property name="endDate" value="2019/01/15" />
+		<property name="price" value="320.50" />
+		<property name="tag" value="Consola" />
+		<property name="user" ref="user1" />
+		<property name="business">
+			<null></null>
+		</property>
+		<property name="item1" ref="item1" />			
+		<property name="saleLine">
+			<list>
+			</list>
+		</property>
+		<property name="startingPrice" value="220.50" />
+		<property name="instantBuyPrice" value="520.50" />
+		<property name="secret" value="false" />
+	</bean>
 		<!-- Review -->
+
+	<bean id="review1" class="domain.Review">
+		<property name="date" value="2018/01/15" />
+		<property name="text" value="Muy buena pero no lo tienen en verde" />
+		<property name="score" value="4" />
+		<property name="shopAdvertisement" ref="shopAdvertisement1" />
+	</bean>
 		<!-- BusinessInfo -->
+	<bean id="businessInfo1" class="domain.BusinessInfo">
+		<property name="adress" value="adv. Shibuya" />
+		<property name="city" value="Tokyo" />
+		<property name="aditionalInfo" value="Vendemos por dinero muchas Nintendo Switch" />
+		<property name="country" value="Japon" />	
+		<property name="business" ref="business1"/>	
+	</bean>
+		
 		<!-- Item -->
+	<bean id="Item1" class="domain.Item">
+		<property name="name" value="Nintendo switch" />
+		<property name="description" value="Totalmente nueva" />
+		<property name="photo" value="http://www.nintenderos.com/wp-content/uploads/2017/10/nintendo-switch.jpg" />
+	</bean>
+		
 		<!-- ShoppingCart -->
+	<bean id="shoppingCard1" class="domain.ShoppingCart">
+		<property name="User" ref="user1" />
+	</bean>
+	<bean id="shoppingCard2" class="domain.ShoppingCart">
+		<property name="User" ref="user2" />
+	</bean>
+	<bean id="shoppingCard3" class="domain.ShoppingCart">
+		<property name="User" ref="user3" />
+	</bean>
+	
 		<!-- saleLine -->
+	<bean id="saleLine1" class="domain.saleLine">
+		<property name="amount" value="1"/>
+		<property name="shoppingCard1" ref="shoppingCard1" />
+		<property name="order" ref="Order1" />
+	</bean>
 		<!-- Order -->
+	<bean id="order1" class="domain.Order">
+		<property name="date" value="2018/01/15"/>
+		<property name="status" value="Send"/>
+		<property name="user" ref="user1" />
+		<property name="business" ref="business1" />
+	</bean>
 		<!-- ShipmentAddress -->
+	<bean id="shipmentAddress1" class="domain.ShipmentAddress">
+		<property name="country" value="España"/>
+		<property name="city" value="Sevilla"/>
+		<property name="postalCode" value="41008" />
+		<property name="address" value="c\ Rue 13 del Perzebe" />
+		<property name="order" ref="order1" />
+	</bean>
 		<!-- ShippingInfo -->
+	<bean id="shippingInfo1" class="domain.ShippingInfo">
+		<property name="trackingNumber" value="123456789"/>
+		<property name="company" value="SEUR"/>
+		<property name="additionalInfo" value="esta en camino" />
+		<property name="order" ref="order1" />
+	</bean>
 		<!-- FacturationData -->
+	<bean id="facturationData1" class="domain.FacturationData">
+		<property name="name" value="Xi"/>
+		<property name="subname" value="Wang-Fen"/>
+		<property name="country" value="España" />
+		<property name="city" value="Sevilla" />
+		<property name="postalCode" value="41008" />
+		<property name="IDNumber" value="00000001A" />
+		<property name="order" ref="order1" />
+	</bean>
+
+
 </beans>
