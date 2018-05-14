@@ -19,8 +19,8 @@
 
 	<!-- Artifact identification and properties -->
 
-	<groupId>Design-and-Testing</groupId>
-	<artifactId>Sample-Project</artifactId>
+	<groupId>D42</groupId>
+	<artifactId>AcmeShop</artifactId>
 	<version>1.14</version>
 	<packaging>war</packaging>
 	
@@ -30,9 +30,9 @@
 
 	<!-- Indexing information -->
 
-	<name>Sample Project</name>
-	<url>http://www.sample-project.com</url>
-	<description>This is D&amp;T's sample project.</description>
+	<name>AcmeShop</name>
+	<url>http://www.acme-shop.com</url>
+	<description>This is D&amp;T's project.</description>
 	
 	<!-- Build commands -->
 
