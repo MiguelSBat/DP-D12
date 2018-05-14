@@ -1,3 +1,5 @@
+- Arreglar para que la base de dato sea AcmeShop y no Sample
+
 - Tal y como esta diseñado valoration junto a su relacion con user es erronea y habria que rediseñarlo.
 
 - Replantear relaciones entre user,business y order. Tal y como esta ahora al crear un order, se le asociaria un user y un business,
