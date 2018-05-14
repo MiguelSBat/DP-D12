@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class Chat extends DomainEntity {
@@ -17,7 +19,7 @@ public class Chat extends DomainEntity {
 	private Date	date;
 
 
-	@NotNull
+	@NotBlank
 	public String getText() {
 		return this.text;
 	}

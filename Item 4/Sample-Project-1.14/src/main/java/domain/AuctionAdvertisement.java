@@ -25,6 +25,7 @@ public class AuctionAdvertisement extends DomainEntity {
 		this.startingPrice = startingPrice;
 	}
 
+	@NotNull
 	public Double getInstaBuyPrice() {
 		return this.instaBuyPrice;
 	}

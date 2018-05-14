@@ -5,6 +5,8 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class BusinessInfo extends DomainEntity {
@@ -15,6 +17,7 @@ public class BusinessInfo extends DomainEntity {
 	private String	country;
 
 
+	@NotBlank
 	public String getAddress() {
 		return this.address;
 	}
@@ -23,6 +26,7 @@ public class BusinessInfo extends DomainEntity {
 		this.address = address;
 	}
 
+	@NotBlank
 	public String getCity() {
 		return this.City;
 	}
@@ -31,6 +35,7 @@ public class BusinessInfo extends DomainEntity {
 		this.City = city;
 	}
 
+	@NotBlank
 	public String getAdditionalInfo() {
 		return this.additionalInfo;
 	}
@@ -39,6 +44,7 @@ public class BusinessInfo extends DomainEntity {
 		this.additionalInfo = additionalInfo;
 	}
 
+	@NotBlank
 	public String getCountry() {
 		return this.country;
 	}
