@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class ExpressAdvertisement extends DomainEntity {
+public class ExpressAdvertisement extends Advertisement {
 
 	//Relationships
 

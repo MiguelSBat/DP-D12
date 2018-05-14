@@ -5,6 +5,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -22,7 +23,7 @@ public class ShippingInfo extends DomainEntity {
 	public void setTrackingNumber(final Integer trackingNumber) {
 		this.trackingNumber = trackingNumber;
 	}
-
+	@NotNull
 	public String getCompany() {
 		return this.company;
 	}
@@ -30,7 +31,7 @@ public class ShippingInfo extends DomainEntity {
 	public void setCompany(final String company) {
 		this.company = company;
 	}
-
+	@NotNull
 	public String getAdditionalInfo() {
 		return this.additionalInfo;
 	}

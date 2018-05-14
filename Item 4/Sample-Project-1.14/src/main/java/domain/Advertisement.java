@@ -10,7 +10,11 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -23,6 +27,8 @@ public class Advertisement extends DomainEntity {
 
 
 	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getPublicationDate() {
 		return this.publicationDate;
 	}
@@ -32,6 +38,8 @@ public class Advertisement extends DomainEntity {
 	}
 
 	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getEndDate() {
 		return this.endDate;
 	}
@@ -49,7 +57,7 @@ public class Advertisement extends DomainEntity {
 		this.price = price;
 	}
 
-	@ElementCollection
+	@ElementCollection(targetClass = String.class)
 	public Collection<String> getTags() {
 		return this.tags;
 	}

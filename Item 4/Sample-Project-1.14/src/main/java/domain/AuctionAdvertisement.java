@@ -9,10 +9,10 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class AuctionAdvertisement extends DomainEntity {
+public class AuctionAdvertisement extends Advertisement {
 
 	private Double	startingPrice;
-	private Double	instaBuyPrice;
+	private Double	instantBuyPrice;
 	private Boolean	secret;
 
 
@@ -26,12 +26,12 @@ public class AuctionAdvertisement extends DomainEntity {
 	}
 
 	@NotNull
-	public Double getInstaBuyPrice() {
-		return this.instaBuyPrice;
+	public Double getInstantBuyPrice() {
+		return this.instantBuyPrice;
 	}
 
-	public void setInstaBuyPrice(final Double instaBuyPrice) {
-		this.instaBuyPrice = instaBuyPrice;
+	public void setInstantBuyPrice(final Double instantBuyPrice) {
+		this.instantBuyPrice = instantBuyPrice;
 	}
 
 	@NotNull

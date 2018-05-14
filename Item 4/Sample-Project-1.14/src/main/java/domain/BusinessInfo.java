@@ -4,6 +4,7 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -12,7 +13,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public class BusinessInfo extends DomainEntity {
 
 	private String	address;
-	private String	City;
+	private String	city;
 	private String	additionalInfo;
 	private String	country;
 
@@ -28,11 +29,11 @@ public class BusinessInfo extends DomainEntity {
 
 	@NotBlank
 	public String getCity() {
-		return this.City;
+		return this.city;
 	}
 
 	public void setCity(final String city) {
-		this.City = city;
+		this.city = city;
 	}
 
 	@NotBlank
@@ -53,4 +54,18 @@ public class BusinessInfo extends DomainEntity {
 		this.country = country;
 	}
 
+
+	//Relationships
+
+	private Business	business;
+
+
+	@ManyToOne(optional = false)
+	public Business getBusiness() {
+		return this.business;
+	}
+
+	public void setBusiness(final Business business) {
+		this.business = business;
+	}
 }

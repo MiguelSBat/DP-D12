@@ -7,7 +7,11 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -18,6 +22,8 @@ public class Ticket extends DomainEntity {
 
 
 	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getDate() {
 		return this.date;
 	}
@@ -38,7 +44,7 @@ public class Ticket extends DomainEntity {
 	//Relationships
 
 	private User		user;
-	private Business	bussiness;
+	private Business	business;
 
 
 	@ManyToOne(optional = false)
@@ -51,12 +57,12 @@ public class Ticket extends DomainEntity {
 	}
 
 	@ManyToOne(optional = false)
-	public Business getBussiness() {
-		return this.bussiness;
+	public Business getBusiness() {
+		return this.business;
 	}
 
-	public void setBussiness(final Business bussiness) {
-		this.bussiness = bussiness;
+	public void setBusiness(final Business business) {
+		this.business = business;
 	}
 
 }

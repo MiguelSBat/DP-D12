@@ -19,7 +19,7 @@ public class Config extends DomainEntity {
 	private String				englishWelcomeMessage;
 	private String				spanishWelcomeMessage;
 	private Integer				userMaxAnnouncements;
-	private Integer				bussinessMaxAnnouncements;
+	private Integer				businessMaxAnnouncements;
 	private Integer				premiumMaxAnnouncements;
 	private Integer				announcementExpirationMonths;
 	private Double				premiumPrice;
@@ -68,12 +68,12 @@ public class Config extends DomainEntity {
 	}
 
 	@NotNull
-	public Integer getBussinessMaxAnnouncements() {
-		return this.bussinessMaxAnnouncements;
+	public Integer getBusinessMaxAnnouncements() {
+		return this.businessMaxAnnouncements;
 	}
 
-	public void setBussinessMaxAnnouncements(final Integer bussinessMaxAnnouncements) {
-		this.bussinessMaxAnnouncements = bussinessMaxAnnouncements;
+	public void setBusinessMaxAnnouncements(final Integer bussinessMaxAnnouncements) {
+		this.businessMaxAnnouncements = bussinessMaxAnnouncements;
 	}
 
 	@NotNull
@@ -140,7 +140,7 @@ public class Config extends DomainEntity {
 		this.reputationTreshold = reputationTreshold;
 	}
 
-	@ElementCollection
+	@ElementCollection(targetClass = String.class)
 	public Collection<String> getSpamWords() {
 		return this.spamWords;
 	}

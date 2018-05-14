@@ -109,7 +109,7 @@
 		<property name="englishWelcomeMessage" value="Buy, sell or auction everything that you can imagine" />
 		<property name="spanishWelcomeMessage" value="Compra, vende o subasta todo que puedas imaginar" />
 		<property name="userMaxAnnouncements" value="10" />
-		<property name="bussinessMaxAnnouncements" value="50" />
+		<property name="businessMaxAnnouncements" value="50" />
 		<property name="premiumMaxAnnouncements" value="100" />
 		<property name="announcementExpirationMonths" value="2" />
 		<property name="premiumPrice" value="20.0" />
@@ -117,7 +117,7 @@
 		<property name="transactionReportWeight" value="1" />
 		<property name="reportWeightTreshold" value="5" />
 		<property name="reputationTreshold" value="1" />
-		<property name="tabooWords">
+		<property name="spamWords">
 			<list>
 			<value>sex</value>
 			<value>sexo</value>
@@ -205,7 +205,7 @@
 		</property>
 		<property name="socialIdentities">
 			<list>
-				<ref bean="SocialIdentity1" />
+				<ref bean="socialIdentity1" />
 			</list>
 		</property>
 		<property name="reviews">
@@ -888,11 +888,8 @@
 		<property name="body" value="cuerpo del mensaje 1." />
 		
 		<property name="sender" ref="user1" />
-		<property name="recipients">
-			<list>
-				<ref bean="user2" />
-			</list>
-		</property>
+		<property name="recipient" ref="user2"/>
+		
 	</bean>
 	<bean id="message2" class="domain.Message">
 		<property name="moment" value="2017/10/01 19:00" />
@@ -900,11 +897,7 @@
 		<property name="body" value="cuerpo del mensaje 2." />
 		
 		<property name="sender" ref="user2" />
-		<property name="recipients">
-			<list>
-				<ref bean="user1" />
-			</list>
-		</property>
+		<property name="recipient" ref="user1"/>
 	</bean>
 	<bean id="message3" class="domain.Message">
 		<property name="moment" value="2017/10/01 19:00" />
@@ -912,18 +905,14 @@
 		<property name="body" value="cuerpo del mensaje 3." />
 		
 		<property name="sender" ref="user1" />
-		<property name="recipients">
-			<list>
-				<ref bean="business1" />
-			</list>
-		</property>
+		<property name="recipient" ref="business1"/>
 	</bean>
 	
 		<!-- Report -->
 	<bean id="report1" class="domain.Report">
 		<property name="text" value="Me acosa por el chat" />
 		<property name="weight" value="1" />
-		<property name="actor" ref="User3" />
+		<property name="actor" ref="user3" />
 	</bean>
 		
 		
@@ -932,15 +921,15 @@
 	<bean id="valoration1" class="domain.Valoration">
 		<property name="date" value="2018/01/15" />
 		<property name="score" value="1" />
-		<property name="actor" ref="User3" />
+		<property name="actor" ref="user3" />
 	</bean>
 
 		<!-- SocialIdentity -->
 		
 	<bean id="socialIdentity1" class="domain.SocialIdentity">
-		<property name="website" value="SeriaUnaURL.com" />
+		<property name="website" value="http://SeriaUnaURL.com" />
 		<property name="nick" value="1" />
-		<property name="accountURL" value="CambiarPorUnaURL.com" />
+		<property name="accountURL" value="http://CambiarPorUnaURL.com" />
 	</bean>
 	
 		<!-- Chat -->
@@ -948,13 +937,13 @@
 	<bean id="chat1" class="domain.Chat">
 		<property name="text" value="I want sex with you" />
 		<property name="date" value="2018/01/15" />
-		<property name="sender" ref="User3" />		
-		<property name="receiver" ref="User1" />		
+		<property name="sender" ref="user3" />		
+		<property name="receiver" ref="user1" />		
 	</bean>
 		<!-- Bid -->
 	<bean id="bid1" class="domain.Bid">
 		<property name="amount" value="250.35" />
-		<property name="User" ref="User2" />		
+		<property name="User" ref="user2" />		
 		<property name="auctionAdvertisement" ref="auctionAdvertisement1" />		
 	</bean>		
 		
@@ -982,15 +971,15 @@
 		<property name="publicationDate" value="2018/01/15" />
 		<property name="endDate" value="2030/01/15" />
 		<property name="price" value="290.50" />
-		<property name="tag" value="Consola" />
+		<property name="tags" value="Consola" />
 		<property name="business" ref="business1" />
-		<property name="item1" ref="item1" />			
+		<property name="item" ref="item1" />			
 		<property name="questions">
 			<list>
 				<ref bean="question1" />
 			</list>
 		</property>	
-		<property name="saleLine">
+		<property name="saleLines">
 			<list>
 				<ref bean="saleLine1" />
 			</list>
@@ -1003,13 +992,13 @@
 		<property name="publicationDate" value="2018/01/15" />
 		<property name="endDate" value="2030/01/15" />
 		<property name="price" value="320.50" />
-		<property name="tag" value="Consola" />
+		<property name="tags" value="Consola" />
 		<property name="user" ref="user1" />
 		<property name="business">
 			<null></null>
 		</property>
-		<property name="item1" ref="item1" />			
-		<property name="saleLine">
+		<property name="item" ref="item1" />			
+		<property name="saleLines">
 			<list>
 			</list>
 		</property>
@@ -1020,13 +1009,13 @@
 		<property name="publicationDate" value="2018/01/15" />
 		<property name="endDate" value="2019/01/15" />
 		<property name="price" value="320.50" />
-		<property name="tag" value="Consola" />
+		<property name="tags" value="Consola" />
 		<property name="user" ref="user1" />
 		<property name="business">
 			<null></null>
 		</property>
-		<property name="item1" ref="item1" />			
-		<property name="saleLine">
+		<property name="item" ref="item1" />			
+		<property name="saleLines">
 			<list>
 			</list>
 		</property>
@@ -1044,39 +1033,39 @@
 	</bean>
 		<!-- BusinessInfo -->
 	<bean id="businessInfo1" class="domain.BusinessInfo">
-		<property name="adress" value="adv. Shibuya" />
+		<property name="address" value="adv. Shibuya" />
 		<property name="city" value="Tokyo" />
-		<property name="aditionalInfo" value="Vendemos por dinero muchas Nintendo Switch" />
+		<property name="additionalInfo" value="Vendemos por dinero muchas Nintendo Switch" />
 		<property name="country" value="Japon" />	
 		<property name="business" ref="business1"/>	
 	</bean>
 		
 		<!-- Item -->
-	<bean id="Item1" class="domain.Item">
+	<bean id="item1" class="domain.Item">
 		<property name="name" value="Nintendo switch" />
 		<property name="description" value="Totalmente nueva" />
 		<property name="photo" value="http://www.nintenderos.com/wp-content/uploads/2017/10/nintendo-switch.jpg" />
 	</bean>
 		
 		<!-- ShoppingCart -->
-	<bean id="shoppingCard1" class="domain.ShoppingCart">
+	<bean id="shoppingCart1" class="domain.ShoppingCart">
 		<property name="User" ref="user1" />
 	</bean>
-	<bean id="shoppingCard2" class="domain.ShoppingCart">
+	<bean id="shoppingCart2" class="domain.ShoppingCart">
 		<property name="User" ref="user2" />
 	</bean>
-	<bean id="shoppingCard3" class="domain.ShoppingCart">
+	<bean id="shoppingCart3" class="domain.ShoppingCart">
 		<property name="User" ref="user3" />
 	</bean>
 	
-		<!-- saleLine -->
-	<bean id="saleLine1" class="domain.saleLine">
+		<!-- saleLines -->
+	<bean id="saleLine1" class="domain.SaleLine">
 		<property name="amount" value="1"/>
-		<property name="shoppingCard1" ref="shoppingCard1" />
-		<property name="order" ref="Order1" />
+		<property name="shoppingCart" ref="shoppingCart1" />
+		<property name="ticket" ref="ticket1" />
 	</bean>
-		<!-- Order -->
-	<bean id="order1" class="domain.Order">
+		<!-- Ticket -->
+	<bean id="ticket1" class="domain.Ticket">
 		<property name="date" value="2018/01/15"/>
 		<property name="status" value="Send"/>
 		<property name="user" ref="user1" />
@@ -1088,24 +1077,24 @@
 		<property name="city" value="Sevilla"/>
 		<property name="postalCode" value="41008" />
 		<property name="address" value="c\ Rue 13 del Perzebe" />
-		<property name="order" ref="order1" />
+		<property name="ticket" ref="ticket1" />
 	</bean>
 		<!-- ShippingInfo -->
 	<bean id="shippingInfo1" class="domain.ShippingInfo">
 		<property name="trackingNumber" value="123456789"/>
 		<property name="company" value="SEUR"/>
 		<property name="additionalInfo" value="esta en camino" />
-		<property name="order" ref="order1" />
+		<property name="ticket" ref="ticket1" />
 	</bean>
 		<!-- FacturationData -->
 	<bean id="facturationData1" class="domain.FacturationData">
 		<property name="name" value="Xi"/>
-		<property name="subname" value="Wang-Fen"/>
+		<property name="surname" value="Wang-Fen"/>
 		<property name="country" value="España" />
 		<property name="city" value="Sevilla" />
 		<property name="postalCode" value="41008" />
 		<property name="IDNumber" value="00000001A" />
-		<property name="order" ref="order1" />
+		<property name="ticket" ref="ticket1" />
 	</bean>
 
 

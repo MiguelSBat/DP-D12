@@ -16,7 +16,7 @@ import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class User extends DomainEntity {
+public class User extends Actor {
 
 	private String				name;
 	private String				surname;
@@ -82,7 +82,7 @@ public class User extends DomainEntity {
 	}
 
 	@NotNull
-	@ElementCollection
+	@ElementCollection(targetClass = String.class)
 	public Collection<String> getPhotosURL() {
 		return this.photosURL;
 	}

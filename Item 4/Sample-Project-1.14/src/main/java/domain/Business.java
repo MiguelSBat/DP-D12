@@ -12,14 +12,13 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
-import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
 public class Business extends Actor {
 
 	private String				name;
-	private String				surname;
+	private String				paypalEmail;
 	private String				VATNumber;
 	private Boolean				premium;
 	private Integer				reputation;
@@ -37,12 +36,12 @@ public class Business extends Actor {
 	}
 
 	@NotBlank
-	public String getSurname() {
-		return this.surname;
+	public String getPaypalEmail() {
+		return this.paypalEmail;
 	}
 
-	public void setSurname(final String surname) {
-		this.surname = surname;
+	public void setPaypalEmail(final String paypalEmail) {
+		this.paypalEmail = paypalEmail;
 	}
 
 	@NotBlank
@@ -80,8 +79,7 @@ public class Business extends Actor {
 		this.suspicious = suspicious;
 	}
 
-	@URL
-	@ElementCollection
+	@ElementCollection(targetClass = String.class)
 	public Collection<String> getPhotosURL() {
 		return this.photosURL;
 	}
@@ -93,8 +91,7 @@ public class Business extends Actor {
 
 	//Relationships
 
-	private Collection<Answer>			answers;
-	private Collection<BusinessInfo>	businessInfos;
+	private Collection<Answer>	answers;
 
 
 	@OneToMany
@@ -104,15 +101,6 @@ public class Business extends Actor {
 
 	public void setAnswers(final Collection<Answer> answers) {
 		this.answers = answers;
-	}
-
-	@OneToMany
-	public Collection<BusinessInfo> getBusinessInfos() {
-		return this.businessInfos;
-	}
-
-	public void setBusinessInfos(final Collection<BusinessInfo> businessInfos) {
-		this.businessInfos = businessInfos;
 	}
 
 }
