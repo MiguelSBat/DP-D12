@@ -77,16 +77,16 @@ public class FacturationData extends DomainEntity {
 
 	//Relationships
 
-	private Order	order;
+	private Ticket	ticket;
 
 
 	@OneToOne
-	public Order getOrder() {
-		return this.order;
+	public Ticket getTicket() {
+		return this.ticket;
 	}
 
-	public void setOrder(final Order order) {
-		this.order = order;
+	public void setTicket(final Ticket ticket) {
+		this.ticket = ticket;
 	}
 
 }

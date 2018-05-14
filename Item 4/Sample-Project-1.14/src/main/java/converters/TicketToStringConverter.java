@@ -5,14 +5,14 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import domain.Order;
+import domain.Ticket;
 
 @Component
 @Transactional
-public class OrderToStringConverter implements Converter<Order, String> {
+public class TicketToStringConverter implements Converter<Ticket, String> {
 
 	@Override
-	public String convert(final Order actor) {
+	public String convert(final Ticket actor) {
 		String result;
 
 		if (actor == null)

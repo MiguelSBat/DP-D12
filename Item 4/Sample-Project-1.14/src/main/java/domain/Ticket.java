@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Order extends DomainEntity {
+public class Ticket extends DomainEntity {
 
 	private Date	date;
 	private String	status;

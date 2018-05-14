@@ -26,17 +26,17 @@ public class SaleLine extends DomainEntity {
 
 	//Relationships
 
-	private Order			order;
+	private Ticket			ticket;
 	private ShoppingCart	shoppingCart;
 
 
 	@ManyToOne(optional = false)
-	public Order getOrder() {
-		return this.order;
+	public Ticket getTicket() {
+		return this.ticket;
 	}
 
-	public void setOrder(final Order order) {
-		this.order = order;
+	public void setTicket(final Ticket ticket) {
+		this.ticket = ticket;
 	}
 
 	@ManyToOne(optional = false)

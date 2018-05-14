@@ -8,20 +8,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import repositories.OrderRepository;
-import domain.Order;
+import repositories.TicketRepository;
+import domain.Ticket;
 
 @Component
 @Transactional
-public class StringToOrderConverter implements Converter<String, Order> {
+public class StringToTicketConverter implements Converter<String, Ticket> {
 
 	@Autowired
-	private OrderRepository	userRepository;
+	private TicketRepository	ticketRepository;
 
 
 	@Override
-	public Order convert(final String text) {
-		Order result;
+	public Ticket convert(final String text) {
+		Ticket result;
 		int id;
 
 		try {
@@ -29,7 +29,7 @@ public class StringToOrderConverter implements Converter<String, Order> {
 				result = null;
 			else {
 				id = Integer.valueOf(text);
-				result = this.userRepository.findOne(id);
+				result = this.ticketRepository.findOne(id);
 			}
 		} catch (final Throwable oops) {
 			throw new IllegalArgumentException(oops);
