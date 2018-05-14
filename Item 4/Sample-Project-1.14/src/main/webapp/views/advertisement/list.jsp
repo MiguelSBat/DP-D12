@@ -44,7 +44,7 @@
 	<spring:message code="advertisement.item" var="itemHeader" />
 	<display:column title="${itemHeader}">
 		<a href="advertisement/display.do?advertisementId=${row.id}"><jstl:out
-				value="${row.title}"></jstl:out></a>
+				value="${row.item}"></jstl:out></a>
 	</display:column>
 
 	<spring:message code="advertisement.business" var="businessHeader" />
@@ -59,40 +59,18 @@
 <spring:message code="advertisement.endDate"
 		var="endDateHeader" />
 	<spring:message code="master.page.date.format" var="dateFormat" />
-	<display:column property="endDateDate"
+	<display:column property="endDate"
 		format="{0,date,${dateFormat}}" title="${endDateHeader}" />
 
 	<spring:message code="advertisement.price" var="priceHeader" />
 		<display:column property="price" title="${priceHeader}" />
 
 
-	<spring:message code="advertisement.picture" var="pictureHeader" />
-	<display:column title="${pictureHeader}">
-		<img src="${row.picture}" height="150" width="250" />
-	</display:column>
-	
-	<security:authorize access="hasRole('CUSTOMER')">
-		<display:column sortable="false">
-			<jstl:if test="${row.publicity==true && !advertisementscustomer.contains(row)}">
-				<a href="customer/subscribe.do?advertisementId=${row.id}"><spring:message
-						code="advertisement.subscribe" /></a>
-			</jstl:if>
-		</display:column>
-	</security:authorize>
-	
-	<security:authorize access="hasRole('AGENT')">
-		<display:column sortable="false">
-				<a href="agent/advertisement/create.do?advertisementId=${row.id}"><spring:message
-						code="advertisement.advertisement" /></a>
-		</display:column>
-	</security:authorize>
+	<spring:message code="advertisement.tags" var="tagsHeader" />
+			<display:column property="tags" title="${tagsHeader}" />
 
-	<security:authorize access="hasRole('ADMIN')">
-		<display:column>
-			<a href="administrator/advertisement/delete.do?advertisementId=${row.id}"><spring:message
-					code="chirp.delete" /></a>
-		</display:column>
-	</security:authorize>
+	
+	
 </display:table>
 
 
