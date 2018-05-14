@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -78,6 +79,7 @@ public class Business extends Actor {
 		this.suspicious = suspicious;
 	}
 
+	@URL
 	public Collection<String> getPhotosURL() {
 		return this.photosURL;
 	}

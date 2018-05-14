@@ -6,6 +6,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -33,6 +34,7 @@ public class SocialIdentity extends DomainEntity {
 		this.nick = nick;
 	}
 
+	@URL
 	public String getAccountURL() {
 		return this.accountURL;
 	}
