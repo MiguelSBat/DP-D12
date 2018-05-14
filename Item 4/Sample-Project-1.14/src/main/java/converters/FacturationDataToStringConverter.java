@@ -9,7 +9,7 @@ import domain.FacturationData;
 
 @Component
 @Transactional
-public class FacturationDataConverter implements Converter<FacturationData, String> {
+public class FacturationDataToStringConverter implements Converter<FacturationData, String> {
 
 	@Override
 	public String convert(final FacturationData actor) {

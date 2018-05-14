@@ -66,8 +66,8 @@
 		<bean class="converters.ModeratorToStringConverter" />
 		<bean class="converters.StringToModeratorConverter" />
 		
-		<bean class="converters.OrderToStringConverter" />
-		<bean class="converters.StringToOrderConverter" />
+		<bean class="converters.TicketToStringConverter" />
+		<bean class="converters.StringToTicketConverter" />
 		
 		<bean class="converters.QuestionToStringConverter" />
 		<bean class="converters.StringToQuestionConverter" />
