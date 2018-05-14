@@ -43,12 +43,12 @@
 
 	<spring:message code="advertisement.item" var="itemHeader" />
 	<display:column title="${itemHeader}">
-		<a href="advertisement/display.do?advertisementId=${row.id}"><jstl:out
-				value="${row.item}"></jstl:out></a>
+		<a href="advertisement/display.do?advertisementId=${row.getId()}"><jstl:out
+				value="${row.item.getName()}"></jstl:out></a>
 	</display:column>
 
 	<spring:message code="advertisement.business" var="businessHeader" />
-	<display:column property="business" title="${businessHeader}" />
+	<display:column property="business.name" title="${businessHeader}" />
 
 	<spring:message code="advertisement.publicationDate"
 		var="publicationDateHeader" />
@@ -65,7 +65,8 @@
 	<spring:message code="advertisement.price" var="priceHeader" />
 		<display:column property="price" title="${priceHeader}" />
 
-
+	<spring:message code="advertisement.saleLines" var="saleLinesHeader" />
+		<display:column property="saleLines" title="${saleLinesHeader}" />
 	<spring:message code="advertisement.tags" var="tagsHeader" />
 			<display:column property="tags" title="${tagsHeader}" />
 

@@ -19,6 +19,8 @@
 
 <div>
 	<ul id="jMenu">
+	<li><a href="advertisement/list.do"><spring:message
+							code="master.page.advertisement" /></a></li>
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<security:authorize access="hasRole('ADMIN')">
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
@@ -27,6 +29,9 @@
 					<li><a href="administrator/action-1.do"><spring:message code="master.page.administrator.action.1" /></a></li>
 					<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>					
 				</ul>
+				<ul>
+				<li class="arrow"></li>
+				
 			</li>
 		</security:authorize>
 		

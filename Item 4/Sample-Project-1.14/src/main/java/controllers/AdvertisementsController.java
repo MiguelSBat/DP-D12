@@ -76,52 +76,19 @@ public class AdvertisementsController extends AbstractController {
 		return result;
 	}
 
-	// display
-//
-//	@RequestMapping(value = "display", method = RequestMethod.GET)
-//	public ModelAndView display(@RequestParam final int advertisementId) {
-//		final ModelAndView result;
-//		result = new ModelAndView("advertisement/display");
-//		final Advertisement advertisement;
-//
-//		advertisement = this.advertisementService.findOne(advertisementId);
-//		result.addObject("advertisement", advertisement);
-//		boolean mostrarArticles = true;
-//		mostrarArticles = false;
-//		User u;
-//		if (this.actorService.isLogged())
-//			if (this.actorService.findByPrincipal() instanceof User) {
-//				final User actual = (User) this.actorService.findByPrincipal();
-//				final Boolean EsAutor = actual.getAdvertisements().contains(advertisement);
-//				final Boolean NoEstaPublicado = advertisement.getPublicationDate() == null;
-//				final Boolean Mostrar = NoEstaPublicado && EsAutor;
-//				result.addObject("EsAutor", Mostrar);
-//				mostrarArticles = EsAutor;
-//			}
-//		final Collection<Article> articles = advertisement.getArticles();
-//		final TreeMap<Integer, User> mapaMegaComplejo = new TreeMap<>();
-//
-//		for (final Article a : articles) {
-//			u = this.userService.UserByArticle(a.getId());
-//
-//			mapaMegaComplejo.put(a.getId(), u);
-//		}
-//		if (advertisement.getPublicity() == false)
-//			mostrarArticles = true;
-//		if (advertisement.getPublicity() == true)
-//			if (this.actorService.isLogged() && this.actorService.findByPrincipal() instanceof Customer) {
-//				final Customer c = (Customer) this.actorService.findByPrincipal();
-//				final Collection<Advertisement> customerAdvertisements = this.advertisementService.findByCustomerID(c.getId());
-//				final Collection<Advertisement> customerAdvertisementVolumes = this.advertisementService.findByCustomerIDAndVolumes(c.getId());
-//				if (customerAdvertisements.contains(advertisement) || customerAdvertisementVolumes.contains(advertisement))
-//					mostrarArticles = true;
-//			}
-//
-//		result.addObject("mapaMegaComplejo", mapaMegaComplejo);
-//		result.addObject("mostrarArticles", mostrarArticles);
-//
-//		return result;
-//	}
+//	 display
+
+	@RequestMapping(value = "display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int advertisementId) {
+		final ModelAndView result;
+		result = new ModelAndView("advertisement/display");
+		final Advertisement advertisement;
+
+		advertisement = this.advertisementService.findOne(advertisementId);
+		result.addObject("advertisement", advertisement);
+		
+		return result;
+	}
 	// Edition ----------------------------------------------------------------
 
 //	@RequestMapping(value = "/edit", method = RequestMethod.GET)
