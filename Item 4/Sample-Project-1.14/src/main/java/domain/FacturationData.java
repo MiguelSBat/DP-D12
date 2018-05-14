@@ -4,6 +4,7 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -71,6 +72,21 @@ public class FacturationData extends DomainEntity {
 
 	public void setIDNumber(final String iDNumber) {
 		this.IDNumber = iDNumber;
+	}
+
+
+	//Relationships
+
+	private Order	order;
+
+
+	@OneToOne
+	public Order getOrder() {
+		return this.order;
+	}
+
+	public void setOrder(final Order order) {
+		this.order = order;
 	}
 
 }

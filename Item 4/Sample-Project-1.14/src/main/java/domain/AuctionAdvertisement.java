@@ -6,7 +6,7 @@ import java.util.Collection;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -50,7 +50,7 @@ public class AuctionAdvertisement extends DomainEntity {
 	private Collection<User>	users;
 
 
-	@ManyToMany
+	@ManyToOne(optional = false)
 	public Collection<User> getUsers() {
 		return this.users;
 	}

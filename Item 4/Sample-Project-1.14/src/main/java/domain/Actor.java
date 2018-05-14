@@ -86,6 +86,7 @@ public class Actor extends DomainEntity {
 		this.messagesReceived = messagesReceived;
 	}
 
+	@OneToMany
 	public Collection<Report> getReports() {
 		return this.reports;
 	}

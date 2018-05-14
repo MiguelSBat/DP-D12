@@ -90,6 +90,7 @@ public class Business extends Actor {
 	//Relationships
 
 	private Collection<Answer>	answers;
+	private BusinessInfo		businessInfo;
 
 
 	@OneToMany
@@ -99,6 +100,15 @@ public class Business extends Actor {
 
 	public void setAnswers(final Collection<Answer> answers) {
 		this.answers = answers;
+	}
+
+	@OneToMany
+	public BusinessInfo getBusinessInfo() {
+		return this.businessInfo;
+	}
+
+	public void setBusinessInfo(final BusinessInfo businessInfo) {
+		this.businessInfo = businessInfo;
 	}
 
 }

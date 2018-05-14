@@ -4,7 +4,6 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -46,21 +45,6 @@ public class BusinessInfo extends DomainEntity {
 
 	public void setCountry(final String country) {
 		this.country = country;
-	}
-
-
-	//Relationships
-
-	private Business	bussiness;
-
-
-	@ManyToOne(optional = false)
-	public Business getBussiness() {
-		return this.bussiness;
-	}
-
-	public void setBussiness(final Business bussiness) {
-		this.bussiness = bussiness;
 	}
 
 }

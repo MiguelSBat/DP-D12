@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -89,16 +90,26 @@ public class User extends DomainEntity {
 
 	//Relationships
 
-	private ShoppingCart	shoppingCart;
+	private SocialIdentity	socialIdentity;
+	private Review			review;
 
 
-	@NotNull
-	public ShoppingCart getShoppingCart() {
-		return this.shoppingCart;
+	@OneToMany
+	public SocialIdentity getSocialIdentity() {
+		return this.socialIdentity;
 	}
 
-	public void setShoppingCart(final ShoppingCart shoppingCart) {
-		this.shoppingCart = shoppingCart;
+	public void setSocialIdentity(final SocialIdentity socialIdentity) {
+		this.socialIdentity = socialIdentity;
+	}
+
+	@OneToMany
+	public Review getReview() {
+		return this.review;
+	}
+
+	public void setReview(final Review review) {
+		this.review = review;
 	}
 
 }

@@ -4,6 +4,7 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -51,6 +52,21 @@ public class ShipmentAddress extends DomainEntity {
 
 	public void setAddress(final String address) {
 		this.address = address;
+	}
+
+
+	//Relationships
+
+	private Order	order;
+
+
+	@OneToOne
+	public Order getOrder() {
+		return this.order;
+	}
+
+	public void setOrder(final Order order) {
+		this.order = order;
 	}
 
 }

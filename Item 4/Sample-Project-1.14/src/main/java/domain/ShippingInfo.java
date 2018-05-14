@@ -4,6 +4,7 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -36,6 +37,21 @@ public class ShippingInfo extends DomainEntity {
 
 	public void setAdditionalInfo(final String additionalInfo) {
 		this.additionalInfo = additionalInfo;
+	}
+
+
+	//Relationships
+
+	private Order	order;
+
+
+	@ManyToOne(optional = false)
+	public Order getOrder() {
+		return this.order;
+	}
+
+	public void setOrder(final Order order) {
+		this.order = order;
 	}
 
 }

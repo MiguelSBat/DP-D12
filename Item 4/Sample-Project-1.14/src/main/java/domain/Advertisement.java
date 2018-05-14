@@ -8,6 +8,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -54,7 +55,9 @@ public class Advertisement extends DomainEntity {
 
 	//Relationships
 
-	private Item	item;
+	private Item		item;
+	private SaleLine	saleLine;
+	private Business	business;
 
 
 	@ManyToOne(optional = false)
@@ -64,6 +67,24 @@ public class Advertisement extends DomainEntity {
 
 	public void setItem(final Item item) {
 		this.item = item;
+	}
+
+	@OneToMany
+	public SaleLine getSaleLine() {
+		return this.saleLine;
+	}
+
+	public void setSaleLine(final SaleLine saleLine) {
+		this.saleLine = saleLine;
+	}
+
+	@ManyToOne(optional = true)
+	public Business getBusiness() {
+		return this.business;
+	}
+
+	public void setBusiness(final Business business) {
+		this.business = business;
 	}
 
 }

@@ -4,7 +4,6 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -40,21 +39,6 @@ public class SocialIdentity extends DomainEntity {
 
 	public void setAccountURL(final String accountURL) {
 		this.accountURL = accountURL;
-	}
-
-
-	//Relationships
-
-	private User	user;
-
-
-	@OneToMany
-	public User getUser() {
-		return this.user;
-	}
-
-	public void setUser(final User user) {
-		this.user = user;
 	}
 
 }

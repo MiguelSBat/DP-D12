@@ -53,7 +53,6 @@ public class Review extends DomainEntity {
 	//Relationships
 
 	private ShopAdvertisement	shopAdvertisement;
-	private User				user;
 
 
 	@ManyToOne(optional = false)
@@ -63,15 +62,6 @@ public class Review extends DomainEntity {
 
 	public void setShopAdvertisement(final ShopAdvertisement shopAdvertisement) {
 		this.shopAdvertisement = shopAdvertisement;
-	}
-
-	@ManyToOne(optional = false)
-	public User getUser() {
-		return this.user;
-	}
-
-	public void setUser(final User user) {
-		this.user = user;
 	}
 
 }

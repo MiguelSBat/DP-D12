@@ -1,15 +1,12 @@
 
 package domain;
 
-import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -40,48 +37,9 @@ public class Order extends DomainEntity {
 
 	//Relationships
 
-	private Collection<SaleLine>	saleLines;
-	private ShipmentAddress		shippmentAddress;
-	private ShippingInfo			shippingInfo;
-	private FacturationData			facturationData;
-	private User					user;
-	private Business				bussiness;
+	private User		user;
+	private Business	bussiness;
 
-
-	@OneToMany
-	public Collection<SaleLine> getSaleLines() {
-		return this.saleLines;
-	}
-
-	public void setSaleLines(final Collection<SaleLine> saleLines) {
-		this.saleLines = saleLines;
-	}
-	@NotNull
-	public ShipmentAddress getShippmentAddress() {
-		return this.shippmentAddress;
-	}
-
-	public void setShippmentAddress(final ShipmentAddress shippmentAddress) {
-		this.shippmentAddress = shippmentAddress;
-	}
-
-	@OneToOne(optional = true)
-	public ShippingInfo getShippingInfo() {
-		return this.shippingInfo;
-	}
-
-	public void setShippingInfo(final ShippingInfo shippingInfo) {
-		this.shippingInfo = shippingInfo;
-	}
-
-	@NotNull
-	public FacturationData getFacturationData() {
-		return this.facturationData;
-	}
-
-	public void setFacturationData(final FacturationData facturationData) {
-		this.facturationData = facturationData;
-	}
 
 	@ManyToOne(optional = false)
 	public User getUser() {
