@@ -18,6 +18,8 @@
 	
 	<!-- User accounts -->
 
+
+
 	<bean id="userAccount1" class="security.UserAccount">
 		<property name="username" value="admin" />
 		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
@@ -29,34 +31,926 @@
 			</list>
 		</property>
 	</bean>
-
+	
 	<bean id="userAccount2" class="security.UserAccount">
-		<property name="username" value="customer" />
-		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
+		<property name="username" value="user1" />
+		<property name="password" value="24c9e15e52afc47c225b757e7bee1f9d" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="USER" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 
 	<bean id="userAccount3" class="security.UserAccount">
-		<property name="username" value="super" />
-		<property name="password" value="1b3231655cebb7a1f783eddf27d254ca" />
+		<property name="username" value="moderator1" />
+		<property name="password" value="38caf4a470117125b995f7ce53e6e6b9" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="MODERATOR" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 	
-	<!-- Other domain beans come here -->	
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="user2" />
+		<property name="password" value="7e58d63b60197ceb55a1c487989a3720" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="user3" />
+		<property name="password" value="92877af70a45fd6a2ed7fe81e1236b78" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 	
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="business1" />
+		<property name="password" value="ab36fdc41550db15fd4a47f2e44f0076" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="BUSINESS" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount7" class="security.UserAccount">
+		<property name="username" value="business2" />
+		<property name="password" value="9bde7258dadf923622274ab89ca3d28d" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="BUSINESS" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- config -->	
+	<bean id="config" class="domain.Config">
+		<property name="VAT" value="0.21" />
+		<property name="englishWelcomeMessage" value="Buy, sell or auction everything that you can imagine" />
+		<property name="spanishWelcomeMessage" value="Compra, vende o subasta todo que puedas imaginar" />
+		<property name="userMaxAnnouncements" value="10" />
+		<property name="bussinessMaxAnnouncements" value="50" />
+		<property name="premiumMaxAnnouncements" value="100" />
+		<property name="announcementExpirationMonths" value="2" />
+		<property name="premiumPrice" value="20.0" />
+		<property name="paymentHoldDays" value="7" />
+		<property name="transactionReportWeight" value="1" />
+		<property name="reportWeightTreshold" value="5" />
+		<property name="reputationTreshold" value="1" />
+		<property name="tabooWords">
+			<list>
+			<value>sex</value>
+			<value>sexo</value>
+			<value>viagra</value>
+			<value>cialis</value>
+			
+			</list>	
+		</property>
+	</bean>	
+	
+	<!-- Admin -->	
+	<bean id="admin" class="domain.Administrator">
+	<property name="userAccount" ref="userAccount1" />
+		<property name="emailAddress" value="ponsavi@acme.org" />
+		<property name="folders">
+			<list>
+				<ref bean="rootFolderAdministrator1" />
+				<ref bean="inboxFolderAdministrator1" />
+				<ref bean="outboxFolderAdministrator1" />
+				<ref bean="trashboxFolderAdministrator1" />
+			</list>
+		</property>
+		<property name="messagesSent">
+			<list>
+			</list>
+		</property>
+		<property name="messagesReceived">
+			<list>
+			</list>
+		</property>
+		<property name="reports">
+			<list>
+			</list>
+		</property>
+		<property name="Valorations">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Moderator -->	
+	<bean id="Moderator1" class="domain.Customer">
+		<property name="emailAddress" value="ponsavi@acme.org" />
+		<property name="userAccount" ref="userAccount3" />
+		<property name="folders">
+			<list>
+				<ref bean="rootFolderModerator1" />
+				<ref bean="inboxFolderModerator1" />
+				<ref bean="outboxFolderModerator1" />
+				<ref bean="trashboxFolderModerator1" />
+			</list>
+		</property>
+		<property name="messagesSent">
+			<list>
+			</list>
+		</property>
+		<property name="messagesReceived">
+			<list>
+			</list>
+		</property>
+		<property name="reports">
+			<list>
+			</list>
+		</property>
+		<property name="Valorations">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Users -->	
+	<bean id="user1" class="domain.User">
+	<property name="userAccount" ref="userAccount2" />
+		<property name="name" value="Pepón" />
+		<property name="surname" value="Samper Villagrán" />
+		<property name="emailAddress" value="ponsavi@acme.org" />
+		<property name="phone" value="656343002" />
+		<property name="premium" value="true" />
+		<property name="reputation" value="5" />
+		<property name="suspicious" value="false" />
+		<property name="photosURL">
+			<list>
+				<value>"https://images.vexels.com/media/users/3/140752/isolated/preview/17e31e592ab23bb0e8b2c0e76c0a4361-perfil-masculino-avatar-5-by-vexels.png"</value>
+			</list>
+		</property>
+		<property name="socialIdentities">
+			<list>
+				<ref bean="SocialIdentity1" />
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+				<ref bean="review1" />
+			</list>
+		</property>
+		<property name="folders">
+			<list>
+				<ref bean="rootFolderUser1" />
+				<ref bean="inboxFolderUser1" />
+				<ref bean="outboxFolderUser1" />
+				<ref bean="trashboxFolderUser1" />
+			</list>
+		</property>
+		<property name="messagesSent">
+			<list>
+				<ref bean="message1" />
+				<ref bean="message3" />
+			</list>
+		</property>
+		<property name="messagesReceived">
+			<list>
+				<ref bean="message2" />
+
+			</list>
+		</property>
+		<property name="reports">
+			<list>
+				<ref bean="report1" />
+			</list>
+		</property>
+		<property name="Valorations">
+			<list>
+				<ref bean="valoration1" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="user2" class="domain.User">
+	<property name="userAccount" ref="userAccount4" />
+		<property name="name" value="userName2" />
+		<property name="surname" value="userSurname2" />
+		<property name="emailAddress" value="user2@mail.com" />
+		<property name="phone" value="656222111" />
+		<property name="premium" value="True" />
+		<property name="reputation" value="5" />
+		<property name="suspicious" value="false" />
+		<property name="photosURL">
+			<list>
+				<value>"https://images.vexels.com/media/users/3/140752/isolated/preview/17e31e592ab23bb0e8b2c0e76c0a4361-perfil-masculino-avatar-5-by-vexels.png"</value>
+			</list>
+		</property>
+		<property name="socialIdentities">
+			<list>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+			</list>
+		</property>
+		<property name="folders">
+			<list>
+				<ref bean="rootFolderUser2" />
+
+				<ref bean="inboxFolderUser2" />
+				<ref bean="outboxFolderUser2" />
+
+				<ref bean="trashboxFolderUser2" />
+			</list>
+		</property>
+		<property name="messagesSent">
+			<list>
+				<ref bean="message2" />
+			</list>
+		</property>
+		<property name="messagesReceived">
+			<list>
+				<ref bean="message1" />
+
+			</list>
+		</property>
+		<property name="reports">
+			<list>
+			</list>
+		</property>
+		<property name="Valorations">
+			<list>
+			</list>
+		</property>		
+	</bean>
+	<bean id="user3" class="domain.User">
+	<property name="userAccount" ref="userAccount5" />
+		<property name="name" value="userName3" />
+		<property name="surname" value="userSurname3" />
+		<property name="emailAddress" value="user3@mail.com" />
+		<property name="phone" value="656222113" />
+		<property name="premium" value="True" />
+		<property name="reputation" value="5" />
+		<property name="suspicious" value="True" />
+		<property name="photosURL">
+			<list>
+				<value>"https://images.vexels.com/media/users/3/140752/isolated/preview/17e31e592ab23bb0e8b2c0e76c0a4361-perfil-masculino-avatar-5-by-vexels.png"</value>
+			</list>
+		</property>
+		<property name="socialIdentities">
+			<list>
+			</list>
+		</property>
+		<property name="reviews">
+			<list>
+			</list>
+		</property>
+		<property name="folders">
+			<list>
+				<ref bean="rootFolderUser3" />
+
+				<ref bean="inboxFolderUser3" />
+				<ref bean="outboxFolderUser3" />
+
+				<ref bean="trashboxFolderUser3" />
+			</list>
+		</property>
+		<property name="messagesSent">
+			<list>
+			</list>
+		</property>
+		<property name="messagesReceived">
+			<list>
+			</list>
+		</property>
+		<property name="reports">
+			<list>
+			</list>
+		</property>
+		<property name="Valorations">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+		<!-- Business -->
+		
+	<bean id="business1" class="domain.Agent">
+		<property name="userAccount" ref="userAccount6" />
+		<property name="name" value="business1" />
+		<property name="paypalEmail" value="ponsavi@paypal.org" />
+		<property name="emailAddress" value="ponsavi@acme.org" />
+		<property name="VATNumber" value="das432-das" />
+		<property name="premium" value="True" />
+		<property name="reputation" value="5" />
+		<property name="suspicious" value="false" />
+		<property name="photosURL">
+			<list>
+				<value>"https://images.vexels.com/media/users/3/140752/isolated/preview/17e31e592ab23bb0e8b2c0e76c0a4361-perfil-masculino-avatar-5-by-vexels.png"</value>
+			</list>
+		</property>
+		<property name="answers">
+			<list>
+				<ref bean ="answer1"/>
+			</list>
+		</property>
+		<property name="folders">
+			<list>
+				<ref bean="rootFolderbusiness1" />
+				<ref bean="inboxFolderbusiness1" />
+				<ref bean="outboxFolderbusiness1" />
+				<ref bean="trashboxFolderbusiness1" />
+			</list>
+		</property>
+		<property name="messagesSent">
+			<list>
+			</list>
+		</property>
+		<property name="messagesReceived">
+			<list>
+				<ref bean="message3" />
+			</list>
+		</property>
+		<property name="reports">
+			<list>
+			</list>
+		</property>
+		<property name="Valorations">
+			<list>
+			</list>
+		</property>
+	</bean>
+		
+	<bean id="business2" class="domain.Agent">
+		<property name="userAccount" ref="userAccount7" />
+		<property name="name" value="business2" />
+		<property name="paypalEmail" value="ponsavi@acme.org" />
+		<property name="emailAddress" value="ponsavi@acme.org" />
+		<property name="VATNumber" value="das432-das" />
+		<property name="premium" value="True" />
+		<property name="reputation" value="5" />
+		<property name="suspicious" value="true" />
+		<property name="photosURL">
+			<list>
+				<value>"https://images.vexels.com/media/users/3/140752/isolated/preview/17e31e592ab23bb0e8b2c0e76c0a4361-perfil-masculino-avatar-5-by-vexels.png"</value>
+			</list>
+		</property>
+		<property name="answers">
+			<list>
+			</list>
+		</property>
+		<property name="folders">
+			<list>
+				<ref bean="rootFolderbusiness2" />
+				<ref bean="inboxFolderbusiness2" />
+				<ref bean="outboxFolderbusiness2" />
+				<ref bean="trashboxFolderbusiness2" />
+			</list>
+		</property>
+		<property name="messagesSent">
+			<list>
+			</list>
+		</property>
+		<property name="messagesReceived">
+			<list>
+			</list>
+		</property>
+		<property name="reports">
+			<list>
+			</list>
+		</property>
+		<property name="Valorations">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Folder -->
+
+	<bean id="rootFolderAdministrator1" class="domain.Folder">
+		<property name="title" value="Root" />
+		<property name="folders">
+			<list>
+				<ref bean="inboxFolderAdministrator1" />
+				<ref bean="outboxFolderAdministrator1" />
+				<ref bean="trashboxFolderAdministrator1" />
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+
+	<bean id="inboxFolderAdministrator1" class="domain.Folder">
+		<property name="title" value="Inbox" />
+		<property name="parent" ref="rootFolderAdministrator1" />
+		<property name="folders">
+			<list>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+	<bean id="outboxFolderAdministrator1" class="domain.Folder">
+		<property name="title" value="Outbox" />
+		<property name="parent" ref="rootFolderAdministrator1" />
+		<property name="folders">
+			<list>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+	<bean id="trashboxFolderAdministrator1" class="domain.Folder">
+		<property name="title" value="TrashBox" />
+		
+		<property name="parent" ref="rootFolderAdministrator1" />
+		<property name="folders">
+			<list>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+	
+	<bean id="rootFolderUser1" class="domain.Folder">
+		<property name="title" value="Root" />
+		
+		<property name="folders">
+			<list>
+
+				<ref bean="inboxFolderUser1" />
+				<ref bean="outboxFolderUser1" />
+
+				<ref bean="trashboxFolderUser1" />
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+
+	<bean id="inboxFolderUser1" class="domain.Folder">
+		<property name="title" value="Inbox" />
+		
+		<property name="parent" ref="rootFolderUser1" />
+		<property name="folders">
+			<list>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+				<ref bean="message2" />
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+	<bean id="outboxFolderUser1" class="domain.Folder">
+		<property name="title" value="Outbox" />
+		
+		<property name="parent" ref="rootFolderUser1" />
+		<property name="folders">
+			<list>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+				<ref bean="message1" />
+				<ref bean="message3" />
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+	<bean id="trashboxFolderUser1" class="domain.Folder">
+		<property name="title" value="TrashBox" />
+		
+		<property name="parent" ref="rootFolderUser1" />
+		<property name="folders">
+			<list>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+
+	<bean id="rootFolderUser2" class="domain.Folder">
+		<property name="title" value="Root" />
+		
+		<property name="folders">
+			<list>
+
+				<ref bean="inboxFolderUser2" />
+				<ref bean="outboxFolderUser2" />
+
+				<ref bean="trashboxFolderUser2" />
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+
+	<bean id="inboxFolderUser2" class="domain.Folder">
+		<property name="title" value="Inbox" />
+		
+		<property name="parent" ref="rootFolderUser2" />
+		<property name="folders">
+			<list>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+				<ref bean="message1" />
+
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+	<bean id="outboxFolderUser2" class="domain.Folder">
+		<property name="title" value="Outbox" />
+		
+		<property name="parent" ref="rootFolderUser2" />
+		<property name="folders">
+			<list>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+				<ref bean="message2" />
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+	<bean id="trashboxFolderUser2" class="domain.Folder">
+		<property name="title" value="TrashBox" />
+		
+		<property name="parent" ref="rootFolderUser2" />
+		<property name="folders">
+			<list>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+
+	<bean id="rootFolderUser3" class="domain.Folder">
+		<property name="title" value="Root" />
+		
+		<property name="folders">
+			<list>
+
+				<ref bean="inboxFolderUser3" />
+				<ref bean="outboxFolderUser3" />
+
+				<ref bean="trashboxFolderUser3" />
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+
+	<bean id="inboxFolderUser3" class="domain.Folder">
+		<property name="title" value="Inbox" />
+		
+		<property name="parent" ref="rootFolderUser3" />
+		<property name="folders">
+			<list>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+	<bean id="outboxFolderUser3" class="domain.Folder">
+		<property name="title" value="Outbox" />
+		
+		<property name="parent" ref="rootFolderUser3" />
+		<property name="folders">
+			<list>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+
+	<bean id="trashboxFolderUser3" class="domain.Folder">
+		<property name="title" value="TrashBox" />
+		
+		<property name="parent" ref="rootFolderUser3" />
+		<property name="folders">
+			<list>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+
+	<bean id="rootFolderModerator1" class="domain.Folder">
+		<property name="title" value="Root" />
+		
+		<property name="folders">
+			<list>
+
+				<ref bean="inboxFolderModerator1" />
+				<ref bean="outboxFolderModerator1" />
+
+				<ref bean="trashboxFolderModerator1" />
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+
+	<bean id="inboxFolderModerator1" class="domain.Folder">
+		<property name="title" value="Inbox" />
+		
+		<property name="parent" ref="rootFolderModerator1" />
+		<property name="folders">
+			<list>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+	<bean id="outboxFolderModerator1" class="domain.Folder">
+		<property name="title" value="Outbox" />
+		
+		<property name="parent" ref="rootFolderModerator1" />
+		<property name="folders">
+			<list>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+	<bean id="trashboxFolderModerator1" class="domain.Folder">
+		<property name="title" value="TrashBox" />
+		
+		<property name="parent" ref="rootFolderModerator1" />
+		<property name="folders">
+			<list>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+
+	<bean id="rootFolderbusiness1" class="domain.Folder">
+		<property name="title" value="Root" />
+		
+		<property name="folders">
+			<list>
+
+				<ref bean="inboxFolderbusiness1" />
+				<ref bean="outboxFolderbusiness1" />
+
+				<ref bean="trashboxFolderbusiness1" />
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+
+	<bean id="inboxFolderbusiness1" class="domain.Folder">
+		<property name="title" value="Inbox" />
+		
+		<property name="parent" ref="rootFolderbusiness1" />
+		<property name="folders">
+			<list>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+				<ref bean="message3" />
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+	<bean id="outboxFolderbusiness1" class="domain.Folder">
+		<property name="title" value="Outbox" />
+		
+		<property name="parent" ref="rootFolderbusiness1" />
+		<property name="folders">
+			<list>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+
+	<bean id="trashboxFolderbusiness1" class="domain.Folder">
+		<property name="title" value="TrashBox" />
+		
+		<property name="parent" ref="rootFolderbusiness1" />
+		<property name="folders">
+			<list>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+	
+	<bean id="rootFolderbusiness2" class="domain.Folder">
+		<property name="title" value="Root" />
+		
+		<property name="folders">
+			<list>
+
+				<ref bean="inboxFolderbusiness2" />
+				<ref bean="outboxFolderbusiness2" />
+
+				<ref bean="trashboxFolderbusiness2" />
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+
+	<bean id="inboxFolderbusiness2" class="domain.Folder">
+		<property name="title" value="Inbox" />
+		
+		<property name="parent" ref="rootFolderbusiness2" />
+		<property name="folders">
+			<list>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+	<bean id="outboxFolderbusiness2" class="domain.Folder">
+		<property name="title" value="Outbox" />
+		
+		<property name="parent" ref="rootFolderbusiness2" />
+		<property name="folders">
+			<list>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+	
+	<bean id="trashboxFolderbusiness2" class="domain.Folder">
+		<property name="title" value="TrashBox" />
+		
+		<property name="parent" ref="rootFolderbusiness2" />
+		<property name="folders">
+			<list>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="systemFolders" value="True" />
+	</bean>
+
+
+	<!-- Message -->
+	<bean id="message1" class="domain.Message">
+		<property name="moment" value="2017/10/01 19:00" />
+		<property name="subject" value="Asunto1" />
+		<property name="body" value="cuerpo del mensaje 1." />
+		
+		<property name="sender" ref="user1" />
+		<property name="recipients">
+			<list>
+				<ref bean="user2" />
+			</list>
+		</property>
+	</bean>
+	<bean id="message2" class="domain.Message">
+		<property name="moment" value="2017/10/01 19:00" />
+		<property name="subject" value="Asunto1" />
+		<property name="body" value="cuerpo del mensaje 2." />
+		
+		<property name="sender" ref="user2" />
+		<property name="recipients">
+			<list>
+				<ref bean="user1" />
+			</list>
+		</property>
+	</bean>
+	<bean id="message3" class="domain.Message">
+		<property name="moment" value="2017/10/01 19:00" />
+		<property name="subject" value="Asunto1" />
+		<property name="body" value="cuerpo del mensaje 3." />
+		
+		<property name="sender" ref="user1" />
+		<property name="recipients">
+			<list>
+				<ref bean="business1" />
+			</list>
+		</property>
+	</bean>
+	
+		<!-- Report -->
+	<bean id="report1" class="domain.Report">
+		<property name="text" value="Me acosa por el chat" />
+		<property name="weight" value="1" />
+		<property name="actor" ref="User3" />
+	</bean>
+		
+		
+		<!-- Valoration -->
+		
+	<bean id="valoration1" class="domain.Valoration">
+		<property name="text" value="Me acosa por el chat" />
+		<property name="weight" value="1" />
+		<property name="actor" ref="User3" />
+	</bean>
+
+		<!-- SocialIdentity -->
+		<!-- Chat -->
+		<!-- Bid -->
+		<!-- Answer -->
+		<!-- Question -->
+		<!-- Advertisement -->
+		<!-- ShopAdvertisement -->
+		<!-- ExpressAdvertisement -->
+		<!-- AuctionAdvertisement -->
+		<!-- Review -->
+		<!-- BusinessInfo -->
+		<!-- Item -->
+		<!-- ShoppingCart -->
+		<!-- saleLine -->
+		<!-- Order -->
+		<!-- ShipmentAddress -->
+		<!-- ShippingInfo -->
+		<!-- FacturationData -->
 </beans>
