@@ -4,4 +4,4 @@
 - añadido el parametro systemfolder a folder, e invertido la multiplicidad entre socialidentity y user
 
 - añadida una relación más entre order y user para que pueda ser un vendedor
-
+- Cambiado el dominio de valoration

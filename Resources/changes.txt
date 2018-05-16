@@ -4,3 +4,7 @@ Cambiar Message por Chat y Mail por Message -> Cambiado en el UML y doc
 Cambiar announcement por advertisement -> Done el UML y el doc esta en español ¯\_(?)_/¯
 Quitar el advertisment original de system config-> Done el UML y doc
 Añadir la gestión de la entrega en general -> 
+
+
+
+Añadida Gestión de item
