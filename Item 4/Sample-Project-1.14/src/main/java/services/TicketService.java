@@ -134,4 +134,26 @@ public class TicketService {
 		}
 		return result;
 	}
+	public Collection<Ticket> findByBusinessId(final int id) {
+		Collection<Ticket> result;
+
+		result = this.ticketRepository.findByBusinessId(id);
+
+		return result;
+	}
+	public Collection<Ticket> findByUserId(final int id) {
+		Collection<Ticket> result;
+
+		result = this.ticketRepository.findByUserId(id);
+
+		return result;
+	}
+	public Collection<Ticket> findBySellerId(final int id) {
+		Collection<Ticket> result;
+
+		result = this.ticketRepository.findBySellerId(id);
+
+		return result;
+	}
+
 }
