@@ -65,5 +65,26 @@ public class ExpressAdvertisementService {
 	public void flush() {
 		this.expressAdvertisementRepository.flush();
 	}
+	public Collection<ExpressAdvertisement> findNotPast() {
+		Collection<ExpressAdvertisement> result;
+
+		result = this.expressAdvertisementRepository.findNotPast();
+
+		return result;
+	}
+	public Collection<ExpressAdvertisement> findExpressByBussiness(final int businessId) {
+		Collection<ExpressAdvertisement> result;
+
+		result = this.expressAdvertisementRepository.findExpressbyBusiness(businessId);
+
+		return result;
+	}
+	public Collection<ExpressAdvertisement> findExpressByUser(final int UserId) {
+		Collection<ExpressAdvertisement> result;
+
+		result = this.expressAdvertisementRepository.findExpressbyUser(UserId);
+
+		return result;
+	}
 
 }

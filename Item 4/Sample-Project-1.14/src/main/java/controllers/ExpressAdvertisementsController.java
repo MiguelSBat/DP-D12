@@ -12,32 +12,36 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.AdvertisementService;
+import services.AuctionAdvertisementService;
+import services.ExpressAdvertisementService;
+import services.ShopAdvertisementService;
 import services.UserService;
 import domain.Advertisement;
+import domain.ExpressAdvertisement;
 
 @Controller
-@RequestMapping("/advertisement")
-public class AdvertisementsController extends AbstractController {
+@RequestMapping("/expressAdvertisement")
+public class ExpressAdvertisementsController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private UserService								userService;
+	private UserService					userService;
 	@Autowired
-	private ActorService							actorService;
+	private ActorService				actorService;
 	@Autowired
-	private AdvertisementService					advertisementService;
+	private AdvertisementService		advertisementService;
 	@Autowired
-	private services.AuctionAdvertisementService	AuctionAdvertisementService;
+	private AuctionAdvertisementService	auctionAdvertisementService;
 	@Autowired
-	private services.ExpressAdvertisementService	ExpressAdvertisementService;
+	private ExpressAdvertisementService	expressAdvertisementService;
 	@Autowired
-	private services.ShopAdvertisementService		ShopAdvertisementService;
+	private ShopAdvertisementService	shopAdvertisementService;
 
 
 	// Constructors -----------------------------------------------------------
 
-	public AdvertisementsController() {
+	public ExpressAdvertisementsController() {
 		super();
 	}
 
@@ -59,13 +63,11 @@ public class AdvertisementsController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(final String criteria) {
 		ModelAndView result;
-		Collection<Advertisement> advertisements;
+		Collection<ExpressAdvertisement> advertisements;
 
-		advertisements = this.advertisementService.findByCriteria(criteria);
-		if (criteria == null || criteria == "")
-			advertisements = this.advertisementService.findNotPAst();
+		advertisements = this.expressAdvertisementService.findNotPast();
 
-		result = new ModelAndView("advertisement/list");
+		result = new ModelAndView("expressAdvertisement/list");
 		result.addObject("advertisements", advertisements);
 
 		return result;
@@ -81,14 +83,14 @@ public class AdvertisementsController extends AbstractController {
 
 		//		advertisement = this.advertisementService.findOne(advertisementId);
 
-		advertisement = this.AuctionAdvertisementService.findOne(advertisementId);
+		advertisement = this.auctionAdvertisementService.findOne(advertisementId);
 		String advertisementType = "auction";
 		if (advertisement == null) {
-			advertisement = this.ExpressAdvertisementService.findOne(advertisementId);
+			advertisement = this.expressAdvertisementService.findOne(advertisementId);
 			advertisementType = "express";
 		}
 		if (advertisement == null) {
-			advertisement = this.ShopAdvertisementService.findOne(advertisementId);
+			advertisement = this.shopAdvertisementService.findOne(advertisementId);
 			advertisementType = "shop";
 		}
 		result.addObject("advertisement", advertisement);
@@ -165,7 +167,7 @@ public class AdvertisementsController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Advertisement advertisement, final String message) {
 		ModelAndView result;
 
-		result = new ModelAndView("advertisement/edit");
+		result = new ModelAndView("expressAdvertisement/edit");
 		result.addObject("advertisement", advertisement);
 		result.addObject("message", message);
 
