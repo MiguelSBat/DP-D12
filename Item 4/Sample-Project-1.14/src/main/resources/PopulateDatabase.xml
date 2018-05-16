@@ -1069,6 +1069,7 @@
 		<property name="date" value="2018/01/15"/>
 		<property name="status" value="Send"/>
 		<property name="user" ref="user1" />
+		<property name="seller" ref="user2" />
 		<property name="business" ref="business1" />
 	</bean>
 		<!-- ShipmentAddress -->
