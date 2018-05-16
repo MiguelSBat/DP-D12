@@ -45,6 +45,7 @@ public class Ticket extends DomainEntity {
 
 	private User		user;
 	private Business	business;
+	private User		seller;
 
 
 	@ManyToOne(optional = false)
@@ -63,6 +64,15 @@ public class Ticket extends DomainEntity {
 
 	public void setBusiness(final Business business) {
 		this.business = business;
+	}
+
+	@ManyToOne(optional = false)
+	public User getSeller() {
+		return this.seller;
+	}
+
+	public void setSeller(final User seller) {
+		this.seller = seller;
 	}
 
 }
