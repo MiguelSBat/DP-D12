@@ -4,6 +4,8 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
@@ -41,6 +43,33 @@ public class Item extends DomainEntity {
 
 	public void setPhoto(final String photo) {
 		this.photo = photo;
+	}
+
+
+	//relationships
+
+	private Business	business;
+	private User		user;
+
+
+	@ManyToOne(optional = true)
+	@Valid
+	public Business getBusiness() {
+		return this.business;
+	}
+
+	public void setBusiness(final Business business) {
+		this.business = business;
+	}
+
+	@ManyToOne(optional = true)
+	@Valid
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(final User user) {
+		this.user = user;
 	}
 
 }

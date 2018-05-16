@@ -1045,6 +1045,7 @@
 		<property name="name" value="Nintendo switch" />
 		<property name="description" value="Totalmente nueva" />
 		<property name="photo" value="http://www.nintenderos.com/wp-content/uploads/2017/10/nintendo-switch.jpg" />
+		<property name="business" ref="business1"/>
 	</bean>
 		
 		<!-- ShoppingCart -->
