@@ -24,7 +24,6 @@
 					<li class="arrow"></li>
 					<li><a href="expressAdvertisement/list.do"><spring:message code="master.page.express" /></a></li>
 			</ul>
-					<li class="arrow"></li>
 		</li>
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<security:authorize access="hasRole('ADMIN')">
@@ -35,18 +34,6 @@
 					<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>
 					<li><a href="administrator/config/display.do"><spring:message code="master.page.administrator.config.display" /></a></li>	
 					<li><a href="administrator/config/edit.do"><spring:message code="master.page.administrator.config.edit" /></a></li>					
-				</ul>
-				<li class="arrow"></li>
-				
-			</li>
-		</security:authorize>
-		
-		<security:authorize access="hasRole('CUSTOMER')">
-			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
-					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
 				</ul>
 			</li>
 		</security:authorize>
@@ -64,8 +51,9 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="expressAdvertisement/MyList.do"><spring:message code="master.page.MyList" /></a></li>
-					<li><a href="profile/action-2.do"><spring:message code="master.page.profile.action.2" /></a></li>
-					<li><a href="profile/action-3.do"><spring:message code="master.page.profile.action.3" /></a></li>					
+					<security:authorize access="hasRole('USER')">
+						<li><a href="auctionAdvertisement/myList.do"><spring:message code="master.page.user.myAuctions" /></a></li>
+					</security:authorize>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>

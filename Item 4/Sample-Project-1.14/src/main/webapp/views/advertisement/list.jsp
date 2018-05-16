@@ -27,10 +27,6 @@
 
 <form action="advertisement/list.do" method="get">
 
-
-
-
-
 	<input name="criteria" /> <br /> <input type="submit" value="search" />
 
 </form>
