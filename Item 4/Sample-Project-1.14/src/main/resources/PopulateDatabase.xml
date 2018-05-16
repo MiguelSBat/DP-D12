@@ -997,7 +997,7 @@
 		<property name="business">
 			<null></null>
 		</property>
-		<property name="item" ref="item1" />			
+		<property name="item" ref="item2" />			
 		<property name="saleLines">
 			<list>
 			</list>
@@ -1014,7 +1014,7 @@
 		<property name="business">
 			<null></null>
 		</property>
-		<property name="item" ref="item1" />			
+		<property name="item" ref="item2" />			
 		<property name="saleLines">
 			<list>
 			</list>
@@ -1046,6 +1046,13 @@
 		<property name="description" value="Totalmente nueva" />
 		<property name="photo" value="http://www.nintenderos.com/wp-content/uploads/2017/10/nintendo-switch.jpg" />
 		<property name="business" ref="business1"/>
+	</bean>
+	
+	<bean id="item2" class="domain.Item">
+		<property name="name" value="Item2" />
+		<property name="description" value="Totalmente nueva" />
+		<property name="photo" value="http://www.nintenderos.com/wp-content/uploads/2017/10/nintendo-switch.jpg" />
+		<property name="user" ref="user1"/>
 	</bean>
 		
 		<!-- ShoppingCart -->
