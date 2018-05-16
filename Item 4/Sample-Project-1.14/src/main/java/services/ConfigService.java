@@ -2,6 +2,8 @@
 package services;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -61,6 +63,39 @@ public class ConfigService {
 		result = this.configRepository.findOne(configId);
 		Assert.notNull(result);
 
+		return result;
+	}
+
+	public Config addSpamWord(final String spamWord) {
+		Config config;
+		Config result;
+		Set<String> spamWords;
+
+		config = this.findConfiguration();
+		spamWords = new HashSet<String>(config.getSpamWords());
+		spamWords.add(spamWord);
+		config.setSpamWords(spamWords);
+		result = this.save(config);
+
+		return result;
+	}
+	public Config removeSpamWord(final String spamWord) {
+		Config config;
+		Config result;
+		Collection<String> spamWords;
+
+		config = this.findConfiguration();
+		spamWords = config.getSpamWords();
+		spamWords.remove(spamWord);
+		config.setSpamWords(spamWords);
+		result = this.save(config);
+
+		return result;
+	}
+
+	public Config findConfiguration() {
+		Config result;
+		result = this.configRepository.findAll().get(0);
 		return result;
 	}
 

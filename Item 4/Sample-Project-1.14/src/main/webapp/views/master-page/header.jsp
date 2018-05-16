@@ -27,9 +27,10 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="administrator/action-1.do"><spring:message code="master.page.administrator.action.1" /></a></li>
-					<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>					
+					<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>
+					<li><a href="administrator/config/display.do"><spring:message code="master.page.administrator.config.display" /></a></li>	
+					<li><a href="administrator/config/edit.do"><spring:message code="master.page.administrator.config.edit" /></a></li>					
 				</ul>
-				<ul>
 				<li class="arrow"></li>
 				
 			</li>
