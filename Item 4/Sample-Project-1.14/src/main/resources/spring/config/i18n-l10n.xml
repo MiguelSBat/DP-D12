@@ -22,13 +22,16 @@
 		<value>/views/misc/messages</value>
 		<value>/views/security/messages</value>		
 		<value>/views/welcome/messages</value>
-			<value>/views/advertisement/messages</value>
+		<value>/views/advertisement/messages</value>
 		<value>/views/administrator/messages</value>
 		<value>/views/customer/messages</value>
 		<value>/views/profile/messages</value>
 		<value>/views/law/messages</value>
+
+		<value>/views/expressAdvertisement/messages</value>
+
 		<value>/views/config/messages</value>
-		
+
 	</util:list>
 
 </beans>
