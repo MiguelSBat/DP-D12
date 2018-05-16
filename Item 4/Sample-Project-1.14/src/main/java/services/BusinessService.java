@@ -68,4 +68,20 @@ public class BusinessService {
 		this.businessRepository.flush();
 	}
 
+	public Collection<Business> findByShoppingCartId(final int id) {
+		Collection<Business> result;
+
+		result = this.findByShoppingCartId(id);
+
+		return result;
+	}
+
+	public Collection<Business> findBySaleLineId(final int id) {
+		Collection<Business> result;
+
+		result = this.findBySaleLineId(id);
+
+		return result;
+	}
+
 }

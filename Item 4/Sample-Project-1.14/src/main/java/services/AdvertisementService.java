@@ -68,8 +68,22 @@ public class AdvertisementService {
 		this.advertisementRepository.flush();
 	}
 	public Collection<Advertisement> findByCriteria(final String criteria) {
-		final Collection<Advertisement> advertisements;
+		Collection<Advertisement> advertisements;
 		advertisements = this.advertisementRepository.findByCriteria(criteria);
 		return advertisements;
+	}
+	public Collection<Advertisement> findBySaleLineId(final int id) {
+		Collection<Advertisement> result;
+
+		result = this.advertisementRepository.findBySaleLineId(id);
+
+		return result;
+	}
+	public Collection<Advertisement> findByBusinessId(final int id) {
+		Collection<Advertisement> result;
+
+		result = this.advertisementRepository.findByBusinessId(id);
+
+		return result;
 	}
 }

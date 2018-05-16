@@ -68,4 +68,19 @@ public class SaleLineService {
 		this.saleLineRepository.flush();
 	}
 
+	public Collection<SaleLine> findByShoppingCartId(final int id) {
+		Collection<SaleLine> result;
+
+		result = this.saleLineRepository.findByShoppingCartId(id);
+
+		return result;
+	}
+	public Collection<SaleLine> findByShoppingCartAndBusinessId(final int shoppingCartId, final int businessId) {
+		Collection<SaleLine> result;
+
+		result = this.saleLineRepository.findByShoppingCartAndBusinessId(shoppingCartId, businessId);
+
+		return result;
+	}
+
 }
