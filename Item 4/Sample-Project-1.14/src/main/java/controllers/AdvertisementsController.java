@@ -63,7 +63,7 @@ public class AdvertisementsController extends AbstractController {
 
 		advertisements = this.advertisementService.findByCriteria(criteria);
 		if (criteria == null || criteria == "")
-			advertisements = this.advertisementService.findAll();
+			advertisements = this.advertisementService.findNotPAst();
 
 		result = new ModelAndView("advertisement/list");
 		result.addObject("advertisements", advertisements);

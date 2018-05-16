@@ -61,6 +61,13 @@ public class AdvertisementService {
 
 		return result;
 	}
+	public Collection<Advertisement> findNotPAst() {
+		Collection<Advertisement> result;
+
+		result = this.advertisementRepository.findNotPast();
+
+		return result;
+	}
 
 	public void flush() {
 		this.advertisementRepository.flush();
