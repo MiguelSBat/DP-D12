@@ -1,13 +1,13 @@
-- Arreglar para que la base de dato sea AcmeShop y no Sample
+- Arreglar para que la base de dato sea AcmeShop y no Sample  DONE
 
 - Tal y como esta diseñado valoration junto a su relacion con user es erronea y habria que rediseñarlo.
 
 - Replantear relaciones entre user,business y order. Tal y como esta ahora al crear un order, se le asociaria un user y un business,
-por lo que seria imposible que un user compre algo a otro user.
+por lo que seria imposible que un user compre algo a otro user. DONE
 
 - cambiar las relaciones de auctionadvertisement y expressadvertisement de 0.*-1 a 0.*-0..1, si no, un business no podria crear esos 2 tipos de anuncios
 ya que a la fuerza hay que asociar un user
 
 -Quitar el parametro weight de Report, el sistema ya de por si, pone un peso a los report, por lo que si el usuario no podifica el parametro
 weight de los reports al reportar a alguien, se podria eliminar y seria mas correcto pasar ese parametro a actor, si la finalidad es tener 
-una cuenta de cuantas veces ha sido reportado alguien. Si el parametro se dejase en Report, no hay forma de saber cuantas veces ha sido reportado alguien
+una cuenta de cuantas veces ha sido reportado alguien. Si el parametro se dejase en Report, no hay forma de saber cuantas veces ha sido reportado alguien // Eso no es lo que hace weight
