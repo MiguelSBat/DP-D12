@@ -15,7 +15,7 @@ public class ExpressAdvertisement extends Advertisement {
 	private User	user;
 
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	public User getUser() {
 		return this.user;
 	}
