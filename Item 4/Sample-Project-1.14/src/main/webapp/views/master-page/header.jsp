@@ -19,8 +19,13 @@
 
 <div>
 	<ul id="jMenu">
-	<li><a href="advertisement/list.do"><spring:message
-							code="master.page.advertisement" /></a></li>
+	    <li><a class="fNiv" href="advertisement/list.do"><spring:message code="master.page.advertisement" /></a>
+	    	<ul>
+					<li class="arrow"></li>
+					<li><a href="expressAdvertisement/list.do"><spring:message code="master.page.express" /></a></li>
+			</ul>
+					<li class="arrow"></li>
+		</li>
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<security:authorize access="hasRole('ADMIN')">
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
@@ -58,7 +63,7 @@
 				</a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="profile/action-1.do"><spring:message code="master.page.profile.action.1" /></a></li>
+					<li><a href="expressAdvertisement/MyList.do"><spring:message code="master.page.MyList" /></a></li>
 					<li><a href="profile/action-2.do"><spring:message code="master.page.profile.action.2" /></a></li>
 					<li><a href="profile/action-3.do"><spring:message code="master.page.profile.action.3" /></a></li>					
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>

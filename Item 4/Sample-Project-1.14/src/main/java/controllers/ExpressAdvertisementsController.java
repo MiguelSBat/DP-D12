@@ -2,6 +2,7 @@
 package controllers;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,8 +17,11 @@ import services.AuctionAdvertisementService;
 import services.ExpressAdvertisementService;
 import services.ShopAdvertisementService;
 import services.UserService;
+import domain.Actor;
 import domain.Advertisement;
+import domain.Business;
 import domain.ExpressAdvertisement;
+import domain.User;
 
 @Controller
 @RequestMapping("/expressAdvertisement")
@@ -75,28 +79,29 @@ public class ExpressAdvertisementsController extends AbstractController {
 
 	//	 display
 
-	@RequestMapping(value = "display", method = RequestMethod.GET)
-	public ModelAndView display(@RequestParam final int advertisementId) {
-		final ModelAndView result;
-		result = new ModelAndView("advertisement/display");
-		Advertisement advertisement;
+	@RequestMapping(value = "/MyList", method = RequestMethod.GET)
+	public ModelAndView MyList() {
+		ModelAndView result;
+		Collection<ExpressAdvertisement> advertisements=new HashSet<>();
+		Actor a=actorService.findByPrincipal();
+		
+		
+		if(a instanceof Business){
+			Business b= (Business) a;
+			advertisements = this.expressAdvertisementService.findExpressByBussiness(b.getId());
 
-		//		advertisement = this.advertisementService.findOne(advertisementId);
+		}
+		if(a instanceof User){
+			User u= (User) a;
+			advertisements = this.expressAdvertisementService.findExpressByUser(u.getId());
 
-		advertisement = this.auctionAdvertisementService.findOne(advertisementId);
-		String advertisementType = "auction";
-		if (advertisement == null) {
-			advertisement = this.expressAdvertisementService.findOne(advertisementId);
-			advertisementType = "express";
 		}
-		if (advertisement == null) {
-			advertisement = this.shopAdvertisementService.findOne(advertisementId);
-			advertisementType = "shop";
-		}
-		result.addObject("advertisement", advertisement);
-		result.addObject("type", advertisementType);
+		result = new ModelAndView("expressAdvertisement/list");
+		result.addObject("advertisements", advertisements);
+
 		return result;
 	}
+
 	// Edition ----------------------------------------------------------------
 
 	//	@RequestMapping(value = "/edit", method = RequestMethod.GET)

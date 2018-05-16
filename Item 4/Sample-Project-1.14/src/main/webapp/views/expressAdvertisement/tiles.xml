@@ -17,9 +17,7 @@
 		<put-attribute name="title" value="advertisement edit" />
 		<put-attribute name="body" value="/views/expressAdvertisement/edit.jsp" />
 	</definition>
-	<definition name="expressAdvertisement/display" extends="master.page">	
-		<put-attribute name="title" value="advertisement display" />
-		<put-attribute name="body" value="/views/expressAdvertisement/display.jsp" />
-	</definition>
-	
+
+
+
 </tiles-definitions>
