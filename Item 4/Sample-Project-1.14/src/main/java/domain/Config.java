@@ -59,39 +59,39 @@ public class Config extends DomainEntity {
 	}
 
 	@NotNull
-	public Integer getUserMaxAnnouncements() {
+	public Integer getUserMaxAdvertisements() {
 		return this.userMaxAdvertisements;
 	}
 
-	public void setUserMaxAnnouncements(final Integer userMaxAnnouncements) {
+	public void setUserMaxAdvertisements(final Integer userMaxAnnouncements) {
 		this.userMaxAdvertisements = userMaxAnnouncements;
 	}
 
 	@NotNull
-	public Integer getBusinessMaxAnnouncements() {
+	public Integer getBusinessMaxAdvertisements() {
 		return this.businessMaxAdvertisements;
 	}
 
-	public void setBusinessMaxAnnouncements(final Integer bussinessMaxAnnouncements) {
+	public void setBusinessMaxAdvertisements(final Integer bussinessMaxAnnouncements) {
 		this.businessMaxAdvertisements = bussinessMaxAnnouncements;
 	}
 
 	@NotNull
-	public Integer getPremiumMaxAnnouncements() {
+	public Integer getPremiumMaxAdvertisements() {
 		return this.premiumMaxAdvertisements;
 	}
 
-	public void setPremiumMaxAnnouncements(final Integer premiumMaxAnnouncements) {
+	public void setPremiumMaxAdvertisements(final Integer premiumMaxAnnouncements) {
 		this.premiumMaxAdvertisements = premiumMaxAnnouncements;
 	}
 
 	@NotNull
 	@Range(min = 1, max = 12)
-	public Integer getAnnouncementExpirationMonths() {
+	public Integer getAdvertisementExpirationMonths() {
 		return this.advertisementExpirationMonths;
 	}
 
-	public void setAnnouncementExpirationMonths(final Integer announcementExpirationMonths) {
+	public void setAdvertisementExpirationMonths(final Integer announcementExpirationMonths) {
 		this.advertisementExpirationMonths = announcementExpirationMonths;
 	}
 
