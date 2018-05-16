@@ -35,6 +35,9 @@ public class TicketService {
 	@Autowired
 	private BusinessService			businessService;
 
+	@Autowired
+	private UserService				userService;
+
 
 	//Constructors
 	public TicketService() {
@@ -89,22 +92,39 @@ public class TicketService {
 		Collection<Ticket> result;
 		Collection<SaleLine> salesLines;
 		Collection<Business> business;
+		Collection<User> users;
 		Actor actor;
-		User user;
+		User principal;
 
 		result = new ArrayList<Ticket>();
 		business = this.businessService.findByShoppingCartId(shoppingCartId);
+		users = this.userService.findByShoppingCartId(shoppingCartId);
 		actor = null; //TODO inicializar actor
-		user = (User) actor;
+		principal = (User) actor;
 
 		for (final Business b : business) {
 			ticket = this.create();
 			ticket.setBusiness(b);
 			ticket.setStatus("PENDING");
-			ticket.setUser(user);
+			ticket.setUser(principal);
 			ticket.setDate(new Date());
 			ticketAux = this.save(ticket);
 			salesLines = this.saleLineService.findByShoppingCartAndBusinessId(shoppingCartId, b.getId());
+			for (final SaleLine s : salesLines) {
+				s.setShoppingCart(null);
+				s.setTicket(ticketAux);
+				this.saleLineService.save(s);
+			}
+			result.add(ticketAux);
+		}
+		for (final User u : users) {
+			ticket = this.create();
+			ticket.setSeller(u);
+			ticket.setStatus("PENDING");
+			ticket.setUser(principal);
+			ticket.setDate(new Date());
+			ticketAux = this.save(ticket);
+			salesLines = this.saleLineService.findFromUserByShoppingCartAndUserId(shoppingCartId, u.getId());
 			for (final SaleLine s : salesLines) {
 				s.setShoppingCart(null);
 				s.setTicket(ticketAux);

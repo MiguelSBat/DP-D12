@@ -68,10 +68,10 @@ public class SaleLineService {
 		this.saleLineRepository.flush();
 	}
 
-	public Collection<SaleLine> findByShoppingCartId(final int id) {
+	public Collection<SaleLine> findFromBusinessByShoppingCartId(final int id) {
 		Collection<SaleLine> result;
 
-		result = this.saleLineRepository.findByShoppingCartId(id);
+		result = this.saleLineRepository.findFromBusinessByShoppingCartId(id);
 
 		return result;
 	}
@@ -79,6 +79,35 @@ public class SaleLineService {
 		Collection<SaleLine> result;
 
 		result = this.saleLineRepository.findByShoppingCartAndBusinessId(shoppingCartId, businessId);
+
+		return result;
+	}
+	public Collection<SaleLine> findFromAuctionByShoppingCartAndUserId(final int shoppingCartId, final int userId) {
+		Collection<SaleLine> result;
+
+		result = this.saleLineRepository.findFromAuctionByShoppingCartAndUserId(shoppingCartId, userId);
+
+		return result;
+	}
+	public Collection<SaleLine> findFromExpressByShoppingCartAndUserId(final int shoppingCartId, final int userId) {
+		Collection<SaleLine> result;
+
+		result = this.saleLineRepository.findFromExpressByShoppingCartAndUserId(shoppingCartId, userId);
+
+		return result;
+	}
+	public Collection<SaleLine> findFromUserByShoppingCartAndUserId(final int shoppingCartId, final int userId) {
+		Collection<SaleLine> result;
+
+		result = this.findFromAuctionByShoppingCartAndUserId(shoppingCartId, userId);
+		result.addAll(this.findFromExpressByShoppingCartAndUserId(shoppingCartId, userId));
+
+		return result;
+	}
+	public Collection<SaleLine> findByTicketId(final int id) {
+		Collection<SaleLine> result;
+
+		result = this.saleLineRepository.findByTicketId(id);
 
 		return result;
 	}

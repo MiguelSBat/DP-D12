@@ -67,5 +67,26 @@ public class UserService {
 	public void flush() {
 		this.userRepository.flush();
 	}
+	public Collection<User> findFromAuctionByShoppingCartId(final int id) {
+		Collection<User> result;
+
+		result = this.findFromAuctionByShoppingCartId(id);
+
+		return result;
+	}
+	public Collection<User> findFromExpressByShoppingCartId(final int id) {
+		Collection<User> result;
+
+		result = this.findFromExpressByShoppingCartId(id);
+
+		return result;
+	}
+	public Collection<User> findByShoppingCartId(final int id) {
+		Collection<User> result;
+		result = this.findFromAuctionByShoppingCartId(id);
+		result.addAll(this.findFromExpressByShoppingCartId(id));
+
+		return result;
+	}
 
 }
