@@ -108,10 +108,10 @@
 		<property name="VAT" value="0.21" />
 		<property name="englishWelcomeMessage" value="Buy, sell or auction everything that you can imagine" />
 		<property name="spanishWelcomeMessage" value="Compra, vende o subasta todo que puedas imaginar" />
-		<property name="userMaxAnnouncements" value="10" />
-		<property name="businessMaxAnnouncements" value="50" />
-		<property name="premiumMaxAnnouncements" value="100" />
-		<property name="announcementExpirationMonths" value="2" />
+		<property name="userMaxAdvertisements" value="10" />
+		<property name="businessMaxAdvertisements" value="50" />
+		<property name="premiumMaxAdvertisements" value="100" />
+		<property name="advertisementExpirationMonths" value="2" />
 		<property name="premiumPrice" value="20.0" />
 		<property name="paymentHoldDays" value="7" />
 		<property name="transactionReportWeight" value="1" />
