@@ -39,6 +39,9 @@
 		<security:intercept-url pattern="/advertisement/edit.do" access="permitAll" /> 
 		<security:intercept-url pattern="/advertisement/display.do" access="permitAll" /> 
 		
+		<security:intercept-url pattern="/user/ticket/**" access="hasRole('USER')" /> 
+		<security:intercept-url pattern="/business/ticket/**" access="hasRole('BUSINESS')" /> 
+		
 		<security:intercept-url pattern="/security/login.do" access="permitAll" /> 
 		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" /> 
 
