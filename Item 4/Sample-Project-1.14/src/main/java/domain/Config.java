@@ -18,10 +18,10 @@ public class Config extends DomainEntity {
 	private Double				VAT;
 	private String				englishWelcomeMessage;
 	private String				spanishWelcomeMessage;
-	private Integer				userMaxAnnouncements;
-	private Integer				businessMaxAnnouncements;
-	private Integer				premiumMaxAnnouncements;
-	private Integer				announcementExpirationMonths;
+	private Integer				userMaxAdvertisements;
+	private Integer				businessMaxAdvertisements;
+	private Integer				premiumMaxAdvertisements;
+	private Integer				advertisementExpirationMonths;
 	private Double				premiumPrice;
 	private Integer				paymentHoldDays;
 	private Integer				transactionReportWeight;
@@ -60,39 +60,39 @@ public class Config extends DomainEntity {
 
 	@NotNull
 	public Integer getUserMaxAnnouncements() {
-		return this.userMaxAnnouncements;
+		return this.userMaxAdvertisements;
 	}
 
 	public void setUserMaxAnnouncements(final Integer userMaxAnnouncements) {
-		this.userMaxAnnouncements = userMaxAnnouncements;
+		this.userMaxAdvertisements = userMaxAnnouncements;
 	}
 
 	@NotNull
 	public Integer getBusinessMaxAnnouncements() {
-		return this.businessMaxAnnouncements;
+		return this.businessMaxAdvertisements;
 	}
 
 	public void setBusinessMaxAnnouncements(final Integer bussinessMaxAnnouncements) {
-		this.businessMaxAnnouncements = bussinessMaxAnnouncements;
+		this.businessMaxAdvertisements = bussinessMaxAnnouncements;
 	}
 
 	@NotNull
 	public Integer getPremiumMaxAnnouncements() {
-		return this.premiumMaxAnnouncements;
+		return this.premiumMaxAdvertisements;
 	}
 
 	public void setPremiumMaxAnnouncements(final Integer premiumMaxAnnouncements) {
-		this.premiumMaxAnnouncements = premiumMaxAnnouncements;
+		this.premiumMaxAdvertisements = premiumMaxAnnouncements;
 	}
 
 	@NotNull
 	@Range(min = 1, max = 12)
 	public Integer getAnnouncementExpirationMonths() {
-		return this.announcementExpirationMonths;
+		return this.advertisementExpirationMonths;
 	}
 
 	public void setAnnouncementExpirationMonths(final Integer announcementExpirationMonths) {
-		this.announcementExpirationMonths = announcementExpirationMonths;
+		this.advertisementExpirationMonths = announcementExpirationMonths;
 	}
 
 	@NotNull
