@@ -57,7 +57,7 @@ public class Ticket extends DomainEntity {
 		this.user = user;
 	}
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	public Business getBusiness() {
 		return this.business;
 	}
@@ -66,7 +66,7 @@ public class Ticket extends DomainEntity {
 		this.business = business;
 	}
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	public User getSeller() {
 		return this.seller;
 	}
