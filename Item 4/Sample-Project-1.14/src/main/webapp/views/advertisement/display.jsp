@@ -28,9 +28,10 @@
 	<br />
 
 	<ul style="list-style-type: disc">
+	<h1><spring:message code="advertisement.type"></spring:message>:  <jstl:out value="${type}"></jstl:out></h1>
 
-		<li><b><spring:message code="advertisement.item"></spring:message>:</b>
-			<jstl:out value="${advertisement.getItem()}" /></li>
+	<li><b><spring:message code="advertisement.item"></spring:message>:</b>
+			<jstl:out value="${advertisement.getItem().getName()}" /></li>
 
 	<li><b><spring:message code="advertisement.endDate"></spring:message>:</b> 
 			<fmt:formatDate value="${advertisement.getEndDate()}" pattern="${dateFormat}" /></li>
@@ -38,9 +39,20 @@
 	<li><b><spring:message code="advertisement.publicationDate"></spring:message>:</b> 
 			<fmt:formatDate value="${advertisement.getPublicationDate()}" pattern="${dateFormat}" /></li>
 			
-			
-	<li><b><spring:message code="advertisement.item"></spring:message>:</b> 
-			<jstl:out value="${advertisement.getItem().getName()}" /></li>
+	<li><b><spring:message code="advertisement.price"></spring:message>:</b> 
+			<jstl:out value="${advertisement.getPrice()}" /></li>
+	<jstl:if test="${type.equals('shop')}">
+	<li><b><spring:message code="advertisement.stock"></spring:message>:</b> 
+			<jstl:out value="${advertisement.getStock()}" /></li>
+	
+	</jstl:if>
+	<jstl:if test="${type.equals('auction')}">
+	<li><b><spring:message code="advertisement.startingPrice"></spring:message>:</b> 
+			<jstl:out value="${advertisement.getStartingPrice()}" /></li>
+	<li><b><spring:message code="advertisement.instantBuyPrice"></spring:message>:</b> 
+			<jstl:out value="${advertisement.getInstantBuyPrice()}" /></li>
+	
+	</jstl:if>
 	
 <input type="button" name="cancel"
 	value="<spring:message code="advertisement.back" />"
