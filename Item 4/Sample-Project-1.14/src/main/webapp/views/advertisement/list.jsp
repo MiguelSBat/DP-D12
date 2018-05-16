@@ -47,9 +47,9 @@
 				value="${row.item.getName()}"></jstl:out></a>
 	</display:column>
 
-	<spring:message code="advertisement.business" var="businessHeader" />
+	<%-- <spring:message code="advertisement.business" var="businessHeader" />
 	<display:column property="business.name" title="${businessHeader}" />
-
+ --%>
 	<spring:message code="advertisement.publicationDate"
 		var="publicationDateHeader" />
 	<spring:message code="master.page.date.format" var="dateFormat" />
@@ -65,8 +65,8 @@
 	<spring:message code="advertisement.price" var="priceHeader" />
 		<display:column property="price" title="${priceHeader}" />
 
-	<spring:message code="advertisement.saleLines" var="saleLinesHeader" />
-		<display:column property="saleLines" title="${saleLinesHeader}" />
+<%-- 	<spring:message code="advertisement.saleLines" var="saleLinesHeader" />
+		<display:column property="saleLines" title="${saleLinesHeader}" /> --%>
 	<spring:message code="advertisement.tags" var="tagsHeader" />
 			<display:column property="tags" title="${tagsHeader}" />
 

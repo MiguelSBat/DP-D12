@@ -62,7 +62,7 @@ public class AdvertisementsController extends AbstractController {
 		Collection<Advertisement> advertisements;
 
 		advertisements = this.advertisementService.findByCriteria(criteria);
-		if (criteria == null)
+		if (criteria == null || criteria == "")
 			advertisements = this.advertisementService.findAll();
 
 		result = new ModelAndView("advertisement/list");
