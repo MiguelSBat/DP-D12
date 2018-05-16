@@ -30,7 +30,7 @@ public class SaleLine extends DomainEntity {
 	private ShoppingCart	shoppingCart;
 
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	public Ticket getTicket() {
 		return this.ticket;
 	}
@@ -39,7 +39,7 @@ public class SaleLine extends DomainEntity {
 		this.ticket = ticket;
 	}
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	public ShoppingCart getShoppingCart() {
 		return this.shoppingCart;
 	}
