@@ -31,6 +31,7 @@
 		<value>/views/ticket/tiles.xml</value>
 		<value>/views/config/tiles.xml</value>
 		<value>/views/item/tiles.xml</value>
+		<value>/views/auctionAdvertisement/tiles.xml</value>
 
 	</util:list>
 

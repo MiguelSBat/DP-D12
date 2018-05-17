@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -36,6 +37,7 @@ public class AuctionAdvertisementService {
 		AuctionAdvertisement result;
 
 		result = new AuctionAdvertisement();
+		result.setPublicationDate(new Date());
 
 		return result;
 	}
@@ -57,10 +59,15 @@ public class AuctionAdvertisementService {
 	public AuctionAdvertisement save(final AuctionAdvertisement auctionAdvertisement) {
 		AuctionAdvertisement result;
 		Actor actor;
+		Date date;
 
 		Assert.isTrue(this.actorService.isLogged());
 		actor = this.actorService.findByPrincipal();
 		Assert.isTrue(actor instanceof User || actor instanceof Business);
+		date = new Date();
+		Assert.isTrue(auctionAdvertisement.getEndDate().after(date));
+
+		auctionAdvertisement.setPublicationDate(date);
 		if (actor instanceof User) {
 			auctionAdvertisement.setUser((User) actor);
 			result = this.auctionAdvertisementRepository.save(auctionAdvertisement);

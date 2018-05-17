@@ -72,7 +72,7 @@ public class ItemService {
 		return result;
 	}
 
-	public Collection<Item> getItemsByUser(final int userId) {
+	public Collection<Item> findByUser(final int userId) {
 		Collection<Item> result;
 
 		result = this.itemRepository.getItemsByUser(userId);
@@ -91,6 +91,16 @@ public class ItemService {
 
 	public void flush() {
 		this.itemRepository.flush();
+	}
+
+	public Collection<Item> findByPrincipal() {
+		Collection<Item> result;
+		Actor actor;
+
+		actor = this.actorService.findByPrincipal();
+		result = this.findByUser(actor.getId());
+
+		return result;
 	}
 
 }

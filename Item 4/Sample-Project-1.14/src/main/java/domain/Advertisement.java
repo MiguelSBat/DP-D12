@@ -69,6 +69,7 @@ public class Advertisement extends DomainEntity {
 	private Business				business;
 
 
+	@NotNull
 	@ManyToOne(optional = false)
 	public Item getItem() {
 		return this.item;

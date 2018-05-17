@@ -44,7 +44,7 @@ public class ItemUserController extends AbstractController {
 		Actor principal;
 
 		principal = this.actorService.findByPrincipal();
-		items = this.itemService.getItemsByUser(principal.getId());
+		items = this.itemService.findByUser(principal.getId());
 		result = new ModelAndView("item/list");
 		result.addObject("items", items);
 		result.addObject("requestURI", "user/item/list.do");

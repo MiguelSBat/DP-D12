@@ -38,12 +38,17 @@
 
 	<li><b><spring:message code="advertisement.publicationDate"></spring:message>:</b> 
 			<fmt:formatDate value="${advertisement.getPublicationDate()}" pattern="${dateFormat}" /></li>
-			
-	<li><b><spring:message code="advertisement.price"></spring:message>:</b> 
-			<jstl:out value="${advertisement.getPrice()}" /></li>
+	
 	<jstl:if test="${type.equals('shop')}">
 	<li><b><spring:message code="advertisement.stock"></spring:message>:</b> 
 			<jstl:out value="${advertisement.getStock()}" /></li>
+	<li><b><spring:message code="advertisement.price"></spring:message>:</b> 
+			<jstl:out value="${advertisement.price}" /></li>	
+	
+	</jstl:if>
+	<jstl:if test="${type.equals('express')}">
+	<li><b><spring:message code="advertisement.price"></spring:message>:</b> 
+			<jstl:out value="${advertisement.price}" /></li>	
 	
 	</jstl:if>
 	<jstl:if test="${type.equals('auction')}">
@@ -53,8 +58,8 @@
 			<jstl:out value="${advertisement.getInstantBuyPrice()}" /></li>
 	
 	</jstl:if>
-	
+	</ul>
 <input type="button" name="cancel"
 	value="<spring:message code="advertisement.back" />"
 	onclick="javascript: relativeRedir('advertisement/list.do')" />
-	
+</div>

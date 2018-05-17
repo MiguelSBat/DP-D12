@@ -57,10 +57,19 @@
 	<spring:message code="master.page.date.format" var="dateFormat" />
 	<display:column property="endDate"
 		format="{0,date,${dateFormat}}" title="${endDateHeader}" />
-
-	<spring:message code="advertisement.price" var="priceHeader" />
-		<display:column property="price" title="${priceHeader}" />
-
+	
+		<spring:message code="advertisement.price" var="priceHeader" />
+		
+		<display:column title="${priceHeader}">
+			<jstl:if test="${row.getClass().name != 'domain.AuctionAdvertisement'}">
+				<jstl:out value="${row.price}"/>
+			</jstl:if>
+			<jstl:if test="${row.getClass().name == 'domain.AuctionAdvertisement'}">
+				<jstl:out value="${row.startingPrice}"/>
+			</jstl:if>
+		</display:column>
+	
+	
 <%-- 	<spring:message code="advertisement.saleLines" var="saleLinesHeader" />
 		<display:column property="saleLines" title="${saleLinesHeader}" /> --%>
 	<spring:message code="advertisement.tags" var="tagsHeader" />
@@ -69,5 +78,5 @@
 	
 	
 </display:table>
-
+<a href="auctionAdvertisement/create.do">crear auctionAD</a>
 

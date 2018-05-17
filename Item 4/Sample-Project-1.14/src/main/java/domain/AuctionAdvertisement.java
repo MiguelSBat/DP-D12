@@ -14,7 +14,7 @@ public class AuctionAdvertisement extends Advertisement {
 
 	private Double	startingPrice;
 	private Double	instantBuyPrice;
-	private Boolean	secret;
+	private boolean	secret;
 
 
 	@NotNull
@@ -37,12 +37,11 @@ public class AuctionAdvertisement extends Advertisement {
 		this.instantBuyPrice = instantBuyPrice;
 	}
 
-	@NotNull
-	public Boolean isSecret() {
+	public boolean isSecret() {
 		return this.secret;
 	}
 
-	public void setSecret(final Boolean secret) {
+	public void setSecret(final boolean secret) {
 		this.secret = secret;
 	}
 
