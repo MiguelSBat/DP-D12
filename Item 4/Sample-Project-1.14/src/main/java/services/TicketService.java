@@ -14,9 +14,7 @@ import org.springframework.util.Assert;
 import repositories.TicketRepository;
 import domain.Actor;
 import domain.Business;
-import domain.FacturationData;
 import domain.SaleLine;
-import domain.ShipmentAddress;
 import domain.Ticket;
 import domain.User;
 
@@ -104,10 +102,10 @@ public class TicketService {
 		Collection<SaleLine> salesLines;
 		Collection<Business> business;
 		Collection<User> users;
-		FacturationData facturationData;
-		FacturationData facturationDataAux;
-		ShipmentAddress shipmentAddress;
-		ShipmentAddress shipmentAddressAux;
+		//		FacturationData facturationData;
+		//		FacturationData facturationDataAux;
+		//		ShipmentAddress shipmentAddress;
+		//		ShipmentAddress shipmentAddressAux;
 		Actor actor;
 		User principal;
 
@@ -130,22 +128,22 @@ public class TicketService {
 				s.setTicket(ticketAux);
 				this.saleLineService.save(s);
 			}
-			//Datos Facturación1
-			facturationDataAux = this.facturationDataService.findByUserId(principal.getId()).iterator().next();
-			if (facturationDataAux != null)
-				facturationData = this.facturationDataService.create(facturationDataAux);
-			else
-				facturationData = this.facturationDataService.create();
-			facturationData.setTicket(ticketAux);
-			facturationData = this.facturationDataService.save(facturationData);
-			//Dirección de envío
-			shipmentAddressAux = this.shipmentAddressService.findByUserId(principal.getId()).iterator().next();
-			if (shipmentAddressAux != null)
-				shipmentAddress = this.shipmentAddressService.create(shipmentAddressAux);
-			else
-				shipmentAddress = this.shipmentAddressService.create();
-			shipmentAddress.setTicket(ticketAux);
-			shipmentAddress = this.shipmentAddressService.save(shipmentAddress);
+			//			//Datos Facturación1 TODO: Esto iría en una clase formulario y no aquí, se rellenaría por defecto con estos datos y ya
+			//			facturationDataAux = this.facturationDataService.findByUserId(principal.getId()).iterator().next();
+			//			if (facturationDataAux != null)
+			//				facturationData = this.facturationDataService.create(facturationDataAux);
+			//			else
+			//				facturationData = this.facturationDataService.create();
+			//			facturationData.setTicket(ticketAux);
+			//			facturationData = this.facturationDataService.save(facturationData);
+			//			//Dirección de envío
+			//			shipmentAddressAux = this.shipmentAddressService.findByUserId(principal.getId()).iterator().next();
+			//			if (shipmentAddressAux != null)
+			//				shipmentAddress = this.shipmentAddressService.create(shipmentAddressAux);
+			//			else
+			//				shipmentAddress = this.shipmentAddressService.create();
+			//			shipmentAddress.setTicket(ticketAux);
+			//			shipmentAddress = this.shipmentAddressService.save(shipmentAddress);
 
 			result.add(ticketAux);
 		}
@@ -162,22 +160,22 @@ public class TicketService {
 				s.setTicket(ticketAux);
 				this.saleLineService.save(s);
 			}
-			//Datos Facturación2
-			facturationDataAux = this.facturationDataService.findByUserId(principal.getId()).iterator().next();
-			if (facturationDataAux != null)
-				facturationData = this.facturationDataService.create(facturationDataAux);
-			else
-				facturationData = this.facturationDataService.create();
-			facturationData.setTicket(ticketAux);
-			facturationData = this.facturationDataService.save(facturationData);
-			//Dirección de envío2
-			shipmentAddressAux = this.shipmentAddressService.findByUserId(principal.getId()).iterator().next();
-			if (shipmentAddressAux != null)
-				shipmentAddress = this.shipmentAddressService.create(shipmentAddressAux);
-			else
-				shipmentAddress = this.shipmentAddressService.create();
-			shipmentAddress.setTicket(ticketAux);
-			shipmentAddress = this.shipmentAddressService.save(shipmentAddress);
+			//			//Datos Facturación2 TODO: Esto iría en una clase formulario y no aquí, se rellenaría por defecto con estos datos y ya
+			//			facturationDataAux = this.facturationDataService.findByUserId(principal.getId()).iterator().next();
+			//			if (facturationDataAux != null)
+			//				facturationData = this.facturationDataService.create(facturationDataAux);
+			//			else
+			//				facturationData = this.facturationDataService.create();
+			//			facturationData.setTicket(ticketAux);
+			//			facturationData = this.facturationDataService.save(facturationData);
+			//			//Dirección de envío2
+			//			shipmentAddressAux = this.shipmentAddressService.findByUserId(principal.getId()).iterator().next();
+			//			if (shipmentAddressAux != null)
+			//				shipmentAddress = this.shipmentAddressService.create(shipmentAddressAux);
+			//			else
+			//				shipmentAddress = this.shipmentAddressService.create();
+			//			shipmentAddress.setTicket(ticketAux);
+			//			shipmentAddress = this.shipmentAddressService.save(shipmentAddress);
 
 			result.add(ticketAux);
 		}
