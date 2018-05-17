@@ -24,6 +24,7 @@ public class Business extends Actor {
 	private Integer				reputation;
 	private Boolean				suspicious;
 	private Collection<String>	photosURL;
+	private Boolean				verified;
 
 
 	@NotBlank
@@ -86,6 +87,14 @@ public class Business extends Actor {
 
 	public void setPhotosURL(final Collection<String> photosURL) {
 		this.photosURL = photosURL;
+	}
+
+	public Boolean isVerified() {
+		return this.verified;
+	}
+
+	public void setVerified(final Boolean verified) {
+		this.verified = verified;
 	}
 
 
