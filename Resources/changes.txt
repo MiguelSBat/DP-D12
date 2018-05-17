@@ -5,7 +5,7 @@ Cambiar announcement por advertisement -> Done el UML y el doc esta en español ¯
 Quitar el advertisment original de system config-> Done el UML y doc
 Añadir la gestión de la entrega en general -> 
 Añadido el campo verified en Business
-Quitado el campo Price de advertisement y movido a ExpressAdvertisement y AuctionAdvertisement
+Quitado el campo Price de advertisement y movido a ExpressAdvertisement y ShopAdvertisement
 
 
 Añadida Gestión de item
