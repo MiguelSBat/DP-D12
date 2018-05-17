@@ -982,6 +982,7 @@
 		<property name="saleLines">
 			<list>
 				<ref bean="saleLine1" />
+				<ref bean="saleLine2" />
 			</list>
 		</property>
 	</bean>
@@ -1000,6 +1001,7 @@
 		<property name="item" ref="item2" />			
 		<property name="saleLines">
 			<list>
+			
 			</list>
 		</property>
 	</bean>
@@ -1076,7 +1078,7 @@
 	</bean>
 	<bean id="saleLine2" class="domain.SaleLine">
 		<property name="amount" value="1"/>
-		<property name="shoppingCart" ref="shoppingCart2" />
+		<property name="shoppingCart" ref="shoppingCart1" />
 		<property name="ticket" >
 		<null></null>
 		</property>
