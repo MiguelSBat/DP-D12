@@ -1069,15 +1069,26 @@
 		<!-- saleLines -->
 	<bean id="saleLine1" class="domain.SaleLine">
 		<property name="amount" value="1"/>
-		<property name="shoppingCart" ref="shoppingCart1" />
+		<property name="shoppingCart" >
+		<null></null>
+		</property>
 		<property name="ticket" ref="ticket1" />
+	</bean>
+	<bean id="saleLine2" class="domain.SaleLine">
+		<property name="amount" value="1"/>
+		<property name="shoppingCart" ref="shoppingCart2" />
+		<property name="ticket" >
+		<null></null>
+		</property>
 	</bean>
 		<!-- Ticket -->
 	<bean id="ticket1" class="domain.Ticket">
 		<property name="date" value="2018/01/15"/>
-		<property name="status" value="Send"/>
+		<property name="status" value="SEND"/>
 		<property name="user" ref="user1" />
-		<property name="seller" ref="user2" />
+		<property name="seller" >
+		<null></null>
+		</property>
 		<property name="business" ref="business1" />
 	</bean>
 		<!-- ShipmentAddress -->
