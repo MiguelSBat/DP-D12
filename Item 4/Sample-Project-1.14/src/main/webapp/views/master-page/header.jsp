@@ -37,8 +37,8 @@
 				</ul>
 			</li>
 		</security:authorize>
-		
-		<security:authorize access="isAnonymous()">
+
+	<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 		</security:authorize>
 		
@@ -53,6 +53,7 @@
 					<li><a href="expressAdvertisement/MyList.do"><spring:message code="master.page.MyList" /></a></li>
 					<security:authorize access="hasRole('USER')">
 						<li><a href="auctionAdvertisement/myList.do"><spring:message code="master.page.user.myAuctions" /></a></li>
+						<li><a href="user/item/list.do"><spring:message code="master.page.user.item" /></a></li>
 					</security:authorize>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>

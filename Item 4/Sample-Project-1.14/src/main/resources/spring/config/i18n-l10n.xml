@@ -31,6 +31,8 @@
 		<value>/views/expressAdvertisement/messages</value>
 		<value>/views/config/messages</value>
 
+		<value>/views/item/messages</value>
+
 	</util:list>
 
 </beans>

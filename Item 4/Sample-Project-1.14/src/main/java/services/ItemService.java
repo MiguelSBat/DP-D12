@@ -10,7 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.ItemRepository;
+import domain.Actor;
+import domain.Business;
 import domain.Item;
+import domain.User;
 
 @Service
 @Transactional
@@ -19,6 +22,9 @@ public class ItemService {
 	//Managed Repository ----
 	@Autowired
 	private ItemRepository	itemRepository;
+
+	@Autowired
+	private ActorService	actorService;
 
 
 	//Constructors
@@ -50,8 +56,27 @@ public class ItemService {
 
 	public Item save(final Item item) {
 		Item result;
+		Actor actor;
 
-		result = this.itemRepository.save(item);
+		Assert.isTrue(this.actorService.isLogged());
+		actor = this.actorService.findByPrincipal();
+		Assert.isTrue(actor instanceof User || actor instanceof Business);
+		if (actor instanceof User) {
+			item.setUser((User) actor);
+			result = this.itemRepository.save(item);
+		} else {
+			item.setBusiness((Business) actor);
+			result = this.itemRepository.save(item);
+		}
+
+		return result;
+	}
+
+	public Collection<Item> getItemsByUser(final int userId) {
+		Collection<Item> result;
+
+		result = this.itemRepository.getItemsByUser(userId);
+
 		return result;
 	}
 
