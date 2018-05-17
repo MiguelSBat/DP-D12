@@ -1011,7 +1011,6 @@
 	<bean id="auctionAdvertisement1" class="domain.AuctionAdvertisement">
 		<property name="publicationDate" value="2018/01/15" />
 		<property name="endDate" value="2019/01/15" />
-		<property name="price" value="320.50" />
 		<property name="tags" value="Consola" />
 		<property name="user" ref="user1" />
 		<property name="business">

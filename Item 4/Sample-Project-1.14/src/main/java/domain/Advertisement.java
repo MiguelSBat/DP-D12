@@ -27,7 +27,6 @@ public class Advertisement extends DomainEntity {
 
 	private Date				publicationDate;
 	private Date				endDate;
-	private Double				price;
 	private Collection<String>	tags;
 
 
@@ -51,15 +50,6 @@ public class Advertisement extends DomainEntity {
 
 	public void setEndDate(final Date endDate) {
 		this.endDate = endDate;
-	}
-
-	@NotNull
-	public Double getPrice() {
-		return this.price;
-	}
-
-	public void setPrice(final Double price) {
-		this.price = price;
 	}
 
 	@ElementCollection(targetClass = String.class)

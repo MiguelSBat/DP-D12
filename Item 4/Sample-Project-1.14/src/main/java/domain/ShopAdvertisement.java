@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 public class ShopAdvertisement extends Advertisement {
 
 	private Integer	stock;
+	private Double	price;
 
 
 	@NotNull
@@ -23,6 +24,15 @@ public class ShopAdvertisement extends Advertisement {
 
 	public void setStock(final Integer stock) {
 		this.stock = stock;
+	}
+
+	@NotNull
+	public Double getPrice() {
+		return this.price;
+	}
+
+	public void setPrice(final Double price) {
+		this.price = price;
 	}
 
 
