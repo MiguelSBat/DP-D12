@@ -38,6 +38,9 @@ public class TicketService {
 	@Autowired
 	private UserService				userService;
 
+	@Autowired
+	private ActorService			actorService;
+
 
 	//Constructors
 	public TicketService() {
@@ -99,7 +102,7 @@ public class TicketService {
 		result = new ArrayList<Ticket>();
 		business = this.businessService.findByShoppingCartId(shoppingCartId);
 		users = this.userService.findByShoppingCartId(shoppingCartId);
-		actor = null; //TODO inicializar actor
+		actor = this.actorService.findByPrincipal();
 		principal = (User) actor;
 
 		for (final Business b : business) {
