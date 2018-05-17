@@ -33,6 +33,17 @@ public class ShipmentAddressService {
 
 		return result;
 	}
+	public ShipmentAddress create(final ShipmentAddress shipmentAddress) {
+		ShipmentAddress result;
+
+		result = new ShipmentAddress();
+		result.setAddress(shipmentAddress.getAddress());
+		result.setCity(shipmentAddress.getCity());
+		result.setCountry(shipmentAddress.getCountry());
+		result.setPostalCode(shipmentAddress.getPostalCode());
+
+		return result;
+	}
 
 	public Collection<ShipmentAddress> findAll() {
 		Collection<ShipmentAddress> result;
@@ -66,6 +77,14 @@ public class ShipmentAddressService {
 
 	public void flush() {
 		this.shipmentAddressRepository.flush();
+	}
+
+	public Collection<ShipmentAddress> findByUserId(final int id) {
+		Collection<ShipmentAddress> result;
+
+		result = this.findByUserId(id);
+
+		return result;
 	}
 
 }

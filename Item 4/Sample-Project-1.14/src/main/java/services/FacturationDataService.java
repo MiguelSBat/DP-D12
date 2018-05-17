@@ -33,6 +33,19 @@ public class FacturationDataService {
 
 		return result;
 	}
+	public FacturationData create(final FacturationData facturationData) {
+		FacturationData result;
+
+		result = new FacturationData();
+		result.setCity(facturationData.getCity());
+		result.setCountry(facturationData.getCountry());
+		result.setIDNumber(facturationData.getIDNumber());
+		result.setName(facturationData.getName());
+		result.setPostalCode(facturationData.getPostalCode());
+		result.setSurname(facturationData.getSurname());
+
+		return result;
+	}
 
 	public Collection<FacturationData> findAll() {
 		Collection<FacturationData> result;
@@ -67,5 +80,11 @@ public class FacturationDataService {
 	public void flush() {
 		this.facturationDataRepository.flush();
 	}
+	public Collection<FacturationData> findByUserId(final int id) {
+		Collection<FacturationData> result;
 
+		result = this.findByUserId(id);
+
+		return result;
+	}
 }
