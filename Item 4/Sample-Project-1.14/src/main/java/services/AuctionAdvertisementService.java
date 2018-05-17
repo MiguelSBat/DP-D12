@@ -56,8 +56,19 @@ public class AuctionAdvertisementService {
 
 	public AuctionAdvertisement save(final AuctionAdvertisement auctionAdvertisement) {
 		AuctionAdvertisement result;
+		Actor actor;
 
-		result = this.auctionAdvertisementRepository.save(auctionAdvertisement);
+		Assert.isTrue(this.actorService.isLogged());
+		actor = this.actorService.findByPrincipal();
+		Assert.isTrue(actor instanceof User || actor instanceof Business);
+		if (actor instanceof User) {
+			auctionAdvertisement.setUser((User) actor);
+			result = this.auctionAdvertisementRepository.save(auctionAdvertisement);
+		} else {
+			auctionAdvertisement.setBusiness((Business) actor);
+			result = this.auctionAdvertisementRepository.save(auctionAdvertisement);
+		}
+
 		return result;
 	}
 
