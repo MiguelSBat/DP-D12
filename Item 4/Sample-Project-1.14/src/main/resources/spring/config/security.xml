@@ -57,7 +57,8 @@
 
 		<security:intercept-url pattern="/expressAdvertisement/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/expressAdvertisement/MyList.do" access="hasAnyRole('USER', 'BUSINESS','ADMIN')" /> 
-		
+		<security:intercept-url pattern="/expressAdvertisement/create.do" access="hasAnyRole('USER','BUSINESS')" />
+		<security:intercept-url pattern="/expressAdvertisement/edit.do" access="hasAnyRole('USER','BUSINESS')" />
 
 		<security:intercept-url pattern="/customer/action-1.do" access="hasRole('CUSTOMER')" /> 
 		<security:intercept-url pattern="/customer/action-2.do" access="hasRole('CUSTOMER')" /> 

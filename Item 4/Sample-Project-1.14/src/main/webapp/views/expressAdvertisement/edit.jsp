@@ -21,67 +21,39 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 
-	<!-- soy el edit de un newspaper si, no funciono obviamente modificame como veas  -->
-	
-	<form:form action="newspaper/edit.do" modelAttribute="newspaper">
+<form:form action="expressAdvertisement/edit.do" modelAttribute="expressAdvertisement">
 
 
-	
+
 	<form:hidden path="id" />
-	<form:hidden path="version" /> 
+	<form:hidden path="version" />
+	<form:hidden path="publicationDate" />
 	<br />
-	<acme:textbox code="newspaper.title" path="title"/>
-	<br />
-	<acme:textarea code="newspaper.description" path="description"/>
-	<br />
-<%-- 	<spring:message code="newspaper.publicationDate" var="publicationDate"/>
-	<form:label path="publicationDate">${publicationDate}</form:label>
-	<form:input path="publicationDate" placeholder="dd/mm/yyyy"/>
-	<form:errors cssClass="error" path="publicationDate"/>
-	<br />
-	 --%>
 	
-	<acme:textbox code="newspaper.picture" path="picture"/>
+	<spring:message code="advertisement.endDate" var="endDate"/>
+	<form:label path="endDate">${endDate}</form:label>
+	<form:input path="endDate" placeholder="dd/mm/yyyy"/>
+	<form:errors cssClass="error" path="endDate"/>
+	<br />
+	<acme:textarea code="advertisement.tags" path="tags" />
+	<acme:textbox code="advertisement.price" path="price" />
 	
-	<form:label path="publicity">
-		<spring:message code="newspaper.publicity" />:
+	
+	<form:label path="item">
+		<spring:message code="advertisement.item" />
 	</form:label>
-	<form:select path="publicity">
-        <option value="">--</option>
-        <option value="true"><spring:message code="newspaper.private" /></option>
-        <option value="false"><spring:message code="newspaper.public" /></option>
-    </form:select>
-	
-	<acme:submit name="save" code="newspaper.save"/>
+	<form:select path="item">
+		<form:option label="-----" value="0" />
+		<form:options items="${items}" itemLabel="name" itemValue="id" />
+	</form:select>
+	<form:errors path="item"/>
+	<br />
+
+	<acme:submit name="save" code="advertisement.save" />
+	<jstl:out value="${message}"></jstl:out>
+
+	<acme:cancel url="expressAdvertisement/MyList.do" code="advertisement.cancel" />
 
 
-<%--  <form:label path="articles">
-		<spring:message code="newspaper.articles" />:
-	</form:label>
-	<form:select id="articles" path="articles">
-		<form:option value="0" label="----" />
-		
-		<jstl:forEach items="${articles}" var="article" >
-		<jstl:choose>
-			<jstl:when test="${article.id eq articleId}">
-				<form:option value="${article.id}" label="${article.title}" selected="true"/>
-			</jstl:when>
-		
-			<jstl:otherwise>
-			<form:option value="${article.id}" label="${article.title}" />
-			</jstl:otherwise>
-		</jstl:choose>
-		</jstl:forEach>
-		
-	</form:select>  --%>
-	
-	
-	
-	
-	<!-- El bueno -->
-	<acme:cancel url="" code="newspaper.cancel"/> 
-	
-		
-	
-	</form:form>
-	
+
+</form:form>

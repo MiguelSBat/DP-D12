@@ -4,8 +4,11 @@ package controllers;
 import java.util.Collection;
 import java.util.HashSet;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,14 +16,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.AdvertisementService;
-import services.AuctionAdvertisementService;
 import services.ExpressAdvertisementService;
+import services.ExpressAdvertisementService;
+import services.ItemService;
 import services.ShopAdvertisementService;
 import services.UserService;
 import domain.Actor;
 import domain.Advertisement;
+import domain.ExpressAdvertisement;
 import domain.Business;
 import domain.ExpressAdvertisement;
+import domain.Item;
 import domain.User;
 
 @Controller
@@ -35,8 +41,10 @@ public class ExpressAdvertisementsController extends AbstractController {
 	private ActorService				actorService;
 	@Autowired
 	private AdvertisementService		advertisementService;
+
 	@Autowired
-	private AuctionAdvertisementService	auctionAdvertisementService;
+	private ItemService					itemService;
+
 	@Autowired
 	private ExpressAdvertisementService	expressAdvertisementService;
 	@Autowired
@@ -50,17 +58,17 @@ public class ExpressAdvertisementsController extends AbstractController {
 	}
 
 	// Creation ---------------------------------------------------------------
-	//
-	//	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	//	public ModelAndView create() {
-	//		ModelAndView result;
-	//		Advertisement advertisement;
-	//
-	//		advertisement = this.advertisementService.create();
-	//		result = this.createEditModelAndView(advertisement);
-	//
-	//		return result;
-	//	}
+
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView result;
+		ExpressAdvertisement eAdvertisement;
+
+		eAdvertisement = this.expressAdvertisementService.create();
+		result = this.createEditModelAndView(eAdvertisement);
+
+		return result;
+	}
 
 	// Listing ----------------------------------------------------------------
 
@@ -103,79 +111,50 @@ public class ExpressAdvertisementsController extends AbstractController {
 	}
 
 	// Edition ----------------------------------------------------------------
-
-	//	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	//	public ModelAndView edit(@RequestParam final int advertisementId) {
-	//		ModelAndView result;
-	//		Advertisement advertisement;
-	//
-	//		advertisement = this.advertisementService.findOne(advertisementId);
-	//
-	//		result = this.createEditModelAndView(advertisement);
-	//
-	//		return result;
-	//	}
-	//
-	//	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	//	public ModelAndView save(@Valid final Advertisement advertisement, final BindingResult binding) {
-	//		ModelAndView result;
-	//		System.out.println(advertisement.getPublicity());
-	//		if(binding.getFieldError("publicity")!=null){
-	//			result = createEditModelAndView(advertisement,"advertisement.publicityFail");
-	//			return result;
-	//		}
-	//		if (binding.hasErrors())
-	//			result = this.createEditModelAndView(advertisement);
-	//		else
-	//			try {
-	//				this.advertisementService.save(advertisement);
-	//				result = new ModelAndView("redirect:list.do");
-	//			} catch (final Throwable oops) {
-	//				String errorMessage = "advertisement.commit.error";
-	//
-	//				if (oops.getMessage().contains("message.error"))
-	//					errorMessage = oops.getMessage();
-	//				
-	//				result = this.createEditModelAndView(advertisement, errorMessage);
-	//			}
-	//
-	//		return result;
-	//	}
-	//
-	//	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	//	public ModelAndView delete(final Advertisement advertisement, final BindingResult binding) {
-	//		ModelAndView result;
-	//
-	//		try {
-	//			this.advertisementService.delete(advertisement);
-	//			result = new ModelAndView("redirect:list.do");
-	//		} catch (final Throwable oops) {
-	//			String errorMessage = "category.commit.error";
-	//
-	//			if (oops.getMessage().contains("message.error"))
-	//				errorMessage = oops.getMessage();
-	//			result = this.createEditModelAndView(advertisement, errorMessage);
-	//		}
-	//		return result;
-	//	}
-
-	// Ancillary methods ------------------------------------------------------
-
-	protected ModelAndView createEditModelAndView(final Advertisement advertisement) {
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final ExpressAdvertisement expressAdvertisement, final BindingResult binding) {
 		ModelAndView result;
 
-		result = this.createEditModelAndView(advertisement, null);
+		if (binding.hasErrors()){
+			String message= "advertisement.commit.error";
+			result = this.createEditModelAndView(expressAdvertisement,message);
+		}else
+			try {
+				this.expressAdvertisementService.save(expressAdvertisement);
+				result = new ModelAndView("redirect:MyList.do");
+			} catch (final Throwable oops) {
+				String errorMessage = "advertisement.commit.error";
+
+				if (oops.getMessage().contains("message.error"))
+					errorMessage = oops.getMessage();
+
+				result = this.createEditModelAndView(expressAdvertisement, errorMessage);
+			}
 
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final Advertisement advertisement, final String message) {
+	// Ancillary methods ------------------------------------------------------
+
+	protected ModelAndView createEditModelAndView(final  ExpressAdvertisement expressAdvertisement) {
 		ModelAndView result;
 
-		result = new ModelAndView("expressAdvertisement/edit");
-		result.addObject("advertisement", advertisement);
-		result.addObject("message", message);
+		result = this.createEditModelAndView(expressAdvertisement, null);
 
 		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(final  ExpressAdvertisement expressAdvertisement, final String message) {
+		ModelAndView result;
+		Collection<Item> items;
+
+		result = new ModelAndView("expressAdvertisement/edit");
+		result.addObject("expressAdvertisement", expressAdvertisement);
+		result.addObject("message", message);
+		items = this.itemService.findByPrincipal();
+		result.addObject("items", items);
+
+		return result;
+		
 	}
 }
