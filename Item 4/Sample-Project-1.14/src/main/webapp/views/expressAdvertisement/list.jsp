@@ -30,9 +30,9 @@
 
 
 
-
+<!-- 
 	<input name="criteria" /> <br /> <input type="submit" value="search" />
-
+ -->
 </form>
 
 

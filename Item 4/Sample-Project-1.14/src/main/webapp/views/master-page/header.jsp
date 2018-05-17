@@ -19,11 +19,10 @@
 
 <div>
 	<ul id="jMenu">
-	    <li><a class="fNiv" href="advertisement/list.do"><spring:message code="master.page.advertisement" /></a>
-	    	<ul>
-					<li class="arrow"></li>
-					<li><a href="expressAdvertisement/list.do"><spring:message code="master.page.express" /></a></li>
-			</ul>
+	    <li><a href="advertisement/list.do"><spring:message code="master.page.advertisement" /></a>
+	    
+		<li><a href="expressAdvertisement/list.do"><spring:message code="master.page.express" /></a></li>
+			
 		</li>
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<security:authorize access="hasRole('ADMIN')">
