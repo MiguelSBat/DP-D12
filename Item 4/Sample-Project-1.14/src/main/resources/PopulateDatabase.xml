@@ -983,6 +983,7 @@
 			<list>
 				<ref bean="saleLine1" />
 				<ref bean="saleLine2" />
+				<ref bean="saleLine3" />
 			</list>
 		</property>
 	</bean>
@@ -1083,9 +1084,25 @@
 		<null></null>
 		</property>
 	</bean>
+	<bean id="saleLine3" class="domain.SaleLine">
+		<property name="amount" value="1"/>
+		<property name="shoppingCart" >
+		<null></null>
+		</property>
+		<property name="ticket" ref="ticket2" />
+	</bean>
 		<!-- Ticket -->
 	<bean id="ticket1" class="domain.Ticket">
 		<property name="date" value="2018/01/15"/>
+		<property name="status" value="SEND"/>
+		<property name="user" ref="user1" />
+		<property name="seller" >
+		<null></null>
+		</property>
+		<property name="business" ref="business1" />
+	</bean>
+	<bean id="ticket2" class="domain.Ticket">
+		<property name="date" value="2017/01/15"/>
 		<property name="status" value="SEND"/>
 		<property name="user" ref="user1" />
 		<property name="seller" >
@@ -1100,6 +1117,13 @@
 		<property name="postalCode" value="41008" />
 		<property name="address" value="c\ Rue 13 del Perzebe" />
 		<property name="ticket" ref="ticket1" />
+	</bean>
+	<bean id="shipmentAddress2" class="domain.ShipmentAddress">
+		<property name="country" value="España"/>
+		<property name="city" value="Madrid"/>
+		<property name="postalCode" value="41008" />
+		<property name="address" value="c\ Rue 13 del Perzebe" />
+		<property name="ticket" ref="ticket2" />
 	</bean>
 		<!-- ShippingInfo -->
 	<bean id="shippingInfo1" class="domain.ShippingInfo">
@@ -1117,6 +1141,15 @@
 		<property name="postalCode" value="41008" />
 		<property name="IDNumber" value="00000001A" />
 		<property name="ticket" ref="ticket1" />
+	</bean>
+	<bean id="facturationData2" class="domain.FacturationData">
+		<property name="name" value="Xi"/>
+		<property name="surname" value="Wang-Fen"/>
+		<property name="country" value="España" />
+		<property name="city" value="Madrid" />
+		<property name="postalCode" value="41008" />
+		<property name="IDNumber" value="00000002B" />
+		<property name="ticket" ref="ticket2" />
 	</bean>
 
 
