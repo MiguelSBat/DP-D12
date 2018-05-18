@@ -79,7 +79,7 @@ public class Advertisement extends DomainEntity {
 		this.item = item;
 	}
 
-	@OneToMany
+	@OneToMany(mappedBy = "advertisement")
 	public Collection<SaleLine> getSaleLines() {
 		return this.saleLines;
 	}

@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
-import services.SaleLineService;
+import services.AdvertisementService;
 import services.TicketService;
 import services.UserService;
 import controllers.AbstractController;
 import domain.Actor;
-import domain.SaleLine;
+import domain.Advertisement;
 import domain.Ticket;
 
 @Controller
@@ -27,13 +27,13 @@ public class TicketUserController extends AbstractController {
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private UserService		userService;
+	private UserService				userService;
 	@Autowired
-	private ActorService	actorService;
+	private ActorService			actorService;
 	@Autowired
-	private TicketService	ticketService;
+	private TicketService			ticketService;
 	@Autowired
-	private SaleLineService	saleLineService;
+	private AdvertisementService	advertisementService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -86,13 +86,13 @@ public class TicketUserController extends AbstractController {
 	public ModelAndView display(@RequestParam final int ticketId) {
 		ModelAndView result;
 		Ticket ticket;
-		Collection<SaleLine> salesLines;
+		Collection<Advertisement> advertisements;
 
 		result = new ModelAndView("ticket/display");
 		ticket = this.ticketService.findOne(ticketId);
-		salesLines = this.saleLineService.findByTicketId(ticketId);
+		advertisements = this.advertisementService.findByTicketId(ticketId);
 		result.addObject("ticket", ticket);
-		result.addObject("saleLines", salesLines);
+		result.addObject("advertisements", advertisements);
 		return result;
 	}
 

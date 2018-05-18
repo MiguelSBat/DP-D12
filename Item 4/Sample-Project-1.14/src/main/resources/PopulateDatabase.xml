@@ -1076,6 +1076,7 @@
 		<null></null>
 		</property>
 		<property name="ticket" ref="ticket1" />
+		<property name="advertisement" ref="shopAdvertisement1" />
 	</bean>
 	<bean id="saleLine2" class="domain.SaleLine">
 		<property name="amount" value="1"/>
@@ -1083,6 +1084,7 @@
 		<property name="ticket" >
 		<null></null>
 		</property>
+		<property name="advertisement" ref="shopAdvertisement1" />
 	</bean>
 	<bean id="saleLine3" class="domain.SaleLine">
 		<property name="amount" value="1"/>
@@ -1090,6 +1092,7 @@
 		<null></null>
 		</property>
 		<property name="ticket" ref="ticket2" />
+		<property name="advertisement" ref="shopAdvertisement1" />
 	</bean>
 		<!-- Ticket -->
 	<bean id="ticket1" class="domain.Ticket">

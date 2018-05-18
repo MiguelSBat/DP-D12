@@ -30,6 +30,10 @@
 <br />
 
 <display:table pagesize="5" class="displaytag" 
-	name="saleLines" requestURI="ticket/display.do" id="row">
+	name="advertisements" requestURI="ticket/display.do" id="row">
+	<spring:message code="ticket.display.name" var="rowHeader" />
+	<display:column title="${rowHeader}">
+	<jstl:out value="${row.item.name }"></jstl:out>
+	</display:column>
 	
 	</display:table>

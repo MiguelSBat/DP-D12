@@ -28,6 +28,7 @@ public class SaleLine extends DomainEntity {
 
 	private Ticket			ticket;
 	private ShoppingCart	shoppingCart;
+	private Advertisement	advertisement;
 
 
 	@ManyToOne(optional = true)
@@ -37,6 +38,14 @@ public class SaleLine extends DomainEntity {
 
 	public void setTicket(final Ticket ticket) {
 		this.ticket = ticket;
+	}
+	@ManyToOne(optional = false)
+	public Advertisement getAdvertisement() {
+		return this.advertisement;
+	}
+
+	public void setAdvertisement(final Advertisement advertisement) {
+		this.advertisement = advertisement;
 	}
 
 	@ManyToOne(optional = true)
