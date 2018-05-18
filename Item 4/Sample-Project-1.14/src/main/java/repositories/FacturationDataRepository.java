@@ -16,4 +16,7 @@ public interface FacturationDataRepository extends JpaRepository<FacturationData
 	@Query("select s from FacturationData s where s.ticket.user.id=?1 order by s.ticket.date DESC")
 	Collection<FacturationData> findByUserId(int id);
 
+	@Query("select s from FacturationData s where s.ticket.id=?1")
+	FacturationData findByTicketId(int id);
+
 }

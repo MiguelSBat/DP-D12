@@ -87,4 +87,11 @@ public class FacturationDataService {
 
 		return result;
 	}
+	public FacturationData findByTicketId(final int id) {
+		FacturationData result;
+
+		result = this.facturationDataRepository.findByTicketId(id);
+
+		return result;
+	}
 }

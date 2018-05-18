@@ -67,5 +67,12 @@ public class ShippingInfoService {
 	public void flush() {
 		this.shippingInfoRepository.flush();
 	}
+	public ShippingInfo findByTicketId(final int id) {
+		ShippingInfo result;
+
+		result = this.shippingInfoRepository.findByTicketId(id);
+
+		return result;
+	}
 
 }

@@ -21,6 +21,21 @@
 	<jstl:if test="${ticket.status=='SENT'}"><spring:message code="ticket.display.sent" /></jstl:if>
 	<jstl:if test="${ticket.status=='CANCELED'}"><spring:message code="ticket.display.canceled" /></jstl:if>
 <br />
+<b><spring:message code="ticket.display.changeStatus"></spring:message>:</b>
+<jstl:if test="${ticket.status=='SENT'&&ticket.user.id==principal.id}">
+<a href="user/ticket/status.do?status=RECEIVED&ticketId=${ticket.id }">
+<spring:message code="ticket.display.received"/>
+</a>
+</jstl:if>
+<jstl:if test="${ticket.status=='PENDING'&&(ticket.seller.id==principal.id||ticket.business.id==principal.id)}">
+<a href="user/ticket/status.do?status=SENT&ticketId=${ticket.id }">
+<spring:message code="ticket.display.sent"/>
+</a>
+<a href="user/ticket/status.do?status=CANCELED&ticketId=${ticket.id }">
+<spring:message code="ticket.display.canceled"/>
+</a>
+</jstl:if>
+<br />
 <b><spring:message code="ticket.seller"></spring:message>:</b>
 			<jstl:if test="${ticket.seller!=null }"><jstl:out value="${ticket.seller.name}"/></jstl:if>
 	<jstl:if test="${ticket.business!=null }"><jstl:out value="${ticket.business.name}"/></jstl:if>
@@ -28,12 +43,70 @@
 <b><spring:message code="ticket.buyer"></spring:message>:</b>
 			<jstl:out value="${ticket.user.name}"/>
 <br />
+<br />
+<!-- SHIPMENT ADDRESS -->
+<h1><spring:message code="ticket.display.shipmentAddress"/></h1>
+<b><spring:message code="ticket.display.country"></spring:message>:</b>
+			<jstl:out value="${shipmentAddress.country}"/>
+<br />
+<b><spring:message code="ticket.display.city"></spring:message>:</b>
+			<jstl:out value="${shipmentAddress.city}"/>
+<br />
+<b><spring:message code="ticket.display.postalCode"></spring:message>:</b>
+			<jstl:out value="${shipmentAddress.postalCode}"/>
+<br />
+<b><spring:message code="ticket.display.address"></spring:message>:</b>
+			<jstl:out value="${shipmentAddress.address}"/>
+<br />
+<br />
+<!-- FACTURATION DATA -->
+<h1><spring:message code="ticket.display.facturationData"/></h1>
+<b><spring:message code="ticket.display.name"></spring:message>:</b>
+			<jstl:out value="${facturationData.name}"/>
+<br />
+<b><spring:message code="ticket.display.surname"></spring:message>:</b>
+			<jstl:out value="${facturationData.surname}"/>
+<br />
+<b><spring:message code="ticket.display.IDNumber"></spring:message>:</b>
+			<jstl:out value="${facturationData.IDNumber}"/>
+<br />
+<b><spring:message code="ticket.display.country"></spring:message>:</b>
+			<jstl:out value="${facturationData.country}"/>
+<br />
+<b><spring:message code="ticket.display.city"></spring:message>:</b>
+			<jstl:out value="${facturationData.city}"/>
+<br />
+<b><spring:message code="ticket.display.postalCode"></spring:message>:</b>
+			<jstl:out value="${facturationData.postalCode}"/>
+<br />
+<br />
 
+<!-- SHIPPING INFO -->
+<jstl:if test="${shippingInfo!=null }">
+<h1><spring:message code="ticket.display.shippingInfo"/></h1>
+<b><spring:message code="ticket.display.trackingNumber"></spring:message>:</b>
+			<jstl:out value="${shippingInfo.trackingNumber}"/>
+<br />
+<b><spring:message code="ticket.display.company"></spring:message>:</b>
+			<jstl:out value="${shippingInfo.company}"/>
+<br />
+<b><spring:message code="ticket.display.additionalInfo"></spring:message>:</b>
+			<jstl:out value="${shippingInfo.additionalInfo}"/>
+<br />
+
+</jstl:if>
 <display:table pagesize="5" class="displaytag" 
-	name="advertisements" requestURI="ticket/display.do" id="row">
+	name="saleLines" requestURI="ticket/display.do" id="row">
+	
 	<spring:message code="ticket.display.name" var="rowHeader" />
 	<display:column title="${rowHeader}">
-	<jstl:out value="${row.item.name }"></jstl:out>
+	<a href="advertisement/display.do?advertisementId=${row.id }"><jstl:out value="${row.advertisement.item.name }"></jstl:out></a>
+	</display:column>
+	
+	
+	<spring:message code="ticket.display.amount" var="rowHeader" />
+	<display:column title="${rowHeader}">
+	<jstl:out value="${row.amount }"></jstl:out>
 	</display:column>
 	
 	</display:table>

@@ -86,5 +86,12 @@ public class ShipmentAddressService {
 
 		return result;
 	}
+	public ShipmentAddress findByTicketId(final int id) {
+		ShipmentAddress result;
+
+		result = this.shipmentAddressRepository.findByTicketId(id);
+
+		return result;
+	}
 
 }

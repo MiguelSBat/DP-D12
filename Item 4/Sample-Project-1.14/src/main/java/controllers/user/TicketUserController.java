@@ -12,12 +12,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
-import services.AdvertisementService;
+import services.FacturationDataService;
+import services.SaleLineService;
+import services.ShipmentAddressService;
+import services.ShippingInfoService;
 import services.TicketService;
 import services.UserService;
 import controllers.AbstractController;
 import domain.Actor;
-import domain.Advertisement;
+import domain.FacturationData;
+import domain.SaleLine;
+import domain.ShipmentAddress;
+import domain.ShippingInfo;
 import domain.Ticket;
 
 @Controller
@@ -33,7 +39,13 @@ public class TicketUserController extends AbstractController {
 	@Autowired
 	private TicketService			ticketService;
 	@Autowired
-	private AdvertisementService	advertisementService;
+	private SaleLineService			saleLineService;
+	@Autowired
+	private ShipmentAddressService	shipmentAddressService;
+	@Autowired
+	private ShippingInfoService		shippingInfoService;
+	@Autowired
+	private FacturationDataService	facturationDataService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -86,13 +98,26 @@ public class TicketUserController extends AbstractController {
 	public ModelAndView display(@RequestParam final int ticketId) {
 		ModelAndView result;
 		Ticket ticket;
-		Collection<Advertisement> advertisements;
+		Actor principal;
+		Collection<SaleLine> saleLines;
+		ShipmentAddress shipmentAddress;
+		ShippingInfo shippingInfo;
+		FacturationData facturationData;
 
 		result = new ModelAndView("ticket/display");
+		principal = this.actorService.findByPrincipal();
 		ticket = this.ticketService.findOne(ticketId);
-		advertisements = this.advertisementService.findByTicketId(ticketId);
+		saleLines = this.saleLineService.findByTicketId(ticketId);
+		shipmentAddress = this.shipmentAddressService.findByTicketId(ticketId);
+		shippingInfo = this.shippingInfoService.findByTicketId(ticketId);
+		facturationData = this.facturationDataService.findByTicketId(ticketId);
+
 		result.addObject("ticket", ticket);
-		result.addObject("advertisements", advertisements);
+		result.addObject("saleLines", saleLines);
+		result.addObject("shipmentAddress", shipmentAddress);
+		result.addObject("shippingInfo", shippingInfo);
+		result.addObject("facturationData", facturationData);
+		result.addObject("principal", principal);
 		return result;
 	}
 

@@ -15,4 +15,8 @@ public interface ShipmentAddressRepository extends JpaRepository<ShipmentAddress
 	//select s from ShipmentAddress s where s.ticket.user.id=714 order by s.ticket.date DESC;
 	@Query("select s from ShipmentAddress s where s.ticket.user.id=?1 order by s.ticket.date DESC")
 	Collection<ShipmentAddress> findByUserId(int id);
+
+	//select s from ShipmentAddress s where s.ticket.id=923
+	@Query("select s from ShipmentAddress s where s.ticket.id=?1")
+	ShipmentAddress findByTicketId(int id);
 }
