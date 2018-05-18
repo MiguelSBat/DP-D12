@@ -102,5 +102,16 @@ public class ConfigService {
 	public void flush() {
 		this.configRepository.flush();
 	}
+	public Boolean isTaboo(final String string) {
+		Boolean result;
+		Collection<String> tabooWords;
 
+		tabooWords = this.findConfiguration().getSpamWords();
+		result = false;
+		for (final String tabooWord : tabooWords)
+			if (string.contains(tabooWord))
+				result = true;
+
+		return result;
+	}
 }

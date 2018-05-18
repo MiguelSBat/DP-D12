@@ -12,7 +12,6 @@ import org.springframework.util.Assert;
 
 import repositories.ExpressAdvertisementRepository;
 import domain.Actor;
-import domain.ExpressAdvertisement;
 import domain.Business;
 import domain.ExpressAdvertisement;
 import domain.User;
@@ -28,6 +27,10 @@ public class ExpressAdvertisementService {
 	@Autowired
 	private ActorService					actorService;
 
+	@Autowired
+	private ConfigService					configService;
+
+
 	//Constructors
 	public ExpressAdvertisementService() {
 		super();
@@ -36,7 +39,7 @@ public class ExpressAdvertisementService {
 	public ExpressAdvertisement create() {
 		ExpressAdvertisement result;
 		result = new ExpressAdvertisement();
-		result.setPublicationDate(new Date (System.currentTimeMillis()));
+		result.setPublicationDate(new Date(System.currentTimeMillis()));
 
 		return result;
 	}
@@ -59,13 +62,13 @@ public class ExpressAdvertisementService {
 		ExpressAdvertisement result;
 		Actor actor;
 		Date date;
-
+		Assert.isTrue(!this.configService.isTaboo(expressAdvertisement.getItem().getName()) || !this.configService.isTaboo(expressAdvertisement.getItem().getDescription()), "tabú! >:c ");
 		Assert.isTrue(this.actorService.isLogged());
 		actor = this.actorService.findByPrincipal();
 		Assert.isTrue(actor instanceof User || actor instanceof Business);
 		date = new Date();
 		Assert.isTrue(expressAdvertisement.getEndDate().after(date));
-		expressAdvertisement.setPublicationDate(new Date (System.currentTimeMillis()));
+		expressAdvertisement.setPublicationDate(new Date(System.currentTimeMillis()));
 
 		expressAdvertisement.setPublicationDate(date);
 		if (actor instanceof User) {
@@ -78,8 +81,6 @@ public class ExpressAdvertisementService {
 
 		return result;
 	}
-	
-
 	public ExpressAdvertisement findOne(final int expressAdvertisementId) {
 		ExpressAdvertisement result;
 
