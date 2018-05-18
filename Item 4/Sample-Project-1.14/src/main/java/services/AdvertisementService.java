@@ -91,4 +91,11 @@ public class AdvertisementService {
 
 		return result;
 	}
+	public Collection<Advertisement> findByTicketId(final int id) {
+		Collection<Advertisement> result;
+
+		result = this.advertisementRepository.findByTicketId(id);
+
+		return result;
+	}
 }

@@ -202,5 +202,20 @@ public class TicketService {
 
 		return result;
 	}
+	public Ticket changeStatus(final int ticketId, final String status) {
+		Ticket result;
+		Ticket ticket;
+		Actor principal;
 
+		principal = this.actorService.findByPrincipal();
+		ticket = this.findOne(ticketId);
+		if (status == "SENT" || status == "CANCELLED")
+			Assert.isTrue(ticket.getBusiness().getId() == principal.getId() || ticket.getSeller().getId() == principal.getId());
+		else if (status == "RECEIVED")
+			Assert.isTrue(ticket.getUser().getId() == principal.getId());
+
+		ticket.setStatus(status);
+		result = this.save(ticket);
+		return result;
+	}
 }
