@@ -57,6 +57,9 @@
 						<li><a href="user/ticket/myTickets.do"><spring:message code="master.page.user.myTickets" /></a></li>
 						<li><a href="user/ticket/mySales.do"><spring:message code="master.page.user.mySales" /></a></li>
 					</security:authorize>
+					<security:authorize access="hasRole('BUSINESS')">
+						<li><a href="business/ticket/mySales.do"><spring:message code="master.page.user.mySales" /></a></li>
+					</security:authorize>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>

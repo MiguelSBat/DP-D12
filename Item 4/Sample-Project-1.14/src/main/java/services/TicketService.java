@@ -86,7 +86,6 @@ public class TicketService {
 		Ticket result;
 
 		result = this.ticketRepository.findOne(orderId);
-		Assert.notNull(result);
 
 		return result;
 	}

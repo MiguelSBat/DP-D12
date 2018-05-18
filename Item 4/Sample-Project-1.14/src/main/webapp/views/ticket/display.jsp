@@ -21,21 +21,24 @@
 	<jstl:if test="${ticket.status=='SENT'}"><spring:message code="ticket.display.sent" /></jstl:if>
 	<jstl:if test="${ticket.status=='CANCELED'}"><spring:message code="ticket.display.canceled" /></jstl:if>
 <br />
-<b><spring:message code="ticket.display.changeStatus"></spring:message>:</b>
 <jstl:if test="${ticket.status=='SENT'&&ticket.user.id==principal.id}">
+<b><spring:message code="ticket.display.changeStatus"></spring:message>:</b>
 <a href="user/ticket/status.do?status=RECEIVED&ticketId=${ticket.id }">
 <spring:message code="ticket.display.received"/>
 </a>
+<br />
 </jstl:if>
 <jstl:if test="${ticket.status=='PENDING'&&(ticket.seller.id==principal.id||ticket.business.id==principal.id)}">
+<b><spring:message code="ticket.display.changeStatus"></spring:message>:</b>
 <a href="user/ticket/status.do?status=SENT&ticketId=${ticket.id }">
 <spring:message code="ticket.display.sent"/>
 </a>
 <a href="user/ticket/status.do?status=CANCELED&ticketId=${ticket.id }">
 <spring:message code="ticket.display.canceled"/>
 </a>
-</jstl:if>
 <br />
+</jstl:if>
+
 <b><spring:message code="ticket.seller"></spring:message>:</b>
 			<jstl:if test="${ticket.seller!=null }"><jstl:out value="${ticket.seller.name}"/></jstl:if>
 	<jstl:if test="${ticket.business!=null }"><jstl:out value="${ticket.business.name}"/></jstl:if>
