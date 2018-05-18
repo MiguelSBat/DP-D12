@@ -54,9 +54,17 @@
 	<jstl:if test="${row.status=='CANCELED'}"><spring:message code="ticket.display.canceled" /></jstl:if>
 	</display:column>
 	
+	<security:authorize access="hasRole('USER')">
 	<display:column >
 	<a href="user/ticket/display.do?ticketId=${row.id }"><spring:message code="ticket.view"/></a>
 	</display:column>
+	</security:authorize>
+	<security:authorize access="hasRole('BUSINESS')">
+	<display:column >
+	<a href="business/ticket/display.do?ticketId=${row.id }"><spring:message code="ticket.view"/></a>
+	</display:column>
+	</security:authorize>
+	
 	
 
 </display:table>

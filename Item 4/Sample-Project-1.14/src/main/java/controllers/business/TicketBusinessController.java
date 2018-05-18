@@ -76,7 +76,7 @@ public class TicketBusinessController extends AbstractController {
 		Assert.isTrue(status != null);
 
 		this.ticketService.changeStatus(ticketId, status);
-		result = new ModelAndView("redirect:advertisement/list.do");
+		result = new ModelAndView("redirect:/business/ticket/display.do?ticketId=" + ticketId);
 
 		return result;
 	}
