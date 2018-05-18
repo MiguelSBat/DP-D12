@@ -63,6 +63,11 @@ public class ExpressAdvertisementService {
 		Actor actor;
 		Date date;
 		Assert.isTrue(!this.configService.isTaboo(expressAdvertisement.getItem().getName()) || !this.configService.isTaboo(expressAdvertisement.getItem().getDescription()), "tabú! >:c ");
+
+		final Collection<String> tags = expressAdvertisement.getTags();
+		for (final String t : tags)
+			Assert.isTrue(!this.configService.isTaboo(t), "tabú");
+
 		Assert.isTrue(this.actorService.isLogged());
 		actor = this.actorService.findByPrincipal();
 		Assert.isTrue(actor instanceof User || actor instanceof Business);

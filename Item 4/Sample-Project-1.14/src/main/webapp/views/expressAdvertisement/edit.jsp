@@ -32,7 +32,7 @@
 	
 	<spring:message code="advertisement.endDate" var="endDate"/>
 	<form:label path="endDate">${endDate}</form:label>
-	<form:input path="endDate" placeholder="dd/mm/yyyy"/>
+	<form:input path="endDate" placeholder="dd/mm/yyyy HH:MM"/>
 	<form:errors cssClass="error" path="endDate"/>
 	<br />
 	<acme:textarea code="advertisement.tags" path="tags" />
@@ -50,10 +50,10 @@
 	<br />
 
 	<acme:submit name="save" code="advertisement.save" />
-	<jstl:out value="${message}"></jstl:out>
+
 
 	<acme:cancel url="expressAdvertisement/MyList.do" code="advertisement.cancel" />
 
-
-
+<%-- 	<jstl:out value="${message}"></jstl:out>
+ --%>
 </form:form>
