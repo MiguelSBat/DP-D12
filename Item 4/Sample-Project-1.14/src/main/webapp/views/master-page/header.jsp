@@ -54,6 +54,8 @@
 					<security:authorize access="hasRole('USER')">
 						<li><a href="auctionAdvertisement/myList.do"><spring:message code="master.page.user.myAuctions" /></a></li>
 						<li><a href="user/item/list.do"><spring:message code="master.page.user.item" /></a></li>
+						<li><a href="user/ticket/myTickets.do"><spring:message code="master.page.user.myTickets" /></a></li>
+						<li><a href="user/ticket/mySales.do"><spring:message code="master.page.user.mySales" /></a></li>
 					</security:authorize>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
