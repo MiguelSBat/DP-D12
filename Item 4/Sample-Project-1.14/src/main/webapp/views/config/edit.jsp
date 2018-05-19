@@ -65,13 +65,6 @@
 	<form:errors cssClass="error" path="premiumPrice" />
 	<br />
 	
-	<form:label path="paymentHoldDays">
-	<spring:message code="config.paymentHoldDays"/>	
-	</form:label>
-	<form:input path="paymentHoldDays" />
-	<form:errors cssClass="error" path="paymentHoldDays" />
-	<br />
-	
 	<form:label path="transactionReportWeight">
 	<spring:message code="config.transactionReportWeight"/>	
 	</form:label>

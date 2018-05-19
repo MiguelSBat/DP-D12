@@ -52,9 +52,6 @@
 <jstl:out value="${config.premiumPrice}" />
 <br />
 
-<b><spring:message code="config.paymentHoldDays" /></b>
-<jstl:out value="${config.paymentHoldDays}" />
-<br />
 
 <b><spring:message code="config.transactionReportWeight" /></b>
 <jstl:out value="${config.transactionReportWeight}" />

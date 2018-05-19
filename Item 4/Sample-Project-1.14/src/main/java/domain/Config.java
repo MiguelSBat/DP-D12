@@ -23,7 +23,6 @@ public class Config extends DomainEntity {
 	private Integer				premiumMaxAdvertisements;
 	private Integer				advertisementExpirationMonths;
 	private Double				premiumPrice;
-	private Integer				paymentHoldDays;
 	private Integer				transactionReportWeight;
 	private Integer				reportWeightTreshold;
 	private Integer				reputationTreshold;
@@ -102,15 +101,6 @@ public class Config extends DomainEntity {
 
 	public void setPremiumPrice(final Double premiumPrice) {
 		this.premiumPrice = premiumPrice;
-	}
-
-	@NotNull
-	public Integer getPaymentHoldDays() {
-		return this.paymentHoldDays;
-	}
-
-	public void setPaymentHoldDays(final Integer paymentHoldDays) {
-		this.paymentHoldDays = paymentHoldDays;
 	}
 
 	@NotNull
