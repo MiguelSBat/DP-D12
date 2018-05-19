@@ -98,6 +98,16 @@
 <br />
 
 </jstl:if>
+<jstl:if test="${shippingInfo==null && ticket.business.id==principal.id}">
+<a href="business/shippingInfo/create.do?ticketId=${ticket.id }">
+<spring:message code="ticket.shippingInfo"></spring:message>
+</a>
+</jstl:if>
+<jstl:if test="${shippingInfo==null && ticket.seller.id==principal.id}">
+<a href="user/shippingInfo/create.do?ticketId=${ticket.id }">
+<spring:message code="ticket.shippingInfo"></spring:message>
+</a>
+</jstl:if>
 <display:table pagesize="5" class="displaytag" 
 	name="saleLines" requestURI="ticket/display.do" id="row">
 	

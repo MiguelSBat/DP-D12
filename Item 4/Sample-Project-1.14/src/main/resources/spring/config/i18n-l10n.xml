@@ -30,6 +30,7 @@
 		<value>/views/ticket/messages</value>
 		<value>/views/expressAdvertisement/messages</value>
 		<value>/views/config/messages</value>
+		<value>/views/shippingInfo/messages</value>
 
 		<value>/views/item/messages</value>
 		<value>/views/auctionAdvertisement/messages</value>

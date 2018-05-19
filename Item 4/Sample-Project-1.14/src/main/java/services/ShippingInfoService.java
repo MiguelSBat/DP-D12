@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.ShippingInfoRepository;
+import domain.Actor;
 import domain.ShippingInfo;
 
 @Service
@@ -19,6 +20,8 @@ public class ShippingInfoService {
 	//Managed Repository ----
 	@Autowired
 	private ShippingInfoRepository	shippingInfoRepository;
+	@Autowired
+	private ActorService			actorService;
 
 
 	//Constructors
@@ -50,6 +53,10 @@ public class ShippingInfoService {
 
 	public ShippingInfo save(final ShippingInfo shippingInfo) {
 		ShippingInfo result;
+		Actor principal;
+		principal = this.actorService.findByPrincipal();
+		Assert.isTrue(shippingInfo.getticket().getBusiness() == null || shippingInfo.getticket().getBusiness().getId() == principal.getId());
+		Assert.isTrue(shippingInfo.getticket().getSeller() == null || shippingInfo.getticket().getSeller().getId() == principal.getId());
 
 		result = this.shippingInfoRepository.save(shippingInfo);
 		return result;

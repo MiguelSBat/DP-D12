@@ -113,7 +113,6 @@
 		<property name="premiumMaxAdvertisements" value="100" />
 		<property name="advertisementExpirationMonths" value="2" />
 		<property name="premiumPrice" value="20.0" />
-		<property name="paymentHoldDays" value="7" />
 		<property name="transactionReportWeight" value="1" />
 		<property name="reportWeightTreshold" value="5" />
 		<property name="reputationTreshold" value="1" />
