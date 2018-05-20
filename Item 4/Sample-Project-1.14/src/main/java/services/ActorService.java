@@ -2,23 +2,33 @@
 package services;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.ActorRepository;
+import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
+import domain.Admin;
+import domain.Folder;
+import domain.Message;
+import domain.Report;
+import domain.Valoration;
 import domain.Advertisement;
 import domain.Question;
 import domain.Review;
 import domain.User;
 import domain.Valoration;
+import forms.ActorForm;
 
 @Service
 @Transactional
@@ -26,7 +36,7 @@ public class ActorService {
 
 	//Managed Repository ----
 	@Autowired
-	private ActorRepository			actorRepository;
+	private ActorRepository		actorRepository;
 
 	@Autowired
 	private AdvertisementService	advertisementService;
@@ -39,6 +49,18 @@ public class ActorService {
 
 	@Autowired
 	private ReviewService			reviewService;
+
+	@Autowired
+	private AdminService		adminService;
+
+	@Autowired
+	private BusinessService		businessService;
+
+	@Autowired
+	private ModeratorService	moderatorService;
+
+	@Autowired
+	private UserService			userService;
 
 
 	//Constructors
@@ -122,7 +144,66 @@ public class ActorService {
 
 		return result;
 	}
+	public Actor create(final ActorForm actorForm) {
+		Actor result;
+		UserAccount userAccount;
+		Authority authority;
 
+		Assert.isTrue(actorForm.getPassword().equals(actorForm.getPassword2()));
+
+		userAccount = new UserAccount();
+		authority = new Authority();
+		final String actorType = actorForm.getAuthority();
+
+		if (actorType.equals(Authority.ADMIN)) {
+			Assert.isTrue(this.findByPrincipal() instanceof Admin);
+			authority.setAuthority(Authority.ADMIN);
+			result = this.adminService.create();
+		} else if (actorType.equals(Authority.BUSINESS)) {
+			authority.setAuthority(Authority.BUSINESS);
+			result = this.businessService.create(actorForm);
+		} else if (actorType.equals(Authority.MODERATOR)) {
+			Assert.isTrue(this.findByPrincipal() instanceof Admin);
+			authority.setAuthority(Authority.MODERATOR);
+			result = this.moderatorService.create();
+		} else if (actorType.equals(Authority.USER)) {
+			authority.setAuthority(Authority.USER);
+			result = this.userService.create(actorForm);
+		} else
+			throw new ServiceException("Invalid actor type parameter");
+
+		userAccount.addAuthority(authority);
+		result.setUserAccount(userAccount);
+
+		result.setEmailAddress(actorForm.getEmail());
+		result.getUserAccount().setUsername(actorForm.getUsername());
+		result.getUserAccount().setPassword(actorForm.getPassword());
+		final Collection<Folder> folders = new HashSet<>();
+		final Collection<Message> messagesSent = new HashSet<>();
+		final Collection<Message> messagesReceived = new HashSet<>();
+		final Collection<Report> reports = new HashSet<>();
+		final Collection<Valoration> valorations = new HashSet<>();
+		result.setFolders(folders);
+		result.setMessagesReceived(messagesReceived);
+		result.setMessagesSent(messagesSent);
+		result.setReports(reports);
+		result.setValorations(valorations);
+		return result;
+	}
+
+	public Actor register(final Actor actor) {
+		Assert.notNull(actor);
+		final Actor result;
+
+		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		final String pass = encoder.encodePassword(actor.getUserAccount().getPassword(), null);
+		actor.getUserAccount().setPassword(pass);
+
+		result = this.save(actor);
+
+		return result;
+	}
+}
 	public void softBan(final int actorId) {
 		Actor result;
 

@@ -4,7 +4,6 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -52,20 +51,5 @@ public class BusinessInfo extends DomainEntity {
 
 	public void setCountry(final String country) {
 		this.country = country;
-	}
-
-
-	//Relationships
-
-	private Business	business;
-
-
-	@ManyToOne(optional = false)
-	public Business getBusiness() {
-		return this.business;
-	}
-
-	public void setBusiness(final Business business) {
-		this.business = business;
 	}
 }

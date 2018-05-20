@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import javax.transaction.Transactional;
 
@@ -10,7 +11,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.BusinessRepository;
+import domain.Actor;
+import domain.Answer;
 import domain.Business;
+import domain.BusinessInfo;
+import forms.ActorForm;
 
 @Service
 @Transactional
@@ -88,6 +93,23 @@ public class BusinessService {
 		Collection<Business> result;
 
 		result = this.businessRepository.findNotVerified();
+
+		return result;
+	}
+
+	public Actor create(final ActorForm form) {
+		final Business result = new Business();
+
+		result.setAnswers(new HashSet<Answer>());
+		result.setBusinessInfos(new HashSet<BusinessInfo>());
+		result.setName(form.getName());
+		result.setPaypalEmail(form.getPaypalEmail());
+		result.setPhotosURL(new HashSet<String>());
+		result.setPremium(false);
+		result.setReputation(3);
+		result.setSuspicious(false);
+		result.setVATNumber(form.getVATNumber());
+		result.setVerified(false);
 
 		return result;
 	}

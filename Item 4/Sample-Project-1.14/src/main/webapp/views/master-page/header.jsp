@@ -22,7 +22,7 @@
 	    <li><a class="fNiv" href="advertisement/list.do"><spring:message code="master.page.advertisement" /></a>
 	    	<ul>
 					<li class="arrow"></li>
-					<li><a href="expressAdvertisement/list.do"><spring:message code="master.page.express" /></a></li>
+		<li><a href="expressAdvertisement/list.do"><spring:message code="master.page.express" /></a></li>
 			</ul>
 		</li>
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
@@ -33,14 +33,21 @@
 					<li><a href="administrator/action-1.do"><spring:message code="master.page.administrator.action.1" /></a></li>
 					<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>
 					<li><a href="administrator/config/display.do"><spring:message code="master.page.administrator.config.display" /></a></li>	
-					<li><a href="administrator/config/edit.do"><spring:message code="master.page.administrator.config.edit" /></a></li>					
+					<li><a href="administrator/config/edit.do"><spring:message code="master.page.administrator.config.edit" /></a></li>	
+					<li><a href="actor/create.do?actorType=ADMIN"><spring:message
+									code="master.page.createAdmin" /></a></li>
+					<li><a href="actor/create.do?actorType=MODERATOR"><spring:message
+									code="master.page.createModerator" /></a></li>				
 				</ul>
 			</li>
 		</security:authorize>
-		
 
 	<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
+			<li><a href="actor/create.do?actorType=USER"><spring:message
+										code="master.page.createUser" /></a></li>
+			<li><a href="actor/create.do?actorType=BUSINESS"><spring:message
+										code="master.page.createBusiness" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
@@ -51,10 +58,13 @@
 				</a>
 				<ul>
 					<li class="arrow"></li>
+					<li><a href="expressAdvertisement/create.do"><spring:message code="master.page.createExpress" /></a></li>
 					<li><a href="expressAdvertisement/MyList.do"><spring:message code="master.page.MyList" /></a></li>
 					<security:authorize access="hasRole('USER')">
 						<li><a href="auctionAdvertisement/myList.do"><spring:message code="master.page.user.myAuctions" /></a></li>
 						<li><a href="user/item/list.do"><spring:message code="master.page.user.item" /></a></li>
+						<li><a href="user/ticket/myTickets.do"><spring:message code="master.page.user.myTickets" /></a></li>
+						<li><a href="user/ticket/mySales.do"><spring:message code="master.page.user.mySales" /></a></li>
 					</security:authorize>
 					<security:authorize access="hasRole('MODERATOR')">
 						<li><a href="moderator/business/list.do"><spring:message code="master.page.moderator.business.list" /></a></li>	

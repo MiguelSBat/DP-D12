@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import javax.transaction.Transactional;
 
@@ -10,7 +11,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.UserRepository;
+import domain.Actor;
+import domain.Review;
+import domain.SocialIdentity;
 import domain.User;
+import forms.ActorForm;
 
 @Service
 @Transactional
@@ -85,6 +90,22 @@ public class UserService {
 		Collection<User> result;
 		result = this.findFromAuctionByShoppingCartId(id);
 		result.addAll(this.findFromExpressByShoppingCartId(id));
+
+		return result;
+	}
+
+	public Actor create(final ActorForm form) {
+		final User result = new User();
+
+		result.setName(form.getName());
+		result.setPhone(form.getPhone());
+		result.setPhotosURL(new HashSet<String>());
+		result.setPremium(false);
+		result.setReputation(3);
+		result.setReviews(new HashSet<Review>());
+		result.setSocialIdentities(new HashSet<SocialIdentity>());
+		result.setSurname(form.getSurname());
+		result.setSuspicious(false);
 
 		return result;
 	}

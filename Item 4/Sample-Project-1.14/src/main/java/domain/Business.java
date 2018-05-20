@@ -97,10 +97,22 @@ public class Business extends Actor {
 		this.verified = verified;
 	}
 
+	public Boolean getPremium() {
+		return this.premium;
+	}
 
+	public Boolean getSuspicious() {
+		return this.suspicious;
+	}
+
+	public Boolean getVerified() {
+		return this.verified;
+	}
 	//Relationships
 
-	private Collection<Answer>	answers;
+
+	private Collection<Answer>			answers;
+	private Collection<BusinessInfo>	businessInfos;
 
 
 	@OneToMany
@@ -110,6 +122,15 @@ public class Business extends Actor {
 
 	public void setAnswers(final Collection<Answer> answers) {
 		this.answers = answers;
+	}
+
+	@OneToMany
+	public Collection<BusinessInfo> getBusinessInfos() {
+		return this.businessInfos;
+	}
+
+	public void setBusinessInfos(final Collection<BusinessInfo> businessInfos) {
+		this.businessInfos = businessInfos;
 	}
 
 }

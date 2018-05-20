@@ -405,6 +405,11 @@
 			<list>
 			</list>
 		</property>
+		<property name="businessInfos">
+			<list>
+				<ref bean="businessInfo1" />
+			</list>
+		</property>
 	</bean>
 		
 	<bean id="business2" class="domain.Business">
@@ -449,6 +454,10 @@
 			</list>
 		</property>
 		<property name="Valorations">
+			<list>
+			</list>
+		</property>
+		<property name="businessInfos">
 			<list>
 			</list>
 		</property>
@@ -1053,8 +1062,7 @@
 		<property name="address" value="adv. Shibuya" />
 		<property name="city" value="Tokyo" />
 		<property name="additionalInfo" value="Vendemos por dinero muchas Nintendo Switch" />
-		<property name="country" value="Japon" />	
-		<property name="business" ref="business1"/>	
+		<property name="country" value="Japon" />
 	</bean>
 		
 		<!-- Item -->
