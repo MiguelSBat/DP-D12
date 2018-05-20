@@ -1,0 +1,63 @@
+
+package controllers.administrator;
+
+import java.util.Collection;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import services.ActorService;
+import services.BusinessService;
+import controllers.AbstractController;
+import domain.Business;
+
+@Controller
+@RequestMapping("/adminsitrator/business")
+public class BusinessAdministratorController extends AbstractController {
+
+	//Service -----------------------------------------------------------------
+	@Autowired
+	private BusinessService	businessService;
+
+	@Autowired
+	private ActorService	actorService;
+
+
+	//Constructor
+
+	public BusinessAdministratorController() {
+		super();
+	}
+
+	// Listing ----------------------------------------------------------------
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
+		Collection<Business> businesses;
+
+		businesses = this.businessService.findNotVerified();
+		result = new ModelAndView("business/list");
+		result.addObject("businesses", businesses);
+		result.addObject("requestURI", "administrator/business/list.do");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/verify", method = RequestMethod.GET)
+	public ModelAndView verify(@RequestParam final int businessId) {
+		ModelAndView result;
+		Business business;
+
+		business = this.businessService.findOne(businessId);
+		business.setVerified(true);
+		this.businessService.save(business);
+		result = new ModelAndView("redirect:/administrator/business/list.do");
+
+		return result;
+	}
+}

@@ -17,4 +17,7 @@ public interface BusinessRepository extends JpaRepository<Business, Integer> {
 
 	@Query("select a.business from Advertisement a join a.saleLines s where s.shoppingCart.id=?1")
 	Collection<Business> findByShoppingCartId(int id);
+
+	@Query("select b from Business b where b.verified=0")
+	Collection<Business> findNotVerified();
 }

@@ -84,4 +84,12 @@ public class BusinessService {
 		return result;
 	}
 
+	public Collection<Business> findNotVerified() {
+		Collection<Business> result;
+
+		result = this.businessRepository.findNotVerified();
+
+		return result;
+	}
+
 }

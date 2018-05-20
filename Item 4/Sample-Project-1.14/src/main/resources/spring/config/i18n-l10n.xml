@@ -33,6 +33,7 @@
 		<value>/views/shippingInfo/messages</value>
 
 		<value>/views/item/messages</value>
+		<value>/views/business/messages</value>
 		<value>/views/auctionAdvertisement/messages</value>
 
 	</util:list>

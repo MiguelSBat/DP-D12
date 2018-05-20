@@ -19,10 +19,11 @@
 
 <div>
 	<ul id="jMenu">
-	    <li><a href="advertisement/list.do"><spring:message code="master.page.advertisement" /></a>
-	    
-		<li><a href="expressAdvertisement/list.do"><spring:message code="master.page.express" /></a></li>
-			
+	    <li><a class="fNiv" href="advertisement/list.do"><spring:message code="master.page.advertisement" /></a>
+	    	<ul>
+					<li class="arrow"></li>
+					<li><a href="expressAdvertisement/list.do"><spring:message code="master.page.express" /></a></li>
+			</ul>
 		</li>
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<security:authorize access="hasRole('ADMIN')">
@@ -36,6 +37,7 @@
 				</ul>
 			</li>
 		</security:authorize>
+		
 
 	<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
@@ -49,16 +51,16 @@
 				</a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="expressAdvertisement/create.do"><spring:message code="master.page.createExpress" /></a></li>
 					<li><a href="expressAdvertisement/MyList.do"><spring:message code="master.page.MyList" /></a></li>
 					<security:authorize access="hasRole('USER')">
 						<li><a href="auctionAdvertisement/myList.do"><spring:message code="master.page.user.myAuctions" /></a></li>
 						<li><a href="user/item/list.do"><spring:message code="master.page.user.item" /></a></li>
-						<li><a href="user/ticket/myTickets.do"><spring:message code="master.page.user.myTickets" /></a></li>
-						<li><a href="user/ticket/mySales.do"><spring:message code="master.page.user.mySales" /></a></li>
 					</security:authorize>
-					<security:authorize access="hasRole('BUSINESS')">
-						<li><a href="business/ticket/mySales.do"><spring:message code="master.page.user.mySales" /></a></li>
+					<security:authorize access="hasRole('MODERATOR')">
+						<li><a href="moderator/business/list.do"><spring:message code="master.page.moderator.business.list" /></a></li>					
+					</security:authorize>
+					<security:authorize access="hasRole('ADMIN')">
+						<li><a href="administrator/business/list.do"><spring:message code="master.page.moderator.business.list" /></a></li>					
 					</security:authorize>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>

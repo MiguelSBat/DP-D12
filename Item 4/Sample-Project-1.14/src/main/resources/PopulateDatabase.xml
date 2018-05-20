@@ -404,6 +404,7 @@
 		<property name="premium" value="True" />
 		<property name="reputation" value="5" />
 		<property name="suspicious" value="true" />
+		<property name="verified" value="false" />
 		<property name="photosURL">
 			<list>
 				<value>"https://images.vexels.com/media/users/3/140752/isolated/preview/17e31e592ab23bb0e8b2c0e76c0a4361-perfil-masculino-avatar-5-by-vexels.png"</value>
