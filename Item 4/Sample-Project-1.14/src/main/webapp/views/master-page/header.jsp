@@ -57,10 +57,12 @@
 						<li><a href="user/item/list.do"><spring:message code="master.page.user.item" /></a></li>
 					</security:authorize>
 					<security:authorize access="hasRole('MODERATOR')">
-						<li><a href="moderator/business/list.do"><spring:message code="master.page.moderator.business.list" /></a></li>					
+						<li><a href="moderator/business/list.do"><spring:message code="master.page.moderator.business.list" /></a></li>	
+						<li><a href="moderator/actor/list.do"><spring:message code="master.page.moderator.actorSuspicious.list" /></a></li>				
 					</security:authorize>
 					<security:authorize access="hasRole('ADMIN')">
-						<li><a href="administrator/business/list.do"><spring:message code="master.page.moderator.business.list" /></a></li>					
+						<li><a href="administrator/business/list.do"><spring:message code="master.page.moderator.business.list" /></a></li>	
+						<li><a href="administrator/actor/list.do"><spring:message code="master.page.moderator.actorSuspicious.list" /></a></li>			
 					</security:authorize>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>

@@ -24,23 +24,29 @@
 
 
 <!-- Listing grid -->
-<display:table pagesize="5" class="displaytag" name="businesses" requestURI="${requestURI}" id="row">
+<display:table pagesize="5" class="displaytag" name="actors" requestURI="${requestURI}" id="row">
 
-	<spring:message code="business.name" var="name" />
+	<spring:message code="actor.name" var="name" />
 	<display:column title="${name}" sortable="false">
 		<jstl:out value="${row.name}" />
 	</display:column>
 
-	<spring:message code="business.paypalEmail" var="paypalEmail" />
-	<display:column title="${paypalEmail}" sortable="false">
-		<jstl:out value="${row.paypalEmail}" />
+	<spring:message code="actor.emailAddress" var="emailAddress" />
+	<display:column title="${emailAddress}" sortable="false">
+		<jstl:out value="${row.emailAddress}" />
 	</display:column>
-
-	<spring:message code="business.VATNumber" var="VATNumber" />
-	<display:column title="${VATNumber}" sortable="false">
-		<jstl:out value="${row.VATNumber}" />
+	
+	<security:authorize access="hasRole('MODERATOR')">
+	<display:column>
+	<a href="moderator/business/verify.do?businessId=${row.id }"><spring:message code="business.verify" /></a>
 	</display:column>
-
+	</security:authorize>
+	
+	<security:authorize access="hasRole('ADMIN')">
+	<display:column>
+	<a href="administrator/business/verify.do?businessId=${row.id }"><spring:message code="business.verify" /></a>
+	</display:column>
+	</security:authorize>
 	
 </display:table>
 

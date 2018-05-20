@@ -98,4 +98,12 @@ public class ActorService {
 		return result;
 	}
 
+	public Collection<Actor> findSuspicious() {
+		Collection<Actor> result;
+
+		result = this.actorRepository.findSuspicious();
+
+		return result;
+	}
+
 }
