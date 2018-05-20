@@ -75,7 +75,14 @@
 	<spring:message code="advertisement.tags" var="tagsHeader" />
 			<display:column property="tags" title="${tagsHeader}" />
 
-	
+	<security:authorize access="hasRole('MODERATOR')">
+		<jstl:if test="${type.equals('auction')}">
+		<display:column>
+			<a href="moderator/auctionadvertisement/delete.do?auctionadvertisementId=${row.id}"><spring:message
+					code="advertisement.delete" /></a>
+		</display:column>
+		</jstl:if>
+	</security:authorize>
 	
 </display:table>
 <a href="auctionAdvertisement/create.do">crear auctionAD</a>

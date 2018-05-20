@@ -98,4 +98,12 @@ public class AdvertisementService {
 
 		return result;
 	}
+	public Collection<Advertisement> findByBusinessORUser(final int id) {
+		Collection<Advertisement> result;
+
+		result = this.advertisementRepository.findByBusinessORUser(id);
+
+		return result;
+	}
+
 }

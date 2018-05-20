@@ -16,7 +16,7 @@ import controllers.AbstractController;
 import domain.Business;
 
 @Controller
-@RequestMapping("/adminsitrator/business")
+@RequestMapping("/administrator/business")
 public class BusinessAdministratorController extends AbstractController {
 
 	//Service -----------------------------------------------------------------

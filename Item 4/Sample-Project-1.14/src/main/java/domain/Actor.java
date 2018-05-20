@@ -22,6 +22,8 @@ import security.UserAccount;
 public class Actor extends DomainEntity {
 
 	private String	emailAddress;
+	private Boolean	softBan;
+	private Boolean	hardBan;
 
 
 	@Email
@@ -32,6 +34,22 @@ public class Actor extends DomainEntity {
 
 	public void setEmailAddress(final String emailAddress) {
 		this.emailAddress = emailAddress;
+	}
+
+	public Boolean getSoftBan() {
+		return this.softBan;
+	}
+
+	public void setSoftBan(final Boolean softBan) {
+		this.softBan = softBan;
+	}
+
+	public Boolean getHardBan() {
+		return this.hardBan;
+	}
+
+	public void setHardBan(final Boolean hardBan) {
+		this.hardBan = hardBan;
 	}
 
 

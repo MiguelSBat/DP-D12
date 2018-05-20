@@ -64,6 +64,14 @@ public class ValorationService {
 		return result;
 	}
 
+	public Collection<Valoration> findByActor(final int actorId) {
+		Collection<Valoration> result;
+
+		result = this.valorationRepository.findByActor(actorId);
+
+		return result;
+	}
+
 	public void flush() {
 		this.valorationRepository.flush();
 	}

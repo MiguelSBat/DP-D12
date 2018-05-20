@@ -14,6 +14,11 @@ import repositories.ActorRepository;
 import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
+import domain.Advertisement;
+import domain.Question;
+import domain.Review;
+import domain.User;
+import domain.Valoration;
 
 @Service
 @Transactional
@@ -21,7 +26,19 @@ public class ActorService {
 
 	//Managed Repository ----
 	@Autowired
-	private ActorRepository	actorRepository;
+	private ActorRepository			actorRepository;
+
+	@Autowired
+	private AdvertisementService	advertisementService;
+
+	@Autowired
+	private ValorationService		valorationService;
+
+	@Autowired
+	private QuestionService			questionService;
+
+	@Autowired
+	private ReviewService			reviewService;
 
 
 	//Constructors
@@ -104,6 +121,42 @@ public class ActorService {
 		result = this.actorRepository.findSuspicious();
 
 		return result;
+	}
+
+	public void softBan(final int actorId) {
+		Actor result;
+
+		result = this.actorRepository.findOne(actorId);
+		result.setSoftBan(true);
+		this.save(result);
+	}
+
+	public void hardBan(final int actorId) {
+		Actor result;
+		User user;
+		Collection<Advertisement> advertisements;
+		Collection<Valoration> valorations;
+		Collection<Question> questions;
+		Collection<Review> reviews;
+
+		result = this.actorRepository.findOne(actorId);
+		result.setHardBan(true);
+		this.save(result);
+		advertisements = this.advertisementService.findByBusinessORUser(actorId);
+		valorations = this.valorationService.findByActor(actorId);
+		if (result instanceof User) {
+			user = (User) this.findOne(actorId);
+			questions = this.questionService.findByUser(actorId);
+			reviews = user.getReviews();
+			for (final Question q : questions)
+				this.questionService.delete(q);
+			for (final Review r : reviews)
+				this.reviewService.delete(r);
+		}
+		for (final Valoration v : valorations)
+			this.valorationService.delete(v);
+		for (final Advertisement a : advertisements)
+			this.advertisementService.delete(a);
 	}
 
 }

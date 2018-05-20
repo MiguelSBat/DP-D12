@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
@@ -43,4 +44,23 @@ public class ActorModeratorController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/softBan", method = RequestMethod.GET)
+	public ModelAndView softBan(@RequestParam final int actorId) {
+		ModelAndView result;
+
+		this.actorService.softBan(actorId);
+		result = new ModelAndView("redirect:/moderator/actor/list.do");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/hardBan", method = RequestMethod.GET)
+	public ModelAndView hardBan(@RequestParam final int actorId) {
+		ModelAndView result;
+
+		this.actorService.hardBan(actorId);
+		result = new ModelAndView("redirect:/moderator/actor/list.do");
+
+		return result;
+	}
 }

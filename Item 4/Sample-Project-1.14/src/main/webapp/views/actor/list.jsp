@@ -37,15 +37,43 @@
 	</display:column>
 	
 	<security:authorize access="hasRole('MODERATOR')">
+	
 	<display:column>
-	<a href="moderator/business/verify.do?businessId=${row.id }"><spring:message code="business.verify" /></a>
+	<jstl:if test="${row.softBan=='false'}">
+	<a href="moderator/actor/softBan.do?actorId=${row.id }"><spring:message code="actor.softBan" /></a>
+		</jstl:if>
 	</display:column>
+
 	</security:authorize>
 	
 	<security:authorize access="hasRole('ADMIN')">
+	
 	<display:column>
-	<a href="administrator/business/verify.do?businessId=${row.id }"><spring:message code="business.verify" /></a>
+	<jstl:if test="${row.softBan=='false'}">
+	<a href="administrator/actor/softBan.do?actorId=${row.id }"><spring:message code="actor.softBan" /></a>
+	</jstl:if>
 	</display:column>
+	
+	</security:authorize>
+	
+	<security:authorize access="hasRole('MODERATOR')">
+	
+	<display:column>
+	<jstl:if test="${row.hardBan=='false'}">
+	<a href="moderator/actor/hardBan.do?actorId=${row.id }"><spring:message code="actor.hardBan" /></a>
+	</jstl:if>
+	</display:column>
+	
+	</security:authorize>
+	
+	<security:authorize access="hasRole('ADMIN')">
+	
+	<display:column>
+	<jstl:if test="${row.hardBan=='false'}">
+	<a href="administrator/actor/hardBan.do?actorId=${row.id }"><spring:message code="actor.hardBan" /></a>
+	</jstl:if>
+	</display:column>
+	
 	</security:authorize>
 	
 </display:table>

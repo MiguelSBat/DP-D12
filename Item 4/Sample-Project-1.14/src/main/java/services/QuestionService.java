@@ -64,6 +64,14 @@ public class QuestionService {
 		return result;
 	}
 
+	public Collection<Question> findByUser(final int actorId) {
+		Collection<Question> result;
+
+		result = this.questionRepository.findByUser(actorId);
+
+		return result;
+	}
+
 	public void flush() {
 		this.questionRepository.flush();
 	}
