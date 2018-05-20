@@ -17,13 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.AdvertisementService;
 import services.ExpressAdvertisementService;
-import services.ExpressAdvertisementService;
 import services.ItemService;
 import services.ShopAdvertisementService;
 import services.UserService;
 import domain.Actor;
-import domain.Advertisement;
-import domain.ExpressAdvertisement;
 import domain.Business;
 import domain.ExpressAdvertisement;
 import domain.Item;
@@ -106,9 +103,28 @@ public class ExpressAdvertisementsController extends AbstractController {
 		}
 		result = new ModelAndView("expressAdvertisement/list");
 		result.addObject("advertisements", advertisements);
-
+		boolean delete=true;
+		result.addObject("delete",delete);
 		return result;
 	}
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+		public ModelAndView delete(@RequestParam final int expressAdvertisementId) {
+			ModelAndView result;
+	
+			ExpressAdvertisement expressAdvertisement=expressAdvertisementService.findOne(expressAdvertisementId);
+			
+			try {
+				this.expressAdvertisementService.delete(expressAdvertisement);
+				result = new ModelAndView("redirect:MyList.do");
+			} catch (final Throwable oops) {
+				String errorMessage = "advertisement.commit.error";
+	
+				if (oops.getMessage().contains("message.error"))
+					errorMessage = oops.getMessage();
+				result = this.createEditModelAndView(expressAdvertisement, errorMessage);
+			}
+			return result;
+		}
 
 	// Edition ----------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
@@ -117,6 +133,7 @@ public class ExpressAdvertisementsController extends AbstractController {
 
 		if (binding.hasErrors()){
 			String message= "advertisement.commit.error";
+			
 			result = this.createEditModelAndView(expressAdvertisement,message);
 		}else
 			try {
@@ -127,7 +144,9 @@ public class ExpressAdvertisementsController extends AbstractController {
 
 				if (oops.getMessage().contains("message.error"))
 					errorMessage = oops.getMessage();
-
+				if(expressAdvertisementService.isTabooThisExpressAdvertisement(expressAdvertisement)){
+					errorMessage= "ExpressAdvertisement.tabuError";
+				}
 				result = this.createEditModelAndView(expressAdvertisement, errorMessage);
 			}
 
@@ -147,12 +166,15 @@ public class ExpressAdvertisementsController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final  ExpressAdvertisement expressAdvertisement, final String message) {
 		ModelAndView result;
 		Collection<Item> items;
-
+		Boolean tabu =false;
+	
+	
 		result = new ModelAndView("expressAdvertisement/edit");
 		result.addObject("expressAdvertisement", expressAdvertisement);
 		result.addObject("message", message);
 		items = this.itemService.findByPrincipal();
 		result.addObject("items", items);
+	
 
 		return result;
 		

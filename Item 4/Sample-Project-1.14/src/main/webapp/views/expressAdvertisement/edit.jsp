@@ -54,6 +54,5 @@
 
 	<acme:cancel url="expressAdvertisement/MyList.do" code="advertisement.cancel" />
 
-<%-- 	<jstl:out value="${message}"></jstl:out>
- --%>
+
 </form:form>
