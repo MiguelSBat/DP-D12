@@ -21,4 +21,8 @@
 		<put-attribute name="body" value="/views/auctionAdvertisement/edit.jsp" />
 	</definition>
 	
+	<definition name="auctionAdvertisement/list" extends="master.page">	
+		<put-attribute name="title" value="Lista de subastas" />
+		<put-attribute name="body" value="/views/auctionAdvertisement/list.jsp" />
+	</definition>
 </tiles-definitions>

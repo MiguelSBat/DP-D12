@@ -15,8 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.AuctionAdvertisementService;
 import services.ItemService;
+import domain.Actor;
 import domain.AuctionAdvertisement;
+import domain.Business;
 import domain.Item;
+import domain.User;
 
 @Controller
 @RequestMapping("/auctionAdvertisement")
@@ -46,11 +49,18 @@ public class AuctionAdvertisementController extends AbstractController {
 	public ModelAndView list(final String criteria) {
 		ModelAndView result;
 		Collection<AuctionAdvertisement> advertisements;
+		Actor actor;
 
 		advertisements = this.auctionAdvertisementService.findByPrincipal();
-		result = new ModelAndView("advertisement/list");
+		result = new ModelAndView("auctionAdvertisement/list");
 		result.addObject("advertisements", advertisements);
-
+		if (this.actorService.isLogged()) {
+			actor = this.actorService.findByPrincipal();
+			if (actor instanceof User)
+				result.addObject("userId", actor.getId());
+			else if (actor instanceof Business)
+				result.addObject("businessId", actor.getId());
+		}
 		return result;
 	}
 
@@ -66,21 +76,9 @@ public class AuctionAdvertisementController extends AbstractController {
 
 		return result;
 	}
-	//	 display
 
 	// Edition ----------------------------------------------------------------
 
-	//	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	//	public ModelAndView edit(@RequestParam final int auctionAdvertisementId) {
-	//		ModelAndView result;
-	//		AuctionAdvertisement auctionAdvertisement;
-	//
-	//		auctionAdvertisement = this.auctionAdvertisementService.findOne(auctionAdvertisementId);
-	//		result = this.createEditModelAndView(auctionAdvertisement);
-	//
-	//		return result;
-	//	}
-	//
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final AuctionAdvertisement auctionAdvertisement, final BindingResult binding) {
 		ModelAndView result;
@@ -102,23 +100,21 @@ public class AuctionAdvertisementController extends AbstractController {
 
 		return result;
 	}
-	//
-	//	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	//	public ModelAndView delete(final Advertisement advertisement, final BindingResult binding) {
-	//		ModelAndView result;
-	//
-	//		try {
-	//			this.advertisementService.delete(advertisement);
-	//			result = new ModelAndView("redirect:list.do");
-	//		} catch (final Throwable oops) {
-	//			String errorMessage = "category.commit.error";
-	//
-	//			if (oops.getMessage().contains("message.error"))
-	//				errorMessage = oops.getMessage();
-	//			result = this.createEditModelAndView(advertisement, errorMessage);
-	//		}
-	//		return result;
-	//	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(final int auctionAdvertisementId) {
+		ModelAndView result;
+
+		try {
+			this.auctionAdvertisementService.delete(auctionAdvertisementId);
+
+		} catch (final Throwable oops) {
+
+		}
+		result = new ModelAndView("redirect:myList.do");
+
+		return result;
+	}
 
 	// Ancillary methods ------------------------------------------------------
 
