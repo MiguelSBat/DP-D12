@@ -10,13 +10,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.AuctionAdvertisementService;
+import services.BidService;
 import services.ItemService;
 import domain.Actor;
 import domain.AuctionAdvertisement;
+import domain.Bid;
 import domain.Business;
 import domain.Item;
 import domain.User;
@@ -35,6 +38,9 @@ public class AuctionAdvertisementController extends AbstractController {
 
 	@Autowired
 	private ActorService				actorService;
+
+	@Autowired
+	private BidService					bidService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -129,6 +135,22 @@ public class AuctionAdvertisementController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/bid", method = RequestMethod.GET)
+	public ModelAndView bid(@RequestParam final int auctionAdvertisementId, @RequestParam final Double amount) {
+		ModelAndView result;
+		Bid bid;
+
+		//TODO cambiar el check en el jsp
+		result = new ModelAndView("redirect:/advertisement/display.do?advertisementId=" + auctionAdvertisementId);
+		try {
+			bid = this.bidService.createAndSave(auctionAdvertisementId, amount);
+			result.addObject("bided", true);
+		} catch (final Throwable oops) {
+			result.addObject("bidError", true);
+		}
+
+		return result;
+	}
 	// Ancillary methods ------------------------------------------------------
 
 	protected ModelAndView createEditModelAndView(final AuctionAdvertisement auctionAdvertisement) {

@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ActorService;
 import services.AdvertisementService;
-import services.UserService;
+import services.BidService;
 import domain.Advertisement;
+import domain.AuctionAdvertisement;
+import domain.Bid;
+import domain.ExpressAdvertisement;
 
 @Controller
 @RequestMapping("/advertisement")
@@ -22,17 +24,9 @@ public class AdvertisementController extends AbstractController {
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private UserService								userService;
+	private AdvertisementService	advertisementService;
 	@Autowired
-	private ActorService							actorService;
-	@Autowired
-	private AdvertisementService					advertisementService;
-	@Autowired
-	private services.AuctionAdvertisementService	AuctionAdvertisementService;
-	@Autowired
-	private services.ExpressAdvertisementService	ExpressAdvertisementService;
-	@Autowired
-	private services.ShopAdvertisementService		ShopAdvertisementService;
+	private BidService				bidService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -75,22 +69,24 @@ public class AdvertisementController extends AbstractController {
 
 	@RequestMapping(value = "display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam final int advertisementId) {
-		final ModelAndView result;
-		result = new ModelAndView("advertisement/display");
+		ModelAndView result;
 		Advertisement advertisement;
+		String advertisementType;
+		Collection<Bid> bids;
 
 		//		advertisement = this.advertisementService.findOne(advertisementId);
 
-		advertisement = this.AuctionAdvertisementService.findOne(advertisementId);
-		String advertisementType = "auction";
-		if (advertisement == null) {
-			advertisement = this.ExpressAdvertisementService.findOne(advertisementId);
+		result = new ModelAndView("advertisement/display");
+		advertisement = this.advertisementService.findOne(advertisementId);
+		if (advertisement instanceof AuctionAdvertisement) {
+			advertisementType = "auction";
+			bids = this.bidService.findOrderedByAuction(advertisement.getId());
+			result.addObject("bids", bids);
+		} else if (advertisement instanceof ExpressAdvertisement)
 			advertisementType = "express";
-		}
-		if (advertisement == null) {
-			advertisement = this.ShopAdvertisementService.findOne(advertisementId);
+		else
 			advertisementType = "shop";
-		}
+
 		result.addObject("advertisement", advertisement);
 		result.addObject("type", advertisementType);
 		return result;

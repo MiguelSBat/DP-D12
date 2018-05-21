@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -10,7 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.BidRepository;
+import domain.Actor;
+import domain.AuctionAdvertisement;
 import domain.Bid;
+import domain.User;
 
 @Service
 @Transactional
@@ -18,7 +22,13 @@ public class BidService {
 
 	//Managed Repository ----
 	@Autowired
-	private BidRepository	bidRepository;
+	private BidRepository				bidRepository;
+
+	@Autowired
+	private AuctionAdvertisementService	auctionAdvertisementService;
+
+	@Autowired
+	private ActorService				actorService;
 
 
 	//Constructors
@@ -68,4 +78,31 @@ public class BidService {
 		this.bidRepository.flush();
 	}
 
+	public Collection<Bid> findOrderedByAuction(final int auctionAdvertisementId) {
+		Collection<Bid> result;
+
+		result = this.bidRepository.findOrderedByAuction(auctionAdvertisementId);
+
+		return result;
+	}
+
+	public Bid createAndSave(final int auctionAdvertisementId, final Double amount) {
+		Bid bid, result;
+		AuctionAdvertisement auctionAdvertisement;
+		Actor actor;
+
+		auctionAdvertisement = this.auctionAdvertisementService.findOne(auctionAdvertisementId);
+		Assert.isTrue(auctionAdvertisement != null && auctionAdvertisement.getEndDate().after(new Date()));
+		Assert.isTrue(this.actorService.isLogged());
+		actor = this.actorService.findByPrincipal();
+		Assert.isTrue(actor instanceof User);
+
+		bid = this.create();
+		bid.setAmount(amount);
+		bid.setAuctionAdvertisement(auctionAdvertisement);
+		bid.setUser((User) actor);
+		result = this.bidRepository.save(bid);
+
+		return result;
+	}
 }
