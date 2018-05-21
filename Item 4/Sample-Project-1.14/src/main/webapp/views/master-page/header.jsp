@@ -23,6 +23,7 @@
 	    	<ul>
 					<li class="arrow"></li>
 		<li><a href="expressAdvertisement/list.do"><spring:message code="master.page.express" /></a></li>
+		<li><a href="auctionAdvertisement/list.do"><spring:message code="master.page.auctions" /></a></li>
 			</ul>
 		</li>
 		<!-- Do not forget the "fNiv" class for the first level links !! -->

@@ -18,4 +18,7 @@ public interface AuctionAdvertisementRepository extends JpaRepository<AuctionAdv
 	@Query("select a from AuctionAdvertisement a where a.business.id = ?1")
 	Collection<AuctionAdvertisement> findByPrincipalBusiness(int userId);
 
+	@Query("select a from AuctionAdvertisement a where a.endDate>CURRENT_DATE")
+	Collection<AuctionAdvertisement> findNotPast();
+
 }

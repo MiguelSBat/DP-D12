@@ -45,8 +45,21 @@ public class AuctionAdvertisementController extends AbstractController {
 
 	// Listing ----------------------------------------------------------------
 
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
+		Collection<AuctionAdvertisement> advertisements;
+
+		advertisements = this.auctionAdvertisementService.findNotPast();
+
+		result = new ModelAndView("auctionAdvertisement/list");
+		result.addObject("advertisements", advertisements);
+
+		return result;
+	}
+
 	@RequestMapping(value = "/myList", method = RequestMethod.GET)
-	public ModelAndView list(final String criteria) {
+	public ModelAndView myList(final String criteria) {
 		ModelAndView result;
 		Collection<AuctionAdvertisement> advertisements;
 		Actor actor;

@@ -119,4 +119,12 @@ public class AuctionAdvertisementService {
 		return result;
 	}
 
+	public Collection<AuctionAdvertisement> findNotPast() {
+		Collection<AuctionAdvertisement> result;
+
+		result = this.auctionAdvertisementRepository.findNotPast();
+
+		return result;
+	}
+
 }
