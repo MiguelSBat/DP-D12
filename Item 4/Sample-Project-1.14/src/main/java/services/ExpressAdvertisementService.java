@@ -53,7 +53,8 @@ public class ExpressAdvertisementService {
 
 		return result;
 	}
-
+//el delete solo cambia la fecha
+	
 	public void delete(final ExpressAdvertisement expressAdvertisement) {
 		Collection<ExpressAdvertisement> advertisements=new HashSet<>();
 		Actor a=actorService.findByPrincipal();
@@ -68,7 +69,9 @@ public class ExpressAdvertisementService {
 
 		}
 		Assert.isTrue(advertisements.contains(expressAdvertisement));
-		this.expressAdvertisementRepository.delete(expressAdvertisement);
+		expressAdvertisement.setEndDate(new Date(System.currentTimeMillis()));
+		this.expressAdvertisementRepository.save(expressAdvertisement);
+	
 
 	}
 	public Boolean isTabooThisExpressAdvertisement(final ExpressAdvertisement expressAdvertisement){

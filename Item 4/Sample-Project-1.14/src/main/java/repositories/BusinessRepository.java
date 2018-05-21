@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Business;
+import domain.User;
 
 @Repository
 public interface BusinessRepository extends JpaRepository<Business, Integer> {
@@ -20,4 +21,8 @@ public interface BusinessRepository extends JpaRepository<Business, Integer> {
 
 	@Query("select b from Business b where b.verified=0")
 	Collection<Business> findNotVerified();
+	
+	
+	@Query("select t.business from Ticket t where t.user.id=?1")
+	Collection<Business> findBusinessIbuyThings(int id);
 }

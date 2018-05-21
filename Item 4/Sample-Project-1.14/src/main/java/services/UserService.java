@@ -109,5 +109,27 @@ public class UserService {
 
 		return result;
 	}
+	public Collection<User> findUsersISoldThingsToThey(final int userId) {
+		Collection<User> result;
 
+		result = this.userRepository.findUsersISoldThingsToThey(userId);
+
+		return result;
+	}
+	public Collection<User> findUsersTheySoldThingsToMy(final int userId) {
+		Collection<User> result;
+
+		result = this.userRepository.findUsersTheySoldThingsToMy(userId);
+
+		return result;
+	}
+	public Collection<User> findUsersISoldThingsAndIAmABussiness(final int businessId) {
+		Collection<User> result;
+
+		result = this.userRepository.findUsersISoldThingsAndIAmABussiness(businessId);
+
+		return result;
+	}
+	
+	
 }

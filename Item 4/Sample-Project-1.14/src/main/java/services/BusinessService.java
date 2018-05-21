@@ -113,5 +113,12 @@ public class BusinessService {
 
 		return result;
 	}
+	public Collection<Business> findBusinessIbuyThings(int userId) {
+		Collection<Business> result;
+
+		result = this.businessRepository.findBusinessIbuyThings(userId);
+
+		return result;
+	}
 
 }

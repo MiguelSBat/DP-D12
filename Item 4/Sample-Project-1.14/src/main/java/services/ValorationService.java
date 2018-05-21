@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -50,7 +51,7 @@ public class ValorationService {
 
 	public Valoration save(final Valoration valoration) {
 		Valoration result;
-
+		valoration.setDate(new Date());
 		result = this.valorationRepository.save(valoration);
 		return result;
 	}

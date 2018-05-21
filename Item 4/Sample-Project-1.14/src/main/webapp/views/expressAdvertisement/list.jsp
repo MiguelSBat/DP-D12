@@ -69,12 +69,17 @@
 		<display:column property="saleLines" title="${saleLinesHeader}" /> --%>
 	<spring:message code="advertisement.tags" var="tagsHeader" />
 			<display:column property="tags" title="${tagsHeader}" />
+			
+	
 	<jstl:if test="${delete}">
+	<jsp:useBean id="now" class="java.util.Date"/>
+	<jstl:if test="${row.getEndDate() > now}">
 	<display:column >
 		<a href="expressAdvertisement/delete.do?expressAdvertisementId=${row.id}"><spring:message code="advertisement.delete"></spring:message></a>
 	
 	
 	</display:column>
+	</jstl:if>
 	</jstl:if>
 	
 </display:table>

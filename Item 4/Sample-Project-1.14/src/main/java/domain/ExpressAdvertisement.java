@@ -22,7 +22,7 @@ public class ExpressAdvertisement extends Advertisement {
 	public void setPrice(final Double price) {
 		this.price = price;
 	}
-
+	
 
 	//Relationships
 

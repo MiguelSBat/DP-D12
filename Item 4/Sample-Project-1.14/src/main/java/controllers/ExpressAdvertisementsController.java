@@ -112,7 +112,7 @@ public class ExpressAdvertisementsController extends AbstractController {
 			ModelAndView result;
 	
 			ExpressAdvertisement expressAdvertisement=expressAdvertisementService.findOne(expressAdvertisementId);
-			
+		
 			try {
 				this.expressAdvertisementService.delete(expressAdvertisement);
 				result = new ModelAndView("redirect:MyList.do");

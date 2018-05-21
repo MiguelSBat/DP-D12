@@ -34,6 +34,7 @@
 		<value>/views/item/messages</value>
 		<value>/views/business/messages</value>
 		<value>/views/actor/messages</value>
+		<value>/views/valoration/messages</value>
 		<value>/views/auctionAdvertisement/messages</value>
 
 	</util:list>
