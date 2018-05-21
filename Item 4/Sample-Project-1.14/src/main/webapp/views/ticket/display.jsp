@@ -113,7 +113,7 @@
 	
 	<spring:message code="ticket.display.name" var="rowHeader" />
 	<display:column title="${rowHeader}">
-	<a href="advertisement/display.do?advertisementId=${row.id }"><jstl:out value="${row.advertisement.item.name }"></jstl:out></a>
+	<a href="advertisement/display.do?advertisementId=${row.advertisement.id }"><jstl:out value="${row.advertisement.item.name }"></jstl:out></a>
 	</display:column>
 	
 	
