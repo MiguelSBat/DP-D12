@@ -84,6 +84,6 @@
 		</jstl:if>
 	</security:authorize>
 	
+
 </display:table>
-<a href="auctionAdvertisement/create.do">crear auctionAD</a>
 

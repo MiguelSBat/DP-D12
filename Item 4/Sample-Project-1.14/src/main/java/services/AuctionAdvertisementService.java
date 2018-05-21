@@ -50,9 +50,21 @@ public class AuctionAdvertisementService {
 		return result;
 	}
 
-	public void delete(final AuctionAdvertisement auctionAdvertisement) {
+	public void delete(final int auctionAdvertisementId) {
+		Actor actor;
+		AuctionAdvertisement auctionAdvertisement;
 
-		this.auctionAdvertisementRepository.delete(auctionAdvertisement);
+		auctionAdvertisement = this.findOne(auctionAdvertisementId);
+		Assert.isTrue(auctionAdvertisement != null);
+		actor = this.actorService.findByPrincipal();
+		Assert.isTrue(actor instanceof User || actor instanceof Business);
+		if (actor instanceof User) {
+			Assert.isTrue(auctionAdvertisement.getUser().getId() == actor.getId());
+			this.auctionAdvertisementRepository.delete(auctionAdvertisement);
+		} else {
+			Assert.isTrue(auctionAdvertisement.getBusiness().getId() == actor.getId());
+			this.auctionAdvertisementRepository.delete(auctionAdvertisement);
+		}
 
 	}
 

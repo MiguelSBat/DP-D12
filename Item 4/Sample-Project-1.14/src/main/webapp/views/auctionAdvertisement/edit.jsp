@@ -24,7 +24,8 @@
 
 <!-- soy el edit de un auctionAdvertisement si, no funciono obviamente modificame como veas  -->
 
-<form:form action="auctionAdvertisement/edit.do" modelAttribute="auctionAdvertisement">
+<form:form action="auctionAdvertisement/edit.do"
+	modelAttribute="auctionAdvertisement">
 
 
 
@@ -32,12 +33,14 @@
 	<form:hidden path="version" />
 	<form:hidden path="publicationDate" />
 	<br />
-	
+
 	<acme:textbox code="auctionAdvertisement.endDate" path="endDate" />
 	<acme:textarea code="auctionAdvertisement.tag" path="tags" />
-	<acme:textbox code="auctionAdvertisement.startingPrice" path="startingPrice" />
-	<acme:textbox code="auctionAdvertisement.instantBuyPrice" path="instantBuyPrice" />
-	
+	<acme:textbox code="auctionAdvertisement.startingPrice"
+		path="startingPrice" />
+	<acme:textbox code="auctionAdvertisement.instantBuyPrice"
+		path="instantBuyPrice" />
+
 	<form:label path="item">
 		<spring:message code="auctionAdvertisement.item" />
 	</form:label>
@@ -45,13 +48,14 @@
 		<form:option label="-----" value="0" />
 		<form:options items="${items}" itemLabel="name" itemValue="id" />
 	</form:select>
-	<form:errors path="item"/>
+	<form:errors path="item" />
 	<br />
-	
-	<input type="checkbox" name="secret" id="draftMode" value="True"><spring:message code="auctionAdvertisement.secret"/>
-	<br/>
-	
-<%-- 	<form:label path="secret">
+
+	<input type="checkbox" name="secret" id="draftMode" value="True">
+	<spring:message code="auctionAdvertisement.secret" />
+	<br />
+
+	<%-- 	<form:label path="secret">
 		<spring:message code="auctionAdvertisement.secret" />:
 	</form:label>
 	<form:select path="secret">
@@ -67,9 +71,14 @@
 	<acme:submit name="save" code="auctionAdvertisement.save" />
 
 	<!-- El bueno -->
-	<acme:cancel url="auctionAdvertisement/myList.do" code="auctionAdvertisement.cancel" />
+	<acme:cancel url="auctionAdvertisement/myList.do"
+		code="auctionAdvertisement.cancel" />
 
+	<acme:submit name="save" code="auctionAdvertisement.save" />
 
+	<button type="submit" name="delete" class="btn btn-primary">
+		<spring:message code="auctionAdvertisement.delete" />
+	</button>
 
 </form:form>
 
