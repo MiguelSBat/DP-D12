@@ -26,6 +26,9 @@ public class ItemService {
 	@Autowired
 	private ActorService	actorService;
 
+	@Autowired
+	private ConfigService	configService;
+
 
 	//Constructors
 	public ItemService() {
@@ -57,6 +60,11 @@ public class ItemService {
 	public Item save(final Item item) {
 		Item result;
 		Actor actor;
+		User user;
+
+		user = (User) this.actorService.findByPrincipal();
+		if (this.configService.isTaboo(item.getName()) && this.configService.isTaboo(item.getDescription()) && this.configService.isTaboo(item.getPhoto()))
+			user.setSuspicious(true);
 
 		Assert.isTrue(this.actorService.isLogged());
 		actor = this.actorService.findByPrincipal();

@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 
 import repositories.QuestionRepository;
 import domain.Question;
+import domain.User;
 
 @Service
 @Transactional
@@ -19,6 +20,12 @@ public class QuestionService {
 	//Managed Repository ----
 	@Autowired
 	private QuestionRepository	questionRepository;
+
+	@Autowired
+	private ActorService		actorService;
+
+	@Autowired
+	private ConfigService		configService;
 
 
 	//Constructors
@@ -50,7 +57,11 @@ public class QuestionService {
 
 	public Question save(final Question question) {
 		Question result;
+		User user;
 
+		user = (User) this.actorService.findByPrincipal();
+		if (this.configService.isTaboo(question.getText()))
+			user.setSuspicious(true);
 		result = this.questionRepository.save(question);
 		return result;
 	}

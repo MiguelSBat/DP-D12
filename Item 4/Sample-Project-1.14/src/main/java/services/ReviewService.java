@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 
 import repositories.ReviewRepository;
 import domain.Review;
+import domain.User;
 
 @Service
 @Transactional
@@ -19,6 +20,12 @@ public class ReviewService {
 	//Managed Repository ----
 	@Autowired
 	private ReviewRepository	reviewRepository;
+
+	@Autowired
+	private ActorService		actorService;
+
+	@Autowired
+	private ConfigService		configService;
 
 
 	//Constructors
@@ -50,7 +57,11 @@ public class ReviewService {
 
 	public Review save(final Review review) {
 		Review result;
+		User user;
 
+		user = (User) this.actorService.findByPrincipal();
+		if (this.configService.isTaboo(review.getText()))
+			user.setSuspicious(true);
 		result = this.reviewRepository.save(review);
 		return result;
 	}
