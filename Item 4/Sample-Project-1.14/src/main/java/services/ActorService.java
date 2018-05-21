@@ -57,6 +57,9 @@ public class ActorService {
 	@Autowired
 	private UserService				userService;
 
+	@Autowired
+	private ConfigService			configService;
+
 
 	//Constructors
 	public ActorService() {
@@ -222,4 +225,13 @@ public class ActorService {
 		this.actorRepository.save(result);
 	}
 
+	public Collection<Actor> findByReportWeight() {
+		Collection<Actor> result;
+		Long weight;
+
+		weight = new Long(this.configService.findConfiguration().getReportWeightTreshold());
+		result = this.actorRepository.findByReportWeight(weight);
+
+		return result;
+	}
 }

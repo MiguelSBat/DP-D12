@@ -44,6 +44,19 @@ public class ActorAdministratorController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/listToModerate", method = RequestMethod.GET)
+	public ModelAndView listToModerate() {
+		ModelAndView result;
+		Collection<Actor> actors;
+
+		actors = this.actorService.findByReportWeight();
+		result = new ModelAndView("actor/listToModerate");
+		result.addObject("actors", actors);
+		result.addObject("requestURI", "administrator/actor/listToModerate.do");
+
+		return result;
+	}
+
 	// Operators
 
 	@RequestMapping(value = "/softBan", method = RequestMethod.GET)

@@ -17,4 +17,7 @@ public interface ActorRepository extends JpaRepository<Actor, Integer> {
 
 	@Query("select a from Actor a where a.suspicious=1")
 	Collection<Actor> findSuspicious();
+
+	@Query("select r.actor from Report r group by r.actor having sum(r.weight)>?1")
+	Collection<Actor> findByReportWeight(Long weight);
 }
