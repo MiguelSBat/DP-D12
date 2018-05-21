@@ -216,5 +216,10 @@ public class ActorService {
 
 		this.save(result);
 	}
+	public void valorate(final int actorId){
+		Actor result;
+		result = this.actorRepository.findOne(actorId);
+		this.actorRepository.save(result);
+	}
 
 }
