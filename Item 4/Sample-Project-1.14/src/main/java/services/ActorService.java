@@ -22,6 +22,7 @@ import domain.Admin;
 import domain.Folder;
 import domain.Message;
 import domain.Report;
+import domain.User;
 import domain.Valoration;
 import forms.ActorForm;
 
@@ -125,6 +126,22 @@ public class ActorService {
 		return result;
 	}
 
+	public void actorSuspicious(final Actor actor) {
+		Collection<Valoration> valorations;
+		Integer actorValoration;
+		int userId;
+		valorations = actor.getValorations();
+		actorValoration = 0;
+		User user;
+
+		for (final Valoration v : valorations)
+			actorValoration = +v.getScore();
+		userId = actor.getId();
+		user = this.userService.findOne(userId);
+		if (actorValoration < this.configService.findConfiguration().getReputationTreshold())
+			user.setSuspicious(true);
+	}
+
 	public boolean isLogged() {
 		boolean result = false;
 		Object principal;
@@ -219,7 +236,7 @@ public class ActorService {
 
 		this.save(result);
 	}
-	public void valorate(final int actorId){
+	public void valorate(final int actorId) {
 		Actor result;
 		result = this.actorRepository.findOne(actorId);
 		this.actorRepository.save(result);
