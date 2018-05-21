@@ -70,6 +70,9 @@
 						<li><a href="moderator/business/list.do"><spring:message code="master.page.moderator.business.list" /></a></li>	
 						<li><a href="moderator/actor/list.do"><spring:message code="master.page.moderator.actorSuspicious.list" /></a></li>				
 					</security:authorize>
+					<security:authorize access="hasRole('BUSINESS')">
+						<li><a href="business/ticket/mySales.do"><spring:message code="master.page.user.mySales"/></a></li>		
+					</security:authorize>
 					<security:authorize access="hasRole('ADMIN')">
 						<li><a href="administrator/business/list.do"><spring:message code="master.page.moderator.business.list" /></a></li>	
 						<li><a href="administrator/actor/list.do"><spring:message code="master.page.moderator.actorSuspicious.list" /></a></li>			
