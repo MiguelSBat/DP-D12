@@ -44,6 +44,8 @@ public class ActorAdministratorController extends AbstractController {
 		return result;
 	}
 
+	// Operators
+
 	@RequestMapping(value = "/softBan", method = RequestMethod.GET)
 	public ModelAndView softBan(@RequestParam final int actorId) {
 		ModelAndView result;

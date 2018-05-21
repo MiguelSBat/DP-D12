@@ -23,11 +23,6 @@ import domain.Folder;
 import domain.Message;
 import domain.Report;
 import domain.Valoration;
-import domain.Advertisement;
-import domain.Question;
-import domain.Review;
-import domain.User;
-import domain.Valoration;
 import forms.ActorForm;
 
 @Service
@@ -36,7 +31,7 @@ public class ActorService {
 
 	//Managed Repository ----
 	@Autowired
-	private ActorRepository		actorRepository;
+	private ActorRepository			actorRepository;
 
 	@Autowired
 	private AdvertisementService	advertisementService;
@@ -51,16 +46,16 @@ public class ActorService {
 	private ReviewService			reviewService;
 
 	@Autowired
-	private AdminService		adminService;
+	private AdminService			adminService;
 
 	@Autowired
-	private BusinessService		businessService;
+	private BusinessService			businessService;
 
 	@Autowired
-	private ModeratorService	moderatorService;
+	private ModeratorService		moderatorService;
 
 	@Autowired
-	private UserService			userService;
+	private UserService				userService;
 
 
 	//Constructors
@@ -203,7 +198,7 @@ public class ActorService {
 
 		return result;
 	}
-}
+
 	public void softBan(final int actorId) {
 		Actor result;
 
@@ -214,30 +209,12 @@ public class ActorService {
 
 	public void hardBan(final int actorId) {
 		Actor result;
-		User user;
-		Collection<Advertisement> advertisements;
-		Collection<Valoration> valorations;
-		Collection<Question> questions;
-		Collection<Review> reviews;
 
 		result = this.actorRepository.findOne(actorId);
+		result.getUserAccount().setAccountNonLocked(false);
 		result.setHardBan(true);
+
 		this.save(result);
-		advertisements = this.advertisementService.findByBusinessORUser(actorId);
-		valorations = this.valorationService.findByActor(actorId);
-		if (result instanceof User) {
-			user = (User) this.findOne(actorId);
-			questions = this.questionService.findByUser(actorId);
-			reviews = user.getReviews();
-			for (final Question q : questions)
-				this.questionService.delete(q);
-			for (final Review r : reviews)
-				this.reviewService.delete(r);
-		}
-		for (final Valoration v : valorations)
-			this.valorationService.delete(v);
-		for (final Advertisement a : advertisements)
-			this.advertisementService.delete(a);
 	}
 
 }

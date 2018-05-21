@@ -30,6 +30,7 @@
 				</bean>
 			</list>
 		</property>
+		<property name="accountNonLocked" value="True" />
 	</bean>
 	
 	<bean id="userAccount2" class="security.UserAccount">
@@ -42,6 +43,7 @@
 				</bean>
 			</list>
 		</property>
+		<property name="accountNonLocked" value="True" />
 	</bean>
 
 	<bean id="userAccount3" class="security.UserAccount">
@@ -54,6 +56,7 @@
 				</bean>
 			</list>
 		</property>
+		<property name="accountNonLocked" value="True" />
 	</bean>
 	
 	<bean id="userAccount4" class="security.UserAccount">
@@ -66,6 +69,7 @@
 				</bean>
 			</list>
 		</property>
+		<property name="accountNonLocked" value="True" />
 	</bean>
 	<bean id="userAccount5" class="security.UserAccount">
 		<property name="username" value="user3" />
@@ -77,6 +81,7 @@
 				</bean>
 			</list>
 		</property>
+		<property name="accountNonLocked" value="True" />
 	</bean>
 	
 	<bean id="userAccount6" class="security.UserAccount">
@@ -89,6 +94,7 @@
 				</bean>
 			</list>
 		</property>
+		<property name="accountNonLocked" value="True" />
 	</bean>
 	
 	<bean id="userAccount7" class="security.UserAccount">
@@ -101,6 +107,7 @@
 				</bean>
 			</list>
 		</property>
+		<property name="accountNonLocked" value="True" />
 	</bean>
 	
 	<!-- config -->	
