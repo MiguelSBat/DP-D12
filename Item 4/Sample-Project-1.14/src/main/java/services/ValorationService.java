@@ -76,10 +76,10 @@ public class ValorationService {
 	public void flush() {
 		this.valorationRepository.flush();
 	}
-	public Collection<Valoration> getValorations(final int actorId) {
-		Collection<Valoration> result;
+	public Double getValorations(final int actorId) {
+		Double result;
 
-		result = this.valorationRepository.getValorations(actorId);
+		result = this.valorationRepository.getAverageValorations(actorId);
 
 		return result;
 	}

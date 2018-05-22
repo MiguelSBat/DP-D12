@@ -1,8 +1,6 @@
 
 package controllers;
 
-import java.util.Collection;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.ValorationService;
 import domain.Actor;
-import domain.Valoration;
 import forms.ActorForm;
 
 @Controller
@@ -45,13 +42,9 @@ public class ActorController {
 		final ModelAndView result;
 		result = new ModelAndView("actor/display");
 		//valoraciones 
-		final Collection<Valoration> valorations = this.valorationService.getValorations(actorId);
-		if (valorations.size() != 0) {
-			Integer sum = 0;
-			for (final Valoration v : valorations)
-				sum = sum + v.getScore();
-
-			sum = sum / valorations.size();
+		Double sum = 0.0;
+		if (this.valorationService.getValorations(actorId) != null) {
+			sum = this.valorationService.getValorations(actorId);
 			result.addObject("sum", sum);
 		}
 		//Fin valoraciones
