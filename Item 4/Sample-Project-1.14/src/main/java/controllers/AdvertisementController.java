@@ -73,7 +73,7 @@ public class AdvertisementController extends AbstractController {
 		Advertisement advertisement;
 		String advertisementType;
 		Collection<Bid> bids;
-
+		final Boolean Verdadero = true;
 		//		advertisement = this.advertisementService.findOne(advertisementId);
 
 		result = new ModelAndView("advertisement/display");
@@ -86,6 +86,11 @@ public class AdvertisementController extends AbstractController {
 			advertisementType = "express";
 		else
 			advertisementType = "shop";
+
+		if (advertisement.getBusiness() == null)
+			result.addObject("user", Verdadero);
+		else
+			result.addObject("business", Verdadero);
 
 		result.addObject("advertisement", advertisement);
 		result.addObject("type", advertisementType);

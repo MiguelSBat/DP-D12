@@ -76,5 +76,11 @@ public class ValorationService {
 	public void flush() {
 		this.valorationRepository.flush();
 	}
+	public Collection<Valoration> getValorations(final int actorId) {
+		Collection<Valoration> result;
 
+		result = this.valorationRepository.getValorations(actorId);
+
+		return result;
+	}
 }

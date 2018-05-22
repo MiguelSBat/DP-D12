@@ -20,4 +20,5 @@ public interface ActorRepository extends JpaRepository<Actor, Integer> {
 
 	@Query("select r.actor from Report r group by r.actor having sum(r.weight)>?1")
 	Collection<Actor> findByReportWeight(Long weight);
+
 }

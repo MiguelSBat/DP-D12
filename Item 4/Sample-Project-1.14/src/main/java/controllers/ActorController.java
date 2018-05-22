@@ -1,6 +1,8 @@
 
 package controllers;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import services.ValorationService;
 import domain.Actor;
+import domain.Valoration;
 import forms.ActorForm;
 
 @Controller
@@ -20,7 +24,9 @@ import forms.ActorForm;
 public class ActorController {
 
 	@Autowired
-	private ActorService	actorService;
+	private ActorService		actorService;
+	@Autowired
+	private ValorationService	valorationService;
 
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -37,14 +43,24 @@ public class ActorController {
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam final int actorId) throws Exception {
 		final ModelAndView result;
-
 		result = new ModelAndView("actor/display");
+		//valoraciones 
+		final Collection<Valoration> valorations = this.valorationService.getValorations(actorId);
+		if (valorations.size() != 0) {
+			Integer sum = 0;
+			for (final Valoration v : valorations)
+				sum = sum + v.getScore();
+
+			sum = sum / valorations.size();
+			result.addObject("sum", sum);
+		}
+		//Fin valoraciones
+
 		final Actor actor = this.actorService.findOne(actorId);
-		System.out.println(actor.getEmailAddress());
-		System.out.println("suspenso");
 
 		result.addObject("requestURI", "actor/display.do?actorId=" + actorId);
 		result.addObject("actor", actor);
+
 		return result;
 	}
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")

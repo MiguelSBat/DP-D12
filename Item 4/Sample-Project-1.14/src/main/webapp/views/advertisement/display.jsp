@@ -33,8 +33,12 @@
 			:
 			<jstl:out value="${type}"></jstl:out>
 		</h1>
+		<jstl:if test="${user}">
 	<a href="actor/display.do?actorId=${advertisement.getUser().getId()}">${advertisement.getUser().getName()}</a>
-
+	</jstl:if>
+	<jstl:if test="${business}">
+	<a href="actor/display.do?actorId=${advertisement.getBusiness().getId()}">${advertisement.getBusiness().getName()}</a>
+	</jstl:if>
 		<li><b><spring:message code="advertisement.item"></spring:message>:</b>
 			<jstl:out value="${advertisement.getItem().getName()}" /></li>
 

@@ -15,11 +15,11 @@
 <b><spring:message code="actor.name" /></b>
 <jstl:out value="${actor.getName()}" />
 <br />
-<b><spring:message code="actor.surname" /></b>
-<jstl:out value="${actor.surname}" />
-<br />
+
 <b><spring:message code="actor.email" /></b>
 <jstl:out value="${actor.getEmailAddress()}" />
 <br />
-
+<b><spring:message code="actor.sum" /></b>
+<jstl:out value="${sum}" />
+<br />
 
