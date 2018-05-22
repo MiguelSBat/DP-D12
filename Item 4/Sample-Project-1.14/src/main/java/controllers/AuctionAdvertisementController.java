@@ -83,6 +83,19 @@ public class AuctionAdvertisementController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/bidded", method = RequestMethod.GET)
+	public ModelAndView bidded() {
+		ModelAndView result;
+		Collection<AuctionAdvertisement> advertisements;
+
+		advertisements = this.auctionAdvertisementService.findByprincipal();
+
+		result = new ModelAndView("auctionAdvertisement/list");
+		result.addObject("advertisements", advertisements);
+
+		return result;
+	}
+
 	// Creation ---------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)

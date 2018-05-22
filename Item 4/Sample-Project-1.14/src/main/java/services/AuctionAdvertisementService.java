@@ -27,6 +27,9 @@ public class AuctionAdvertisementService {
 	@Autowired
 	private ActorService					actorService;
 
+	@Autowired
+	private ConfigService					configService;
+
 
 	//Constructors
 	public AuctionAdvertisementService() {
@@ -78,6 +81,7 @@ public class AuctionAdvertisementService {
 		Assert.isTrue(actor instanceof User || actor instanceof Business);
 		date = new Date();
 		Assert.isTrue(auctionAdvertisement.getEndDate().after(date));
+		Assert.isTrue(!this.hasSpam(auctionAdvertisement));
 
 		auctionAdvertisement.setPublicationDate(date);
 		if (actor instanceof User) {
@@ -87,6 +91,18 @@ public class AuctionAdvertisementService {
 			auctionAdvertisement.setBusiness((Business) actor);
 			result = this.auctionAdvertisementRepository.save(auctionAdvertisement);
 		}
+
+		return result;
+	}
+
+	private boolean hasSpam(final AuctionAdvertisement auctionAdvertisement) {
+		boolean result;
+
+		result = false;
+		result = (this.configService.isTaboo(auctionAdvertisement.getItem().getName()) || this.configService.isTaboo(auctionAdvertisement.getItem().getDescription()));
+		for (final String e : auctionAdvertisement.getTags())
+			if (this.configService.isTaboo(e))
+				result = true;
 
 		return result;
 	}
@@ -127,4 +143,13 @@ public class AuctionAdvertisementService {
 		return result;
 	}
 
+	public Collection<AuctionAdvertisement> findByprincipal() {
+		Collection<AuctionAdvertisement> result;
+		Actor actor;
+
+		actor = this.actorService.findByPrincipal();
+		result = this.auctionAdvertisementRepository.findByUser(actor.getId());
+
+		return result;
+	}
 }

@@ -78,7 +78,7 @@
 					requestURI="advertisement/display.do" id="row">
 					<spring:message code="advertisement.user" var="user" />
 					<display:column title="${user}">
-						<a href="user/display.do?userId=${row.user.id}"> <jstl:out
+						<a href="actor/display.do?actorId=${row.user.id}"> <jstl:out
 								value="${row.user.name}"></jstl:out></a>
 					</display:column>
 

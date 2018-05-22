@@ -47,10 +47,11 @@
 					<security:authorize access="hasAnyRole('USER','BUSINESS')">
 					<li><a href="expressAdvertisement/create.do"><spring:message code="master.page.createExpress" /></a></li>
 					<li><a href="expressAdvertisement/MyList.do"><spring:message code="master.page.MyList" /></a></li>
+					<li><a href="auctionAdvertisement/myList.do"><spring:message code="master.page.myAuctions" /></a></li>
 					<li><a href="valoration/list.do"><spring:message code="master.page.valoration" /></a></li>
 					</security:authorize>
 					<security:authorize access="hasRole('USER')">
-						<li><a href="auctionAdvertisement/myList.do"><spring:message code="master.page.user.myAuctions" /></a></li>
+						<li><a href="auctionAdvertisement/bidded.do"><spring:message code="master.page.user.bidded" /></a></li>
 						<li><a href="user/item/list.do"><spring:message code="master.page.user.item" /></a></li>
 						<li><a href="user/ticket/myTickets.do"><spring:message code="master.page.user.myTickets" /></a></li>
 						<li><a href="user/ticket/mySales.do"><spring:message code="master.page.user.mySales" /></a></li>
