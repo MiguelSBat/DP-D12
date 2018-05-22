@@ -51,7 +51,7 @@
 		
 		<security:intercept-url pattern="/user/shippingInfo/**" access="hasRole('USER')" /> 
 		<security:intercept-url pattern="/business/shippingInfo/**" access="hasRole('BUSINESS')" /> 
-		
+		<security:intercept-url pattern="/businessInfo/**" access="hasRole('BUSINESS')" /> 
 		<security:intercept-url pattern="/security/login.do" access="permitAll" /> 
 		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" /> 
 

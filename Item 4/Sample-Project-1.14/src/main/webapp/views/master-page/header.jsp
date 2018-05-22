@@ -62,7 +62,8 @@
 						<li><a href="moderator/actor/listToModerate.do"><spring:message code="master.page.moderator.actor.reported.list" /></a></li>
 					</security:authorize>
 					<security:authorize access="hasRole('BUSINESS')">
-						<li><a href="business/ticket/mySales.do"><spring:message code="master.page.user.mySales"/></a></li>		
+						<li><a href="business/ticket/mySales.do"><spring:message code="master.page.user.mySales"/></a></li>	
+						<li><a href="businessInfo/create.do"><spring:message code="master.page.businessInfo"/></a></li>			
 					</security:authorize>
 					<security:authorize access="hasRole('ADMIN')">
 						<li><a href="administrator/business/list.do"><spring:message code="master.page.moderator.business.list" /></a></li>	

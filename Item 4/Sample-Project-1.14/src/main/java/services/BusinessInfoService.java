@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.BusinessInfoRepository;
+import domain.Actor;
+import domain.Business;
 import domain.BusinessInfo;
 
 @Service
@@ -19,7 +21,10 @@ public class BusinessInfoService {
 	//Managed Repository ----
 	@Autowired
 	private BusinessInfoRepository	businessInfoRepository;
-
+	@Autowired
+	private ActorService			actorService;
+	@Autowired
+	private BusinessService			businessService;
 
 	//Constructors
 	public BusinessInfoService() {
@@ -28,7 +33,7 @@ public class BusinessInfoService {
 
 	public BusinessInfo create() {
 		BusinessInfo result;
-
+		
 		result = new BusinessInfo();
 
 		return result;
@@ -50,8 +55,15 @@ public class BusinessInfoService {
 
 	public BusinessInfo save(final BusinessInfo businessInfo) {
 		BusinessInfo result;
-
+		Assert.isTrue(actorService.findByPrincipal() instanceof Business);
+		Business b=(Business)actorService.findByPrincipal();
+		
+		
 		result = this.businessInfoRepository.save(businessInfo);
+		Collection<BusinessInfo>businessInfos =b.getBusinessInfos();
+		businessInfos.add(result);
+		b.setBusinessInfos(businessInfos);
+		this.businessService.save(b);
 		return result;
 	}
 

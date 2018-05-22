@@ -1,6 +1,8 @@
 
 package controllers;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.ValorationService;
 import domain.Actor;
+import domain.Business;
+import domain.BusinessInfo;
 import forms.ActorForm;
 
 @Controller
@@ -50,9 +54,17 @@ public class ActorController {
 		//Fin valoraciones
 
 		final Actor actor = this.actorService.findOne(actorId);
-
+		
+		//mostrar businessInfos
+		if(	actor instanceof Business){	
+		Business b=(Business)actor;
+		Collection<BusinessInfo>businessInfos =b.getBusinessInfos();
+		result.addObject("info",businessInfos);
+		}		
+				
 		result.addObject("requestURI", "actor/display.do?actorId=" + actorId);
 		result.addObject("actor", actor);
+		
 
 		return result;
 	}

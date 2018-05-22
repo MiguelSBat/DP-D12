@@ -22,4 +22,29 @@
 <b><spring:message code="actor.sum" /></b>
 <jstl:out value="${sum}" />
 <br />
+<display:table pagesize="5" class="displaytag" name="info" requestURI="${requestURI}" id="row">
+
+	<spring:message code="businessInfo.address" var="address" />
+	<display:column title="${address}" sortable="false">
+		<jstl:out value="${row.address}" />
+	</display:column>
+
+	<spring:message code="businessInfo.city" var="city" />
+	<display:column title="${city}" sortable="true">
+		<jstl:out value="${row.city}" />
+	</display:column>
+	
+	<spring:message code="businessInfo.country" var="country" />
+	<display:column title="${country}" sortable="false">
+		<jstl:out value="${row.country}" />
+	</display:column>
+
+	<spring:message code="businessInfo.additionalInfo" var="country" />
+	<display:column title="${additionalInfo}" sortable="false">
+		<jstl:out value="${row.additionalInfo}" />
+	</display:column>
+
+	<
+
+</display:table>
 
