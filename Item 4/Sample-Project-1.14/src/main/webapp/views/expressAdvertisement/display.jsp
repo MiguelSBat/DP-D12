@@ -30,6 +30,7 @@
 	<ul style="list-style-type: disc">
 	<h1><spring:message code="advertisement.type"></spring:message>:  <jstl:out value="${type}"></jstl:out></h1>
 
+
 	<li><b><spring:message code="advertisement.item"></spring:message>:</b>
 			<jstl:out value="${advertisement.getItem().getName()}" /></li>
 

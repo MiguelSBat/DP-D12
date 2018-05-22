@@ -34,7 +34,19 @@ public class ActorController {
 		result = this.createRegisterModelAndView(actorForm);
 		return result;
 	}
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int actorId) throws Exception {
+		final ModelAndView result;
 
+		result = new ModelAndView("actor/display");
+		final Actor actor = this.actorService.findOne(actorId);
+		System.out.println(actor.getEmailAddress());
+		System.out.println("suspenso");
+
+		result.addObject("requestURI", "actor/display.do?actorId=" + actorId);
+		result.addObject("actor", actor);
+		return result;
+	}
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
 	public ModelAndView register(@Valid final ActorForm actorForm, final BindingResult binding) {
 		ModelAndView result;

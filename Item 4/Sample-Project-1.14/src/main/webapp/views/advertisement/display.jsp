@@ -33,6 +33,7 @@
 			:
 			<jstl:out value="${type}"></jstl:out>
 		</h1>
+	<a href="actor/display.do?actorId=${advertisement.getUser().getId()}">${advertisement.getUser().getName()}</a>
 
 		<li><b><spring:message code="advertisement.item"></spring:message>:</b>
 			<jstl:out value="${advertisement.getItem().getName()}" /></li>
