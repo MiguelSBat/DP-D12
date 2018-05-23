@@ -12,7 +12,9 @@ import org.springframework.util.Assert;
 
 import repositories.AuctionAdvertisementRepository;
 import domain.Actor;
+import domain.Advertisement;
 import domain.AuctionAdvertisement;
+import domain.Bid;
 import domain.Business;
 import domain.User;
 
@@ -29,6 +31,9 @@ public class AuctionAdvertisementService {
 
 	@Autowired
 	private ConfigService					configService;
+
+	@Autowired
+	private BidService						bidService;
 
 
 	//Constructors
@@ -151,5 +156,29 @@ public class AuctionAdvertisementService {
 		result = this.auctionAdvertisementRepository.findByUser(actor.getId());
 
 		return result;
+	}
+
+	public boolean isBiddable(final Advertisement advertisement) {
+		AuctionAdvertisement auctionAdvertisement;
+		boolean biddable;
+		Actor actor;
+		Collection<Bid> bids;
+
+		Assert.isTrue(advertisement instanceof AuctionAdvertisement);
+		auctionAdvertisement = (AuctionAdvertisement) advertisement;
+		biddable = false;
+		if (this.actorService.isLogged()) {
+			actor = this.actorService.findByPrincipal();
+			if (actor instanceof User && actor.getId() != auctionAdvertisement.getUser().getId() && auctionAdvertisement.getEndDate().after(new Date()))
+				if (!auctionAdvertisement.isSecret())
+					biddable = true;
+				else {
+					bids = this.bidService.findByAuctionAndUser(actor.getId(), auctionAdvertisement.getId());
+					if (bids.size() == 0)
+						biddable = true;
+				}
+		}
+
+		return biddable;
 	}
 }

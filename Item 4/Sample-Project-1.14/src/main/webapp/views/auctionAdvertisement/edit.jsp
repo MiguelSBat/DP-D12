@@ -74,11 +74,5 @@
 	<acme:cancel url="auctionAdvertisement/myList.do"
 		code="auctionAdvertisement.cancel" />
 
-	<acme:submit name="save" code="auctionAdvertisement.save" />
-
-	<button type="submit" name="delete" class="btn btn-primary">
-		<spring:message code="auctionAdvertisement.delete" />
-	</button>
-
 </form:form>
 

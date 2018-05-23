@@ -159,6 +159,8 @@ public class AuctionAdvertisementController extends AbstractController {
 			bid = this.bidService.createAndSave(auctionAdvertisementId, amount);
 			result.addObject("bided", true);
 		} catch (final Throwable oops) {
+			if (oops.getMessage().contains("error.minimumBid"))
+				result.addObject("minimumBid", true);
 			result.addObject("bidError", true);
 		}
 

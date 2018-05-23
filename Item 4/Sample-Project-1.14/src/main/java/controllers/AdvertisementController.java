@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AdvertisementService;
+import services.AuctionAdvertisementService;
 import services.BidService;
+import domain.Actor;
 import domain.Advertisement;
 import domain.AuctionAdvertisement;
 import domain.Bid;
@@ -24,9 +26,11 @@ public class AdvertisementController extends AbstractController {
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private AdvertisementService	advertisementService;
+	private AdvertisementService		advertisementService;
 	@Autowired
-	private BidService				bidService;
+	private BidService					bidService;
+	@Autowired
+	private AuctionAdvertisementService	auctionAdvertisementService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -68,20 +72,27 @@ public class AdvertisementController extends AbstractController {
 	//	 display
 
 	@RequestMapping(value = "display", method = RequestMethod.GET)
-	public ModelAndView display(@RequestParam final int advertisementId) {
+	public ModelAndView display(@RequestParam final int advertisementId, final boolean minimumBid) {
 		ModelAndView result;
 		Advertisement advertisement;
 		String advertisementType;
 		Collection<Bid> bids;
+		final Collection<Bid> userBids;
+		final Actor actor;
 		final Boolean Verdadero = true;
+		boolean biddable;
 		//		advertisement = this.advertisementService.findOne(advertisementId);
 
+		biddable = false;
 		result = new ModelAndView("advertisement/display");
 		advertisement = this.advertisementService.findOne(advertisementId);
 		if (advertisement instanceof AuctionAdvertisement) {
 			advertisementType = "auction";
 			bids = this.bidService.findOrderedByAuction(advertisement.getId());
 			result.addObject("bids", bids);
+			biddable = this.auctionAdvertisementService.isBiddable(advertisement);
+			if (minimumBid == true)
+				result.addObject("minimumBid", true);
 		} else if (advertisement instanceof ExpressAdvertisement)
 			advertisementType = "express";
 		else
@@ -94,6 +105,7 @@ public class AdvertisementController extends AbstractController {
 
 		result.addObject("advertisement", advertisement);
 		result.addObject("type", advertisementType);
+		result.addObject("biddable", biddable);
 		return result;
 	}
 	// Edition ----------------------------------------------------------------

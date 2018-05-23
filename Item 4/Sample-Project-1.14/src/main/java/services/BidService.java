@@ -96,12 +96,21 @@ public class BidService {
 		Assert.isTrue(this.actorService.isLogged());
 		actor = this.actorService.findByPrincipal();
 		Assert.isTrue(actor instanceof User);
+		Assert.isTrue(auctionAdvertisement.getStartingPrice() < amount, "error.minimumBid");
 
 		bid = this.create();
 		bid.setAmount(amount);
 		bid.setAuctionAdvertisement(auctionAdvertisement);
 		bid.setUser((User) actor);
 		result = this.bidRepository.save(bid);
+
+		return result;
+	}
+
+	public Collection<Bid> findByAuctionAndUser(final int userId, final int auctionId) {
+		final Collection<Bid> result;
+
+		result = this.bidRepository.findByAuctionAndUser(userId, auctionId);
 
 		return result;
 	}

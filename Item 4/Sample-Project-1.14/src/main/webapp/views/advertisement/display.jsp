@@ -89,7 +89,11 @@
 			</jstl:if>
 			
 			<security:authorize access="hasRole('USER')">
-			<jstl:if test="${ true}">
+			<jstl:if test="${biddable}">
+				<jstl:if test="${minimumBid==true}">
+					<spring:message code="bid.minimum"/>
+					</br>
+				</jstl:if>
 				<form action="auctionAdvertisement/bid.do" method="get">
 					<input type="hidden" name="auctionAdvertisementId"
 						value="${advertisement.id}">
