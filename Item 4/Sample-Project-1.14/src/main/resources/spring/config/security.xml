@@ -48,6 +48,8 @@
 		
 		<security:intercept-url pattern="/user/ticket/**" access="hasRole('USER')" /> 
 		<security:intercept-url pattern="/business/ticket/**" access="hasRole('BUSINESS')" /> 
+		<security:intercept-url pattern="/business/**" access="hasRole('BUSINESS')" /> 
+		
 		
 		<security:intercept-url pattern="/user/shippingInfo/**" access="hasRole('USER')" /> 
 		<security:intercept-url pattern="/business/shippingInfo/**" access="hasRole('BUSINESS')" /> 

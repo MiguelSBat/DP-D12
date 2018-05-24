@@ -317,10 +317,10 @@
 		<property name="surname" value="userSurname3" />
 		<property name="emailAddress" value="user3@mail.com" />
 		<property name="phone" value="656222113" />
-		<property name="premium" value="True" />
+		<property name="premium" value="true" />
 		<property name="reputation" value="5" />
 		<property name="suspicious" value="True" />
-			<property name="softBan" value="false"/>
+		<property name="softBan" value="false"/>
 		<property name="hardBan" value="false"/>
 		<property name="photosURL">
 			<list>

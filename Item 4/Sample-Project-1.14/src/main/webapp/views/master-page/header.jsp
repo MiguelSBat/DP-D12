@@ -55,6 +55,7 @@
 						<li><a href="user/item/list.do"><spring:message code="master.page.user.item" /></a></li>
 						<li><a href="user/ticket/myTickets.do"><spring:message code="master.page.user.myTickets" /></a></li>
 						<li><a href="user/ticket/mySales.do"><spring:message code="master.page.user.mySales" /></a></li>
+						<li><a href="user/profile/premium.do"><spring:message code="master.page.user.getPremium" /></a></li>
 					</security:authorize>
 					<security:authorize access="hasRole('MODERATOR')">
 						<li><a href="moderator/business/list.do"><spring:message code="master.page.moderator.business.list" /></a></li>	
@@ -63,7 +64,8 @@
 					</security:authorize>
 					<security:authorize access="hasRole('BUSINESS')">
 						<li><a href="business/ticket/mySales.do"><spring:message code="master.page.user.mySales"/></a></li>	
-						<li><a href="businessInfo/create.do"><spring:message code="master.page.businessInfo"/></a></li>			
+						<li><a href="businessInfo/create.do"><spring:message code="master.page.businessInfo"/></a></li>
+						<li><a href="business/profile/premium.do"><spring:message code="master.page.user.getPremium" /></a></li>	
 					</security:authorize>
 					<security:authorize access="hasRole('ADMIN')">
 						<li><a href="administrator/business/list.do"><spring:message code="master.page.moderator.business.list" /></a></li>	
