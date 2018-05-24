@@ -188,6 +188,7 @@ public class ActorService {
 			throw new ServiceException("Invalid actor type parameter");
 
 		userAccount.addAuthority(authority);
+		userAccount.setAccountNonLocked(true);
 		result.setUserAccount(userAccount);
 
 		result.setEmailAddress(actorForm.getEmail());
