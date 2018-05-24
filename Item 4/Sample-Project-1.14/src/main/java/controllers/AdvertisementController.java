@@ -2,6 +2,7 @@
 package controllers;
 
 import java.util.Collection;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.AdvertisementService;
 import services.AuctionAdvertisementService;
 import services.BidService;
@@ -17,7 +19,9 @@ import domain.Actor;
 import domain.Advertisement;
 import domain.AuctionAdvertisement;
 import domain.Bid;
+import domain.Business;
 import domain.ExpressAdvertisement;
+import domain.User;
 
 @Controller
 @RequestMapping("/advertisement")
@@ -31,6 +35,9 @@ public class AdvertisementController extends AbstractController {
 	private BidService					bidService;
 	@Autowired
 	private AuctionAdvertisementService	auctionAdvertisementService;
+
+	@Autowired
+	private ActorService				actorService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -74,18 +81,42 @@ public class AdvertisementController extends AbstractController {
 	@RequestMapping(value = "display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam final int advertisementId, final boolean minimumBid) {
 		ModelAndView result;
-		Advertisement advertisement;
+		Advertisement advertisement, premium;
 		String advertisementType;
 		Collection<Bid> bids;
-		final Collection<Bid> userBids;
+		Collection<Advertisement> premiums, premiumUsers;
+		Boolean isPremiumUser = true;
+		Boolean isPremiumBusiness = true;
+		User user;
+		Business business;
 		final Actor actor;
 		final Boolean Verdadero = true;
 		boolean biddable;
+		final Random rnd;
 		//		advertisement = this.advertisementService.findOne(advertisementId);
 
 		biddable = false;
 		result = new ModelAndView("advertisement/display");
 		advertisement = this.advertisementService.findOne(advertisementId);
+		premiums = this.advertisementService.findByPremiumBusiness();
+		premiumUsers = this.advertisementService.findByPremiumUser();
+		premiums.addAll(premiumUsers);
+
+		if (this.actorService.isLogged()) {
+			actor = this.actorService.findByPrincipal();
+			if (actor instanceof User) {
+				user = (User) actor;
+				isPremiumUser = user.isPremium();
+				if (!isPremiumUser)
+					result.addObject("isPremium", isPremiumUser);
+			}
+			if (actor instanceof Business) {
+				business = (Business) actor;
+				isPremiumBusiness = business.isPremium();
+				if (!isPremiumBusiness)
+					result.addObject("isPremium", isPremiumBusiness);
+			}
+		}
 		if (advertisement instanceof AuctionAdvertisement) {
 			advertisementType = "auction";
 			bids = this.bidService.findOrderedByAuction(advertisement.getId());
@@ -102,6 +133,12 @@ public class AdvertisementController extends AbstractController {
 			result.addObject("user", Verdadero);
 		else
 			result.addObject("business", Verdadero);
+
+		if (premiums.size() > 0) {
+			rnd = new Random();
+			premium = (Advertisement) premiums.toArray()[rnd.nextInt(premiums.size())];
+			result.addObject("premium", premium);
+		}
 
 		result.addObject("advertisement", advertisement);
 		result.addObject("type", advertisementType);

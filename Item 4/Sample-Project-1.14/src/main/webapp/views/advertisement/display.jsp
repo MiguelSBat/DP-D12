@@ -21,12 +21,47 @@
 
 
 <fmt:setLocale value="${locale}" />
+	<security:authorize access="hasAnyRole('USER','BUSINESS') || isAnonymous()">
+	<a class="premium" href="advertisement/display.do?advertisementId=${premium.getId()}">
+	<div class="solid">
+	<h3 ><spring:message code="advertisement.premium"></spring:message></h3>
+	<b><spring:message code="advertisement.item"></spring:message>:</b>
+			<jstl:out value="${premium.getItem().getName()}" />
+			
+		<jstl:if test="${premium.getClass().name == 'domain.ShopAdvertisement'}">
+			<li><b><spring:message code="advertisement.stock"></spring:message>:</b>
+				<jstl:out value="${premium.stock}" /></li>
+			<li><b><spring:message code="advertisement.price"></spring:message>:</b>
+				<jstl:out value="${premium.price}" /></li>
+		</jstl:if>
+		
+		<jstl:if test="${premium.getClass().name == 'domain.AuctionAdvertisement'}">
+			<li><b><spring:message code="advertisement.instantBuyPrice"></spring:message>:</b>
+				<jstl:out value="${premium.getInstantBuyPrice()}" /></li>
+			<li><b><spring:message code="advertisement.startingPrice"></spring:message>:</b>
+				<jstl:out value="${premium.getStartingPrice()}" /></li>
+		</jstl:if>
+		
+		<jstl:if test="${premium.getClass().name == 'domain.ExpressAdvertisement'}">
+			<li><b><spring:message code="advertisement.price"></spring:message>:</b>
+				<jstl:out value="${premium.getPrice()}" /></li>
+		</jstl:if>
+		
+	<b><spring:message code="advertisement.endDate"></spring:message>:</b>
+	<fmt:formatDate value="${premium.getEndDate()}" pattern="${dateFormat}" />
+	
+	<img class="premiumphoto" src="${premium.item.photo}"/>
 
-
+	<p class="message">	<spring:message code="advertisement.click"/>
+	</p>
+	</div>
+	</a>
+	</security:authorize>
+	
 <div id="advertisement">
 
 	<br />
-
+	
 	<ul style="list-style-type: disc">
 		<h1>
 			<spring:message code="advertisement.type"></spring:message>
@@ -68,8 +103,9 @@
 			<li><b><spring:message code="advertisement.instantBuyPrice"></spring:message>:</b>
 				<jstl:out value="${advertisement.getInstantBuyPrice()}" /></li>
 
-
-
+	
+	<img src="${advertisement.item.photo}" height="200" width="300" />
+	
 			<br />
 			<br />
 			<!-- Listing grid BIDs -->

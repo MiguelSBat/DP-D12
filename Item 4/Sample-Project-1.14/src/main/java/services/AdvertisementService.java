@@ -106,4 +106,28 @@ public class AdvertisementService {
 		return result;
 	}
 
+	public Collection<Advertisement> findByPremium() {
+		Collection<Advertisement> result;
+
+		result = this.advertisementRepository.findByPremium();
+
+		return result;
+	}
+
+	public Collection<Advertisement> findByPremiumBusiness() {
+		Collection<Advertisement> result;
+
+		result = this.advertisementRepository.findByPremiumBusiness();
+
+		return result;
+	}
+
+	public Collection<Advertisement> findByPremiumUser() {
+		Collection<Advertisement> result;
+
+		result = this.advertisementRepository.findByPremiumUser();
+
+		return result;
+	}
+
 }

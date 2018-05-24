@@ -7,6 +7,24 @@
  * http://www.tdg-seville.info/License.html
  * 
  */
+ 
+ a:VISITED.premium{
+ 	style:none;
+ 	color: black; 
+ }
+
+.solid {
+	border: 2px solid black;
+	border-radius: 15px;
+	padding-left: 0.5em;	
+	float: right;
+	background-color: #dfdfdf;
+	width: 15%;
+}
+
+img.premiumphoto{
+	max-width: 95%;
+}
 
 .error {
 	color: red;
