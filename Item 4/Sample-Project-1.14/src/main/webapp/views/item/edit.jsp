@@ -13,7 +13,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="user/item/edit.do" modelAttribute="item">
+<security:authorize access="hasRole('USER')"><form:form action="user/item/edit.do" modelAttribute="item">
 	
 	<form:hidden path="id" />
 	<form:hidden path="version" /> 
@@ -29,4 +29,21 @@
 	<acme:cancel url="/user/item/list.do" code="item.cancel"/>
 	
 </form:form>
+</security:authorize>
+<security:authorize access="hasRole('BUSINESS')"><form:form action="business/item/edit.do" modelAttribute="item">
 	
+	<form:hidden path="id" />
+	<form:hidden path="version" /> 
+  
+	<acme:textbox code="item.name" path="name"/>
+	
+	<acme:textarea code="item.description" path="description"/>
+	
+	<acme:textbox code="item.photo" path="photo"/>
+	
+	<acme:submit name="save" code="item.save"/>
+	
+	<acme:cancel url="/business/item/list.do" code="item.cancel"/>
+	
+</form:form>
+</security:authorize>	

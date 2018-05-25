@@ -45,8 +45,16 @@
 
 </display:table>
 
+<security:authorize access="hasRole('USER')">
 <a href="user/item/create.do"> 
 		<spring:message code="item.create" />
 </a>
+</security:authorize>
+
+<security:authorize access="hasRole('BUSINESS')">
+<a href="business/item/create.do"> 
+		<spring:message code="item.create" />
+</a>
+</security:authorize>
 
 

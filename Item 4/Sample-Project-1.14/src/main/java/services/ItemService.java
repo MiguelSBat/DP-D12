@@ -62,16 +62,15 @@ public class ItemService {
 		Actor actor;
 		User user;
 
-		user = (User) this.actorService.findByPrincipal();
-		if (this.configService.isTaboo(item.getName()) && this.configService.isTaboo(item.getDescription()) && this.configService.isTaboo(item.getPhoto()))
-			user.setSuspicious(true);
-
 		Assert.isTrue(this.actorService.isLogged());
 		actor = this.actorService.findByPrincipal();
 		Assert.isTrue(actor instanceof User || actor instanceof Business);
 		if (actor instanceof User) {
 			item.setUser((User) actor);
 			result = this.itemRepository.save(item);
+			user = (User) this.actorService.findByPrincipal();
+			if (this.configService.isTaboo(item.getName()) && this.configService.isTaboo(item.getDescription()) && this.configService.isTaboo(item.getPhoto()))
+				user.setSuspicious(true);
 		} else {
 			item.setBusiness((Business) actor);
 			result = this.itemRepository.save(item);
@@ -84,6 +83,14 @@ public class ItemService {
 		Collection<Item> result;
 
 		result = this.itemRepository.getItemsByUser(userId);
+
+		return result;
+	}
+
+	public Collection<Item> findByBusiness(final int businessId) {
+		Collection<Item> result;
+
+		result = this.itemRepository.getItemsByBusiness(businessId);
 
 		return result;
 	}
