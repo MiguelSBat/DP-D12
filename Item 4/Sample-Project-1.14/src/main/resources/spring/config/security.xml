@@ -37,7 +37,8 @@
 		<security:intercept-url pattern="/views/misc/index.jsp" access="permitAll" /> 
 		<security:intercept-url pattern="/advertisement/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/advertisement/edit.do" access="permitAll" /> 
-		<security:intercept-url pattern="/advertisement/display.do" access="permitAll" /> 
+		<security:intercept-url pattern="/advertisement/display.do" access="permitAll" />
+		<security:intercept-url pattern="/socialIdentity/**" access="permitAll" />  
 		
 		<security:intercept-url pattern="/auctionAdvertisement/list.do" access="permitAll" />
 		<security:intercept-url pattern="/auctionAdvertisement/bid.do" access="hasRole('USER')" />
@@ -47,6 +48,7 @@
 		<security:intercept-url pattern="/auctionAdvertisement/edit.do" access="hasAnyRole('USER','BUSINESS')" />
 		
 		<security:intercept-url pattern="/user/ticket/**" access="hasRole('USER')" /> 
+		<security:intercept-url pattern="/user/socialIdentity/**" access="hasRole('USER')" /> 
 		<security:intercept-url pattern="/business/ticket/**" access="hasRole('BUSINESS')" /> 
 		<security:intercept-url pattern="/business/**" access="hasRole('BUSINESS')" /> 
 		

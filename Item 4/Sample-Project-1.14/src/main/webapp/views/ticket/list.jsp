@@ -30,14 +30,14 @@
 	<jstl:if test="${listType=='myTickets' }">
 	<spring:message code="ticket.seller" var="rowHeader" />
 	<display:column title="${rowHeader}">
-	<jstl:if test="${row.seller!=null }"><jstl:out value="${row.seller.name}"></jstl:out></jstl:if>
-	<jstl:if test="${row.business!=null }"><jstl:out value="${row.business.name}"></jstl:out></jstl:if>
+	<jstl:if test="${row.seller!=null }"><a href="actor/display.do?actorId=${row.seller.id }"><jstl:out value="${row.seller.name}" /></a></jstl:if>
+	<jstl:if test="${row.business!=null }"><a href="actor/display.do?actorId=${row.business.id }"><jstl:out value="${row.business.name}" /></a></jstl:if>
 	</display:column>
 	</jstl:if>
 	
 	<jstl:if test="${listType=='mySales' }">
 	<spring:message code="ticket.buyer" var="rowHeader" />
-	<display:column title="${rowHeader}"><jstl:out value="${row.user.name}"></jstl:out>
+	<display:column title="${rowHeader}"><a href="actor/display.do?actorId=${row.user.id }"><jstl:out value="${row.user.name}" /></a>
 	</display:column>
 	</jstl:if>
 	

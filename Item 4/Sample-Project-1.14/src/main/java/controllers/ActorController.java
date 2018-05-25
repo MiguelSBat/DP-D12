@@ -14,10 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import services.SocialIdentityService;
 import services.ValorationService;
 import domain.Actor;
 import domain.Business;
 import domain.BusinessInfo;
+import domain.SocialIdentity;
+import domain.User;
 import forms.ActorForm;
 
 @Controller
@@ -25,9 +28,11 @@ import forms.ActorForm;
 public class ActorController {
 
 	@Autowired
-	private ActorService		actorService;
+	private ActorService			actorService;
 	@Autowired
-	private ValorationService	valorationService;
+	private ValorationService		valorationService;
+	@Autowired
+	private SocialIdentityService	socialIdentityService;
 
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -43,7 +48,8 @@ public class ActorController {
 	}
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam final int actorId) throws Exception {
-		final ModelAndView result;
+		ModelAndView result;
+		Collection<SocialIdentity> socialIdentities;
 		result = new ModelAndView("actor/display");
 		//valoraciones 
 		Double sum = 0.0;
@@ -54,17 +60,19 @@ public class ActorController {
 		//Fin valoraciones
 
 		final Actor actor = this.actorService.findOne(actorId);
-		
+
 		//mostrar businessInfos
-		if(	actor instanceof Business){	
-		Business b=(Business)actor;
-		Collection<BusinessInfo>businessInfos =b.getBusinessInfos();
-		result.addObject("info",businessInfos);
-		}		
-				
+		if (actor instanceof Business) {
+			final Business b = (Business) actor;
+			final Collection<BusinessInfo> businessInfos = b.getBusinessInfos();
+			result.addObject("info", businessInfos);
+		} else if (actor instanceof User) {
+			socialIdentities = this.socialIdentityService.findByUserId(actorId);
+			result.addObject("socialIdentities", socialIdentities);
+		}
+
 		result.addObject("requestURI", "actor/display.do?actorId=" + actorId);
 		result.addObject("actor", actor);
-		
 
 		return result;
 	}

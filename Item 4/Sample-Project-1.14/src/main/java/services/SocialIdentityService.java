@@ -68,4 +68,12 @@ public class SocialIdentityService {
 		this.socialIdentityRepository.flush();
 	}
 
+	public Collection<SocialIdentity> findByUserId(final int id) {
+		Collection<SocialIdentity> result;
+
+		result = this.socialIdentityRepository.findByUserId(id);
+
+		return result;
+	}
+
 }

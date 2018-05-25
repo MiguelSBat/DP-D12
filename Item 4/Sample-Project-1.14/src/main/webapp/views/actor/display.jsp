@@ -22,7 +22,8 @@
 <b><spring:message code="actor.sum" /></b>
 <jstl:out value="${sum}" />
 <br />
-<display:table pagesize="5" class="displaytag" name="info" requestURI="${requestURI}" id="row">
+<display:table pagesize="5" class="displaytag" name="info"
+	requestURI="${requestURI}" id="row">
 
 	<spring:message code="businessInfo.address" var="address" />
 	<display:column title="${address}" sortable="false">
@@ -33,7 +34,7 @@
 	<display:column title="${city}" sortable="true">
 		<jstl:out value="${row.city}" />
 	</display:column>
-	
+
 	<spring:message code="businessInfo.country" var="country" />
 	<display:column title="${country}" sortable="false">
 		<jstl:out value="${row.country}" />
@@ -44,7 +45,22 @@
 		<jstl:out value="${row.additionalInfo}" />
 	</display:column>
 
-	<
-
+</display:table>
+<br>
+<b><spring:message code="actor.socialIdentities" />:</b>
+<display:table pagesize="5" class="displaytag" name="socialIdentities"
+	requestURI="${requestURI}" id="row">
+	<spring:message code="actor.socialIdentity.nick" var="nick" />
+	<display:column title="${nick}" sortable="false">
+		<jstl:out value="${row.nick}" />
+	</display:column>
+	<spring:message code="actor.socialIdentity.accountURL" var="accountURL" />
+	<display:column title="${accountURL}" sortable="false">
+		<a href="<jstl:url value="${row.accountURL }" />"><jstl:out value="${row.accountURL}" /></a>
+	</display:column>
+	<spring:message code="actor.socialIdentity.website" var="website" />
+	<display:column title="${website}" sortable="false">
+	<a href="<jstl:url value="${row.website }" />"><jstl:out value="${row.website}" /></a>
+	</display:column>
 </display:table>
 

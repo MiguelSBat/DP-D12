@@ -38,6 +38,7 @@
 		<value>/views/auctionAdvertisement/messages</value>
 		<value>/views/shopAdvertisement/messages</value>
 		<value>/views/businessInfo/messages</value>
+		<value>/views/socialIdentity/messages</value>
 	</util:list>
 
 </beans>
