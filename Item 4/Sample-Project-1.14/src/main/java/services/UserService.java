@@ -130,6 +130,12 @@ public class UserService {
 
 		return result;
 	}
-	
-	
+	public User findBySocialIdentityId(final int id) {
+		User result;
+
+		result = this.userRepository.findBySocialIdentity(id);
+
+		return result;
+	}
+
 }

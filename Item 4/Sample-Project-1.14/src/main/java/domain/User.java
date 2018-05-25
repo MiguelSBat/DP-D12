@@ -115,5 +115,11 @@ public class User extends Actor {
 	public void setReviews(final Collection<Review> reviews) {
 		this.reviews = reviews;
 	}
+	public void addSocialIdentity(final SocialIdentity socialIdentity) {
+		this.socialIdentities.add(socialIdentity);
+	}
+	public void removeSocialIdentity(final SocialIdentity socialIdentity) {
+		this.socialIdentities.remove(socialIdentity);
+	}
 
 }

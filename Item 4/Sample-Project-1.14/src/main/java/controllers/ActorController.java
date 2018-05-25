@@ -50,6 +50,7 @@ public class ActorController {
 	public ModelAndView display(@RequestParam final int actorId) throws Exception {
 		ModelAndView result;
 		Collection<SocialIdentity> socialIdentities;
+		int principalId;
 		result = new ModelAndView("actor/display");
 		//valoraciones 
 		Double sum = 0.0;
@@ -58,6 +59,9 @@ public class ActorController {
 			result.addObject("sum", sum);
 		}
 		//Fin valoraciones
+		principalId = 0;
+		if (this.actorService.isLogged())
+			principalId = this.actorService.findByPrincipal().getId();
 
 		final Actor actor = this.actorService.findOne(actorId);
 
@@ -73,6 +77,7 @@ public class ActorController {
 
 		result.addObject("requestURI", "actor/display.do?actorId=" + actorId);
 		result.addObject("actor", actor);
+		result.addObject("principalId", principalId);
 
 		return result;
 	}

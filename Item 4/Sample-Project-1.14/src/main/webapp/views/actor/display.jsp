@@ -60,7 +60,18 @@
 	</display:column>
 	<spring:message code="actor.socialIdentity.website" var="website" />
 	<display:column title="${website}" sortable="false">
-	<a href="<jstl:url value="${row.website }" />"><jstl:out value="${row.website}" /></a>
+	<jstl:out value="${row.website}" />
 	</display:column>
+	<jstl:if test="${principalId==actor.id }">
+	<display:column>
+	<a href="user/socialIdentity/edit.do?socialIdentityId=${row.id }"><spring:message code="socialIdentity.edit" /></a>
+	</display:column>
+	<display:column>
+	<a href="user/socialIdentity/delete.do?socialIdentityId=${row.id }"><spring:message code="socialIdentity.remove" /></a>
+	</display:column>
+	</jstl:if>
 </display:table>
+<jstl:if test="${principalId==actor.id }">
+<a href="user/socialIdentity/create.do"><spring:message code="actor.socialIdentity.add" /></a>
+</jstl:if>
 

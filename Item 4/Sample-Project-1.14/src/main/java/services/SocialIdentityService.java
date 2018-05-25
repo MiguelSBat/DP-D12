@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.SocialIdentityRepository;
+import domain.Actor;
 import domain.SocialIdentity;
+import domain.User;
 
 @Service
 @Transactional
@@ -19,6 +21,12 @@ public class SocialIdentityService {
 	//Managed Repository ----
 	@Autowired
 	private SocialIdentityRepository	socialIdentityRepository;
+
+	@Autowired
+	private ActorService				actorService;
+
+	@Autowired
+	private UserService					userService;
 
 
 	//Constructors
@@ -43,15 +51,32 @@ public class SocialIdentityService {
 	}
 
 	public void delete(final SocialIdentity socialIdentity) {
+		Actor principal;
+		User user;
+		user = this.userService.findBySocialIdentityId(socialIdentity.getId());
+		principal = this.actorService.findByPrincipal();
+		Assert.isTrue(user.getId() == principal.getId());
 
+		user.removeSocialIdentity(socialIdentity);
+		this.userService.save(user);
 		this.socialIdentityRepository.delete(socialIdentity);
 
 	}
 
 	public SocialIdentity save(final SocialIdentity socialIdentity) {
 		SocialIdentity result;
+		Actor principal;
+		User user;
 
+		user = this.userService.findBySocialIdentityId(socialIdentity.getId());
+		principal = this.actorService.findByPrincipal();
+		Assert.isTrue(user.getId() == principal.getId());
 		result = this.socialIdentityRepository.save(socialIdentity);
+		if (socialIdentity.getId() == 0) {
+			user.addSocialIdentity(result);
+			this.userService.save(user);
+		}
+
 		return result;
 	}
 
