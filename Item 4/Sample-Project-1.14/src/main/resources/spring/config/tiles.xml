@@ -39,6 +39,7 @@
 		<value>/views/businessInfo/tiles.xml</value>
 		<value>/views/shopAdvertisement/tiles.xml</value>
 		<value>/views/socialIdentity/tiles.xml</value>
+		<value>/views/chat/tiles.xml</value>
 
 	</util:list>
 

@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -51,6 +52,7 @@ public class ChatService {
 	public Chat save(final Chat chat) {
 		Chat result;
 
+		chat.setDate(new Date());
 		result = this.chatRepository.save(chat);
 		return result;
 	}
@@ -66,6 +68,14 @@ public class ChatService {
 
 	public void flush() {
 		this.chatRepository.flush();
+	}
+
+	public Collection<Chat> findByUsersId(final int user1Id, final int user2Id) {
+		Collection<Chat> result;
+
+		result = this.chatRepository.findByUsersId(user1Id, user2Id);
+
+		return result;
 	}
 
 }
