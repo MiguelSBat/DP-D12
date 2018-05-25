@@ -66,4 +66,19 @@ public class ShopAdvertisementService {
 		this.shopAdvertisementRepository.flush();
 	}
 
+	public Collection<ShopAdvertisement> findNotPast() {
+		Collection<ShopAdvertisement> result;
+
+		result = this.shopAdvertisementRepository.findNotPast();
+
+		return result;
+	}
+	public Collection<ShopAdvertisement> findShopByBussiness(final int businessId) {
+		Collection<ShopAdvertisement> result;
+
+		result = this.shopAdvertisementRepository.findShopbyBusiness(businessId);
+
+		return result;
+	}
+
 }

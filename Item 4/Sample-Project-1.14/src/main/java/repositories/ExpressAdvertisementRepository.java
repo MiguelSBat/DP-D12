@@ -12,7 +12,7 @@ import domain.ExpressAdvertisement;
 @Repository
 public interface ExpressAdvertisementRepository extends JpaRepository<ExpressAdvertisement, Integer> {
 
-	@Query("select a from ExpressAdvertisement a where a.endDate>CURRENT_DATE")
+	@Query("select a from ExpressAdvertisement a where a.endDate>CURRENT_timestamp")
 	Collection<ExpressAdvertisement> findNotPast();
 
 	@Query("select a from ExpressAdvertisement a where a.user.id=?1 ")

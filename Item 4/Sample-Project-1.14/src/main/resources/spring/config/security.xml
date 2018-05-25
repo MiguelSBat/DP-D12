@@ -74,6 +74,12 @@
 		<security:intercept-url pattern="/expressAdvertisement/create.do" access="hasAnyRole('USER','BUSINESS')" />
 		<security:intercept-url pattern="/expressAdvertisement/edit.do" access="hasAnyRole('USER','BUSINESS')" />
 		<security:intercept-url pattern="/expressAdvertisement/delete.do" access="hasAnyRole('USER','BUSINESS')" />
+		
+		<security:intercept-url pattern="/shopAdvertisement/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/shopAdvertisement/myList.do" access="hasAnyRole('BUSINESS','ADMIN')" /> 
+		<security:intercept-url pattern="/shopAdvertisement/create.do" access="hasAnyRole('BUSINESS')" />
+		<security:intercept-url pattern="/shopAdvertisement/edit.do" access="hasAnyRole('BUSINESS')" />
+		<security:intercept-url pattern="/shopAdvertisement/delete.do" access="hasAnyRole('BUSINESS')" />
 
 		<security:intercept-url pattern="/customer/action-1.do" access="hasRole('CUSTOMER')" /> 
 		<security:intercept-url pattern="/customer/action-2.do" access="hasRole('CUSTOMER')" /> 

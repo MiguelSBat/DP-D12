@@ -24,6 +24,7 @@
 					<li class="arrow"></li>
 		<li><a href="expressAdvertisement/list.do"><spring:message code="master.page.express" /></a></li>
 		<li><a href="auctionAdvertisement/list.do"><spring:message code="master.page.auctions" /></a></li>
+		<li><a href="shopAdvertisement/list.do"><spring:message code="master.page.shops" /></a></li>
 			</ul>
 		</li>
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
@@ -66,6 +67,7 @@
 						<li><a href="business/ticket/mySales.do"><spring:message code="master.page.user.mySales"/></a></li>	
 						<li><a href="businessInfo/create.do"><spring:message code="master.page.businessInfo"/></a></li>
 						<li><a href="business/profile/premium.do"><spring:message code="master.page.user.getPremium" /></a></li>	
+						<li><a href="shopAdvertisement/myList.do"><spring:message code="master.page.myShop" /></a></li>
 					</security:authorize>
 					<security:authorize access="hasRole('ADMIN')">
 						<li><a href="administrator/business/list.do"><spring:message code="master.page.moderator.business.list" /></a></li>	
