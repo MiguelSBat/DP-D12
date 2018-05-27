@@ -31,4 +31,7 @@ public interface SaleLineRepository extends JpaRepository<SaleLine, Integer> {
 	//select s from SaleLine s where s.ticket.id=782
 	@Query("select s from SaleLine s where s.ticket.id=?1")
 	Collection<SaleLine> findByTicketId(int id);
+
+	@Query("select s from SaleLine s where s.shoppingCart.id=?1")
+	Collection<SaleLine> findByShoppingCartId(int id);
 }

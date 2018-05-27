@@ -35,3 +35,7 @@ img.premiumphoto{
 	color: red;
 	font-weight: bolder;
 }
+
+.hidden {
+	display: none;
+}

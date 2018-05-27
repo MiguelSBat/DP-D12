@@ -25,6 +25,9 @@ public class UserService {
 	@Autowired
 	private UserRepository	userRepository;
 
+	@Autowired
+	private ActorService	actorService;
+
 
 	//Constructors
 	public UserService() {
@@ -130,6 +133,16 @@ public class UserService {
 
 		return result;
 	}
+
+	public User findByPrincipal() {
+		User result;
+
+		result = this.findOne(this.actorService.findByPrincipal().getId());
+		Assert.notNull(result);
+
+		return result;
+	}
+
 	public User findBySocialIdentityId(final int id) {
 		User result;
 

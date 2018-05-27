@@ -10,7 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.ShoppingCartRepository;
+import domain.Advertisement;
+import domain.SaleLine;
 import domain.ShoppingCart;
+import domain.User;
 
 @Service
 @Transactional
@@ -19,6 +22,12 @@ public class ShoppingCartService {
 	//Managed Repository ----
 	@Autowired
 	private ShoppingCartRepository	shoppingCartRepository;
+
+	@Autowired
+	private SaleLineService			saleLineService;
+
+	@Autowired
+	private UserService				userService;
 
 
 	//Constructors
@@ -68,4 +77,37 @@ public class ShoppingCartService {
 		this.shoppingCartRepository.flush();
 	}
 
+	public ShoppingCart findByUserOrCreate(final User user) {
+		ShoppingCart result;
+
+		result = this.shoppingCartRepository.findByUser(user.getId());
+		if (result == null)
+			result = this.create(user);
+
+		return result;
+	}
+
+	private ShoppingCart create(final User user) {
+		final ShoppingCart cart = new ShoppingCart();
+
+		cart.setUser(user);
+		final ShoppingCart result = this.save(cart);
+
+		return result;
+	}
+
+	public Integer getAmountInCart(final ShoppingCart cart, final Advertisement ad) {
+		Integer result = 0;
+
+		for (final SaleLine line : this.saleLineService.findByShoppingCart(cart))
+			if (line.getAdvertisement().equals(ad))
+				result += line.getAmount();
+
+		return result;
+	}
+
+	public ShoppingCart findByPrincipalOrCreate() {
+		final User user = this.userService.findByPrincipal();
+		return this.findByUserOrCreate(user);
+	}
 }

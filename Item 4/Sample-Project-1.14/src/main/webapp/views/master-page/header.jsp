@@ -86,6 +86,9 @@
 				</ul>
 			</li>
 		</security:authorize>
+		<security:authorize access="hasRole('USER')">
+			<li><a class="fNiv" href="user/shoppingCart/view.do"><spring:message code="master.page.shoppingCart" /></a></li>
+		</security:authorize>
 	</ul>
 </div>
 

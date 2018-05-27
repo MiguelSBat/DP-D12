@@ -10,15 +10,34 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.SaleLineRepository;
+import domain.Advertisement;
+import domain.AuctionAdvertisement;
+import domain.ExpressAdvertisement;
 import domain.SaleLine;
+import domain.ShopAdvertisement;
+import domain.ShoppingCart;
 
 @Service
 @Transactional
 public class SaleLineService {
 
+	static final String				ADDED			= "added";
+	static final String				OUT_OF_STOCK	= "outOfStock";
+	static final String				INVALID_AMOUNT	= "invalidAmount";
+	static final String				ERROR			= "error";
+
 	//Managed Repository ----
 	@Autowired
-	private SaleLineRepository	saleLineRepository;
+	private SaleLineRepository		saleLineRepository;
+
+	@Autowired
+	private AdvertisementService	advertisementService;
+
+	@Autowired
+	private ShoppingCartService		shoppingCartService;
+
+	@Autowired
+	private UserService				userService;
 
 
 	//Constructors
@@ -34,6 +53,35 @@ public class SaleLineService {
 		return result;
 	}
 
+	public String create(final int adId, final Integer amount) {
+		SaleLine line;
+
+		final Advertisement ad = this.advertisementService.findOne(adId);
+		final ShoppingCart cart = this.shoppingCartService.findByUserOrCreate(this.userService.findByPrincipal());
+		if (ad instanceof ExpressAdvertisement) {
+			if (amount != 1)
+				return SaleLineService.INVALID_AMOUNT;
+			if (this.shoppingCartService.getAmountInCart(cart, ad) > 0)
+				return SaleLineService.OUT_OF_STOCK;
+		}
+		if (ad instanceof ShopAdvertisement) {
+			if (amount < 1)
+				return SaleLineService.INVALID_AMOUNT;
+			if ((amount + this.shoppingCartService.getAmountInCart(cart, ad)) > ((ShopAdvertisement) ad).getStock())
+				return SaleLineService.OUT_OF_STOCK;
+		}
+		if (ad instanceof AuctionAdvertisement)
+			return SaleLineService.ERROR;
+
+		line = new SaleLine();
+		line.setAdvertisement(ad);
+		line.setAmount(amount);
+		line.setShoppingCart(cart);
+
+		line = this.save(line);
+
+		return SaleLineService.ADDED;
+	}
 	public Collection<SaleLine> findAll() {
 		Collection<SaleLine> result;
 
@@ -108,6 +156,30 @@ public class SaleLineService {
 		Collection<SaleLine> result;
 
 		result = this.saleLineRepository.findByTicketId(id);
+
+		return result;
+	}
+
+	public Collection<SaleLine> findByShoppingCart(final ShoppingCart shoppingCart) {
+		return this.findByShoppingCartId(shoppingCart.getId());
+	}
+
+	private Collection<SaleLine> findByShoppingCartId(final int id) {
+		return this.saleLineRepository.findByShoppingCartId(id);
+	}
+
+	public Collection<SaleLine> findByPrincipal() {
+		return this.findByShoppingCart(this.shoppingCartService.findByPrincipalOrCreate());
+	}
+
+	public Double getTotalAmount(final Collection<SaleLine> saleLines) {
+		Double result = 0.0;
+
+		for (final SaleLine line : saleLines)
+			if (line.getAdvertisement() instanceof ExpressAdvertisement)
+				result += ((ExpressAdvertisement) line.getAdvertisement()).getPrice() * line.getAmount();
+			else if (line.getAdvertisement() instanceof ShopAdvertisement)
+				result += ((ShopAdvertisement) line.getAdvertisement()).getPrice() * line.getAmount();
 
 		return result;
 	}

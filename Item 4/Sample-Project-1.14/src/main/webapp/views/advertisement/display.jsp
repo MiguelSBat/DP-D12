@@ -10,8 +10,53 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<script>
+	function addToCartAction(adId){
+		var amount = $("#cartAmount").val();
+		
+		$.ajax({
+		    type:'GET',
+		    url: "user/advertisement/addToCart.do?adId="+adId+"&amount="+amount,
+		    dataType: 'text',
+		    success:function(data, status){
 
-<!-- soy el display de un advertisement si, no funciono obviamente modificame como veas  -->
+		        switch(data){
+		        	case "added":
+		        		$(".cartMsg").addClass("hidden");
+		        		$("#added").removeClass("hidden");
+		        		break;
+		        	case "outOfStock":
+		        		$(".cartMsg").addClass("hidden");
+		        		$("#outOfStock").removeClass("hidden");
+		        		break;
+		        	case "invalidAmount":
+		        		$(".cartMsg").addClass("hidden");
+		        		$("#amount").removeClass("hidden");
+		        		break;
+		        	case "error":
+		        		$(".cartMsg").addClass("hidden");
+		        		$(".#cartError").removeClass("hidden");
+		        		break;
+		        	default:
+		        		$(".cartMsg").addClass("hidden");
+		        		break;
+		        		
+		        }
+
+		        },
+		    error:function(xhr, status, errorThrown){
+
+		        console.log(xhr);
+		        console.log(status);
+		        console.log(errorThrown);
+		    }
+
+		});
+	}
+</script>
+
+
+<!-- soy el display de un advertisement si, no funciono obviamente modificame como veas - ES TO FEO, DEJO MI BOTON Y ME VOY bye -->
 
 
 <!-- Guardamos en una variable el formato de la fecha  -->
@@ -128,7 +173,7 @@
 			<jstl:if test="${biddable}">
 				<jstl:if test="${minimumBid==true}">
 					<spring:message code="bid.minimum"/>
-					</br>
+					<br>
 				</jstl:if>
 				<form action="auctionAdvertisement/bid.do" method="get">
 					<input type="hidden" name="auctionAdvertisementId"
@@ -141,6 +186,29 @@
 			</security:authorize>
 		</jstl:if>
 	</ul>
+	
+	<input type="button" name="addToCart"
+		value="<spring:message code="advertisement.addToCart" />"
+		onclick="addToCartAction('${advertisement.id}')" />
+	
+	<jstl:if test="${type.equals('shop')}">
+		<input type="number" step="1" min="0" max="${advertisement.stock}" value="1" name="cartAmount" id="cartAmount" />
+	</jstl:if>
+	<jstl:if test="${type.equals('express')}">
+		<input style="display: none;" type="number" value="1" name="cartAmount" id="cartAmount" />
+	</jstl:if>
+	
+	<!-- Cart confirmation messages -->
+	
+	<strong id="added" class="hidden cartMsg"><spring:message code="advertisement.addToCart.added" /><a href="#"><spring:message code="advertisement.viewCart" /></a></strong>
+	<strong id="outOfStock" class="hidden cartMsg"><spring:message code="advertisement.addToCart.outOfStock" /></strong>
+	<strong id="amount" class="hidden cartMsg"><spring:message code="advertisement.addToCart.amount" /></strong>
+	<strong id="cartError" class="hidden cartMsg"><spring:message code="advertisement.addToCart.error" /></strong>
+	
+	
+	<br>
+	<br>
+	
 	<input type="button" name="cancel"
 		value="<spring:message code="advertisement.back" />"
 		onclick="javascript: relativeRedir('advertisement/list.do')" />
