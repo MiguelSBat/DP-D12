@@ -2,13 +2,17 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import repositories.ShopAdvertisementRepository;
+import domain.Actor;
+import domain.Business;
 import domain.ShopAdvertisement;
 
 @Service
@@ -18,6 +22,8 @@ public class ShopAdvertisementService {
 	//Managed Repository ----
 	@Autowired
 	private ShopAdvertisementRepository	shopAdvertisementRepository;
+	@Autowired
+	private ActorService				actorService;
 
 
 	//Constructors
@@ -41,10 +47,17 @@ public class ShopAdvertisementService {
 		return result;
 	}
 
-	public void delete(final ShopAdvertisement shopAdvertisement) {
+	public void delete(final int shopAdvertisementId) {
+		Actor actor;
+		ShopAdvertisement shopAdvertisement;
 
-		this.shopAdvertisementRepository.delete(shopAdvertisement);
-
+		shopAdvertisement = this.findOne(shopAdvertisementId);
+		Assert.isTrue(shopAdvertisement != null);
+		actor = this.actorService.findByPrincipal();
+		Assert.isTrue(actor instanceof Business);
+		Assert.isTrue(shopAdvertisement.getBusiness().getId() == actor.getId());
+		shopAdvertisement.setEndDate(new Date(System.currentTimeMillis()));
+		this.shopAdvertisementRepository.save(shopAdvertisement);
 	}
 
 	public ShopAdvertisement save(final ShopAdvertisement shopAdvertisement) {

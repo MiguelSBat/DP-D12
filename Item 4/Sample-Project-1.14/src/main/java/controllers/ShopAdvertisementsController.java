@@ -85,6 +85,21 @@ public class ShopAdvertisementsController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(final int shopAdvertisementId) {
+		ModelAndView result;
+
+		try {
+			this.shopAdvertisementService.delete(shopAdvertisementId);
+
+		} catch (final Throwable oops) {
+
+		}
+		result = new ModelAndView("redirect:myList.do");
+
+		return result;
+	}
+
 	// Ancillary methods ------------------------------------------------------
 
 	protected ModelAndView createEditModelAndView(final ShopAdvertisement shopAdvertisement) {
