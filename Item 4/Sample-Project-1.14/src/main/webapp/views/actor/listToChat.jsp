@@ -26,10 +26,6 @@
 <!-- Listing grid -->
 <display:table pagesize="5" class="displaytag" name="actors" requestURI="${requestURI}" id="row">
 
-	<spring:message code="actor.name" var="name" />
-	<display:column title="${name}" sortable="false">
-		<jstl:out value="${row.name}" />
-	</display:column>
 
 	<spring:message code="actor.email" var="email" />
 	<display:column title="${email}" sortable="false">

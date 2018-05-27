@@ -48,7 +48,7 @@
 		<security:intercept-url pattern="/auctionAdvertisement/edit.do" access="hasAnyRole('USER','BUSINESS')" />
 		
 		<security:intercept-url pattern="/user/ticket/**" access="hasRole('USER')" /> 
-		<security:intercept-url pattern="/user/chat/**" access="hasRole('USER')" /> 
+		<security:intercept-url pattern="/chat/**" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/user/socialIdentity/**" access="hasRole('USER')" /> 
 		<security:intercept-url pattern="/business/ticket/**" access="hasRole('BUSINESS')" /> 
 		<security:intercept-url pattern="/business/**" access="hasRole('BUSINESS')" /> 

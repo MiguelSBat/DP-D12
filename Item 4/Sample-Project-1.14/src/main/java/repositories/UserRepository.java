@@ -28,4 +28,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	//select u from User u join u.socialIdentities s where s.id=
 	@Query("select u from User u join u.socialIdentities s where s.id=?1")
 	User findBySocialIdentity(int id);
+
 }

@@ -52,7 +52,7 @@
 	
 
 </display:table>
-<form:form action="user/chat/edit.do?user2Id=${user2Id }" modelAttribute="chat">
+<form:form action="chat/edit.do?user2Id=${user2Id }" modelAttribute="chat">
 	
 	<form:hidden path="id" />
 	<form:hidden path="version" />

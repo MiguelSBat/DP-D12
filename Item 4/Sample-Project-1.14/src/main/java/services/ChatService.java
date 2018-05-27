@@ -70,10 +70,10 @@ public class ChatService {
 		this.chatRepository.flush();
 	}
 
-	public Collection<Chat> findByUsersId(final int user1Id, final int user2Id) {
+	public Collection<Chat> findByActorsId(final int user1Id, final int user2Id) {
 		Collection<Chat> result;
 
-		result = this.chatRepository.findByUsersId(user1Id, user2Id);
+		result = this.chatRepository.findByActorsId(user1Id, user2Id);
 
 		return result;
 	}

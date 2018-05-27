@@ -1,5 +1,5 @@
 
-package controllers.user;
+package controllers;
 
 import java.util.Collection;
 import java.util.Date;
@@ -15,13 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.ChatService;
-import controllers.AbstractController;
 import domain.Actor;
 import domain.Chat;
 
 @Controller
-@RequestMapping("/user/chat")
-public class ChatUserController extends AbstractController {
+@RequestMapping("/chat")
+public class ChatController extends AbstractController {
 
 	//Service -----------------------------------------------------------------
 	@Autowired
@@ -33,7 +32,7 @@ public class ChatUserController extends AbstractController {
 
 	// Constructors -----------------------------------------------------------
 
-	public ChatUserController() {
+	public ChatController() {
 		super();
 	}
 
@@ -41,7 +40,6 @@ public class ChatUserController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(final int user2Id) {
 		ModelAndView result;
-		final Collection<Chat> chats;
 		Chat chat;
 		Actor principal;
 		Actor receiver;
@@ -54,6 +52,19 @@ public class ChatUserController extends AbstractController {
 		chat.setDate(new Date());
 		result = this.createEditModelAndView(chat);
 		result.addObject("principalId", principal.getId());
+		return result;
+	}
+	@RequestMapping(value = "/opened", method = RequestMethod.GET)
+	public ModelAndView opened() {
+		ModelAndView result;
+		Actor principal;
+		Collection<Actor> opened;
+
+		principal = this.actorService.findByPrincipal();
+		opened = this.actorService.findByOpenedChats(principal.getId());
+		result = new ModelAndView("actor/opened");
+		result.addObject("actors", opened);
+		result.addObject("requestURI", "chat/opened.do");
 		return result;
 	}
 
@@ -72,7 +83,7 @@ public class ChatUserController extends AbstractController {
 
 				this.chatService.save(chat);
 
-				result = new ModelAndView("redirect:/user/chat/list.do?user2Id=" + chat.getReceiver().getId());
+				result = new ModelAndView("redirect:/chat/list.do?user2Id=" + chat.getReceiver().getId());
 
 			} catch (final Throwable oops) {
 				final String errorMessage = "chat.commit.error";
@@ -100,7 +111,7 @@ public class ChatUserController extends AbstractController {
 		if (message == null)
 			result = new ModelAndView("chat/list");
 		else
-			result = new ModelAndView("redirect:/user/chat/list.do?user2Id=" + chat.getReceiver().getId());
+			result = new ModelAndView("redirect:/chat/list.do?user2Id=" + chat.getReceiver().getId());
 
 		result = new ModelAndView("chat/list");
 		result.addObject("chat", chat);
@@ -109,7 +120,7 @@ public class ChatUserController extends AbstractController {
 		chats = this.chatService.findByActorsId(principal.getId(), chat.getReceiver().getId());
 		result.addObject("chats", chats);
 
-		result.addObject("requestURI", "user/chat/list.do?user2Id=" + chat.getReceiver().getId());
+		result.addObject("requestURI", "chat/list.do?user2Id=" + chat.getReceiver().getId());
 
 		return result;
 	}

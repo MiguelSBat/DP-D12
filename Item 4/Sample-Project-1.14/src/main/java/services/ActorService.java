@@ -3,6 +3,7 @@ package services;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -249,6 +250,14 @@ public class ActorService {
 
 		weight = new Long(this.configService.findConfiguration().getReportWeightTreshold());
 		result = this.actorRepository.findByReportWeight(weight);
+
+		return result;
+	}
+	public Collection<Actor> findByOpenedChats(final int userId) {
+		Set<Actor> result;
+
+		result = new HashSet<Actor>(this.actorRepository.findByChatsReceived(userId));
+		result.addAll(this.actorRepository.findByChatsSended(userId));
 
 		return result;
 	}

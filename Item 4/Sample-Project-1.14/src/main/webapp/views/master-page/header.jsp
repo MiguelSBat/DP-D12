@@ -45,6 +45,7 @@
 				</a>
 				<ul>
 					<li class="arrow"></li>
+					<li><a href='chat/opened.do'><spring:message code="actor.openedChat" /></a></li>
 					<security:authorize access="hasAnyRole('USER','BUSINESS')">
 					<li><a href="expressAdvertisement/create.do"><spring:message code="master.page.createExpress" /></a></li>
 					<li><a href="expressAdvertisement/MyList.do"><spring:message code="master.page.MyList" /></a></li>

@@ -22,6 +22,9 @@
 <b><spring:message code="actor.sum" /></b>
 <jstl:out value="${sum}" />
 <br />
+<security:authorize access="isAuthenticated()">
+<a href='chat/list.do?user2Id=${actor.id }'><b><spring:message code="actor.openChat" /></b></a>
+</security:authorize>
 <display:table pagesize="5" class="displaytag" name="info"
 	requestURI="${requestURI}" id="row">
 
