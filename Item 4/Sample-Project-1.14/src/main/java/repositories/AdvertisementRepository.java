@@ -12,7 +12,7 @@ import domain.Advertisement;
 @Repository
 public interface AdvertisementRepository extends JpaRepository<Advertisement, Integer> {
 
-	@Query("select a from Advertisement a where a.item.name like CONCAT('%',?1,'%') and a.endDate>CURRENT_DATE")
+	@Query("select a from Advertisement a where a.item.name like CONCAT('%',?1,'%') and a.endDate>CURRENT_timestamp")
 	Collection<Advertisement> findByCriteria(String criteria);
 
 	@Query("select a from Advertisement a where a.endDate>CURRENT_timestamp")
