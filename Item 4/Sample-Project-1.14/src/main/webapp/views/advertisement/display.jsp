@@ -145,6 +145,36 @@
 								value="${row.user.name}"></jstl:out></a>
 					</display:column>
 
+					<spring:message code="review.date" var="date" />
+					<display:column property="date" title="${date}" />
+
+					<spring:message code="review.text" var="text" />
+					<display:column property="text" title="${text}" />
+					
+					<spring:message code="review.score" var="score" />
+					<display:column property="score" title="${score}" />
+
+			</display:table>
+					<display:table pagesize="5" class="displaytag" name="questions"
+					requestURI="advertisement/display.do" id="row">
+					<spring:message code="advertisement.user" var="user" />
+					<display:column title="${user}">
+						<a href="actor/display.do?actorId=${row.user.id}"> <jstl:out
+								value="${row.user.name}"></jstl:out></a>
+					</display:column>
+
+					<spring:message code="review.date" var="date" />
+					<display:column property="date" title="${date}" />
+
+					<spring:message code="review.text" var="text" />
+					<display:column property="text" title="${text}" />
+					
+					<spring:message code="review.questionanswers" var="answers" />
+					<display:column title="${answers}">
+						<a href="question/display.do?questionId=${row.id}"> <jstl:out
+								value="${answers}"></jstl:out></a>
+					</display:column>
+
 			</display:table>
 
 		</jstl:if>

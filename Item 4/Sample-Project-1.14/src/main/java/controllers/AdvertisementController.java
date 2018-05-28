@@ -16,13 +16,16 @@ import services.AdvertisementService;
 import services.AuctionAdvertisementService;
 import services.BidService;
 import services.ReviewService;
+import services.ShopAdvertisementService;
 import domain.Actor;
 import domain.Advertisement;
 import domain.AuctionAdvertisement;
 import domain.Bid;
 import domain.Business;
 import domain.ExpressAdvertisement;
+import domain.Question;
 import domain.Review;
+import domain.ShopAdvertisement;
 import domain.User;
 
 @Controller
@@ -43,6 +46,9 @@ public class AdvertisementController extends AbstractController {
 
 	@Autowired
 	private ReviewService				reviewService;
+
+	@Autowired
+	private ShopAdvertisementService	shopAdvertisementService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -91,7 +97,8 @@ public class AdvertisementController extends AbstractController {
 		Collection<Bid> bids;
 		Collection<Advertisement> premiums, premiumUsers;
 		Collection<Review> reviews;
-
+		Collection<Question> questions;
+		ShopAdvertisement shopAdvertisement;
 		Boolean isPremiumUser = true;
 		Boolean isPremiumBusiness = true;
 		User user;
@@ -137,6 +144,9 @@ public class AdvertisementController extends AbstractController {
 			advertisementType = "shop";
 			reviews = this.reviewService.findByShopAdvertisement(advertisement.getId());
 			result.addObject("reviews", reviews);
+			shopAdvertisement = this.shopAdvertisementService.findOne(advertisementId);
+			questions = shopAdvertisement.getQuestions();
+			result.addObject("questions", questions);
 		}
 		if (advertisement.getBusiness() == null)
 			result.addObject("user", Verdadero);
