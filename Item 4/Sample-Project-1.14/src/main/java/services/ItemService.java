@@ -113,7 +113,11 @@ public class ItemService {
 		Actor actor;
 
 		actor = this.actorService.findByPrincipal();
-		result = this.findByUser(actor.getId());
+
+		if (actor instanceof User)
+			result = this.findByUser(actor.getId());
+		else
+			result = this.findByBusiness(actor.getId());
 
 		return result;
 	}

@@ -7,6 +7,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -18,6 +19,7 @@ public class ShopAdvertisement extends Advertisement {
 
 
 	@NotNull
+	@Min(0)
 	public Integer getStock() {
 		return this.stock;
 	}
@@ -27,6 +29,7 @@ public class ShopAdvertisement extends Advertisement {
 	}
 
 	@NotNull
+	@Min(0)
 	public Double getPrice() {
 		return this.price;
 	}

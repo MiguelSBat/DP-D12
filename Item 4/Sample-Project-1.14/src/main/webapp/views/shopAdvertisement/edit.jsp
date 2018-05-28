@@ -34,39 +34,26 @@
 	<form:hidden path="publicationDate" />
 	<br />
 
-	<acme:textbox code="shopAdvertisement.endDate" path="endDate" />
-	<acme:textarea code="shopAdvertisement.tag" path="tags" />
-	<acme:textbox code="shopAdvertisement.startingPrice"
-		path="startingPrice" />
-	<acme:textbox code="shopAdvertisement.instantBuyPrice"
-		path="instantBuyPrice" />
-
+	<spring:message code="advertisement.endDate" var="endDate"/>
+	<form:label path="endDate">${endDate}</form:label>
+	<form:input path="endDate" placeholder="dd/mm/yyyy HH:MM"/>
+	<form:errors cssClass="error" path="endDate"/>
+	<br />
+	<acme:textarea code="advertisement.tags" path="tags" />
+	<acme:textbox code="advertisement.price" path="price" />
+	<acme:textbox code="advertisement.stock" path="stock" />
+	
 	<form:label path="item">
-		<spring:message code="shopAdvertisement.item" />
+		<spring:message code="advertisement.item" />
 	</form:label>
 	<form:select path="item">
 		<form:option label="-----" value="0" />
 		<form:options items="${items}" itemLabel="name" itemValue="id" />
 	</form:select>
-	<form:errors path="item" />
+	<form:errors path="item"/>
 	<br />
 
-	<input type="checkbox" name="secret" id="draftMode" value="True">
-	<spring:message code="shopAdvertisement.secret" />
-	<br />
 
-	<%-- 	<form:label path="secret">
-		<spring:message code="shopAdvertisement.secret" />:
-	</form:label>
-	<form:select path="secret">
-		<option value="">--</option>
-		<option value="true">
-			<spring:message code="shopAdvertisement.secret" />
-		</option>
-		<option value="false">
-			<spring:message code="shopAdvertisement.nonSecret" />
-		</option>
-	</form:select> --%>
 
 	<acme:submit name="save" code="shopAdvertisement.save" />
 
