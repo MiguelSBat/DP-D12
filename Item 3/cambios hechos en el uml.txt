@@ -5,3 +5,5 @@
 
 - añadida una relación más entre order y user para que pueda ser un vendedor
 - Cambiado el dominio de valoration
+
+-invertido relacion entre user y review
