@@ -95,7 +95,6 @@ public class User extends Actor {
 	//Relationships
 
 	private Collection<SocialIdentity>	socialIdentities;
-	private Collection<Review>			reviews;
 
 
 	@OneToMany
@@ -107,14 +106,6 @@ public class User extends Actor {
 		this.socialIdentities = socialIdentities;
 	}
 
-	@OneToMany
-	public Collection<Review> getReviews() {
-		return this.reviews;
-	}
-
-	public void setReviews(final Collection<Review> reviews) {
-		this.reviews = reviews;
-	}
 	public void addSocialIdentity(final SocialIdentity socialIdentity) {
 		this.socialIdentities.add(socialIdentity);
 	}

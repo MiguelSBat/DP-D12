@@ -220,11 +220,7 @@
 				<ref bean="socialIdentity1" />
 			</list>
 		</property>
-		<property name="reviews">
-			<list>
-				<ref bean="review1" />
-			</list>
-		</property>
+
 		<property name="folders">
 			<list>
 				<ref bean="rootFolderUser1" />
@@ -277,10 +273,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="reviews">
-			<list>
-			</list>
-		</property>
+
 		<property name="folders">
 			<list>
 				<ref bean="rootFolderUser2" />
@@ -331,10 +324,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="reviews">
-			<list>
-			</list>
-		</property>
+
 		<property name="folders">
 			<list>
 				<ref bean="rootFolderUser3" />
@@ -1063,6 +1053,7 @@
 		<property name="text" value="Muy buena pero no lo tienen en verde" />
 		<property name="score" value="4" />
 		<property name="shopAdvertisement" ref="shopAdvertisement1" />
+		<property name="user" ref="user1" />
 	</bean>
 		<!-- BusinessInfo -->
 	<bean id="businessInfo1" class="domain.BusinessInfo">

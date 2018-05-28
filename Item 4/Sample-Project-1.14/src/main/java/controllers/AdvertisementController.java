@@ -15,12 +15,14 @@ import services.ActorService;
 import services.AdvertisementService;
 import services.AuctionAdvertisementService;
 import services.BidService;
+import services.ReviewService;
 import domain.Actor;
 import domain.Advertisement;
 import domain.AuctionAdvertisement;
 import domain.Bid;
 import domain.Business;
 import domain.ExpressAdvertisement;
+import domain.Review;
 import domain.User;
 
 @Controller
@@ -38,6 +40,9 @@ public class AdvertisementController extends AbstractController {
 
 	@Autowired
 	private ActorService				actorService;
+
+	@Autowired
+	private ReviewService				reviewService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -85,6 +90,8 @@ public class AdvertisementController extends AbstractController {
 		String advertisementType;
 		Collection<Bid> bids;
 		Collection<Advertisement> premiums, premiumUsers;
+		Collection<Review> reviews;
+
 		Boolean isPremiumUser = true;
 		Boolean isPremiumBusiness = true;
 		User user;
@@ -126,9 +133,11 @@ public class AdvertisementController extends AbstractController {
 				result.addObject("minimumBid", true);
 		} else if (advertisement instanceof ExpressAdvertisement)
 			advertisementType = "express";
-		else
+		else {
 			advertisementType = "shop";
-
+			reviews = this.reviewService.findByShopAdvertisement(advertisement.getId());
+			result.addObject("reviews", reviews);
+		}
 		if (advertisement.getBusiness() == null)
 			result.addObject("user", Verdadero);
 		else

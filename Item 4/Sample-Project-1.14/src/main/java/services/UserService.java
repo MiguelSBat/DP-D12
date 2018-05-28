@@ -12,7 +12,6 @@ import org.springframework.util.Assert;
 
 import repositories.UserRepository;
 import domain.Actor;
-import domain.Review;
 import domain.SocialIdentity;
 import domain.User;
 import forms.ActorForm;
@@ -105,7 +104,6 @@ public class UserService {
 		result.setPhotosURL(new HashSet<String>());
 		result.setPremium(false);
 		result.setReputation(3);
-		result.setReviews(new HashSet<Review>());
 		result.setSocialIdentities(new HashSet<SocialIdentity>());
 		result.setSurname(form.getSurname());
 		result.setSuspicious(false);

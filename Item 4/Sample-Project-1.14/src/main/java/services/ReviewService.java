@@ -79,4 +79,10 @@ public class ReviewService {
 		this.reviewRepository.flush();
 	}
 
+	public Collection<Review> findByShopAdvertisement(final int id) {
+		Collection<Review> result;
+		result = this.reviewRepository.findByShopAdvertisement(id);
+		return result;
+	}
+
 }

@@ -135,11 +135,23 @@
 				<jstl:out value="${advertisement.getStock()}" /></li>
 			<li><b><spring:message code="advertisement.price"></spring:message>:</b>
 				<jstl:out value="${advertisement.price}" /></li>
+			<img src="${advertisement.item.photo}" height="200" width="300" />
+			
+			<display:table pagesize="5" class="displaytag" name="reviews"
+					requestURI="advertisement/display.do" id="row">
+					<spring:message code="advertisement.user" var="user" />
+					<display:column title="${user}">
+						<a href="actor/display.do?actorId=${row.user.id}"> <jstl:out
+								value="${row.user.name}"></jstl:out></a>
+					</display:column>
+
+			</display:table>
 
 		</jstl:if>
 		<jstl:if test="${type.equals('express')}">
 			<li><b><spring:message code="advertisement.price"></spring:message>:</b>
 				<jstl:out value="${advertisement.price}" /></li>
+			<img src="${advertisement.item.photo}" height="200" width="300" />
 
 		</jstl:if>
 		<jstl:if test="${type.equals('auction')}">
@@ -147,6 +159,8 @@
 				<jstl:out value="${advertisement.getStartingPrice()}" /></li>
 			<li><b><spring:message code="advertisement.instantBuyPrice"></spring:message>:</b>
 				<jstl:out value="${advertisement.getInstantBuyPrice()}" /></li>
+				
+				
 
 	
 	<img src="${advertisement.item.photo}" height="200" width="300" />
