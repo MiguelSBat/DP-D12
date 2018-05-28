@@ -87,4 +87,12 @@ public class QuestionService {
 		this.questionRepository.flush();
 	}
 
+	public Collection<Question> findByBusiness(final int businessId) {
+		Collection<Question> result;
+
+		result = this.questionRepository.findByBusiness(businessId);
+
+		return result;
+	}
+
 }

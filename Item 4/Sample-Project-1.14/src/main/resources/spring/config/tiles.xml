@@ -42,6 +42,7 @@
 		<value>/views/chat/tiles.xml</value>
 		<value>/views/shoppingCart/tiles.xml</value>
 		<value>/views/review/tiles.xml</value>
+		<value>/views/question/tiles.xml</value>
 
 	</util:list>
 

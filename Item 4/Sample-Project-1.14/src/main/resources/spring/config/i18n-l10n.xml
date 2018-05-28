@@ -42,6 +42,8 @@
 		<value>/views/chat/messages</value>
 		<value>/views/shoppingCart/messages</value>
 		<value>/views/review/messages</value>
+		<value>/views/question/messages</value>
+		
 	</util:list>
 
 </beans>
