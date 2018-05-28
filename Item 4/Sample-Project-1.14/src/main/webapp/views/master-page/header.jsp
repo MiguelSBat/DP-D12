@@ -70,6 +70,7 @@
 						<li><a href="business/profile/premium.do"><spring:message code="master.page.user.getPremium" /></a></li>	
 						<li><a href="shopAdvertisement/myList.do"><spring:message code="master.page.myShop" /></a></li>
 						<li><a href="business/item/list.do"><spring:message code="master.page.user.item" /></a></li>
+						<li><a href="business/question/list.do"><spring:message code="master.page.business.question" /></a></li>
 					</security:authorize>
 					<security:authorize access="hasRole('ADMIN')">
 						<li><a href="administrator/business/list.do"><spring:message code="master.page.moderator.business.list" /></a></li>	

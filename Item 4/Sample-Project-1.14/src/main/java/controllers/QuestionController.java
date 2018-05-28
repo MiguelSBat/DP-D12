@@ -16,9 +16,7 @@ import services.BidService;
 import services.BusinessService;
 import services.ItemService;
 import services.QuestionService;
-import domain.Actor;
 import domain.Answer;
-import domain.Business;
 import domain.Question;
 
 @Controller
@@ -50,30 +48,6 @@ public class QuestionController extends AbstractController {
 
 	public QuestionController() {
 		super();
-	}
-
-	// Listing ----------------------------------------------------------------
-
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam final int businessId) {
-		ModelAndView result;
-		Collection<Question> questions;
-		Business business;
-		Actor actor;
-
-		questions = this.questionService.findByBusiness(businessId);
-		business = this.businessService.findOne(businessId);
-		result = new ModelAndView("question/list");
-		result.addObject("questions", questions);
-		result.addObject("business", business);
-
-		if (this.actorService.isLogged()) {
-			actor = this.actorService.findByPrincipal();
-			if (actor instanceof Business)
-				result.addObject("businessId", actor.getId());
-		}
-
-		return result;
 	}
 
 	// Display ----------------------------------------------------------------

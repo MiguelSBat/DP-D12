@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -13,7 +14,6 @@ import repositories.AnswerRepository;
 import domain.Answer;
 import domain.Business;
 import domain.Question;
-import domain.User;
 
 @Service
 @Transactional
@@ -32,16 +32,23 @@ public class AnswerService {
 	@Autowired
 	private BusinessService		businessService;
 
+	@Autowired
+	private QuestionService		questionService;
+
 
 	//Constructors
 	public AnswerService() {
 		super();
 	}
 
-	public Answer create() {
+	public Answer create(final int questionId) {
 		Answer result;
+		Question question;
 
+		question = this.questionService.findOne(questionId);
 		result = new Answer();
+		result.setDate(new Date());
+		result.setQuestion(question);
 
 		return result;
 	}
@@ -66,11 +73,14 @@ public class AnswerService {
 
 	public Answer save(final Answer answer) {
 		Answer result;
-		User user;
+		Business business;
 
-		user = (User) this.actorService.findByPrincipal();
+		business = (Business) this.actorService.findByPrincipal();
+		Assert.isTrue(business.getId() == answer.getQuestion().getShopAdvertisement().getBusiness().getId());
+
 		if (this.configService.isTaboo(answer.getText()))
-			user.setSuspicious(true);
+			business.setSuspicious(true);
+		answer.setDate(new Date());
 		result = this.answerRepository.save(answer);
 		return result;
 	}

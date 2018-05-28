@@ -43,6 +43,12 @@
 	<display:column property="date"
 		format="{0,date,${dateFormat}}" title="${date}" />
 	
+	<spring:message code="question.item" var="item" />
+	<display:column title="${item}">
+		<a href="advertisement/display.do?advertisementId=${row.shopAdvertisement.id}"><jstl:out
+				value="${row.shopAdvertisement.item.name}"></jstl:out></a>
+	</display:column>
+	
 	<spring:message code="question.text" var="text" />
 	<display:column title="${text}">
 		<jstl:out value="${row.text}"></jstl:out>
@@ -58,7 +64,7 @@
 		<jstl:if test="${businessId!=null}">
 			<spring:message code="question.answer" var="answer" />
 			<display:column>
-				<a href="answer/create.do?questionId=${row.id}">
+				<a href="business/answer/create.do?questionId=${row.id}">
 					<jstl:out value="${answer}"></jstl:out></a>
 			</display:column>
 			

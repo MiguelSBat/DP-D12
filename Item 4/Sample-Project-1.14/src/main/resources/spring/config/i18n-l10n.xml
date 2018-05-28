@@ -43,6 +43,7 @@
 		<value>/views/shoppingCart/messages</value>
 		<value>/views/review/messages</value>
 		<value>/views/question/messages</value>
+		<value>/views/answer/messages</value>
 		
 	</util:list>
 
