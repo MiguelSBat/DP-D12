@@ -11,6 +11,8 @@ import org.springframework.util.Assert;
 
 import repositories.AnswerRepository;
 import domain.Answer;
+import domain.Business;
+import domain.Question;
 import domain.User;
 
 @Service
@@ -26,6 +28,9 @@ public class AnswerService {
 
 	@Autowired
 	private ActorService		actorService;
+
+	@Autowired
+	private BusinessService		businessService;
 
 
 	//Constructors
@@ -50,7 +55,11 @@ public class AnswerService {
 	}
 
 	public void delete(final Answer answer) {
+		Business business;
 
+		business = (Business) this.actorService.findByPrincipal();
+		business.removeAnswer(answer);
+		this.businessService.save(business);
 		this.answerRepository.delete(answer);
 
 	}
@@ -77,6 +86,23 @@ public class AnswerService {
 
 	public void flush() {
 		this.answerRepository.flush();
+	}
+
+	public Collection<Answer> findByQuestion(final int questionId) {
+		Collection<Answer> result;
+
+		result = this.answerRepository.findByQuestion(questionId);
+
+		return result;
+	}
+
+	public void deleteByQuestion(final Question question) {
+		Collection<Answer> answers;
+
+		answers = this.findByQuestion(question.getId());
+
+		for (final Answer e : answers)
+			this.delete(e);
 	}
 
 }

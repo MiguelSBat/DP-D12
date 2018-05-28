@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 import repositories.ShopAdvertisementRepository;
 import domain.Actor;
 import domain.Business;
+import domain.Question;
 import domain.ShopAdvertisement;
 
 @Service
@@ -123,6 +124,15 @@ public class ShopAdvertisementService {
 		result = this.shopAdvertisementRepository.findShopbyBusiness(businessId);
 
 		return result;
+	}
+
+	public void deleteQuestion(final Question question) {
+		ShopAdvertisement shopAdvertisement;
+
+		shopAdvertisement = this.findOne(question.getShopAdvertisement().getId());
+
+		shopAdvertisement.removeQuestion(question);
+		this.shopAdvertisementRepository.save(shopAdvertisement);
 	}
 
 }

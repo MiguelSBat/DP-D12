@@ -1,5 +1,5 @@
 
-package controllers;
+package controllers.business;
 
 import java.util.Collection;
 
@@ -7,23 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
-import services.AnswerService;
-import services.BidService;
-import services.BusinessService;
-import services.ItemService;
 import services.QuestionService;
+import controllers.AbstractController;
 import domain.Actor;
-import domain.Answer;
-import domain.Business;
+import domain.Item;
 import domain.Question;
 
 @Controller
-@RequestMapping("/question")
-public class QuestionController extends AbstractController {
+@RequestMapping("/business/question")
+public class QuestionBusinessController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
 
@@ -31,86 +26,26 @@ public class QuestionController extends AbstractController {
 	private QuestionService	questionService;
 
 	@Autowired
-	private BusinessService	businessService;
-
-	@Autowired
-	private AnswerService	answerService;
-
-	@Autowired
-	private ItemService		itemService;
-
-	@Autowired
 	private ActorService	actorService;
 
-	@Autowired
-	private BidService		bidService;
 
-
-	// Constructors -----------------------------------------------------------
-
-	public QuestionController() {
-		super();
-	}
-
-	// Listing ----------------------------------------------------------------
-
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam final int businessId) {
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(final int questionId) {
 		ModelAndView result;
-		Collection<Question> questions;
-		Business business;
 		Actor actor;
 
-		questions = this.questionService.findByBusiness(businessId);
-		business = this.businessService.findOne(businessId);
-		result = new ModelAndView("question/list");
-		result.addObject("questions", questions);
-		result.addObject("business", business);
+		try {
+			this.questionService.delete(questionId);
+		} catch (final Throwable oops) {
 
-		if (this.actorService.isLogged()) {
-			actor = this.actorService.findByPrincipal();
-			if (actor instanceof Business)
-				result.addObject("businessId", actor.getId());
 		}
 
-		return result;
-	}
-
-	// Display ----------------------------------------------------------------
-
-	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView display(@RequestParam final int questionId) {
-		ModelAndView result;
-		Collection<Answer> answers;
-		Question question;
-
-		answers = this.answerService.findByQuestion(questionId);
-		question = this.questionService.findOne(questionId);
-		result = new ModelAndView("question/display");
-		result.addObject("answers", answers);
-		result.addObject("question", question);
+		actor = this.actorService.findByPrincipal();
+		result = new ModelAndView("redirect:/question/list.do?businessId=" + actor.getId());
 
 		return result;
 	}
 
-	//	@RequestMapping(value = "/myList", method = RequestMethod.GET)
-	//	public ModelAndView myList(final String criteria) {
-	//		ModelAndView result;
-	//		Collection<Question> questions;
-	//		Actor actor;
-	//
-	//		questions = this.questionService.findByPrincipal();
-	//		result = new ModelAndView("question/list");
-	//		result.addObject("questions", questions);
-	//		if (this.actorService.isLogged()) {
-	//			actor = this.actorService.findByPrincipal();
-	//			if (actor instanceof User)
-	//				result.addObject("userId", actor.getId());
-	//			else if (actor instanceof Business)
-	//				result.addObject("businessId", actor.getId());
-	//		}
-	//		return result;
-	//	}
 	//
 	//	@RequestMapping(value = "/bidded", method = RequestMethod.GET)
 	//	public ModelAndView bidded() {
@@ -194,6 +129,7 @@ public class QuestionController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(final Question question, final String message) {
 		ModelAndView result;
+		final Collection<Item> items;
 
 		result = new ModelAndView("question/edit");
 		result.addObject("question", question);

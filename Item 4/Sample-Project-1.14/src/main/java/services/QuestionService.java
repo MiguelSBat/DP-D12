@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.QuestionRepository;
+import domain.Business;
 import domain.Question;
 import domain.User;
 
@@ -19,13 +20,19 @@ public class QuestionService {
 
 	//Managed Repository ----
 	@Autowired
-	private QuestionRepository	questionRepository;
+	private QuestionRepository			questionRepository;
 
 	@Autowired
-	private ActorService		actorService;
+	private ActorService				actorService;
 
 	@Autowired
-	private ConfigService		configService;
+	private ConfigService				configService;
+
+	@Autowired
+	private AnswerService				answerService;
+
+	@Autowired
+	private ShopAdvertisementService	shopAdvertisementService;
 
 
 	//Constructors
@@ -49,12 +56,6 @@ public class QuestionService {
 		return result;
 	}
 
-	public void delete(final Question question) {
-
-		this.questionRepository.delete(question);
-
-	}
-
 	public Question save(final Question question) {
 		Question result;
 		User user;
@@ -66,6 +67,18 @@ public class QuestionService {
 		return result;
 	}
 
+	public void delete(final int questionId) {
+		Question question;
+		Business business;
+
+		business = (Business) this.actorService.findByPrincipal();
+		question = this.findOne(questionId);
+		Assert.isTrue(question.getShopAdvertisement().getBusiness().getId() == business.getId());
+		this.answerService.deleteByQuestion(question);
+		this.shopAdvertisementService.deleteQuestion(question);
+		this.questionRepository.delete(question);
+
+	}
 	public Question findOne(final int questionId) {
 		Question result;
 

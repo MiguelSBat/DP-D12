@@ -53,4 +53,12 @@ public class ShopAdvertisement extends Advertisement {
 		this.questions = questions;
 	}
 
+	public void addQuestion(final Question question) {
+		this.questions.add(question);
+	}
+
+	public void removeQuestion(final Question question) {
+		this.questions.remove(question);
+	}
+
 }

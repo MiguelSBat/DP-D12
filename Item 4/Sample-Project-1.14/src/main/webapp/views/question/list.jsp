@@ -23,7 +23,9 @@
 
 
 <b><spring:message code="question.business"/>:</b>
-<jstl:out value="${business.name}"/>
+<a href="actor/display.do?actorId=${business.id}">
+	<jstl:out value="${business.name}"/>
+</a>
 <br>
 
 <!-- Listing grid -->
@@ -51,6 +53,22 @@
 		<a href="question/display.do?questionId=${row.id}"><jstl:out
 				value="${answers}"></jstl:out></a>
 	</display:column>
+	
+	<security:authorize access="hasRole('BUSINESS')">
+		<jstl:if test="${businessId!=null}">
+			<spring:message code="question.answer" var="answer" />
+			<display:column>
+				<a href="answer/create.do?questionId=${row.id}">
+					<jstl:out value="${answer}"></jstl:out></a>
+			</display:column>
+			
+			<spring:message code="question.delete" var="delete" />
+			<display:column>
+				<a href="business/question/delete.do?questionId=${row.id}">
+					<jstl:out value="${delete}"></jstl:out></a>
+			</display:column>
+		</jstl:if>
+	</security:authorize>
 
 </display:table>
 

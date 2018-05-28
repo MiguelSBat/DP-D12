@@ -98,6 +98,7 @@
 		<security:intercept-url pattern="/actor/display.do" access="permitAll" />
 		
 		<security:intercept-url pattern="/question/**" access="permitAll" />
+		<security:intercept-url pattern="/business/question/**" access="hasRole('BUSINESS')" />
 		
 		<security:intercept-url pattern="/law/terms-conditions.do" access="permitAll" /> 
 	

@@ -108,8 +108,9 @@ public class Business extends Actor {
 	public Boolean getVerified() {
 		return this.verified;
 	}
-	//Relationships
 
+
+	//Relationships
 
 	private Collection<Answer>			answers;
 	private Collection<BusinessInfo>	businessInfos;
@@ -131,6 +132,14 @@ public class Business extends Actor {
 
 	public void setBusinessInfos(final Collection<BusinessInfo> businessInfos) {
 		this.businessInfos = businessInfos;
+	}
+
+	public void addAnswer(final Answer answer) {
+		this.answers.add(answer);
+	}
+
+	public void removeAnswer(final Answer answer) {
+		this.answers.remove(answer);
 	}
 
 }
