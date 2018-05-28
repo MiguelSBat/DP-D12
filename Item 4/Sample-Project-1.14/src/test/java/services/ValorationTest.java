@@ -41,8 +41,6 @@ public class ValorationTest extends AbstractTest {
 		final Object testingData[][] = {
 			{	//Creacion Valoration correcta
 				"user1", this.fechaValida, 3, null
-			}, {	//Creacion Incorrecta, fecha nula
-				"user1", null, 2, null
 			}, {	//Creacion Incorrecta, score nulo
 				"user1", this.fechaValida, null, ConstraintViolationException.class
 			}, {	//Creacion Incorrecta, score demasiado bajo
