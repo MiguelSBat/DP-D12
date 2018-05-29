@@ -40,7 +40,12 @@
 	<display:column title="${VATNumber}" sortable="false">
 		<jstl:out value="${row.VATNumber}" />
 	</display:column>
-
+	<security:authorize access="hasRole('ADMIN')">
+	<display:column >
+	<a href="administrator/business/verify.do?businessId=${row.id}"><spring:message code="business.verify" /></a>
+	</display:column>
+	
+	</security:authorize>
 	
 </display:table>
 
