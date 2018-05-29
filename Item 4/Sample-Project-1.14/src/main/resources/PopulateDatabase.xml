@@ -1046,6 +1046,23 @@
 		<property name="instantBuyPrice" value="520.50" />
 		<property name="secret" value="false" />
 	</bean>
+	<bean id="auctionAdvertisement2" class="domain.AuctionAdvertisement">
+		<property name="publicationDate" value="2017/01/15" />
+		<property name="endDate" value="2018/01/15" />
+		<property name="tags" value="Consola" />
+		<property name="user" ref="user1" />
+		<property name="business">
+			<null></null>
+		</property>
+		<property name="item" ref="item2" />			
+		<property name="saleLines">
+			<list>
+			</list>
+		</property>
+		<property name="startingPrice" value="220.50" />
+		<property name="instantBuyPrice" value="520.50" />
+		<property name="secret" value="false" />
+	</bean>
 		<!-- Review -->
 
 	<bean id="review1" class="domain.Review">
