@@ -122,4 +122,11 @@
 	<jstl:out value="${row.amount }"></jstl:out>
 	</display:column>
 	
+	<jstl:if test="${ticket.status=='RECEIVED' && ticket.seller==null}">
+	<display:column >
+
+	<a href="user/review/create.do?advertisementId=${row.advertisement.id}"><spring:message code="ticket.review"/></a>
+	</display:column>
+	</jstl:if>
+	
 	</display:table>

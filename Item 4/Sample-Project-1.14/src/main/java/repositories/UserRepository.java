@@ -29,4 +29,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query("select u from User u join u.socialIdentities s where s.id=?1")
 	User findBySocialIdentity(int id);
 
+	@Query("select distinct t.user from SaleLine s join s.ticket t where s.advertisement.id=?1")
+	Collection<User> findByAdvertisementsBuyed(int ID);
+
 }

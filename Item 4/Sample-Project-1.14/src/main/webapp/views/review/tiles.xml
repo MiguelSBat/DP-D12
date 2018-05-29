@@ -8,14 +8,11 @@
 <tiles-definitions>
 
 	
-	<definition name="socialIdentity/list" extends="master.page">	
-		<put-attribute name="title" value="Social Identities list" />
-		<put-attribute name="body" value="/views/socialIdentity/list.jsp" />
-	</definition>
+
 	
-	<definition name="socialIdentity/edit" extends="master.page">	
-		<put-attribute name="title" value="Social Identities Edit" />
-		<put-attribute name="body" value="/views/socialIdentity/edit.jsp" />
+	<definition name="review/edit" extends="master.page">	
+		<put-attribute name="title" value="Review Creation" />
+		<put-attribute name="body" value="/views/review/edit.jsp" />
 	</definition>
 
 	

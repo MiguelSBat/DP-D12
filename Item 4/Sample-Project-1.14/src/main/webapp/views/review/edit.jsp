@@ -13,19 +13,24 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="user/socialIdentity/edit.do" modelAttribute="socialIdentity">
-	
+<form:form action="user/review/edit.do" modelAttribute="review">
+
 	<form:hidden path="id" />
 	<form:hidden path="version" /> 
+	<form:hidden path="date"/>
+	<form:hidden path="user"/>
+	<form:hidden path="shopAdvertisement"/>
   
-	<acme:textbox code="socialIdentity.nick" path="nick"/>
+	<acme:textarea code="review.text" path="text"/>
 	
-	<acme:textbox code="socialIdentity.accountURL" path="accountURL"/>
+	<acme:textbox code="review.score" path="score"/>
 	
-	<acme:textbox code="socialIdentity.website" path="website"/>
+
 	
-	<acme:submit name="save" code="item.save"/>
+	<acme:submit name="save" code="review.save"/>
 	
-	<acme:cancel url="/actor/display.do?actorId${principalId }" code="item.cancel"/>
+	<spring:message code="review.cancel" var="cancel"/>
+	<input type="button" name="cancel" value="${cancel}" onclick="javascript:relativeRedir('');" />
+	<br />	
 	
 </form:form>

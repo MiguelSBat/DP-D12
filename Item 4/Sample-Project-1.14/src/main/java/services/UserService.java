@@ -149,4 +149,10 @@ public class UserService {
 		return result;
 	}
 
+	public Collection<User> findByAdvertisementsBuyed(final int ID) {
+		Collection<User> result;
+		result = this.userRepository.findByAdvertisementsBuyed(ID);
+		return result;
+	}
+
 }

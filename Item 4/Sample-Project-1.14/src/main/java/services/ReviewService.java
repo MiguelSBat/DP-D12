@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -37,6 +38,8 @@ public class ReviewService {
 		Review result;
 
 		result = new Review();
+		final Date date = new Date();
+		result.setDate(date);
 
 		return result;
 	}
@@ -58,8 +61,8 @@ public class ReviewService {
 	public Review save(final Review review) {
 		Review result;
 		User user;
-
 		user = (User) this.actorService.findByPrincipal();
+		Assert.isTrue(user.getId() == review.getUser().getId());
 		if (this.configService.isTaboo(review.getText()))
 			user.setSuspicious(true);
 		result = this.reviewRepository.save(review);

@@ -46,7 +46,7 @@ public class AdvertisementController extends AbstractController {
 
 	@Autowired
 	private ReviewService				reviewService;
-
+	
 	@Autowired
 	private ShopAdvertisementService	shopAdvertisementService;
 
