@@ -7,3 +7,5 @@
 - Cambiado el dominio de valoration
 
 -invertido relacion entre user y review
+
+- puesto en el uml la bidireccion que metio willy
