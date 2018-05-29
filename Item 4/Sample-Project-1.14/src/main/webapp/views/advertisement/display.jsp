@@ -136,6 +136,8 @@
 			<li><b><spring:message code="advertisement.price"></spring:message>:</b>
 				<jstl:out value="${advertisement.price}" /></li>
 			<img src="${advertisement.item.photo}" height="200" width="300" />
+			<li><b><spring:message code="advertisement.score"></spring:message>:</b>
+				<jstl:out value="${score}" /></li>
 			
 			<display:table pagesize="5" class="displaytag" name="reviews"
 					requestURI="advertisement/display.do" id="row">

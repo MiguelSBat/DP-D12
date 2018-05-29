@@ -88,4 +88,10 @@ public class ReviewService {
 		return result;
 	}
 
+	public Double avgScoreOfShopAd(final int ID) {
+		Double result;
+		result = this.reviewRepository.avgScoreOfShopAd(ID);
+		return result;
+	}
+
 }

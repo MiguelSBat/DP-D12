@@ -46,7 +46,7 @@ public class AdvertisementController extends AbstractController {
 
 	@Autowired
 	private ReviewService				reviewService;
-	
+
 	@Autowired
 	private ShopAdvertisementService	shopAdvertisementService;
 
@@ -98,6 +98,7 @@ public class AdvertisementController extends AbstractController {
 		Collection<Advertisement> premiums, premiumUsers;
 		Collection<Review> reviews;
 		Collection<Question> questions;
+		Double score;
 		ShopAdvertisement shopAdvertisement;
 		Boolean isPremiumUser = true;
 		Boolean isPremiumBusiness = true;
@@ -147,6 +148,9 @@ public class AdvertisementController extends AbstractController {
 			shopAdvertisement = this.shopAdvertisementService.findOne(advertisementId);
 			questions = shopAdvertisement.getQuestions();
 			result.addObject("questions", questions);
+			score = this.reviewService.avgScoreOfShopAd(advertisementId);
+			result.addObject("score", score);
+
 		}
 		if (advertisement.getBusiness() == null)
 			result.addObject("user", Verdadero);
