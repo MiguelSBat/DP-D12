@@ -178,6 +178,11 @@
 					</display:column>
 
 			</display:table>
+			<security:authorize access="hasRole('USER')">
+				<a href="user/question/create.do?shopAdvertisementId=${advertisement.id}">
+					<spring:message code="advertisement.question.ask" />
+				</a>
+			</security:authorize>
 
 		</jstl:if>
 		<jstl:if test="${type.equals('express')}">

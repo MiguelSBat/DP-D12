@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -10,8 +11,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.QuestionRepository;
+import domain.Actor;
+import domain.Advertisement;
 import domain.Business;
 import domain.Question;
+import domain.ShopAdvertisement;
 import domain.User;
 
 @Service
@@ -34,16 +38,27 @@ public class QuestionService {
 	@Autowired
 	private ShopAdvertisementService	shopAdvertisementService;
 
+	@Autowired
+	private AdvertisementService		advertisementService;
+
 
 	//Constructors
 	public QuestionService() {
 		super();
 	}
 
-	public Question create() {
+	public Question create(final int shopAdvertisementId) {
 		Question result;
+		Advertisement advertisement;
+		Actor actor;
 
+		advertisement = this.advertisementService.findOne(shopAdvertisementId);
+		actor = this.actorService.findByPrincipal();
+		Assert.isTrue(advertisement != null && advertisement instanceof ShopAdvertisement);
 		result = new Question();
+		result.setShopAdvertisement((ShopAdvertisement) advertisement);
+		result.setUser((User) actor);
+		result.setDate(new Date());
 
 		return result;
 	}
@@ -59,11 +74,15 @@ public class QuestionService {
 	public Question save(final Question question) {
 		Question result;
 		User user;
+		final ShopAdvertisement shopAdvertisement;
 
 		user = (User) this.actorService.findByPrincipal();
 		if (this.configService.isTaboo(question.getText()))
 			user.setSuspicious(true);
+		question.setDate(new Date());
 		result = this.questionRepository.save(question);
+		this.shopAdvertisementService.addQuestion(result);
+
 		return result;
 	}
 

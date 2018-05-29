@@ -135,4 +135,13 @@ public class ShopAdvertisementService {
 		this.shopAdvertisementRepository.save(shopAdvertisement);
 	}
 
+	public void addQuestion(final Question question) {
+		ShopAdvertisement shopAdvertisement;
+
+		shopAdvertisement = this.findOne(question.getShopAdvertisement().getId());
+
+		shopAdvertisement.addQuestion(question);
+		this.shopAdvertisementRepository.save(shopAdvertisement);
+	}
+
 }
