@@ -22,6 +22,19 @@
 <b><spring:message code="actor.sum" /></b>
 <jstl:out value="${sum}" />
 <br />
+
+<security:authorize access="hasRole('USER')">
+	<jstl:if test="${premium==false}">
+	<a href="user/profile/premium.do"><spring:message code="master.page.user.getPremium" /></a>
+	</jstl:if>
+</security:authorize>
+<security:authorize access="hasRole('BUSINESS')">
+	<jstl:if test="${premium==false}">
+	<a href="business/profile/premium.do"><spring:message code="master.page.user.getPremium" /></a>
+	</jstl:if>
+</security:authorize>
+<br/>
+
 <security:authorize access="isAuthenticated()">
 <a href='chat/list.do?user2Id=${actor.id }'><b><spring:message code="actor.openChat" /></b></a>
 </security:authorize>

@@ -69,9 +69,13 @@ public class ActorController {
 		if (actor instanceof Business) {
 			final Business b = (Business) actor;
 			final Collection<BusinessInfo> businessInfos = b.getBusinessInfos();
+			final boolean premium = b.getPremium();
+			result.addObject("premium", premium);
 			result.addObject("info", businessInfos);
 		} else if (actor instanceof User) {
 			socialIdentities = this.socialIdentityService.findByUserId(actorId);
+			final boolean premium = ((User) actor).isPremium();
+			result.addObject("premium", premium);
 			result.addObject("socialIdentities", socialIdentities);
 		}
 
