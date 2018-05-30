@@ -248,7 +248,8 @@
 		</property>
 		<property name="Valorations">
 			<list>
-				<ref bean="valoration1" />
+				<ref bean="valoratio3" />
+				<ref bean="valoratio4" />
 			</list>
 		</property>
 	</bean>
@@ -301,6 +302,7 @@
 		</property>
 		<property name="Valorations">
 			<list>
+				<ref bean="valoratio5" />
 			</list>
 		</property>		
 	</bean>
@@ -941,7 +943,28 @@
 		
 	<bean id="valoration1" class="domain.Valoration">
 		<property name="date" value="2018/01/15" />
+		<property name="score" value="3" />
+		<property name="actor" ref="user1" />
+	</bean>
+	
+	<bean id="valoration2" class="domain.Valoration">
+		<property name="date" value="2018/01/15" />
+		<property name="score" value="5" />
+		<property name="actor" ref="user1" />
+	</bean>
+	<bean id="valoration3" class="domain.Valoration">
+		<property name="date" value="2018/01/15" />
+		<property name="score" value="2" />
+		<property name="actor" ref="user2" />
+	</bean>
+	<bean id="valoration4" class="domain.Valoration">
+		<property name="date" value="2018/01/15" />
 		<property name="score" value="1" />
+		<property name="actor" ref="user3" />
+	</bean>
+	<bean id="valoration5" class="domain.Valoration">
+		<property name="date" value="2018/01/15" />
+		<property name="score" value="4" />
 		<property name="actor" ref="user3" />
 	</bean>
 
