@@ -47,6 +47,12 @@
 	
 	</security:authorize>
 	
+	<security:authorize access="hasRole('MODERATOR')">
+	<display:column >
+	<a href="moderator/business/verify.do?businessId=${row.id}"><spring:message code="business.verify" /></a>
+	</display:column>
+	
+	</security:authorize>
 </display:table>
 
 
