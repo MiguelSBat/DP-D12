@@ -1009,6 +1009,24 @@
 		</property>
 	</bean>
 	
+	<bean id="shopAdvertisement1" class="domain.ShopAdvertisement">
+		<property name="stock" value="60" />
+		<property name="publicationDate" value="2018/01/15" />
+		<property name="endDate" value="2030/01/15" />
+		<property name="price" value="60.0" />
+		<property name="tags" value="Video Juego" />
+		<property name="business" ref="business1" />
+		<property name="item" ref="item3" />			
+		<property name="questions">
+			<list>
+			</list>
+		</property>	
+		<property name="saleLines">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
 		<!-- ExpressAdvertisement -->
 		
 	<bean id="expressAdvertisement1" class="domain.ExpressAdvertisement">
@@ -1021,6 +1039,23 @@
 			<null></null>
 		</property>
 		<property name="item" ref="item2" />			
+		<property name="saleLines">
+			<list>
+			
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="expressAdvertisement1" class="domain.ExpressAdvertisement">
+		<property name="publicationDate" value="2018/01/15" />
+		<property name="endDate" value="2030/01/15" />
+		<property name="price" value="70.50" />
+		<property name="tags" value="Amibo" />
+		<property name="user" ref="user1" />
+		<property name="business">
+			<null></null>
+		</property>
+		<property name="item" ref="item4" />			
 		<property name="saleLines">
 			<list>
 			
@@ -1092,9 +1127,22 @@
 		<property name="name" value="Item2" />
 		<property name="description" value="Totalmente nueva" />
 		<property name="photo" value="http://www.nintenderos.com/wp-content/uploads/2017/10/nintendo-switch.jpg" />
-		<property name="user" ref="user1"/>
+		<property name="user" ref="business1"/>
 	</bean>
 		
+	<bean id="item3" class="domain.Item">
+		<property name="name" value="Zelda Breath of the Wild Switch" />
+		<property name="description" value="Viene incluido con todos los DLCs" />
+		<property name="photo" value="https://media.vandal.net/m/43030/the-legend-of-zelda-breath-of-the-wild-201732131429_1.jpg" />
+		<property name="user" ref="user1"/>
+	</bean>
+	
+	<bean id="item4" class="domain.Item">
+		<property name="name" value="Amibo Link twilight princess" />
+		<property name="description" value="Amibo Link Nivel 50 y entrenado para COMPETITIVO SSB" />
+		<property name="photo" value="https://images-na.ssl-images-amazon.com/images/I/619sdEL41VL._SX342_.jpg" />
+		<property name="user" ref="business1"/>
+	</bean>
 		<!-- ShoppingCart -->
 	<bean id="shoppingCart1" class="domain.ShoppingCart">
 		<property name="User" ref="user1" />
