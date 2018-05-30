@@ -161,13 +161,12 @@ public class UserService {
 		final Collection<User> res = new ArrayList<>();
 		List<User> aux;
 		aux = this.userRepository.topFiveSellers();
-		int n = aux.size();
-		if (n > 0)
+		if (aux.size() > 0)
 			for (int i = 0; i < aux.size(); i++) {
-				res.add(aux.get(i));
-				n++;
-				if (n == 5)
+				if (i == 5)
 					break;
+				res.add(aux.get(i));
+
 			}
 
 		return res;
