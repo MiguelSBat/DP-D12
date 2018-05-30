@@ -2,6 +2,8 @@
 package services;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -27,6 +29,10 @@ public class ReportService {
 	private ConfigService		configService;
 	@Autowired
 	private ActorService		actorService;
+	@Autowired
+	private UserService			userService;
+	@Autowired
+	private BusinessService		businessService;
 
 
 	//Constructors
@@ -57,9 +63,39 @@ public class ReportService {
 		this.reportRepository.delete(report);
 
 	}
-	public boolean isExtraWeight() {
+	private boolean isExtraWeight(final int userId) {
 		boolean result;
+		Set<User> users;
+		Set<Business> businesses;
+		Collection<Business> auxBus;
+		Collection<User> auxUsers;
+		Actor principal;
+		Actor actor;
+		User user;
+		Business business;
+
+		principal = this.actorService.findByPrincipal();
+		actor = this.actorService.findOne(userId);
 		result = false;
+		if (actor instanceof User) {
+			user = (User) actor;
+			auxUsers = this.userService.findUsersISoldThingsToThey(principal.getId());
+			users = new HashSet<User>(auxUsers);
+			if (principal instanceof User) {
+				auxUsers = this.userService.findUsersTheySoldThingsToMy(principal.getId());
+				users.addAll(auxUsers);
+			}
+			if (users.contains(user))
+				result = true;
+		} else if (actor instanceof Business && principal instanceof User) {
+			business = (Business) actor;
+			auxBus = this.businessService.findBusinessIbuyThings(principal.getId());
+			businesses = new HashSet<Business>(auxBus);
+			if (businesses.contains(business))
+				result = true;
+		} else
+			Assert.isTrue(false);
+
 		return result;
 	}
 
@@ -72,7 +108,7 @@ public class ReportService {
 
 		config = this.configService.findConfiguration();
 		principal = this.actorService.findByPrincipal();
-		if (this.isExtraWeight())
+		if (this.isExtraWeight(report.getActor().getId()))
 			report.setWeight(config.getTransactionReportWeight());
 
 		result = this.reportRepository.save(report);

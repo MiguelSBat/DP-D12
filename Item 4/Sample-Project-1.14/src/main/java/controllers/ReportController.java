@@ -71,7 +71,7 @@ public class ReportController extends AbstractController {
 				result = new ModelAndView("redirect:/actor/display.do?actorId=" + report.getActor().getId());
 
 			} catch (final Throwable oops) {
-				String errorMessage = "review.commit.error";
+				String errorMessage = "report.commit.error";
 
 				if (oops.getMessage().contains("message.error"))
 					errorMessage = oops.getMessage();

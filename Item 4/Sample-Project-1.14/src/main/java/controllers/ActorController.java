@@ -51,6 +51,7 @@ public class ActorController {
 		ModelAndView result;
 		Collection<SocialIdentity> socialIdentities;
 		int principalId;
+		Actor actor;
 		result = new ModelAndView("actor/display");
 		//valoraciones 
 		Double sum = 0.0;
@@ -62,8 +63,10 @@ public class ActorController {
 		principalId = 0;
 		if (this.actorService.isLogged())
 			principalId = this.actorService.findByPrincipal().getId();
-
-		final Actor actor = this.actorService.findOne(actorId);
+		if (actorId == 0)
+			actor = this.actorService.findByPrincipal();
+		else
+			actor = this.actorService.findOne(actorId);
 
 		//mostrar businessInfos
 		if (actor instanceof Business) {

@@ -27,11 +27,13 @@
 	<jstl:if test="${premium==false}">
 	<a href="user/profile/premium.do"><spring:message code="master.page.user.getPremium" /></a>
 	</jstl:if>
+	<a href="report/create.do?actorId=${actor.id }"><spring:message code="actor.report" /></a>
 </security:authorize>
 <security:authorize access="hasRole('BUSINESS')">
 	<jstl:if test="${premium==false}">
 	<a href="business/profile/premium.do"><spring:message code="master.page.user.getPremium" /></a>
 	</jstl:if>
+	<a href="report/create.do?actorId=${actor.id }"><spring:message code="actor.report" /></a>
 </security:authorize>
 <br/>
 

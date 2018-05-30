@@ -39,7 +39,7 @@
 		
 		<security:authorize access="isAuthenticated()">
 			<li>
-				<a class="fNiv"> 
+				<a class="fNiv" href="actor/display.do?actorId=0"> 
 					<spring:message code="master.page.profile" /> 
 			        (<security:authentication property="principal.username" />)
 				</a>
