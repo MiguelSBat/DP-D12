@@ -10,7 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.ReportRepository;
+import domain.Actor;
+import domain.Business;
+import domain.Config;
 import domain.Report;
+import domain.User;
 
 @Service
 @Transactional
@@ -19,6 +23,10 @@ public class ReportService {
 	//Managed Repository ----
 	@Autowired
 	private ReportRepository	reportRepository;
+	@Autowired
+	private ConfigService		configService;
+	@Autowired
+	private ActorService		actorService;
 
 
 	//Constructors
@@ -30,6 +38,8 @@ public class ReportService {
 		Report result;
 
 		result = new Report();
+		result.setText("");
+		result.setWeight(1);
 
 		return result;
 	}
@@ -47,14 +57,29 @@ public class ReportService {
 		this.reportRepository.delete(report);
 
 	}
-
-	public Report save(final Report report) {
-		Report result;
-
-		result = this.reportRepository.save(report);
+	public boolean isExtraWeight() {
+		boolean result;
+		result = false;
 		return result;
 	}
 
+	public Report save(final Report report) {
+		Report result;
+		Config config;
+		Actor principal;
+
+		Assert.isTrue(report.getActor() instanceof User || report.getActor() instanceof Business);
+
+		config = this.configService.findConfiguration();
+		principal = this.actorService.findByPrincipal();
+		if (this.isExtraWeight())
+			report.setWeight(config.getTransactionReportWeight());
+
+		result = this.reportRepository.save(report);
+		principal.getReports().add(result);
+		this.actorService.save(principal);
+		return result;
+	}
 	public Report findOne(final int reportId) {
 		Report result;
 

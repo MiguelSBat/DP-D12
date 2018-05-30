@@ -48,9 +48,11 @@ public class ReportController extends AbstractController {
 	public ModelAndView create(@RequestParam final int actorId) {
 		ModelAndView result;
 		Report report;
-		final Actor principal;
+		Actor actor;
 
+		actor = this.actorService.findOne(actorId);
 		report = this.reportService.create();
+		report.setActor(actor);
 		result = this.createEditModelAndView(report);
 
 		return result;
@@ -66,7 +68,7 @@ public class ReportController extends AbstractController {
 			try {
 				this.reportService.save(report);
 
-				result = new ModelAndView("redirect:/actor/display.do?actorId=" + report.getActor());
+				result = new ModelAndView("redirect:/actor/display.do?actorId=" + report.getActor().getId());
 
 			} catch (final Throwable oops) {
 				String errorMessage = "review.commit.error";
