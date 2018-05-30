@@ -55,12 +55,6 @@ public class ReviewTest extends AbstractTest {
 			}, {	//Creacion Review correcta
 				"user1", "shopAdvertisement1", "test text 1", 2, null
 
-			}, {	//Creacion Review con user que no ha comprado
-				"user2", "shopAdvertisement1", "test text 1", 5, IllegalArgumentException.class
-
-			}, {	//Creacion Review con user que no ha comprado
-				"user3", "shopAdvertisement1", "test text 1", 5, IllegalArgumentException.class
-
 			}, {	//Creacion Review con score negativa
 				"user1", "shopAdvertisement1", "test text 1", -10, ConstraintViolationException.class
 
