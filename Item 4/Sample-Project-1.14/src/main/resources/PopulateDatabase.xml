@@ -302,7 +302,7 @@
 		</property>
 		<property name="Valorations">
 			<list>
-				<ref bean="valoration5" />
+				<ref bean="valoration1" />
 			</list>
 		</property>		
 	</bean>
@@ -402,6 +402,8 @@
 		</property>
 		<property name="Valorations">
 			<list>
+				<ref bean="valoration2" />
+				<ref bean="valoration5" />
 			</list>
 		</property>
 		<property name="businessInfos">
@@ -934,6 +936,18 @@
 		<!-- Report -->
 	<bean id="report1" class="domain.Report">
 		<property name="text" value="Me acosa por el chat" />
+		<property name="weight" value="1" />
+		<property name="actor" ref="user3" />
+	</bean>
+	
+	<bean id="report2" class="domain.Report">
+		<property name="text" value="Me amenaza por el chat" />
+		<property name="weight" value="1" />
+		<property name="actor" ref="user3" />
+	</bean>
+	
+	<bean id="report3" class="domain.Report">
+		<property name="text" value="Me manda foto porno por el chat" />
 		<property name="weight" value="1" />
 		<property name="actor" ref="user3" />
 	</bean>
