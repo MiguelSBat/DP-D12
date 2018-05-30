@@ -43,7 +43,20 @@
 	<display:column title="${nameHeader}">
 	<jstl:out	value="${row.getName()}"></jstl:out></a>
 	</display:column>
-
+	<display:column >
+		
+	
+ 		<form method="get" action='valoration/valorate.do?actorId=${row.id}&?'>
+       		<input type="radio" name="rating" value="1" >
+            <input type="radio" name="rating" value="2" >
+            <input type="radio" name="rating" value="3" >
+            <input type="radio" name="rating" value="4" >
+            <input type="radio" name="rating" value="5" >
+            <input type="hidden" name="actorId" value=${row.id}>
+            <input type="submit" value="rating">
+           
+        </form>
+	</display:column>
 
 	
 </display:table>

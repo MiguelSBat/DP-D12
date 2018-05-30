@@ -47,7 +47,10 @@ public class ActorController {
 		return result;
 	}
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView display(@RequestParam final int actorId) throws Exception {
+	public ModelAndView display(  Integer actorId ) throws Exception {
+		if(actorId==null){
+		actorId = this.actorService.findByPrincipal().getId();
+		}
 		ModelAndView result;
 		Collection<SocialIdentity> socialIdentities;
 		int principalId;
