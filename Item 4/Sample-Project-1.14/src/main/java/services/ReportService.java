@@ -93,9 +93,7 @@ public class ReportService {
 			businesses = new HashSet<Business>(auxBus);
 			if (businesses.contains(business))
 				result = true;
-		} else
-			Assert.isTrue(false);
-
+		}
 		return result;
 	}
 
