@@ -52,7 +52,8 @@ public class ExpressAdvertisementTest extends AbstractTest {
 			{	//Creacion BusinessInfo correcta
 				"user1", "item1", 10.0, null
 
-			}, {	//Creacion BusinessInfo correcta por business
+			},
+			{	//Creacion BusinessInfo correcta por business
 				"business1", "item1", 10.0, null
 
 			}
