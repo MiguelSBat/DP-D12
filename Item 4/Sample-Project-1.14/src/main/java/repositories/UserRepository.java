@@ -2,6 +2,7 @@
 package repositories;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -31,5 +32,11 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 	@Query("select distinct t.user from SaleLine s join s.ticket t where s.advertisement.id=?1")
 	Collection<User> findByAdvertisementsBuyed(int ID);
+
+	@Query("select t.seller from Ticket t group by t.seller order by count(t.seller) DESC")
+	List<User> topFiveSellers();
+
+	@Query("select 100.0*count(u)/(select count(b) from Business b) from User u")
+	Double ratioUserVsBusiness();
 
 }

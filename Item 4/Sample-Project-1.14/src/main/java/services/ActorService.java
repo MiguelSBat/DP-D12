@@ -261,4 +261,11 @@ public class ActorService {
 
 		return result;
 	}
+
+	public Collection<Actor> getActorsByReport() {
+		Collection<Actor> res;
+		res = this.actorRepository.getActorsByReport();
+		return res;
+	}
+
 }

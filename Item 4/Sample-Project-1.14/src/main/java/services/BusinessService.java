@@ -1,8 +1,10 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -55,7 +57,7 @@ public class BusinessService {
 
 	public Business save(final Business business) {
 		Business result;
-			//Tener en cuenta que es llamado desde businessInfoService linea 64
+		//Tener en cuenta que es llamado desde businessInfoService linea 64
 		result = this.businessRepository.save(business);
 		return result;
 	}
@@ -113,12 +115,28 @@ public class BusinessService {
 
 		return result;
 	}
-	public Collection<Business> findBusinessIbuyThings(int userId) {
+	public Collection<Business> findBusinessIbuyThings(final int userId) {
 		Collection<Business> result;
 
 		result = this.businessRepository.findBusinessIbuyThings(userId);
 
 		return result;
+	}
+
+	public Collection<Business> topFiveBusiness() {
+		final Collection<Business> res = new ArrayList<>();
+		List<Business> aux;
+		aux = this.businessRepository.topFiveBusiness();
+		int n = aux.size();
+		if (n > 0)
+			for (int i = 0; i < aux.size(); i++) {
+				res.add(aux.get(i));
+				n++;
+				if (n == 5)
+					break;
+			}
+
+		return res;
 	}
 
 }

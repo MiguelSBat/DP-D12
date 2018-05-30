@@ -78,6 +78,7 @@
 						<li><a href="administrator/actor/listToModerate.do"><spring:message code="master.page.moderator.actor.reported.list" /></a></li>
 						<li><a href="administrator/config/display.do"><spring:message code="master.page.administrator.config.display" /></a></li>	
 						<li><a href="administrator/config/edit.do"><spring:message code="master.page.administrator.config.edit" /></a></li>	
+						<li><a href="administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
 						<li><a href="actor/create.do?actorType=ADMIN"><spring:message
 									code="master.page.createAdmin" /></a></li>
 						<li><a href="actor/create.do?actorType=MODERATOR"><spring:message

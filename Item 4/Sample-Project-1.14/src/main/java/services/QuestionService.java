@@ -127,4 +127,10 @@ public class QuestionService {
 		return result;
 	}
 
+	public Double avgQuestionsPerShopAdvertisement() {
+		Double result;
+		result = this.questionRepository.avgQuestionsPerShopAdvertisement();
+		return result;
+	}
+
 }

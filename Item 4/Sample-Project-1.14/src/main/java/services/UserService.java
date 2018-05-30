@@ -1,8 +1,10 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -155,4 +157,25 @@ public class UserService {
 		return result;
 	}
 
+	public Collection<User> topFiveUser() {
+		final Collection<User> res = new ArrayList<>();
+		List<User> aux;
+		aux = this.userRepository.topFiveSellers();
+		int n = aux.size();
+		if (n > 0)
+			for (int i = 0; i < aux.size(); i++) {
+				res.add(aux.get(i));
+				n++;
+				if (n == 5)
+					break;
+			}
+
+		return res;
+	}
+
+	public Double ratioUserVsBusiness() {
+		Double result;
+		result = this.userRepository.ratioUserVsBusiness();
+		return result;
+	}
 }

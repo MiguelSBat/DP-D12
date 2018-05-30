@@ -18,4 +18,7 @@ public interface ShopAdvertisementRepository extends JpaRepository<ShopAdvertise
 	@Query("select a from ShopAdvertisement a where a.business.id=?1 ")
 	Collection<ShopAdvertisement> findShopbyBusiness(int id);
 
+	@Query("select avg(s.stock) from ShopAdvertisement s")
+	Double avgStockShop();
+
 }

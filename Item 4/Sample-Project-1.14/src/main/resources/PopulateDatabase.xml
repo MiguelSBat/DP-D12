@@ -1235,6 +1235,7 @@
 		</property>
 		<property name="business" ref="business1" />
 	</bean>
+	
 		<!-- ShipmentAddress -->
 	<bean id="shipmentAddress1" class="domain.ShipmentAddress">
 		<property name="country" value="España"/>

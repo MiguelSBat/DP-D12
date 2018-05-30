@@ -135,6 +135,12 @@ public class ShopAdvertisementService {
 		this.shopAdvertisementRepository.save(shopAdvertisement);
 	}
 
+	public Double avgStockShop() {
+		Double result;
+		result = this.shopAdvertisementRepository.avgStockShop();
+		return result;
+	}
+
 	public void addQuestion(final Question question) {
 		ShopAdvertisement shopAdvertisement;
 

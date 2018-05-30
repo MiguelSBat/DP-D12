@@ -27,4 +27,8 @@ public interface ActorRepository extends JpaRepository<Actor, Integer> {
 
 	@Query("select c.sender from Chat c where c.receiver.id = ?1 group by c.sender")
 	Collection<Actor> findByChatsReceived(int id);
+
+	@Query("select r.actor from Report r")
+	Collection<Actor> getActorsByReport();
+
 }

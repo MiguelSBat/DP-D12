@@ -127,4 +127,40 @@ public class ReportService {
 		this.reportRepository.flush();
 	}
 
+	public Collection<Report> getReportsByReportedActor(final int id) {
+		Collection<Report> result;
+		result = this.reportRepository.getReportsByReportedActor(id);
+		return result;
+	}
+
+	public Double avgReportsPerUser() {
+		Double result = 0.0;
+		Collection<Report> auxR;
+		Collection<User> aux;
+		Collection<Actor> auxa;
+		auxa = this.actorService.getActorsByReport();
+		aux = this.userService.findAll();
+		auxa.retainAll(aux);
+		for (final Actor a : auxa) {
+			auxR = this.getReportsByReportedActor(a.getId());
+			result = result + auxR.size();
+		}
+		return result / aux.size();
+	}
+
+	public Double avgReportsPerBusiness() {
+		Double result = 0.0;
+		Collection<Report> auxR;
+		Collection<Business> aux;
+		Collection<Actor> auxa;
+		auxa = this.actorService.getActorsByReport();
+		aux = this.businessService.findAll();
+		auxa.retainAll(aux);
+		for (final Actor a : auxa) {
+			auxR = this.getReportsByReportedActor(a.getId());
+			result = result + auxR.size();
+		}
+		return result / aux.size();
+	}
+
 }

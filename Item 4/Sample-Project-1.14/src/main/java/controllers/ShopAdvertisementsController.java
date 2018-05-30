@@ -109,7 +109,7 @@ public class ShopAdvertisementsController extends AbstractController {
 
 		result = new ModelAndView("shopAdvertisement/list");
 		result.addObject("advertisements", advertisements);
-		result.addObject("requestURI", "shopAdvertisement/myList.do");
+		result.addObject("requestURI", "shopAdvertisement/list.do");
 
 		return result;
 	}

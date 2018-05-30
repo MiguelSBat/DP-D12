@@ -20,4 +20,7 @@ public interface ExpressAdvertisementRepository extends JpaRepository<ExpressAdv
 
 	@Query("select a from ExpressAdvertisement a where a.business.id=?1 ")
 	Collection<ExpressAdvertisement> findExpressbyBusiness(int id);
+
+	@Query("select avg(s.price) from ExpressAdvertisement s")
+	Double avgPriceExp();
 }

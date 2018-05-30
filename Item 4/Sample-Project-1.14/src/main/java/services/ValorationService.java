@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.ValorationRepository;
+import domain.Business;
+import domain.User;
 import domain.Valoration;
 
 @Service
@@ -20,6 +22,12 @@ public class ValorationService {
 	//Managed Repository ----
 	@Autowired
 	private ValorationRepository	valorationRepository;
+
+	@Autowired
+	private UserService				userService;
+
+	@Autowired
+	private BusinessService			businessService;
 
 
 	//Constructors
@@ -82,5 +90,32 @@ public class ValorationService {
 		result = this.valorationRepository.getAverageValorations(actorId);
 
 		return result;
+	}
+
+	public Double getAverageValorationByUser() {
+		final Collection<User> aux = this.userService.findAll();
+
+		Double res = 0.0;
+		Double s = 0.0;
+
+		for (final User u : aux) {
+			if (this.getValorations(u.getId()) != null)
+				s = this.getValorations(u.getId());
+			res = res + s;
+		}
+		return res / aux.size();
+	}
+
+	public Double getAverageValorationByBusiness() {
+		final Collection<Business> aux = this.businessService.findAll();
+		Double res = 0.0;
+
+		Double s = 0.0;
+		for (final Business u : aux) {
+			if (this.getValorations(u.getId()) != null)
+				s = this.getValorations(u.getId());
+			res = res + s;
+		}
+		return res / aux.size();
 	}
 }

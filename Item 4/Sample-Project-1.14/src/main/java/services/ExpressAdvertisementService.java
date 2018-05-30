@@ -32,7 +32,6 @@ public class ExpressAdvertisementService {
 	private ConfigService					configService;
 
 
-
 	//Constructors
 	public ExpressAdvertisementService() {
 		super();
@@ -53,38 +52,36 @@ public class ExpressAdvertisementService {
 
 		return result;
 	}
-//el delete solo cambia la fecha
-	
+	//el delete solo cambia la fecha
+
 	public void delete(final ExpressAdvertisement expressAdvertisement) {
-		Collection<ExpressAdvertisement> advertisements=new HashSet<>();
-		Actor a=actorService.findByPrincipal();
-		if(a instanceof Business){
-			Business b= (Business) a;
+		Collection<ExpressAdvertisement> advertisements = new HashSet<>();
+		final Actor a = this.actorService.findByPrincipal();
+		if (a instanceof Business) {
+			final Business b = (Business) a;
 			advertisements = this.findExpressByBussiness(b.getId());
 
 		}
-		if(a instanceof User){
-			User u= (User) a;
+		if (a instanceof User) {
+			final User u = (User) a;
 			advertisements = this.findExpressByUser(u.getId());
 
 		}
 		Assert.isTrue(advertisements.contains(expressAdvertisement));
 		expressAdvertisement.setEndDate(new Date(System.currentTimeMillis()));
 		this.expressAdvertisementRepository.save(expressAdvertisement);
-	
 
 	}
-	public Boolean isTabooThisExpressAdvertisement(final ExpressAdvertisement expressAdvertisement){
-		boolean tabu=false;
-		tabu=(this.configService.isTaboo(expressAdvertisement.getItem().getName()) || this.configService.isTaboo(expressAdvertisement.getItem().getDescription()));
+	public Boolean isTabooThisExpressAdvertisement(final ExpressAdvertisement expressAdvertisement) {
+		boolean tabu = false;
+		tabu = (this.configService.isTaboo(expressAdvertisement.getItem().getName()) || this.configService.isTaboo(expressAdvertisement.getItem().getDescription()));
 
 		final Collection<String> tags = expressAdvertisement.getTags();
-		for (final String t : tags){
-			if(this.configService.isTaboo(t)==true){
-				tabu=true;
+		for (final String t : tags)
+			if (this.configService.isTaboo(t) == true) {
+				tabu = true;
 				break;
 			}
-		}
 		return tabu;
 	}
 
@@ -92,8 +89,8 @@ public class ExpressAdvertisementService {
 		ExpressAdvertisement result;
 		Actor actor;
 		Date date;
-		
-		Assert.isTrue(!isTabooThisExpressAdvertisement(expressAdvertisement),"ExpressAdvertisement.tabuError");
+
+		Assert.isTrue(!this.isTabooThisExpressAdvertisement(expressAdvertisement), "ExpressAdvertisement.tabuError");
 		Assert.isTrue(this.actorService.isLogged());
 		actor = this.actorService.findByPrincipal();
 		Assert.isTrue(actor instanceof User || actor instanceof Business);
@@ -142,6 +139,12 @@ public class ExpressAdvertisementService {
 
 		result = this.expressAdvertisementRepository.findExpressbyUser(UserId);
 
+		return result;
+	}
+
+	public Double avgPriceExp() {
+		Double result;
+		result = this.expressAdvertisementRepository.avgPriceExp();
 		return result;
 	}
 
