@@ -54,9 +54,10 @@ public class BusinessModeratorController extends AbstractController {
 		Business business;
 
 		business = this.businessService.findOne(businessId);
-		//TODO: Intentional bug: Verify en moderador no verifica el negocio en cuestión
-		//business.setVerified(true);
-		business.setVerified(false);
+		//TODO: Cuando se active el intencionado, comentar la siguiente linea
+		business.setVerified(true);
+		//TODO: Cuando se pueda, descomentar la siguiente linea para el bug intencionado
+		//business.setVerified(false);
 		this.businessService.save(business);
 		result = new ModelAndView("redirect:/moderator/business/list.do");
 
