@@ -1009,7 +1009,7 @@
 		</property>
 	</bean>
 	
-	<bean id="shopAdvertisement1" class="domain.ShopAdvertisement">
+	<bean id="shopAdvertisement2" class="domain.ShopAdvertisement">
 		<property name="stock" value="60" />
 		<property name="publicationDate" value="2018/01/15" />
 		<property name="endDate" value="2030/01/15" />
@@ -1046,7 +1046,7 @@
 		</property>
 	</bean>
 	
-	<bean id="expressAdvertisement1" class="domain.ExpressAdvertisement">
+	<bean id="expressAdvertisement2" class="domain.ExpressAdvertisement">
 		<property name="publicationDate" value="2018/01/15" />
 		<property name="endDate" value="2030/01/15" />
 		<property name="price" value="70.50" />
