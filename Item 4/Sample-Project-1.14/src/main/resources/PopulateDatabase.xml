@@ -248,8 +248,8 @@
 		</property>
 		<property name="Valorations">
 			<list>
-				<ref bean="valoratio3" />
-				<ref bean="valoratio4" />
+				<ref bean="valoration3" />
+				<ref bean="valoration4" />
 			</list>
 		</property>
 	</bean>
@@ -302,7 +302,7 @@
 		</property>
 		<property name="Valorations">
 			<list>
-				<ref bean="valoratio5" />
+				<ref bean="valoration5" />
 			</list>
 		</property>		
 	</bean>
