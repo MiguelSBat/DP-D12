@@ -1127,21 +1127,21 @@
 		<property name="name" value="Item2" />
 		<property name="description" value="Totalmente nueva" />
 		<property name="photo" value="http://www.nintenderos.com/wp-content/uploads/2017/10/nintendo-switch.jpg" />
-		<property name="user" ref="business1"/>
+		<property name="user" ref="user1"/>
 	</bean>
 		
 	<bean id="item3" class="domain.Item">
 		<property name="name" value="Zelda Breath of the Wild Switch" />
 		<property name="description" value="Viene incluido con todos los DLCs" />
 		<property name="photo" value="https://media.vandal.net/m/43030/the-legend-of-zelda-breath-of-the-wild-201732131429_1.jpg" />
-		<property name="user" ref="user1"/>
+		<property name="business" ref="business1"/>
 	</bean>
 	
 	<bean id="item4" class="domain.Item">
 		<property name="name" value="Amibo Link twilight princess" />
 		<property name="description" value="Amibo Link Nivel 50 y entrenado para COMPETITIVO SSB" />
 		<property name="photo" value="https://images-na.ssl-images-amazon.com/images/I/619sdEL41VL._SX342_.jpg" />
-		<property name="user" ref="business1"/>
+		<property name="user" ref="user1"/>
 	</bean>
 		<!-- ShoppingCart -->
 	<bean id="shoppingCart1" class="domain.ShoppingCart">
