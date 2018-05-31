@@ -12,4 +12,9 @@
 		<put-attribute name="body" value="/views/payment/pay.jsp" />
 	</definition>
 	
+	<definition name="payment/confirmation" extends="master.page">	
+		<put-attribute name="title" value="Pago realizado correctamente" />
+		<put-attribute name="body" value="/views/payment/confirmation.jsp" />
+	</definition>
+	
 </tiles-definitions>

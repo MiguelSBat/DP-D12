@@ -251,7 +251,7 @@
 	
 	<!-- Cart confirmation messages -->
 	
-	<strong id="added" class="hidden cartMsg"><spring:message code="advertisement.addToCart.added" /><a href="#"><spring:message code="advertisement.viewCart" /></a></strong>
+	<strong id="added" class="hidden cartMsg"><spring:message code="advertisement.addToCart.added" /><a href="user/shoppingCart/view.do"><spring:message code="advertisement.viewCart" /></a></strong>
 	<strong id="outOfStock" class="hidden cartMsg"><spring:message code="advertisement.addToCart.outOfStock" /></strong>
 	<strong id="amount" class="hidden cartMsg"><spring:message code="advertisement.addToCart.amount" /></strong>
 	<strong id="cartError" class="hidden cartMsg"><spring:message code="advertisement.addToCart.error" /></strong>

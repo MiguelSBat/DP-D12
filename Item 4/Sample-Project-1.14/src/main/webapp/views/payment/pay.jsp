@@ -13,7 +13,6 @@
 <script src="scripts/checkout.js"></script>
 
 <h3><spring:message code="payment.amount"/> <jstl:out value="${total}"/></h3>
-<br>
 
 <form:form id="payForm" action="" modelAttribute="paymentForm">
 
@@ -79,22 +78,16 @@
 
       onAuthorize: function(data, actions) {
     	  return paypal.request.post(EXECUTE_PAYMENT_URL,{'paymentId' : data.paymentID,'payerId' : data.payerID}).then(function(data) {
-              if (data == 'OK'){
-                  $(location).attr('href','/paymentConfirmation');
-              } else if (data == 'ERROR'){
-                  alert('Pago no confirmado');
-              } else{
-                  alert('Error en el pago');
-              }
+    		 $(location).attr('href','user/payment/payConfirmation.do');
           });
       },
 
       onCancel: function(data, actions) {
-        alert(cancel);
+        $(location).attr('href','user/shoppingCart/view.do');
       },
 
       onError: function(err) {
-        alert(error);
+        alert('error');
       }
     }, '#paypal-button');
   </script>

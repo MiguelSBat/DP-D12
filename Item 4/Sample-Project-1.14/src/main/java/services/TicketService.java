@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 
 import repositories.TicketRepository;
 import domain.Actor;
+import domain.Advertisement;
 import domain.ExpressAdvertisement;
 import domain.FacturationData;
 import domain.SaleLine;
@@ -55,10 +56,13 @@ public class TicketService {
 	@Autowired
 	private ShoppingCartService		shopppingCartService;
 
-	public static final String		PENDING		= "pending";
-	public static final String		SENT		= "sent";
-	public static final String		RECEIVED	= "received";
-	public static final String		CANCELLED	= "cancelled";
+	@Autowired
+	private PaymentService			paymentService;
+
+	public static final String		PENDING		= "PENDING";
+	public static final String		SENT		= "SENT";
+	public static final String		RECEIVED	= "RECEIVED";
+	public static final String		CANCELLED	= "CANCELED";
 
 
 	//Constructors
@@ -124,6 +128,7 @@ public class TicketService {
 			this.advertisementService.executeBuy(saved);
 		}
 
+		this.paymentService.payout(tickets);
 		this.shopppingCartService.remove();
 	}
 	public Collection<Ticket> parseShoppingCart(final ShoppingCart cart) {
@@ -137,7 +142,7 @@ public class TicketService {
 				final ExpressAdvertisement ad = (ExpressAdvertisement) line.getAdvertisement();
 				Boolean exists = false;
 				for (final Ticket t : result)
-					if (t.getSeller().equals(ad.getUser())) {
+					if (t.getSeller() != null && t.getSeller().equals(ad.getUser())) {
 						exists = true;
 						line.setShoppingCart(null);
 						line.setTicket(t);
@@ -161,7 +166,7 @@ public class TicketService {
 				final ShopAdvertisement ad = (ShopAdvertisement) line.getAdvertisement();
 				Boolean exists = false;
 				for (final Ticket t : result)
-					if (t.getBusiness().equals(ad.getBusiness())) {
+					if (t.getBusiness() != null && t.getBusiness().equals(ad.getBusiness())) {
 						exists = true;
 						line.setShoppingCart(null);
 						line.setTicket(t);
@@ -223,6 +228,21 @@ public class TicketService {
 
 		ticket.setStatus(status);
 		result = this.save(ticket);
+		return result;
+	}
+
+	public Double getTotal(final Ticket t) {
+		Double result = 0.0;
+		final Collection<SaleLine> lines = this.saleLineService.findByTicketId(t.getId());
+
+		for (final SaleLine line : lines) {
+			final Advertisement ad = line.getAdvertisement();
+			if (ad instanceof ExpressAdvertisement)
+				result += ((ExpressAdvertisement) ad).getPrice();
+			else if (ad instanceof ShopAdvertisement)
+				result += line.getAmount() * ((ShopAdvertisement) ad).getPrice();
+		}
+
 		return result;
 	}
 }
