@@ -61,10 +61,14 @@
 	<spring:message code="master.page.date.format" var="dateFormat" />
 	<display:column property="endDate"
 		format="{0,date,${dateFormat}}" title="${endDateHeader}" />
-
-	<spring:message code="advertisement.price" var="priceHeader" />
+<%
+//TODO: bug intencional  descomentar esto  
+%>
+<%-- 	<spring:message code="advertisement.price" var="priceHeader" />
 		<display:column property="price" title="${priceHeader}" />
-
+ --%>
+ 
+ 
 <%-- 	<spring:message code="advertisement.saleLines" var="saleLinesHeader" />
 		<display:column property="saleLines" title="${saleLinesHeader}" /> --%>
 	<spring:message code="advertisement.tags" var="tagsHeader" />

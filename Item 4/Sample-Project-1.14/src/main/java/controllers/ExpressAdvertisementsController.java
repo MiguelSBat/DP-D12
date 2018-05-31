@@ -21,6 +21,7 @@ import services.ItemService;
 import services.ShopAdvertisementService;
 import services.UserService;
 import domain.Actor;
+import domain.Advertisement;
 import domain.Business;
 import domain.ExpressAdvertisement;
 import domain.Item;
@@ -72,10 +73,13 @@ public class ExpressAdvertisementsController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(final String criteria) {
 		ModelAndView result;
-		Collection<ExpressAdvertisement> advertisements;
-
-		advertisements = this.expressAdvertisementService.findNotPast();
-
+		
+		//TODO: bug intencional
+		//Collection<ExpressAdvertisement> advertisements;
+	//	advertisements = this.expressAdvertisementService.findNotPast();
+		Collection<Advertisement> advertisements;
+		advertisements = this.advertisementService.findNotPAst();
+		
 		result = new ModelAndView("expressAdvertisement/list");
 		result.addObject("advertisements", advertisements);
 
