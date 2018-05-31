@@ -15,6 +15,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <display:table pagesize="5" class="displaytag" 
 	name="lines" requestURI="user/shoppingCart/view.do" id="row">
@@ -46,3 +47,5 @@
 </display:table>
 
 <h3><spring:message code="shoppingCart.total"/> <jstl:out value="${total}" /></h3>
+<br>
+<acme:cancel url="user/payment/pay.do" code="shoppingCart.pay" />

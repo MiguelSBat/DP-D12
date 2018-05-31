@@ -1,9 +1,9 @@
 
 package services;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 
 import javax.transaction.Transactional;
 
@@ -13,10 +13,15 @@ import org.springframework.util.Assert;
 
 import repositories.TicketRepository;
 import domain.Actor;
-import domain.Business;
+import domain.ExpressAdvertisement;
+import domain.FacturationData;
 import domain.SaleLine;
+import domain.ShipmentAddress;
+import domain.ShopAdvertisement;
+import domain.ShoppingCart;
 import domain.Ticket;
 import domain.User;
+import forms.PaymentForm;
 
 @Service
 @Transactional
@@ -46,6 +51,14 @@ public class TicketService {
 
 	@Autowired
 	private ShipmentAddressService	shipmentAddressService;
+
+	@Autowired
+	private ShoppingCartService		shopppingCartService;
+
+	public static final String		PENDING		= "pending";
+	public static final String		SENT		= "sent";
+	public static final String		RECEIVED	= "received";
+	public static final String		CANCELLED	= "cancelled";
 
 
 	//Constructors
@@ -94,92 +107,85 @@ public class TicketService {
 		this.ticketRepository.flush();
 	}
 
-	public Collection<Ticket> createAndSaveFromShoppingCartId(final int shoppingCartId) {
-		Ticket ticket;
-		Ticket ticketAux;
-		Collection<Ticket> result;
-		Collection<SaleLine> salesLines;
-		Collection<Business> business;
-		Collection<User> users;
-		//		FacturationData facturationData;
-		//		FacturationData facturationDataAux;
-		//		ShipmentAddress shipmentAddress;
-		//		ShipmentAddress shipmentAddressAux;
-		Actor actor;
-		User principal;
+	public void executeBuy(final PaymentForm form) {
+		final Collection<Ticket> tickets = this.parseShoppingCart(this.shopppingCartService.findByPrincipalOrCreate());
+		Assert.notEmpty(tickets);
+		for (final Ticket t : tickets) {
+			final Ticket saved = this.save(t);
 
-		result = new ArrayList<Ticket>();
-		business = this.businessService.findByShoppingCartId(shoppingCartId);
-		users = this.userService.findByShoppingCartId(shoppingCartId);
-		actor = this.actorService.findByPrincipal();
-		principal = (User) actor;
+			final ShipmentAddress shipmentAddress = this.shipmentAddressService.create(form);
+			shipmentAddress.setTicket(saved);
+			this.shipmentAddressService.save(shipmentAddress);
 
-		for (final Business b : business) {
-			ticket = this.create();
-			ticket.setBusiness(b);
-			ticket.setStatus("PENDING");
-			ticket.setUser(principal);
-			ticket.setDate(new Date());
-			ticketAux = this.save(ticket);
-			salesLines = this.saleLineService.findByShoppingCartAndBusinessId(shoppingCartId, b.getId());
-			for (final SaleLine s : salesLines) {
-				s.setShoppingCart(null);
-				s.setTicket(ticketAux);
-				this.saleLineService.save(s);
-			}
-			//			//Datos Facturación1 TODO: Esto iría en una clase formulario y no aquí, se rellenaría por defecto con estos datos y ya
-			//			facturationDataAux = this.facturationDataService.findByUserId(principal.getId()).iterator().next();
-			//			if (facturationDataAux != null)
-			//				facturationData = this.facturationDataService.create(facturationDataAux);
-			//			else
-			//				facturationData = this.facturationDataService.create();
-			//			facturationData.setTicket(ticketAux);
-			//			facturationData = this.facturationDataService.save(facturationData);
-			//			//Dirección de envío
-			//			shipmentAddressAux = this.shipmentAddressService.findByUserId(principal.getId()).iterator().next();
-			//			if (shipmentAddressAux != null)
-			//				shipmentAddress = this.shipmentAddressService.create(shipmentAddressAux);
-			//			else
-			//				shipmentAddress = this.shipmentAddressService.create();
-			//			shipmentAddress.setTicket(ticketAux);
-			//			shipmentAddress = this.shipmentAddressService.save(shipmentAddress);
+			final FacturationData facturationData = this.facturationDataService.create(form);
+			facturationData.setTicket(saved);
+			this.facturationDataService.save(facturationData);
 
-			result.add(ticketAux);
+			this.advertisementService.executeBuy(saved);
 		}
-		for (final User u : users) {
-			ticket = this.create();
-			ticket.setSeller(u);
-			ticket.setStatus("PENDING");
-			ticket.setUser(principal);
-			ticket.setDate(new Date());
-			ticketAux = this.save(ticket);
-			salesLines = this.saleLineService.findFromUserByShoppingCartAndUserId(shoppingCartId, u.getId());
-			for (final SaleLine s : salesLines) {
-				s.setShoppingCart(null);
-				s.setTicket(ticketAux);
-				this.saleLineService.save(s);
-			}
-			//			//Datos Facturación2 TODO: Esto iría en una clase formulario y no aquí, se rellenaría por defecto con estos datos y ya
-			//			facturationDataAux = this.facturationDataService.findByUserId(principal.getId()).iterator().next();
-			//			if (facturationDataAux != null)
-			//				facturationData = this.facturationDataService.create(facturationDataAux);
-			//			else
-			//				facturationData = this.facturationDataService.create();
-			//			facturationData.setTicket(ticketAux);
-			//			facturationData = this.facturationDataService.save(facturationData);
-			//			//Dirección de envío2
-			//			shipmentAddressAux = this.shipmentAddressService.findByUserId(principal.getId()).iterator().next();
-			//			if (shipmentAddressAux != null)
-			//				shipmentAddress = this.shipmentAddressService.create(shipmentAddressAux);
-			//			else
-			//				shipmentAddress = this.shipmentAddressService.create();
-			//			shipmentAddress.setTicket(ticketAux);
-			//			shipmentAddress = this.shipmentAddressService.save(shipmentAddress);
 
-			result.add(ticketAux);
-		}
+		this.shopppingCartService.remove();
+	}
+	public Collection<Ticket> parseShoppingCart(final ShoppingCart cart) {
+		final Collection<Ticket> result = new HashSet<Ticket>();
+		final Collection<SaleLine> lines = this.saleLineService.findByShoppingCart(cart);
+		final User principal = this.userService.findByPrincipal();
+		final Date date = new Date();
+
+		for (final SaleLine line : lines)
+			if (line.getAdvertisement() instanceof ExpressAdvertisement) {
+				final ExpressAdvertisement ad = (ExpressAdvertisement) line.getAdvertisement();
+				Boolean exists = false;
+				for (final Ticket t : result)
+					if (t.getSeller().equals(ad.getUser())) {
+						exists = true;
+						line.setShoppingCart(null);
+						line.setTicket(t);
+						this.saleLineService.save(line);
+						break;
+					}
+				if (!exists) {
+					final Ticket t = new Ticket();
+					t.setUser(principal);
+					t.setSeller(ad.getUser());
+					t.setDate(date);
+					t.setStatus(TicketService.PENDING);
+					final Ticket saved = this.save(t);
+					line.setShoppingCart(null);
+					line.setTicket(saved);
+					result.add(saved);
+					this.saleLineService.save(line);
+					continue;
+				}
+			} else if (line.getAdvertisement() instanceof ShopAdvertisement) {
+				final ShopAdvertisement ad = (ShopAdvertisement) line.getAdvertisement();
+				Boolean exists = false;
+				for (final Ticket t : result)
+					if (t.getBusiness().equals(ad.getBusiness())) {
+						exists = true;
+						line.setShoppingCart(null);
+						line.setTicket(t);
+						this.saleLineService.save(line);
+						break;
+					}
+				if (!exists) {
+					final Ticket t = new Ticket();
+					t.setUser(principal);
+					t.setBusiness(ad.getBusiness());
+					t.setDate(date);
+					t.setStatus(TicketService.PENDING);
+					final Ticket saved = this.save(t);
+					line.setShoppingCart(null);
+					line.setTicket(saved);
+					result.add(saved);
+					this.saleLineService.save(line);
+					continue;
+				}
+			}
+
 		return result;
 	}
+
 	public Collection<Ticket> findByBusinessId(final int id) {
 		Collection<Ticket> result;
 

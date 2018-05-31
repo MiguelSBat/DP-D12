@@ -19,4 +19,7 @@ public interface ShipmentAddressRepository extends JpaRepository<ShipmentAddress
 	//select s from ShipmentAddress s where s.ticket.id=923
 	@Query("select s from ShipmentAddress s where s.ticket.id=?1")
 	ShipmentAddress findByTicketId(int id);
+
+	@Query("select s from ShipmentAddress s where s.user.id = ?1 and s.id = (select max(a.id) from ShipmentAddress a where a.user.id = ?1)")
+	ShipmentAddress findLatest(int userId);
 }

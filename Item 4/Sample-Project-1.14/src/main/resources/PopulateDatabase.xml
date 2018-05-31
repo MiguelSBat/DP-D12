@@ -1269,6 +1269,7 @@
 		<property name="postalCode" value="41008" />
 		<property name="address" value="c\ Rue 13 del Perzebe" />
 		<property name="ticket" ref="ticket1" />
+		<property name="user" ref="user1" />
 	</bean>
 	<bean id="shipmentAddress2" class="domain.ShipmentAddress">
 		<property name="country" value="España"/>
@@ -1276,6 +1277,7 @@
 		<property name="postalCode" value="41008" />
 		<property name="address" value="c\ Rue 13 del Perzebe" />
 		<property name="ticket" ref="ticket2" />
+		<property name="user" ref="user1" />
 	</bean>
 		<!-- ShippingInfo -->
 	<bean id="shippingInfo1" class="domain.ShippingInfo">
@@ -1293,6 +1295,7 @@
 		<property name="postalCode" value="41008" />
 		<property name="IDNumber" value="00000001A" />
 		<property name="ticket" ref="ticket1" />
+		<property name="user" ref="user1" />
 	</bean>
 	<bean id="facturationData2" class="domain.FacturationData">
 		<property name="name" value="Xi"/>
@@ -1302,6 +1305,7 @@
 		<property name="postalCode" value="41008" />
 		<property name="IDNumber" value="00000002B" />
 		<property name="ticket" ref="ticket2" />
+		<property name="user" ref="user1" />
 	</bean>
 
 

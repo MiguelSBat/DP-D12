@@ -41,6 +41,7 @@
 		<value>/views/socialIdentity/tiles.xml</value>
 		<value>/views/chat/tiles.xml</value>
 		<value>/views/shoppingCart/tiles.xml</value>
+		<value>/views/payment/tiles.xml</value>
 		<value>/views/review/tiles.xml</value>
 		<value>/views/question/tiles.xml</value>
 		<value>/views/answer/tiles.xml</value>

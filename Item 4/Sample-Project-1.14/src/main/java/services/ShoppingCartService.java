@@ -11,7 +11,9 @@ import org.springframework.util.Assert;
 
 import repositories.ShoppingCartRepository;
 import domain.Advertisement;
+import domain.ExpressAdvertisement;
 import domain.SaleLine;
+import domain.ShopAdvertisement;
 import domain.ShoppingCart;
 import domain.User;
 
@@ -109,5 +111,24 @@ public class ShoppingCartService {
 	public ShoppingCart findByPrincipalOrCreate() {
 		final User user = this.userService.findByPrincipal();
 		return this.findByUserOrCreate(user);
+	}
+
+	public Double getTotal() {
+		Double result = 0.0;
+		final Collection<SaleLine> lines = this.saleLineService.findByPrincipal();
+
+		for (final SaleLine line : lines) {
+			final Advertisement ad = line.getAdvertisement();
+			if (ad instanceof ExpressAdvertisement)
+				result += ((ExpressAdvertisement) ad).getPrice() * line.getAmount();
+			else if (ad instanceof ShopAdvertisement)
+				result += ((ShopAdvertisement) ad).getPrice() * line.getAmount();
+		}
+
+		return result;
+	}
+
+	public void remove() {
+		this.delete(this.findByPrincipalOrCreate());
 	}
 }

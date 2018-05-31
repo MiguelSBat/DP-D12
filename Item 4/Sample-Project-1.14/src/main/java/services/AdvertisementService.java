@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -10,6 +11,10 @@ import org.springframework.stereotype.Service;
 
 import repositories.AdvertisementRepository;
 import domain.Advertisement;
+import domain.ExpressAdvertisement;
+import domain.SaleLine;
+import domain.ShopAdvertisement;
+import domain.Ticket;
 
 @Service
 @Transactional
@@ -18,6 +23,9 @@ public class AdvertisementService {
 	//Managed Repository ----
 	@Autowired
 	private AdvertisementRepository	advertisementRepository;
+
+	@Autowired
+	private SaleLineService			saleLineService;
 
 
 	//Constructors
@@ -130,4 +138,17 @@ public class AdvertisementService {
 		return result;
 	}
 
+	public void executeBuy(final Ticket ticket) {
+		for (final SaleLine line : this.saleLineService.findByTicketId(ticket.getId())) {
+			final Advertisement ad = line.getAdvertisement();
+			if (ad instanceof ExpressAdvertisement) {
+				ad.setEndDate(new Date());
+				this.save(ad);
+			}
+			if (ad instanceof ShopAdvertisement) {
+				((ShopAdvertisement) ad).setStock(((ShopAdvertisement) ad).getStock() - line.getAmount());
+				this.save(ad);
+			}
+		}
+	}
 }

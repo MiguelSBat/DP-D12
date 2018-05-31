@@ -4,6 +4,7 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -58,6 +59,7 @@ public class ShipmentAddress extends DomainEntity {
 	//Relationships
 
 	private Ticket	ticket;
+	private User	user;
 
 
 	@OneToOne
@@ -67,6 +69,15 @@ public class ShipmentAddress extends DomainEntity {
 
 	public void setTicket(final Ticket ticket) {
 		this.ticket = ticket;
+	}
+
+	@ManyToOne
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(final User user) {
+		this.user = user;
 	}
 
 }

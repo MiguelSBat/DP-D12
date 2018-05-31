@@ -1,17 +1,14 @@
 
-package domain;
-
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+package forms;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-@Entity
-@Access(AccessType.PROPERTY)
-public class FacturationData extends DomainEntity {
+public class PaymentForm {
+
+	private String	shipmentCountry;
+	private String	shipmentCity;
+	private String	shipmentPostalCode;
+	private String	shipmentAdress;
 
 	private String	name;
 	private String	surname;
@@ -20,6 +17,42 @@ public class FacturationData extends DomainEntity {
 	private String	postalCode;
 	private String	IDNumber;
 
+
+	@NotBlank
+	public String getShipmentCountry() {
+		return this.shipmentCountry;
+	}
+
+	public void setShipmentCountry(final String shipmentCountry) {
+		this.shipmentCountry = shipmentCountry;
+	}
+
+	@NotBlank
+	public String getShipmentCity() {
+		return this.shipmentCity;
+	}
+
+	public void setShipmentCity(final String shipmentCity) {
+		this.shipmentCity = shipmentCity;
+	}
+
+	@NotBlank
+	public String getShipmentPostalCode() {
+		return this.shipmentPostalCode;
+	}
+
+	public void setShipmentPostalCode(final String shipmentPostalCode) {
+		this.shipmentPostalCode = shipmentPostalCode;
+	}
+
+	@NotBlank
+	public String getShipmentAdress() {
+		return this.shipmentAdress;
+	}
+
+	public void setShipmentAdress(final String shipmentAdress) {
+		this.shipmentAdress = shipmentAdress;
+	}
 
 	@NotBlank
 	public String getName() {
@@ -73,31 +106,6 @@ public class FacturationData extends DomainEntity {
 
 	public void setIDNumber(final String iDNumber) {
 		this.IDNumber = iDNumber;
-	}
-
-
-	//Relationships
-
-	private Ticket	ticket;
-	private User	user;
-
-
-	@OneToOne
-	public Ticket getTicket() {
-		return this.ticket;
-	}
-
-	public void setTicket(final Ticket ticket) {
-		this.ticket = ticket;
-	}
-
-	@ManyToOne
-	public User getUser() {
-		return this.user;
-	}
-
-	public void setUser(final User user) {
-		this.user = user;
 	}
 
 }

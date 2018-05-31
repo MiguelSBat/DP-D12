@@ -184,4 +184,10 @@ public class SaleLineService {
 		return result;
 	}
 
+	public void deleteAll() {
+		final Collection<SaleLine> lines = this.findByPrincipal();
+		for (final SaleLine line : lines)
+			this.delete(line);
+	}
+
 }

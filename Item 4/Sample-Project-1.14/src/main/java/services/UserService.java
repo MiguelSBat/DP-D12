@@ -14,9 +14,12 @@ import org.springframework.util.Assert;
 
 import repositories.UserRepository;
 import domain.Actor;
+import domain.FacturationData;
+import domain.ShipmentAddress;
 import domain.SocialIdentity;
 import domain.User;
 import forms.ActorForm;
+import forms.PaymentForm;
 
 @Service
 @Transactional
@@ -24,10 +27,16 @@ public class UserService {
 
 	//Managed Repository ----
 	@Autowired
-	private UserRepository	userRepository;
+	private UserRepository			userRepository;
 
 	@Autowired
-	private ActorService	actorService;
+	private ActorService			actorService;
+
+	@Autowired
+	private ShipmentAddressService	shipmentAddressService;
+
+	@Autowired
+	private FacturationDataService	facturationDataService;
 
 
 	//Constructors
@@ -149,6 +158,34 @@ public class UserService {
 		result = this.userRepository.findBySocialIdentity(id);
 
 		return result;
+	}
+
+	public PaymentForm getPaymentForm() {
+		final User principal = this.findByPrincipal();
+		final ShipmentAddress address = this.shipmentAddressService.findLatest(principal.getId());
+		final FacturationData facturation = this.facturationDataService.findLatest(principal.getId());
+		final PaymentForm form = new PaymentForm();
+
+		if (address != null) {
+			form.setShipmentAdress(address.getAddress());
+			form.setShipmentCity(address.getCity());
+			form.setShipmentCountry(address.getCountry());
+			form.setShipmentPostalCode(address.getPostalCode());
+		}
+
+		if (facturation != null) {
+			form.setCity(facturation.getCity());
+			form.setCountry(facturation.getCountry());
+			form.setIDNumber(facturation.getIDNumber());
+			form.setName(facturation.getName());
+			form.setSurname(facturation.getSurname());
+			form.setPostalCode(facturation.getPostalCode());
+		} else {
+			form.setName(principal.getName());
+			form.setSurname(principal.getSurname());
+		}
+
+		return form;
 	}
 
 	public Collection<User> findByAdvertisementsBuyed(final int ID) {

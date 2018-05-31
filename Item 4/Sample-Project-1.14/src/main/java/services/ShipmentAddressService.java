@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 
 import repositories.ShipmentAddressRepository;
 import domain.ShipmentAddress;
+import forms.PaymentForm;
 
 @Service
 @Transactional
@@ -19,6 +20,9 @@ public class ShipmentAddressService {
 	//Managed Repository ----
 	@Autowired
 	private ShipmentAddressRepository	shipmentAddressRepository;
+
+	@Autowired
+	private UserService					userService;
 
 
 	//Constructors
@@ -45,6 +49,18 @@ public class ShipmentAddressService {
 		return result;
 	}
 
+	public ShipmentAddress create(final PaymentForm shipmentAddress) {
+		ShipmentAddress result;
+
+		result = new ShipmentAddress();
+		result.setAddress(shipmentAddress.getShipmentAdress());
+		result.setCity(shipmentAddress.getShipmentCity());
+		result.setCountry(shipmentAddress.getShipmentCountry());
+		result.setPostalCode(shipmentAddress.getShipmentPostalCode());
+		result.setUser(this.userService.findByPrincipal());
+
+		return result;
+	}
 	public Collection<ShipmentAddress> findAll() {
 		Collection<ShipmentAddress> result;
 
@@ -92,6 +108,10 @@ public class ShipmentAddressService {
 		result = this.shipmentAddressRepository.findByTicketId(id);
 
 		return result;
+	}
+
+	public ShipmentAddress findLatest(final int userId) {
+		return this.shipmentAddressRepository.findLatest(userId);
 	}
 
 }

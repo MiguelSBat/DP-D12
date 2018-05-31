@@ -19,4 +19,7 @@ public interface FacturationDataRepository extends JpaRepository<FacturationData
 	@Query("select s from FacturationData s where s.ticket.id=?1")
 	FacturationData findByTicketId(int id);
 
+	@Query("select f from FacturationData f where f.user.id = ?1 and f.id = (select max(a.id) from FacturationData a where a.user.id = ?1)")
+	FacturationData findLatest(int userId);
+
 }

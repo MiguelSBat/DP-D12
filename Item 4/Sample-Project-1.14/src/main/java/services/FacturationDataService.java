@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 
 import repositories.FacturationDataRepository;
 import domain.FacturationData;
+import forms.PaymentForm;
 
 @Service
 @Transactional
@@ -19,6 +20,9 @@ public class FacturationDataService {
 	//Managed Repository ----
 	@Autowired
 	private FacturationDataRepository	facturationDataRepository;
+
+	@Autowired
+	private UserService					userService;
 
 
 	//Constructors
@@ -43,6 +47,21 @@ public class FacturationDataService {
 		result.setName(facturationData.getName());
 		result.setPostalCode(facturationData.getPostalCode());
 		result.setSurname(facturationData.getSurname());
+
+		return result;
+	}
+
+	public FacturationData create(final PaymentForm facturationData) {
+		FacturationData result;
+
+		result = new FacturationData();
+		result.setCity(facturationData.getCity());
+		result.setCountry(facturationData.getCountry());
+		result.setIDNumber(facturationData.getIDNumber());
+		result.setName(facturationData.getName());
+		result.setPostalCode(facturationData.getPostalCode());
+		result.setSurname(facturationData.getSurname());
+		result.setUser(this.userService.findByPrincipal());
 
 		return result;
 	}
@@ -93,5 +112,9 @@ public class FacturationDataService {
 		result = this.facturationDataRepository.findByTicketId(id);
 
 		return result;
+	}
+
+	public FacturationData findLatest(final int userId) {
+		return this.facturationDataRepository.findLatest(userId);
 	}
 }
