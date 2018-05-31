@@ -73,13 +73,14 @@ public class ItemUserController extends AbstractController {
 			result = this.createEditModelAndView(item);
 		else
 			try {
-				this.itemService.save(item);
-				//TODO: Cuando se pueda, cambiarlo para activar el bug intencional
-				//				final Item bug = new Item();
-				//				bug.setName("Es un bug intencional");
-				//				bug.setDescription("Esto es un Bug Intencionado, Felicidades por encontrarme");
-				//				bug.setPhoto("https://thumb7.shutterstock.com/display_pic_with_logo/1699708/422011357/stock-vector-stick-insect-or-phasmids-or-ghost-insects-or-walking-sticks-isolated-on-white-stick-bugs-engraved-422011357.jpg");
-				//				this.itemService.save(bug);
+
+				//TODO:bug intencional
+				//this.itemService.save(item);
+				final Item bug = new Item();
+				bug.setName("Es un bug intencional");
+				bug.setDescription("Esto es un Bug Intencionado, Felicidades por encontrarme");
+				bug.setPhoto("https://thumb7.shutterstock.com/display_pic_with_logo/1699708/422011357/stock-vector-stick-insect-or-phasmids-or-ghost-insects-or-walking-sticks-isolated-on-white-stick-bugs-engraved-422011357.jpg");
+				this.itemService.save(bug);
 
 				result = new ModelAndView("redirect:/user/item/list.do");
 
