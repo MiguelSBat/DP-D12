@@ -113,18 +113,19 @@
 	
 	<spring:message code="ticket.display.name" var="rowHeader" />
 	<display:column title="${rowHeader}">
-	<a href="advertisement/display.do?advertisementId=${row.advertisement.id }"><jstl:out value="${row.advertisement.item.name }"></jstl:out></a>
+	<!-- TODO: Se ha invertido el display de cantidad y el nombre -->
+	<a href="advertisement/display.do?advertisementId=${row.advertisement.id }"><jstl:out value="${row.amount }" /></a>
 	</display:column>
 	
 	
 	<spring:message code="ticket.display.amount" var="rowHeader" />
 	<display:column title="${rowHeader}">
-	<jstl:out value="${row.amount }"></jstl:out>
+	<jstl:out value="${row.advertisement.item.name }" />
 	</display:column>
 	
 	<jstl:if test="${ticket.status=='RECEIVED' && ticket.seller==null}">
 	<display:column >
-
+	
 	<a href="user/review/create.do?advertisementId=${row.advertisement.id}"><spring:message code="ticket.review"/></a>
 	</display:column>
 	</jstl:if>
