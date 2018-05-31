@@ -1063,6 +1063,7 @@
 			</list>
 		</property>
 	</bean>
+
 	
 		<!-- ExpressAdvertisement -->
 		
@@ -1135,6 +1136,24 @@
 		<property name="instantBuyPrice" value="520.50" />
 		<property name="secret" value="false" />
 	</bean>
+	
+	<bean id="auctionAdvertisement3" class="domain.AuctionAdvertisement">
+		<property name="publicationDate" value="2017/01/15" />
+		<property name="endDate" value="2019/01/15" />
+		<property name="tags" value="Consola" />
+		<property name="user">
+		<null></null>
+		</property>
+		<property name="business" ref="business1"/>
+		<property name="item" ref="item5" />			
+		<property name="saleLines">
+			<list>
+			</list>
+		</property>
+		<property name="startingPrice" value="220.50" />
+		<property name="instantBuyPrice" value="999.99" />
+		<property name="secret" value="true" />
+	</bean>
 		<!-- Review -->
 
 	<bean id="review1" class="domain.Review">
@@ -1180,6 +1199,13 @@
 		<property name="photo" value="https://images-na.ssl-images-amazon.com/images/I/619sdEL41VL._SX342_.jpg" />
 		<property name="user" ref="user1"/>
 	</bean>
+	<bean id="item5" class="domain.Item">
+		<property name="name" value="SuperNess Mini" />
+		<property name="description" value="Tiene Todos los juegos instalados" />
+		<property name="photo" value="https://images-na.ssl-images-amazon.com/images/I/81dKE5hBovL._SX385_.jpg" />
+		<property name="business" ref="business1"/>
+	</bean>
+	
 		<!-- ShoppingCart -->
 	<bean id="shoppingCart1" class="domain.ShoppingCart">
 		<property name="User" ref="user1" />
