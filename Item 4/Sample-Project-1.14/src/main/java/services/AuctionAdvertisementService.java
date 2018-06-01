@@ -170,14 +170,15 @@ public class AuctionAdvertisementService {
 		biddable = false;
 		if (this.actorService.isLogged()) {
 			actor = this.actorService.findByPrincipal();
-			if (actor instanceof User && actor.getId() != auctionAdvertisement.getUser().getId() && auctionAdvertisement.getEndDate().after(new Date()))
-				if (!auctionAdvertisement.isSecret())
-					biddable = true;
-				else {
-					bids = this.bidService.findByAuctionAndUser(actor.getId(), auctionAdvertisement.getId());
-					if (bids.size() == 0)
+			if (auctionAdvertisement.getEndDate().after(new Date()))
+				if ((auctionAdvertisement.getUser() != null && actor.getId() != auctionAdvertisement.getUser().getId()) || (auctionAdvertisement.getBusiness() != null && actor.getId() != auctionAdvertisement.getBusiness().getId()))
+					if (!auctionAdvertisement.isSecret())
 						biddable = true;
-				}
+					else {
+						bids = this.bidService.findByAuctionAndUser(actor.getId(), auctionAdvertisement.getId());
+						if (bids.size() == 0)
+							biddable = true;
+					}
 		}
 
 		return biddable;

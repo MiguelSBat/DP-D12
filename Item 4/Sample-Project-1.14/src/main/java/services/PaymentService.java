@@ -117,4 +117,38 @@ public class PaymentService {
 		// payout.createSynchronous(apiContext); // Paypal does not support multiple payouts at this moment.
 
 	}
+
+	public Payment buildPayment(final String baseUrl, final Double price, final String recipient) {
+		final User user = this.userService.findByPrincipal();
+		final List<Transaction> transactions = new LinkedList<Transaction>();
+
+		final Amount amount = new Amount();
+		amount.setCurrency("EUR");
+		amount.setTotal(Double.toString(price));
+
+		final Transaction transaction = new Transaction();
+		transaction.setAmount(amount);
+		transaction.setDescription("AcmeShop");
+		transactions.add(transaction);
+
+		final PayerInfo payerInfo = new PayerInfo();
+		payerInfo.setFirstName(user.getName());
+		payerInfo.setLastName(user.getSurname());
+		payerInfo.setEmail(user.getEmailAddress());
+
+		final Payer payer = new Payer();
+		payer.setPaymentMethod("paypal");
+		payer.setPayerInfo(payerInfo);
+
+		final Payment payment = new Payment();
+		payment.setIntent("sale");
+		payment.setPayer(payer);
+		payment.setTransactions(transactions);
+
+		final RedirectUrls redirectUrls = new RedirectUrls();
+		redirectUrls.setCancelUrl(baseUrl + "/user/shoppingCart/view.do");
+		redirectUrls.setReturnUrl(baseUrl + "/");
+		payment.setRedirectUrls(redirectUrls);
+		return payment;
+	}
 }

@@ -18,4 +18,7 @@ public interface BidRepository extends JpaRepository<Bid, Integer> {
 	@Query("select b from Bid b where b.auctionAdvertisement.id=?2 and b.user.id=?1")
 	Collection<Bid> findByAuctionAndUser(int userId, int auctionId);
 
+	@Query("select b from Bid b where b.auctionAdvertisement.id=?1")
+	Collection<Bid> findByAuction(int id);
+
 }

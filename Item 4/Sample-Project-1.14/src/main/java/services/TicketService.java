@@ -14,6 +14,7 @@ import org.springframework.util.Assert;
 import repositories.TicketRepository;
 import domain.Actor;
 import domain.Advertisement;
+import domain.AuctionAdvertisement;
 import domain.ExpressAdvertisement;
 import domain.FacturationData;
 import domain.SaleLine;
@@ -58,6 +59,9 @@ public class TicketService {
 
 	@Autowired
 	private PaymentService			paymentService;
+
+	@Autowired
+	private BidService				bidService;
 
 	public static final String		PENDING		= "PENDING";
 	public static final String		SENT		= "SENT";
@@ -244,5 +248,33 @@ public class TicketService {
 		}
 
 		return result;
+	}
+
+	public void executeBuy(final AuctionAdvertisement auction, final PaymentForm paymentForm) {
+		final Ticket ticket = new Ticket();
+		ticket.setUser(this.userService.findByPrincipal());
+		ticket.setSeller(auction.getUser() != null ? auction.getUser() : null);
+		ticket.setBusiness(auction.getBusiness() != null ? auction.getBusiness() : null);
+		ticket.setStatus(TicketService.PENDING);
+		ticket.setDate(new Date());
+		final Ticket savedTicket = this.save(ticket);
+
+		final SaleLine line = new SaleLine();
+		line.setAdvertisement(auction);
+		line.setAmount(1);
+		line.setTicket(savedTicket);
+		this.saleLineService.save(line);
+
+		this.bidService.deleteFromAuction(auction);
+		auction.setEndDate(new Date());
+		this.advertisementService.save(auction);
+
+		final FacturationData fdata = this.facturationDataService.create(paymentForm);
+		fdata.setTicket(savedTicket);
+		this.facturationDataService.save(fdata);
+
+		final ShipmentAddress saddress = this.shipmentAddressService.create(paymentForm);
+		saddress.setTicket(savedTicket);
+		this.shipmentAddressService.save(saddress);
 	}
 }

@@ -13,6 +13,11 @@
 		<put-attribute name="body" value="/views/payment/pay.jsp" />
 	</definition>
 	
+	<definition name="payment/payBuyNow" extends="master.page">	
+		<put-attribute name="title" value="Payment" />
+		<put-attribute name="body" value="/views/payment/payBuyNow.jsp" />
+	</definition>
+	
 	<definition name="payment/confirmation" extends="master.page">	
 		<put-attribute name="title" value="Payment successfully processed" />
 		<put-attribute name="body" value="/views/payment/confirmation.jsp" />

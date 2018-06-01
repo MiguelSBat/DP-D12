@@ -114,4 +114,13 @@ public class BidService {
 
 		return result;
 	}
+
+	public void deleteFromAuction(final AuctionAdvertisement auction) {
+		for (final Bid b : this.findByAuction(auction.getId()))
+			this.delete(b);
+	}
+
+	private Collection<Bid> findByAuction(final int id) {
+		return this.bidRepository.findByAuction(id);
+	}
 }

@@ -9,6 +9,7 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<script src="scripts/checkout.js"></script>
 
 <script>
 	function addToCartAction(adId){
@@ -195,9 +196,9 @@
 			<li><b><spring:message code="advertisement.startingPrice"></spring:message>:</b>
 				<jstl:out value="${advertisement.getStartingPrice()}" /></li>
 			<li><b><spring:message code="advertisement.instantBuyPrice"></spring:message>:</b>
-				<jstl:out value="${advertisement.getInstantBuyPrice()}" /> <input type="button" name="buynow"
-																			value="<spring:message code="advertisement.buy.now" />"
-																			onclick="javascript: relativeRedir('user/payment/buyNow.do?'+${advertisement.id})" /></li>
+				<jstl:out value="${advertisement.getInstantBuyPrice()}" /> <input type="button" name="cancel"
+																				value="<spring:message code="advertisement.buy.now" />"
+																				onclick="javascript: relativeRedir('user/payment/payBuyNow.do?auctionId=${advertisement.id}')" /></li>
 				
 				
 
@@ -270,3 +271,4 @@
 		value="<spring:message code="advertisement.back" />"
 		onclick="javascript: relativeRedir('advertisement/list.do')" />
 </div>
+
