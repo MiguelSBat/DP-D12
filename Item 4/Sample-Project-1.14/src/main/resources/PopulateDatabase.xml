@@ -1245,7 +1245,7 @@
 		<!-- Ticket -->
 	<bean id="ticket1" class="domain.Ticket">
 		<property name="date" value="2018/01/15"/>
-		<property name="status" value="RECEIVED"/>
+		<property name="status" value="SENT"/>
 		<property name="user" ref="user1" />
 		<property name="seller" >
 		<null></null>
