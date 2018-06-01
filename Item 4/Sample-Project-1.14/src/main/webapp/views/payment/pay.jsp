@@ -59,9 +59,9 @@
     };
     
     paypal.Button.render({
-      env: 'sandbox', // Or 'sandbox',
-
-      commit: true, // Show a 'Pay Now' button
+      env: 'sandbox',
+      commit: true,       
+      locale: '<spring:message code="payment.locale"/>',
 
       style: {
         color: 'gold',

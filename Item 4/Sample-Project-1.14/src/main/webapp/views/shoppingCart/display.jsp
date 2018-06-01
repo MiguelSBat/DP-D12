@@ -48,4 +48,6 @@
 
 <h3><spring:message code="shoppingCart.total"/> <jstl:out value="${total}" /></h3>
 <br>
-<acme:cancel url="user/payment/pay.do" code="shoppingCart.pay" />
+<jstl:if test="${shoppingCart.total > 0.0}">
+	<acme:cancel url="user/payment/pay.do" code="shoppingCart.pay" />
+</jstl:if>

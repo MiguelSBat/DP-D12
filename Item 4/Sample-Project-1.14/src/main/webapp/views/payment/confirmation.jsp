@@ -10,4 +10,4 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
-<a href="/"><spring:message code="payment.confirmation"/></a>
+<a href="/AcmeShop"><spring:message code="payment.confirmation"/></a>

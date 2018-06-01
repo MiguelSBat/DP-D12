@@ -82,7 +82,7 @@
 		
 		<jstl:if test="${premium.getClass().name == 'domain.AuctionAdvertisement'}">
 			<li><b><spring:message code="advertisement.instantBuyPrice"></spring:message>:</b>
-				<jstl:out value="${premium.getInstantBuyPrice()}" /></li>
+				<jstl:out value="${premium.getInstantBuyPrice()}" /> 
 			<li><b><spring:message code="advertisement.startingPrice"></spring:message>:</b>
 				<jstl:out value="${premium.getStartingPrice()}" /></li>
 		</jstl:if>
@@ -93,7 +93,7 @@
 		</jstl:if>
 		
 	<b><spring:message code="advertisement.endDate"></spring:message>:</b>
-	<fmt:formatDate value="${premium.getEndDate()}" pattern="${dateFormat}" />
+	<fmt:formatDate value="${premium.getEndDate()}" />
 	
 	<img class="premiumphoto" src="${premium.item.photo}"/>
 
@@ -128,7 +128,7 @@
 
 		<li><b><spring:message code="advertisement.publicationDate"></spring:message>:</b>
 			<fmt:formatDate value="${advertisement.getPublicationDate()}"
-				pattern="${dateFormat}" /></li>
+				pattern="MM/dd/yyyy HH:mm" /></li>
 
 		<jstl:if test="${type.equals('shop')}">
 			<li><b><spring:message code="advertisement.stock"></spring:message>:</b>
@@ -195,7 +195,9 @@
 			<li><b><spring:message code="advertisement.startingPrice"></spring:message>:</b>
 				<jstl:out value="${advertisement.getStartingPrice()}" /></li>
 			<li><b><spring:message code="advertisement.instantBuyPrice"></spring:message>:</b>
-				<jstl:out value="${advertisement.getInstantBuyPrice()}" /></li>
+				<jstl:out value="${advertisement.getInstantBuyPrice()}" /> <input type="button" name="buynow"
+																			value="<spring:message code="advertisement.buy.now" />"
+																			onclick="javascript: relativeRedir('user/payment/buyNow.do?'+${advertisement.id})" /></li>
 				
 				
 
@@ -238,14 +240,18 @@
 		</jstl:if>
 	</ul>
 	
-	<input type="button" name="addToCart"
-		value="<spring:message code="advertisement.addToCart" />"
-		onclick="addToCartAction('${advertisement.id}')" />
+	
 	
 	<jstl:if test="${type.equals('shop')}">
+		<input type="button" name="addToCart"
+			value="<spring:message code="advertisement.addToCart" />"
+			onclick="addToCartAction('${advertisement.id}')" />
 		<input type="number" step="1" min="0" max="${advertisement.stock}" value="1" name="cartAmount" id="cartAmount" />
 	</jstl:if>
 	<jstl:if test="${type.equals('express')}">
+		<input type="button" name="addToCart"
+			value="<spring:message code="advertisement.addToCart" />"
+			onclick="addToCartAction('${advertisement.id}')" />
 		<input style="display: none;" type="number" value="1" name="cartAmount" id="cartAmount" />
 	</jstl:if>
 	
