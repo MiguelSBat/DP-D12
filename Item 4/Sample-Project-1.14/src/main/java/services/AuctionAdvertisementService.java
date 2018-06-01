@@ -81,6 +81,7 @@ public class AuctionAdvertisementService {
 		Actor actor;
 		Date date;
 
+		//TODO: bug intecional, añadir asserts para los precios negativos
 		Assert.isTrue(this.actorService.isLogged());
 		actor = this.actorService.findByPrincipal();
 		Assert.isTrue(actor instanceof User || actor instanceof Business);
