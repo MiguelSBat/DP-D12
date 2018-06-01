@@ -30,7 +30,7 @@
 	<acme:submit name="save" code="review.save"/>
 	
 	<spring:message code="review.cancel" var="cancel"/>
-	<input type="button" name="cancel" value="${cancel}" onclick="javascript:relativeRedir('');" />
+	<input type="button" name="cancel" value="${cancel}" onclick="javascript:relativeRedir('user/ticket/myTickets.do');" />
 	<br />	
 	
 </form:form>

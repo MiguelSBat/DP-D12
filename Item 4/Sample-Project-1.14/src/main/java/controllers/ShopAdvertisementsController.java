@@ -93,7 +93,7 @@ public class ShopAdvertisementsController extends AbstractController {
 		else if (s.contains("shopAdvertisement.stockError"))
 			result = "shopAdvertisement.stockError";
 		else
-			result = "creditCard.commit.error";
+			result = "advertisement.commit.error";
 
 		return result;
 	}
