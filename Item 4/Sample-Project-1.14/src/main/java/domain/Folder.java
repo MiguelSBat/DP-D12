@@ -18,17 +18,17 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 public class Folder extends DomainEntity {
 
-	private String	title;
+	private String	name;
 	private Boolean	systemFolders;
 
 
 	@NotBlank
-	public String getTitle() {
-		return this.title;
+	public String getName() {
+		return this.name;
 	}
 
-	public void setTitle(final String title) {
-		this.title = title;
+	public void setName(final String title) {
+		this.name = title;
 	}
 
 	@NotNull

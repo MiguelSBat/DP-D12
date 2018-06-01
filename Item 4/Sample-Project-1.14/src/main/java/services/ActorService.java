@@ -268,4 +268,12 @@ public class ActorService {
 		return res;
 	}
 
+	public Collection<Actor> findByEmail(final String email) {
+		Collection<Actor> result;
+
+		result = this.actorRepository.findByEmail(email);
+
+		return result;
+	}
+
 }

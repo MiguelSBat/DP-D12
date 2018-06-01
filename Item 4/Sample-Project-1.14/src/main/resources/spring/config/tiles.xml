@@ -46,6 +46,8 @@
 		<value>/views/question/tiles.xml</value>
 		<value>/views/answer/tiles.xml</value>
 		<value>/views/report/tiles.xml</value>
+		<value>/views/message/tiles.xml</value>
+		<value>/views/folder/tiles.xml</value>
 
 	</util:list>
 

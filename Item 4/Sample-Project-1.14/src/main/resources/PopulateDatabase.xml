@@ -467,7 +467,7 @@
 	<!-- Folder -->
 
 	<bean id="rootFolderAdministrator1" class="domain.Folder">
-		<property name="title" value="Root" />
+		<property name="name" value="Root" />
 		<property name="folders">
 			<list>
 				<ref bean="inboxFolderAdministrator1" />
@@ -483,7 +483,7 @@
 	</bean>
 
 	<bean id="inboxFolderAdministrator1" class="domain.Folder">
-		<property name="title" value="Inbox" />
+		<property name="name" value="Inbox" />
 		<property name="parent" ref="rootFolderAdministrator1" />
 		<property name="folders">
 			<list>
@@ -496,7 +496,7 @@
 		<property name="systemFolders" value="True" />
 	</bean>
 	<bean id="outboxFolderAdministrator1" class="domain.Folder">
-		<property name="title" value="Outbox" />
+		<property name="name" value="Outbox" />
 		<property name="parent" ref="rootFolderAdministrator1" />
 		<property name="folders">
 			<list>
@@ -509,7 +509,7 @@
 		<property name="systemFolders" value="True" />
 	</bean>
 	<bean id="trashboxFolderAdministrator1" class="domain.Folder">
-		<property name="title" value="TrashBox" />
+		<property name="name" value="TrashBox" />
 		
 		<property name="parent" ref="rootFolderAdministrator1" />
 		<property name="folders">
@@ -524,7 +524,7 @@
 	</bean>
 	
 	<bean id="rootFolderUser1" class="domain.Folder">
-		<property name="title" value="Root" />
+		<property name="name" value="Root" />
 		
 		<property name="folders">
 			<list>
@@ -543,7 +543,7 @@
 	</bean>
 
 	<bean id="inboxFolderUser1" class="domain.Folder">
-		<property name="title" value="Inbox" />
+		<property name="name" value="Inbox" />
 		
 		<property name="parent" ref="rootFolderUser1" />
 		<property name="folders">
@@ -558,7 +558,7 @@
 		<property name="systemFolders" value="True" />
 	</bean>
 	<bean id="outboxFolderUser1" class="domain.Folder">
-		<property name="title" value="Outbox" />
+		<property name="name" value="Outbox" />
 		
 		<property name="parent" ref="rootFolderUser1" />
 		<property name="folders">
@@ -574,7 +574,7 @@
 		<property name="systemFolders" value="True" />
 	</bean>
 	<bean id="trashboxFolderUser1" class="domain.Folder">
-		<property name="title" value="TrashBox" />
+		<property name="name" value="TrashBox" />
 		
 		<property name="parent" ref="rootFolderUser1" />
 		<property name="folders">
@@ -589,7 +589,7 @@
 	</bean>
 
 	<bean id="rootFolderUser2" class="domain.Folder">
-		<property name="title" value="Root" />
+		<property name="name" value="Root" />
 		
 		<property name="folders">
 			<list>
@@ -608,7 +608,7 @@
 	</bean>
 
 	<bean id="inboxFolderUser2" class="domain.Folder">
-		<property name="title" value="Inbox" />
+		<property name="name" value="Inbox" />
 		
 		<property name="parent" ref="rootFolderUser2" />
 		<property name="folders">
@@ -624,7 +624,7 @@
 		<property name="systemFolders" value="True" />
 	</bean>
 	<bean id="outboxFolderUser2" class="domain.Folder">
-		<property name="title" value="Outbox" />
+		<property name="name" value="Outbox" />
 		
 		<property name="parent" ref="rootFolderUser2" />
 		<property name="folders">
@@ -639,7 +639,7 @@
 		<property name="systemFolders" value="True" />
 	</bean>
 	<bean id="trashboxFolderUser2" class="domain.Folder">
-		<property name="title" value="TrashBox" />
+		<property name="name" value="TrashBox" />
 		
 		<property name="parent" ref="rootFolderUser2" />
 		<property name="folders">
@@ -654,7 +654,7 @@
 	</bean>
 
 	<bean id="rootFolderUser3" class="domain.Folder">
-		<property name="title" value="Root" />
+		<property name="name" value="Root" />
 		
 		<property name="folders">
 			<list>
@@ -673,7 +673,7 @@
 	</bean>
 
 	<bean id="inboxFolderUser3" class="domain.Folder">
-		<property name="title" value="Inbox" />
+		<property name="name" value="Inbox" />
 		
 		<property name="parent" ref="rootFolderUser3" />
 		<property name="folders">
@@ -687,7 +687,7 @@
 		<property name="systemFolders" value="True" />
 	</bean>
 	<bean id="outboxFolderUser3" class="domain.Folder">
-		<property name="title" value="Outbox" />
+		<property name="name" value="Outbox" />
 		
 		<property name="parent" ref="rootFolderUser3" />
 		<property name="folders">
@@ -702,7 +702,7 @@
 	</bean>
 
 	<bean id="trashboxFolderUser3" class="domain.Folder">
-		<property name="title" value="TrashBox" />
+		<property name="name" value="TrashBox" />
 		
 		<property name="parent" ref="rootFolderUser3" />
 		<property name="folders">
@@ -717,7 +717,7 @@
 	</bean>
 
 	<bean id="rootFolderModerator1" class="domain.Folder">
-		<property name="title" value="Root" />
+		<property name="name" value="Root" />
 		
 		<property name="folders">
 			<list>
@@ -736,7 +736,7 @@
 	</bean>
 
 	<bean id="inboxFolderModerator1" class="domain.Folder">
-		<property name="title" value="Inbox" />
+		<property name="name" value="Inbox" />
 		
 		<property name="parent" ref="rootFolderModerator1" />
 		<property name="folders">
@@ -750,7 +750,7 @@
 		<property name="systemFolders" value="True" />
 	</bean>
 	<bean id="outboxFolderModerator1" class="domain.Folder">
-		<property name="title" value="Outbox" />
+		<property name="name" value="Outbox" />
 		
 		<property name="parent" ref="rootFolderModerator1" />
 		<property name="folders">
@@ -764,7 +764,7 @@
 		<property name="systemFolders" value="True" />
 	</bean>
 	<bean id="trashboxFolderModerator1" class="domain.Folder">
-		<property name="title" value="TrashBox" />
+		<property name="name" value="TrashBox" />
 		
 		<property name="parent" ref="rootFolderModerator1" />
 		<property name="folders">
@@ -779,7 +779,7 @@
 	</bean>
 
 	<bean id="rootFolderbusiness1" class="domain.Folder">
-		<property name="title" value="Root" />
+		<property name="name" value="Root" />
 		
 		<property name="folders">
 			<list>
@@ -798,7 +798,7 @@
 	</bean>
 
 	<bean id="inboxFolderbusiness1" class="domain.Folder">
-		<property name="title" value="Inbox" />
+		<property name="name" value="Inbox" />
 		
 		<property name="parent" ref="rootFolderbusiness1" />
 		<property name="folders">
@@ -813,7 +813,7 @@
 		<property name="systemFolders" value="True" />
 	</bean>
 	<bean id="outboxFolderbusiness1" class="domain.Folder">
-		<property name="title" value="Outbox" />
+		<property name="name" value="Outbox" />
 		
 		<property name="parent" ref="rootFolderbusiness1" />
 		<property name="folders">
@@ -828,7 +828,7 @@
 	</bean>
 
 	<bean id="trashboxFolderbusiness1" class="domain.Folder">
-		<property name="title" value="TrashBox" />
+		<property name="name" value="TrashBox" />
 		
 		<property name="parent" ref="rootFolderbusiness1" />
 		<property name="folders">
@@ -843,7 +843,7 @@
 	</bean>
 	
 	<bean id="rootFolderbusiness2" class="domain.Folder">
-		<property name="title" value="Root" />
+		<property name="name" value="Root" />
 		
 		<property name="folders">
 			<list>
@@ -862,7 +862,7 @@
 	</bean>
 
 	<bean id="inboxFolderbusiness2" class="domain.Folder">
-		<property name="title" value="Inbox" />
+		<property name="name" value="Inbox" />
 		
 		<property name="parent" ref="rootFolderbusiness2" />
 		<property name="folders">
@@ -876,7 +876,7 @@
 		<property name="systemFolders" value="True" />
 	</bean>
 	<bean id="outboxFolderbusiness2" class="domain.Folder">
-		<property name="title" value="Outbox" />
+		<property name="name" value="Outbox" />
 		
 		<property name="parent" ref="rootFolderbusiness2" />
 		<property name="folders">
@@ -891,7 +891,7 @@
 	</bean>
 	
 	<bean id="trashboxFolderbusiness2" class="domain.Folder">
-		<property name="title" value="TrashBox" />
+		<property name="name" value="TrashBox" />
 		
 		<property name="parent" ref="rootFolderbusiness2" />
 		<property name="folders">
@@ -913,7 +913,11 @@
 		<property name="body" value="cuerpo del mensaje 1." />
 		
 		<property name="sender" ref="user1" />
-		<property name="recipient" ref="user2"/>
+		<property name="recipients" >
+			<list>
+				<ref bean="user2"/>
+			</list>
+		</property>
 		
 	</bean>
 	<bean id="message2" class="domain.Message">
@@ -922,7 +926,11 @@
 		<property name="body" value="cuerpo del mensaje 2." />
 		
 		<property name="sender" ref="user2" />
-		<property name="recipient" ref="user1"/>
+		<property name="recipients">
+			<list>
+				<ref bean="user1"/>
+			</list>
+		</property>
 	</bean>
 	<bean id="message3" class="domain.Message">
 		<property name="moment" value="2017/10/01 19:00" />
@@ -930,7 +938,11 @@
 		<property name="body" value="cuerpo del mensaje 3." />
 		
 		<property name="sender" ref="user1" />
-		<property name="recipient" ref="business1"/>
+		<property name="recipients">
+			<list>
+				<ref bean="business1"/>
+			</list>
+		</property>
 	</bean>
 	
 		<!-- Report -->

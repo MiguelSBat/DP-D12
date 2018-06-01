@@ -107,6 +107,9 @@
 		
 		<security:intercept-url pattern="/business/answer/**" access="hasRole('BUSINESS')" />
 		
+		<security:intercept-url pattern="/actor/message/**" access="isAuthenticated()" />
+		<security:intercept-url pattern="/actor/folder/**" access="isAuthenticated()" /> 
+		
 		<security:intercept-url pattern="/law/terms-conditions.do" access="permitAll" /> 
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" requires-channel="http"/>

@@ -46,6 +46,8 @@
 		<value>/views/question/messages</value>
 		<value>/views/answer/messages</value>
 		<value>/views/report/messages</value>
+		<value>/views/message/messages</value>
+		<value>/views/folder/messages</value>
 		
 	</util:list>
 
