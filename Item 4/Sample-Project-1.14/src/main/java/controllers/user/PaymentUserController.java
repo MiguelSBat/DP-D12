@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import services.AuctionAdvertisementService;
+import services.BidService;
 import services.PaymentService;
 import services.SaleLineService;
 import services.ShoppingCartService;
@@ -29,6 +30,7 @@ import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
 
 import domain.AuctionAdvertisement;
+import domain.Bid;
 import forms.PaymentForm;
 import forms.PaymentResponse;
 
@@ -55,6 +57,9 @@ public class PaymentUserController {
 	@Autowired
 	AuctionAdvertisementService	auctionAdvertisementService;
 
+	@Autowired
+	BidService					bidService;
+
 
 	@RequestMapping(value = "/pay", method = RequestMethod.GET)
 	public ModelAndView pay() {
@@ -79,6 +84,21 @@ public class PaymentUserController {
 		session.setAttribute("auction", ad);
 
 		result = new ModelAndView("payment/payBuyNow");
+		result.addObject("total", total);
+		result.addObject("paymentForm", form);
+		return result;
+	}
+
+	@RequestMapping(value = "/payBid", method = RequestMethod.GET)
+	public ModelAndView payBid(@RequestParam final int auctionId, final HttpSession session) {
+		final ModelAndView result;
+		final Bid bid = this.bidService.findHighest(auctionId);
+
+		final Double total = bid.getAmount();
+		final PaymentForm form = this.userService.getPaymentForm();
+		session.setAttribute("bid", bid);
+
+		result = new ModelAndView("payment/payBid");
 		result.addObject("total", total);
 		result.addObject("paymentForm", form);
 		return result;
@@ -138,6 +158,35 @@ public class PaymentUserController {
 
 		return result;
 	}
+
+	@RequestMapping(value = "/buyBid", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public PaymentResponse buyBid(@Valid final PaymentForm body, final HttpServletRequest request, final HttpSession session) {
+		PaymentResponse result = null;
+		final Bid bid = (Bid) session.getAttribute("bid");
+
+		final Payment payment = this.paymentService.buildPayment(request.getLocalName(), bid.getAmount(), bid.getAuctionAdvertisement().getBusiness() != null ? bid.getAuctionAdvertisement().getBusiness().getPaypalEmail() : bid.getAuctionAdvertisement()
+			.getUser().getEmailAddress());
+
+		try {
+			final APIContext apiContext = new APIContext(PaymentService.clientId, PaymentService.clientSecret, "sandbox");
+			final Payment createdPayment = payment.create(apiContext);
+			System.out.println(createdPayment.toString());
+			if (createdPayment.getState().equals("created")) {
+				result = new PaymentResponse();
+				result.setId(createdPayment.getId());
+				result.setState(createdPayment.getState());
+				session.setAttribute("paymentForm", body);
+			}
+		} catch (final PayPalRESTException e) {
+			return null;
+		} catch (final Exception ex) {
+			return null;
+		}
+
+		return result;
+	}
+
 	@RequestMapping(value = "/executePaypal", method = RequestMethod.POST)
 	@ResponseBody
 	public PaymentResponse executePaypal(final String paymentId, final String payerId, final HttpServletRequest request, final HttpSession session) {
@@ -188,6 +237,32 @@ public class PaymentUserController {
 
 		return response;
 	}
+
+	@RequestMapping(value = "/executeBid", method = RequestMethod.POST)
+	@ResponseBody
+	public PaymentResponse executeBid(final String paymentId, final String payerId, final HttpSession session) {
+		final PaymentResponse response = new PaymentResponse();
+		final APIContext apiContext = new APIContext(PaymentService.clientId, PaymentService.clientSecret, "sandbox");
+		try {
+			final Payment payment = Payment.get(apiContext, paymentId);
+			Assert.notNull(payment);
+			final PaymentExecution execution = new PaymentExecution();
+			execution.setPayerId(payerId);
+			final Payment result = payment.execute(apiContext, execution);
+			System.out.println(result.toString());
+			if (result.getState().equals("approved")) {
+				this.ticketService.executeBuy((Bid) session.getAttribute("bid"), (PaymentForm) session.getAttribute("paymentForm"));
+				response.setState("OK");
+			}
+		} catch (final PayPalRESTException e) {
+			response.setState("ERROR");
+		} finally {
+			session.removeAttribute("auction");
+		}
+
+		return response;
+	}
+
 	@RequestMapping(value = "/payConfirmation", method = RequestMethod.GET)
 	public ModelAndView paymentConfirmation() {
 		return new ModelAndView("payment/confirmation");

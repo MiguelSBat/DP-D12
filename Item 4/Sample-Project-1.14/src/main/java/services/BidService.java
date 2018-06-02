@@ -123,4 +123,8 @@ public class BidService {
 	private Collection<Bid> findByAuction(final int id) {
 		return this.bidRepository.findByAuction(id);
 	}
+
+	public Bid findHighest(final int auctionId) {
+		return this.bidRepository.findHighest(auctionId);
+	}
 }

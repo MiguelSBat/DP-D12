@@ -3,6 +3,7 @@ package services;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 
 import javax.transaction.Transactional;
 
@@ -34,6 +35,9 @@ public class AuctionAdvertisementService {
 
 	@Autowired
 	private BidService						bidService;
+
+	@Autowired
+	private UserService						userService;
 
 
 	//Constructors
@@ -182,5 +186,21 @@ public class AuctionAdvertisementService {
 		}
 
 		return biddable;
+	}
+
+	public Collection<AuctionAdvertisement> findWonAuctions() {
+		final User user = this.userService.findByPrincipal();
+		final Collection<AuctionAdvertisement> finished = this.findFinished();
+		final Collection<AuctionAdvertisement> result = new HashSet<>();
+		for (final AuctionAdvertisement ad : finished) {
+			final Bid bid = this.bidService.findHighest(ad.getId());
+			if (bid != null && bid.getUser().equals(user))
+				result.add(ad);
+		}
+		return result;
+	}
+
+	private Collection<AuctionAdvertisement> findFinished() {
+		return this.auctionAdvertisementRepository.findFinished();
 	}
 }

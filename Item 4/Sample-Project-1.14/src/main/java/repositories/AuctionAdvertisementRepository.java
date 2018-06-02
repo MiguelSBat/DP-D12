@@ -23,4 +23,7 @@ public interface AuctionAdvertisementRepository extends JpaRepository<AuctionAdv
 
 	@Query("select b.auctionAdvertisement from Bid b where b.user.id=?1 group by b.auctionAdvertisement")
 	Collection<AuctionAdvertisement> findByUser(int userId);
+
+	@Query("select a from AuctionAdvertisement a where a.endDate<CURRENT_timestamp")
+	Collection<AuctionAdvertisement> findFinished();
 }
