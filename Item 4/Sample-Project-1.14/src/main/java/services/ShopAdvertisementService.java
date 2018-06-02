@@ -62,7 +62,7 @@ public class ShopAdvertisementService {
 		actor = this.actorService.findByPrincipal();
 		Assert.isTrue(actor instanceof Business);
 		Assert.isTrue(shopAdvertisement.getBusiness().getId() == actor.getId());
-		//TODO : El delete no hace na, shopAdvertisement.setEndDate(new Date(System.currentTimeMillis()));
+		shopAdvertisement.setEndDate(new Date(System.currentTimeMillis()));
 		this.shopAdvertisementRepository.save(shopAdvertisement);
 	}
 

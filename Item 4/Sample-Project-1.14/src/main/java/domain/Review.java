@@ -45,8 +45,7 @@ public class Review extends DomainEntity {
 	}
 
 	@NotNull
-	//TODO: Acepta negativos
-	@Range(min = Integer.MIN_VALUE, max = 5)
+	@Range(min = 0, max = 5)
 	public Integer getScore() {
 		return this.score;
 	}
