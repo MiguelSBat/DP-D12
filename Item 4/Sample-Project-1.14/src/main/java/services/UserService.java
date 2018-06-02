@@ -14,6 +14,7 @@ import org.springframework.util.Assert;
 
 import repositories.UserRepository;
 import domain.Actor;
+import domain.Business;
 import domain.FacturationData;
 import domain.ShipmentAddress;
 import domain.SocialIdentity;
@@ -213,5 +214,14 @@ public class UserService {
 		Double result;
 		result = this.userRepository.ratioUserVsBusiness();
 		return result;
+	}
+
+	public void makePremium() {
+		final Actor a = this.actorService.findByPrincipal();
+		if (a instanceof User)
+			((User) a).setPremium(true);
+		else if (a instanceof Business)
+			((Business) a).setPremium(true);
+		this.actorService.save(a);
 	}
 }
