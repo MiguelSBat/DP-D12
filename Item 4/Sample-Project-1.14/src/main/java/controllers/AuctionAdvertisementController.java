@@ -165,7 +165,6 @@ public class AuctionAdvertisementController extends AbstractController {
 		ModelAndView result;
 		Bid bid;
 
-		//TODO cambiar el check en el jsp
 		result = new ModelAndView("redirect:/advertisement/display.do?advertisementId=" + auctionAdvertisementId);
 		try {
 			bid = this.bidService.createAndSave(auctionAdvertisementId, amount);
