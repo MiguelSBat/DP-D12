@@ -224,9 +224,12 @@ public class TicketService {
 
 		principal = this.actorService.findByPrincipal();
 		ticket = this.findOne(ticketId);
-		if (status.equals("SENT") || status.equals("CANCELLED"))
-			Assert.isTrue(ticket.getBusiness().getId() == principal.getId() || ticket.getSeller().getId() == principal.getId());
-		else if (status.equals("RECEIVED"))
+		if (status.equals("SENT") || status.equals("CANCELLED")) {
+			if (ticket.getBusiness() != null)
+				Assert.isTrue(ticket.getBusiness().getId() == principal.getId());
+			else
+				Assert.isTrue(ticket.getSeller().getId() == principal.getId());
+		} else if (status.equals("RECEIVED"))
 			Assert.isTrue(ticket.getUser().getId() == principal.getId());
 		else
 			Assert.isTrue(false);
