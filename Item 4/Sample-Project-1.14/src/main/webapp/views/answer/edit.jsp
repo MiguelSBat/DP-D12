@@ -38,7 +38,7 @@
 	<acme:submit name="save" code="answer.save" />
 
 	<!-- El bueno -->
-	<acme:cancel url="question/list.do?businessId=${answer.question.shopAdvertisement.business.id}"
+	<acme:cancel url="business/question/list.do?businessId=${answer.question.shopAdvertisement.business.id}"
 		code="answer.cancel" />
 
 </form:form>
