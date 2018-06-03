@@ -75,14 +75,14 @@
 	
 	<jstl:if test="${delete}">
 	<jsp:useBean id="now" class="java.util.Date"/>
+	
+	<display:column>
 	<jstl:if test="${row.getEndDate() > now}">
-	<display:column >
 		<a href="expressAdvertisement/delete.do?expressAdvertisementId=${row.id}"><spring:message code="advertisement.delete"></spring:message></a>
-	
-	
+	</jstl:if>
 	</display:column>
 	</jstl:if>
-	</jstl:if>
+
 	
 </display:table>
 
