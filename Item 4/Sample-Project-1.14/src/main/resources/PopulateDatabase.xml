@@ -203,9 +203,9 @@
 	<property name="userAccount" ref="userAccount2" />
 		<property name="name" value="Pepón" />
 		<property name="surname" value="Samper Villagrán" />
-		<property name="emailAddress" value="ponsavi@acme.org" />
+		<property name="emailAddress" value="buyer@acmeshop.org" />
 		<property name="phone" value="656343002" />
-		<property name="premium" value="true" />
+		<property name="premium" value="false" />
 		<property name="reputation" value="5" />
 		<property name="suspicious" value="false" />
 			<property name="softBan" value="false"/>

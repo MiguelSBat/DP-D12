@@ -21,13 +21,8 @@
 		<p><spring:message code="payment.premium"/></p>
 		<br>
 		<div id="paypal-button"></div>
-	</jstl:otherwise>
-</jstl:choose>
-
-
-<acme:cancel url="auctionAdvertisement/list.do" code="payment.cancel" />
-
-<script>
+		
+		<script>
 	var CREATE_PAYMENT_URL  = 'user/payment/buyPremium.do';
 	var EXECUTE_PAYMENT_URL = 'user/payment/executePremium.do';
 	
@@ -79,3 +74,9 @@
       }
     }, '#paypal-button');
   </script>
+	</jstl:otherwise>
+</jstl:choose>
+
+
+<acme:cancel url="auctionAdvertisement/list.do" code="payment.cancel" />
+

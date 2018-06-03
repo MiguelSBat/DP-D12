@@ -34,7 +34,7 @@
 <br>
 <div id="paypal-button"></div>
 
-<acme:cancel url="auctionAdvertisement/list.do" code="payment.cancel" />
+<acme:cancel url="auctionAdvertisement/wonBids.do" code="payment.cancel" />
 
 </form:form>
 

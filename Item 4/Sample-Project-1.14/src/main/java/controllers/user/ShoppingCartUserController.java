@@ -33,14 +33,15 @@ public class ShoppingCartUserController {
 		result = new ModelAndView("shoppingCart/view");
 		result.addObject("lines", saleLines);
 		result.addObject("total", total);
+		result.addObject("payable", total > 0.0);
 		return result;
 	}
 
 	@RequestMapping(value = "/remove", method = RequestMethod.GET)
-	public ModelAndView remove(@RequestParam final SaleLine line) {
+	public ModelAndView remove(@RequestParam final int saleLine) {
 		ModelAndView result;
 
-		this.saleLineService.delete(line);
+		this.saleLineService.delete(saleLine);
 
 		result = new ModelAndView("redirect:/user/shoppingCart/view.do");
 		return result;

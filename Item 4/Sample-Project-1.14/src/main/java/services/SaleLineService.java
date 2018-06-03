@@ -190,4 +190,8 @@ public class SaleLineService {
 			this.delete(line);
 	}
 
+	public void delete(final int saleLine) {
+		this.delete(this.findOne(saleLine));
+	}
+
 }

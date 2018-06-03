@@ -270,5 +270,48 @@
 	<input type="button" name="cancel"
 		value="<spring:message code="advertisement.back" />"
 		onclick="javascript: relativeRedir('advertisement/list.do')" />
+		
+	<h3><spring:message code="advertisement.related" /></h3>
+	
+	<display:table pagesize="5" class="displaytag" 
+	name="related" requestURI="advertisement/display.do?advertisementId=${advertisement.id}" id="row">
+
+	<spring:message code="advertisement.item" var="itemHeader" />
+	<display:column title="${itemHeader}">
+		<a href="advertisement/display.do?advertisementId=${row.getId()}"><jstl:out
+				value="${row.item.getName()}"></jstl:out></a>
+	</display:column>
+
+	<%-- <spring:message code="advertisement.business" var="businessHeader" />
+	<display:column property="business.name" title="${businessHeader}" />
+ --%>
+	<spring:message code="advertisement.publicationDate"
+		var="publicationDateHeader" />
+	<spring:message code="master.page.date.format" var="dateFormat" />
+	<display:column property="publicationDate"
+		format="{0,date,${dateFormat}}" title="${publicationDateHeader}" />
+
+<spring:message code="advertisement.endDate"
+		var="endDateHeader" />
+	<spring:message code="master.page.date.format" var="dateFormat" />
+	<display:column property="endDate"
+		format="{0,date,${dateFormat}}" title="${endDateHeader}" />
+	
+		<spring:message code="advertisement.price" var="priceHeader" />
+		
+		<display:column title="${priceHeader}">
+			<jstl:if test="${row.getClass().name != 'domain.AuctionAdvertisement'}">
+				<jstl:out value="${row.price}"/>
+			</jstl:if>
+			<jstl:if test="${row.getClass().name == 'domain.AuctionAdvertisement'}">
+				<jstl:out value="${row.startingPrice}"/>
+			</jstl:if>
+		</display:column>
+		
+	<spring:message code="advertisement.tags" var="tagsHeader" />
+			<display:column property="tags" title="${tagsHeader}" />
+	
+
+</display:table>
 </div>
 

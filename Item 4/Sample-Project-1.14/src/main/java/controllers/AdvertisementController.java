@@ -98,6 +98,7 @@ public class AdvertisementController extends AbstractController {
 		Collection<Advertisement> premiums, premiumUsers;
 		Collection<Review> reviews;
 		Collection<Question> questions;
+		Collection<Advertisement> similar;
 		Double score;
 		ShopAdvertisement shopAdvertisement;
 		Boolean isPremiumUser = true;
@@ -163,6 +164,10 @@ public class AdvertisementController extends AbstractController {
 			result.addObject("premium", premium);
 		}
 
+		similar = this.advertisementService.findByCriteria(advertisement.getItem().getName());
+		similar.remove(advertisement);
+
+		result.addObject("related", similar);
 		result.addObject("advertisement", advertisement);
 		result.addObject("type", advertisementType);
 		result.addObject("biddable", biddable);
