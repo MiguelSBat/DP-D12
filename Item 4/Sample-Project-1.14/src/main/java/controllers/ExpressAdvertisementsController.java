@@ -74,11 +74,10 @@ public class ExpressAdvertisementsController extends AbstractController {
 	public ModelAndView list(final String criteria) {
 		ModelAndView result;
 		
-		//TODO: bug intencional
-		//Collection<ExpressAdvertisement> advertisements;
-	//	advertisements = this.expressAdvertisementService.findNotPast();
-		Collection<Advertisement> advertisements;
-		advertisements = this.advertisementService.findNotPAst();
+		
+		Collection<ExpressAdvertisement> advertisements;
+		advertisements = this.expressAdvertisementService.findNotPast();
+	
 		
 		result = new ModelAndView("expressAdvertisement/list");
 		result.addObject("advertisements", advertisements);

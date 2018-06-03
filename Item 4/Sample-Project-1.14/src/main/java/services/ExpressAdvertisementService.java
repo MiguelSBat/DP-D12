@@ -82,9 +82,9 @@ public class ExpressAdvertisementService {
 				tabu = true;
 				break;
 			}
-		//TODO: bug Intencional
-		//return tabu;
-		return false;
+	
+		return tabu;
+
 	}
 
 	public ExpressAdvertisement save(final ExpressAdvertisement expressAdvertisement) {
