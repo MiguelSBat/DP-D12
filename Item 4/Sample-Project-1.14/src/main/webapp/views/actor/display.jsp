@@ -70,8 +70,8 @@
 	requestURI="${requestURI}" id="row">
 	<spring:message code="actor.socialIdentity.nick" var="nick" />
 	<display:column title="${nick}" sortable="false">
-	<!-- TODO: Se muestra el accountURL en vez del nick -->
-		<jstl:out value="${row.accountURL}" />
+	<!-- DONE: Se muestra el accountURL en vez del nick // Arreglado-->
+		<jstl:out value="${row.nick}" />
 	</display:column>
 	<spring:message code="actor.socialIdentity.accountURL" var="accountURL" />
 	<display:column title="${accountURL}" sortable="false">
