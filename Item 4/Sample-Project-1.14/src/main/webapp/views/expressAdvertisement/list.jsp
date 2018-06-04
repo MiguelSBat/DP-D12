@@ -39,7 +39,7 @@
 <!-- Listing grid -->
 
 <display:table pagesize="5" class="displaytag" 
-	name="advertisements" requestURI="advertisement/list.do" id="row">
+	name="advertisements" requestURI="${requestURI}" id="row">
 
 	<spring:message code="advertisement.item" var="itemHeader" />
 	<display:column title="${itemHeader}">

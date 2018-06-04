@@ -81,7 +81,7 @@ public class ExpressAdvertisementsController extends AbstractController {
 		
 		result = new ModelAndView("expressAdvertisement/list");
 		result.addObject("advertisements", advertisements);
-
+		result.addObject("requestURI", "expressAdvertisement/list.do");
 		return result;
 	}
 
@@ -108,6 +108,7 @@ public class ExpressAdvertisementsController extends AbstractController {
 		result.addObject("advertisements", advertisements);
 		boolean delete=true;
 		result.addObject("delete",delete);
+		result.addObject("requestURI", "expressAdvertisement/MyList.do");
 		return result;
 	}
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
