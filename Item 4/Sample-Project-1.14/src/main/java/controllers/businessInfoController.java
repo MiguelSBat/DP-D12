@@ -5,13 +5,16 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.BusinessInfoService;
 import domain.BusinessInfo;
+import domain.Folder;
 
 @Controller
 @RequestMapping("/businessInfo")
@@ -42,7 +45,17 @@ public class businessInfoController extends AbstractController {
 	
 			return result;
 		}
+		//edition
+		@RequestMapping(value = "/edit", method = RequestMethod.GET)
+		public ModelAndView edit(@RequestParam final int businessInfoId) {
+			ModelAndView result;
+			BusinessInfo bi;
 
+			bi = this.businessInfoService.findOne(businessInfoId);
+			Assert.notNull(bi);
+			result = this.createEditModelAndView(bi);
+			return result;
+		}
 		// Edition ----------------------------------------------------------------
 		@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 		public ModelAndView save(@Valid final BusinessInfo businessInfo, final BindingResult binding) {

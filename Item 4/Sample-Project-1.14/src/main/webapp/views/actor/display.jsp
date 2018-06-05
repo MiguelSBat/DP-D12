@@ -40,6 +40,8 @@
 <security:authorize access="isAuthenticated()">
 <a href='chat/list.do?user2Id=${actor.id }'><b><spring:message code="actor.openChat" /></b></a>
 </security:authorize>
+
+<jstl:if test="${esBusiness}">
 <display:table pagesize="5" class="displaytag" name="info"
 	requestURI="${requestURI}" id="row">
 
@@ -62,8 +64,13 @@
 	<display:column title="${additionalInfo}" sortable="false">
 		<jstl:out value="${row.additionalInfo}" />
 	</display:column>
-
+	<jstl:if test="${puedeEditarBInfo}">
+	<display:column>
+		<a href="businessInfo/edit.do?businessInfoId=${row.id}" />edit</a>
+	</display:column>
+	</jstl:if>
 </display:table>
+</jstl:if>
 <br>
 <b><spring:message code="actor.socialIdentities" />:</b>
 <display:table pagesize="5" class="displaytag" name="socialIdentities"

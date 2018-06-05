@@ -60,10 +60,13 @@ public class BusinessInfoService {
 		
 		
 		result = this.businessInfoRepository.save(businessInfo);
+		
 		Collection<BusinessInfo>businessInfos =b.getBusinessInfos();
+		if(!businessInfos.contains(result)){
 		businessInfos.add(result);
 		b.setBusinessInfos(businessInfos);
 		this.businessService.save(b);
+		}
 		return result;
 	}
 
