@@ -66,7 +66,7 @@
 	</display:column>
 	<jstl:if test="${puedeEditarBInfo}">
 	<display:column>
-		<a href="businessInfo/edit.do?businessInfoId=${row.id}" />edit</a>
+		<a href="businessInfo/edit.do?businessInfoId=${row.id}" ><spring:message code="businessInfo.edit"></spring:message></a>
 	</display:column>
 	</jstl:if>
 </display:table>
