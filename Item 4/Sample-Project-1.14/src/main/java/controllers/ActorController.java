@@ -70,11 +70,15 @@ public class ActorController {
 			actor = this.actorService.findByPrincipal();
 		else
 			actor = this.actorService.findOne(actorId);
-
+		boolean puedeEditarBI=false;
+		if(actorId==this.actorService.findByPrincipal().getId())
+			puedeEditarBI=true;
+		boolean esBusiness=false;
 		//mostrar businessInfos
 		if (actor instanceof Business) {
 			final Business b = (Business) actor;
 			final Collection<BusinessInfo> businessInfos = b.getBusinessInfos();
+			esBusiness=true;
 			final boolean premium = b.getPremium();
 			result.addObject("premium", premium);
 			result.addObject("info", businessInfos);
@@ -86,6 +90,8 @@ public class ActorController {
 		}
 
 		result.addObject("requestURI", "actor/display.do?actorId=" + actorId);
+		result.addObject("esBusiness", esBusiness);
+		result.addObject("puedeEditarBInfo", puedeEditarBI);
 		result.addObject("actor", actor);
 		result.addObject("principalId", principalId);
 

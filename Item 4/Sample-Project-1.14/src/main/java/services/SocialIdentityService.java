@@ -67,12 +67,12 @@ public class SocialIdentityService {
 		SocialIdentity result;
 		Actor principal;
 		User user;
-
 		user = this.userService.findBySocialIdentityId(socialIdentity.getId());
 		principal = this.actorService.findByPrincipal();
-		Assert.isTrue(user.getId() == principal.getId());
+		Assert.isTrue(socialIdentity.getId() == 0 || (user.getId() == principal.getId()));
 		result = this.socialIdentityRepository.save(socialIdentity);
 		if (socialIdentity.getId() == 0) {
+			user = (User) principal;
 			user.addSocialIdentity(result);
 			this.userService.save(user);
 		}

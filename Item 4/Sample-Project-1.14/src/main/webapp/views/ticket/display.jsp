@@ -28,12 +28,22 @@
 </a>
 <br />
 </jstl:if>
-<jstl:if test="${ticket.status=='PENDING'&&(ticket.seller.id==principal.id||ticket.business.id==principal.id)}">
+<jstl:if test="${ticket.status=='PENDING'&&ticket.business.id==principal.id}">
 <b><spring:message code="ticket.display.changeStatus"></spring:message>:</b>
 <a href="business/ticket/status.do?status=SENT&ticketId=${ticket.id }">
 <spring:message code="ticket.display.sent"/>
 </a>
 <a href="business/ticket/status.do?status=CANCELED&ticketId=${ticket.id }">
+<spring:message code="ticket.display.canceled"/>
+</a>
+<br />
+</jstl:if>
+<jstl:if test="${ticket.status=='PENDING'&&ticket.seller.id==principal.id}">
+<b><spring:message code="ticket.display.changeStatus"></spring:message>:</b>
+<a href="user/ticket/status.do?status=SENT&ticketId=${ticket.id }">
+<spring:message code="ticket.display.sent"/>
+</a>
+<a href="user/ticket/status.do?status=CANCELED&ticketId=${ticket.id }">
 <spring:message code="ticket.display.canceled"/>
 </a>
 <br />
@@ -123,7 +133,7 @@
 	<jstl:out value="${row.amount }" />
 	</display:column>
 	
-	<jstl:if test="${ticket.status=='RECEIVED' && ticket.seller==null}">
+	<jstl:if test="${ticket.status=='RECEIVED' && ticket.seller==null && ticket.user.id==principal.id}">
 	<display:column >
 	
 	<a href="user/review/create.do?advertisementId=${row.advertisement.id}"><spring:message code="ticket.review"/></a>
