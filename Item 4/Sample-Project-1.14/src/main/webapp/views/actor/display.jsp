@@ -72,6 +72,7 @@
 </display:table>
 </jstl:if>
 <br>
+<jstl:if test="${!esBusiness }">
 <b><spring:message code="actor.socialIdentities" />:</b>
 <display:table pagesize="5" class="displaytag" name="socialIdentities"
 	requestURI="${requestURI}" id="row">
@@ -99,5 +100,6 @@
 </display:table>
 <jstl:if test="${principalId==actor.id }">
 <a href="user/socialIdentity/create.do"><spring:message code="actor.socialIdentity.add" /></a>
+</jstl:if>
 </jstl:if>
 
