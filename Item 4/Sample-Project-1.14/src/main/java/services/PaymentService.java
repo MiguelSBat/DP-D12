@@ -3,6 +3,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -18,11 +19,13 @@ import com.paypal.api.payments.Payer;
 import com.paypal.api.payments.PayerInfo;
 import com.paypal.api.payments.Payment;
 import com.paypal.api.payments.Payout;
+import com.paypal.api.payments.PayoutBatch;
 import com.paypal.api.payments.PayoutItem;
 import com.paypal.api.payments.PayoutSenderBatchHeader;
 import com.paypal.api.payments.RedirectUrls;
 import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.APIContext;
+import com.paypal.base.rest.PayPalRESTException;
 
 import domain.SaleLine;
 import domain.Ticket;
@@ -90,32 +93,34 @@ public class PaymentService {
 		return payment;
 	}
 
-	public void payout(final Collection<Ticket> tickets) {
+	public void payout(final Collection<Ticket> tickets) throws PayPalRESTException {
 		final Payout payout = new Payout();
 
 		final PayoutSenderBatchHeader senderBatchHeader = new PayoutSenderBatchHeader();
 		final Random random = new Random();
-		senderBatchHeader.setSenderBatchId(new Double(random.nextDouble()).toString()).setEmailSubject("Payment from AcmeShop");
-		payout.setSenderBatchHeader(senderBatchHeader);
+		senderBatchHeader.setSenderBatchId(new Double(random.nextDouble()).toString()).setEmailSubject("Pago de AcmeShop");
 
-		final List<PayoutItem> items = new ArrayList<>();
+		final List<PayoutItem> items = new ArrayList<PayoutItem>();
+
 		for (final Ticket t : tickets) {
 			final Currency amount = new Currency();
-			amount.setValue(Double.toString(this.ticketService.getTotal(t))).setCurrency("EUR");
-
-			final PayoutItem item = new PayoutItem();
-			if (t.getBusiness() != null)
-				item.setRecipientType("Email").setNote("You sold items to: " + t.getUser().getName() + " " + t.getUser().getSurname()).setReceiver(t.getBusiness().getPaypalEmail()).setSenderItemId("201812341234").setAmount(amount);
-			else if (t.getSeller() != null)
-				item.setRecipientType("Email").setNote("You sold items to: " + t.getUser().getName() + " " + t.getUser().getSurname()).setReceiver(t.getSeller().getEmailAddress()).setSenderItemId("201812341234").setAmount(amount);
-
-			items.add(item);
+			amount.setValue("100").setCurrency("EUR");
+			final PayoutItem senderItem = new PayoutItem();
+			senderItem.setRecipientType("Email").setNote("Pago de AcmeShop").setReceiver(t.getSeller() != null ? t.getSeller().getEmailAddress() : t.getBusiness().getPaypalEmail()).setSenderItemId("201404324234").setAmount(amount);
 		}
 
-		final APIContext apiContext = new APIContext(PaymentService.clientId, PaymentService.clientSecret, "sandbox");
+		payout.setSenderBatchHeader(senderBatchHeader).setItems(items);
 
-		// payout.createSynchronous(apiContext); // Paypal does not support multiple payouts at this moment.
+		PayoutBatch batch = null;
 
+		try {
+			final APIContext apiContext = new APIContext(PaymentService.clientId, PaymentService.clientSecret, "sandbox");
+
+			batch = payout.create(apiContext, new HashMap<String, String>());
+			System.out.println(batch.toString());
+		} catch (final PayPalRESTException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Payment buildPayment(final String baseUrl, final Double price, final String recipient) {
@@ -150,5 +155,33 @@ public class PaymentService {
 		redirectUrls.setReturnUrl(baseUrl + "/");
 		payment.setRedirectUrls(redirectUrls);
 		return payment;
+	}
+
+	public void payout(final Double amount, final String email) throws PayPalRESTException {
+		final Payout payout = new Payout();
+
+		final PayoutSenderBatchHeader senderBatchHeader = new PayoutSenderBatchHeader();
+		final Random random = new Random();
+		senderBatchHeader.setSenderBatchId(new Double(random.nextDouble()).toString()).setEmailSubject("Pago de AcmeShop");
+
+		final List<PayoutItem> items = new ArrayList<PayoutItem>();
+
+		final Currency currency = new Currency();
+		currency.setValue(Double.toString(amount)).setCurrency("EUR");
+		final PayoutItem item = new PayoutItem();
+		item.setRecipientType("Email").setNote("Pago de AcmeShop").setReceiver(email).setSenderItemId("201404324234").setAmount(currency);
+		items.add(item);
+		payout.setSenderBatchHeader(senderBatchHeader).setItems(items);
+
+		PayoutBatch batch = null;
+
+		try {
+			final APIContext apiContext = new APIContext(PaymentService.clientId, PaymentService.clientSecret, "sandbox");
+
+			batch = payout.create(apiContext, new HashMap<String, String>());
+			System.out.println(batch.toString());
+		} catch (final PayPalRESTException e) {
+			e.printStackTrace();
+		}
 	}
 }

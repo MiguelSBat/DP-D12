@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.TicketRepository;
+
+import com.paypal.base.rest.PayPalRESTException;
+
 import domain.Actor;
 import domain.Advertisement;
 import domain.AuctionAdvertisement;
@@ -133,7 +136,12 @@ public class TicketService {
 			this.advertisementService.executeBuy(saved);
 		}
 
-		this.paymentService.payout(tickets);
+		try {
+			this.paymentService.payout(tickets);
+		} catch (final PayPalRESTException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.shopppingCartService.remove();
 	}
 	public Collection<Ticket> parseShoppingCart(final ShoppingCart cart) {
@@ -280,6 +288,12 @@ public class TicketService {
 		final ShipmentAddress saddress = this.shipmentAddressService.create(paymentForm);
 		saddress.setTicket(savedTicket);
 		this.shipmentAddressService.save(saddress);
+
+		try {
+			this.paymentService.payout(auction.getInstantBuyPrice(), auction.getUser() != null ? auction.getUser().getEmailAddress() : auction.getBusiness().getPaypalEmail());
+		} catch (final PayPalRESTException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void executeBuy(final Bid bid, final PaymentForm paymentForm) {
@@ -307,5 +321,11 @@ public class TicketService {
 		final ShipmentAddress saddress = this.shipmentAddressService.create(paymentForm);
 		saddress.setTicket(savedTicket);
 		this.shipmentAddressService.save(saddress);
+
+		try {
+			this.paymentService.payout(bid.getAmount(), bid.getAuctionAdvertisement().getUser() != null ? bid.getAuctionAdvertisement().getUser().getEmailAddress() : bid.getAuctionAdvertisement().getBusiness().getPaypalEmail());
+		} catch (final PayPalRESTException e) {
+			e.printStackTrace();
+		}
 	}
 }

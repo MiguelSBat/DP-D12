@@ -139,16 +139,20 @@ public class AdvertisementService {
 	}
 
 	public void executeBuy(final Ticket ticket) {
+		Double amount = 0.0;
 		for (final SaleLine line : this.saleLineService.findByTicketId(ticket.getId())) {
 			final Advertisement ad = line.getAdvertisement();
 			if (ad instanceof ExpressAdvertisement) {
 				ad.setEndDate(new Date());
 				this.save(ad);
+				amount += ((ExpressAdvertisement) ad).getPrice();
 			}
 			if (ad instanceof ShopAdvertisement) {
 				((ShopAdvertisement) ad).setStock(((ShopAdvertisement) ad).getStock() - line.getAmount());
 				this.save(ad);
+				amount += ((ShopAdvertisement) ad).getPrice() * line.getAmount();
 			}
 		}
+
 	}
 }
