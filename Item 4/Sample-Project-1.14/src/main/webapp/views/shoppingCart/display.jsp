@@ -41,7 +41,7 @@
 	</display:column>	
 	
 	<display:column title="${itemName}">
-		<a href="user/shoppingCart/remove.do?saleLine=${row}"><spring:message code="shoppingCart.remove"/></a>
+		<a href="user/shoppingCart/remove.do?saleLine=${row.id}"><spring:message code="shoppingCart.remove"/></a>
 	</display:column>
 	
 </display:table>
