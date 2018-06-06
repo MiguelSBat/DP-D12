@@ -82,7 +82,7 @@ public class AdvertisementService {
 	}
 	public Collection<Advertisement> findByCriteria(final String criteria) {
 		Collection<Advertisement> advertisements;
-		advertisements = this.advertisementRepository.findByCriteria(criteria);
+		advertisements = this.advertisementRepository.findByCriteria2(criteria);
 		return advertisements;
 	}
 	public Collection<Advertisement> findBySaleLineId(final int id) {

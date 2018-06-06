@@ -15,6 +15,9 @@ public interface AdvertisementRepository extends JpaRepository<Advertisement, In
 	@Query("select a from Advertisement a where a.item.name like CONCAT('%',?1,'%') and a.endDate>CURRENT_timestamp")
 	Collection<Advertisement> findByCriteria(String criteria);
 
+	@Query("select a from Advertisement a join a.tags t where (t like CONCAT('%',?1,'%') or a.item.name like CONCAT('%',?1,'%'))and a.endDate>CURRENT_timestamp")
+	Collection<Advertisement> findByCriteria2(String criteria);
+
 	@Query("select a from Advertisement a where a.endDate>CURRENT_timestamp")
 	Collection<Advertisement> findNotPast();
 
