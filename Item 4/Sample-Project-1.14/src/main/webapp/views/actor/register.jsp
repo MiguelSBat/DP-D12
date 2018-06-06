@@ -17,6 +17,11 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+
+<jstl:if test="${actorForm.authority == 'BUSINESS'}">
+<strong><spring:message code="actor.businessConfirmation" /></strong>
+</jstl:if>
+
 <form:form action="actor/register.do" modelAttribute="actorForm">
 	<form:hidden path="authority" />
 
@@ -100,3 +105,4 @@
 	<spring:message code="actor.cancel" var="cancel"/>
 	<input type="button" name="cancel" value="${cancel}" onclick="javascript:relativeRedir('welcome/index.do');" />
 </form:form>
+
