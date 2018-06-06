@@ -55,19 +55,19 @@ public class ExpressAdvertisementService {
 	//el delete solo cambia la fecha
 
 	public void delete(final ExpressAdvertisement expressAdvertisement) {
-		Collection<ExpressAdvertisement> advertisements = new HashSet<>();
+	
 		final Actor a = this.actorService.findByPrincipal();
 		if (a instanceof Business) {
 			final Business b = (Business) a;
-			advertisements = this.findExpressByBussiness(b.getId());
+			Assert.isTrue(expressAdvertisement.getBusiness().equals(b));
 
 		}
 		if (a instanceof User) {
 			final User u = (User) a;
-			advertisements = this.findExpressByUser(u.getId());
+			Assert.isTrue(expressAdvertisement.getUser().equals(u));
 
 		}
-		Assert.isTrue(advertisements.contains(expressAdvertisement));
+		
 		expressAdvertisement.setEndDate(new Date(System.currentTimeMillis()));
 		this.expressAdvertisementRepository.save(expressAdvertisement);
 
