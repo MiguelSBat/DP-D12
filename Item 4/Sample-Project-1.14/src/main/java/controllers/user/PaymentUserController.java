@@ -1,6 +1,8 @@
 
 package controllers.user;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -89,6 +91,7 @@ public class PaymentUserController {
 		final AuctionAdvertisement ad = this.auctionAdvertisementService.findOne(auctionId);
 
 		final Double total = ad.getInstantBuyPrice();
+		Assert.isTrue(ad.getEndDate().compareTo(new Date()) >= 0);
 		final PaymentForm form = this.userService.getPaymentForm();
 		session.setAttribute("auction", ad);
 

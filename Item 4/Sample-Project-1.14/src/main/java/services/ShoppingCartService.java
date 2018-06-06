@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -119,9 +120,10 @@ public class ShoppingCartService {
 
 		for (final SaleLine line : lines) {
 			final Advertisement ad = line.getAdvertisement();
-			if (ad instanceof ExpressAdvertisement)
+			if (ad instanceof ExpressAdvertisement) {
 				result += ((ExpressAdvertisement) ad).getPrice() * line.getAmount();
-			else if (ad instanceof ShopAdvertisement)
+				Assert.isTrue(ad.getEndDate().compareTo(new Date()) >= 0);
+			} else if (ad instanceof ShopAdvertisement)
 				result += ((ShopAdvertisement) ad).getPrice() * line.getAmount();
 		}
 
