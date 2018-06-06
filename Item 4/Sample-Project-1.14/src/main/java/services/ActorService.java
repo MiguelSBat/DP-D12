@@ -190,6 +190,8 @@ public class ActorService {
 
 		userAccount.addAuthority(authority);
 		userAccount.setAccountNonLocked(true);
+		if (actorType.equals(Authority.BUSINESS))
+			userAccount.setAccountNonLocked(false);
 		result.setUserAccount(userAccount);
 
 		result.setEmailAddress(actorForm.getEmail());

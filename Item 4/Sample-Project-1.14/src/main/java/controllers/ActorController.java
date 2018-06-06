@@ -47,10 +47,9 @@ public class ActorController {
 		return result;
 	}
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView display(  Integer actorId ) throws Exception {
-		if(actorId==null){
-		actorId = this.actorService.findByPrincipal().getId();
-		}
+	public ModelAndView display(Integer actorId) throws Exception {
+		if (actorId == null)
+			actorId = this.actorService.findByPrincipal().getId();
 		ModelAndView result;
 		Collection<SocialIdentity> socialIdentities;
 		int principalId;
@@ -70,15 +69,15 @@ public class ActorController {
 			actor = this.actorService.findByPrincipal();
 		else
 			actor = this.actorService.findOne(actorId);
-		boolean puedeEditarBI=false;
-		if(actorId==this.actorService.findByPrincipal().getId())
-			puedeEditarBI=true;
-		boolean esBusiness=false;
+		boolean puedeEditarBI = false;
+		if (this.actorService.isLogged() && actorId == this.actorService.findByPrincipal().getId())
+			puedeEditarBI = true;
+		boolean esBusiness = false;
 		//mostrar businessInfos
 		if (actor instanceof Business) {
 			final Business b = (Business) actor;
 			final Collection<BusinessInfo> businessInfos = b.getBusinessInfos();
-			esBusiness=true;
+			esBusiness = true;
 			final boolean premium = b.getPremium();
 			result.addObject("premium", premium);
 			result.addObject("info", businessInfos);

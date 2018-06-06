@@ -55,6 +55,7 @@ public class BusinessAdministratorController extends AbstractController {
 
 		business = this.businessService.findOne(businessId);
 		business.setVerified(true);
+		business.getUserAccount().setAccountNonLocked(true);
 		this.businessService.save(business);
 		result = new ModelAndView("redirect:/administrator/business/list.do");
 

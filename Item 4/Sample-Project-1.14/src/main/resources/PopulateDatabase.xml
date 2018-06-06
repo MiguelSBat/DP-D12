@@ -107,7 +107,7 @@
 				</bean>
 			</list>
 		</property>
-		<property name="accountNonLocked" value="True" />
+		<property name="accountNonLocked" value="false" />
 	</bean>
 	
 	<!-- config -->	
@@ -248,7 +248,6 @@
 		</property>
 		<property name="Valorations">
 			<list>
-				<ref bean="valoration3" />
 				<ref bean="valoration4" />
 			</list>
 		</property>
@@ -978,11 +977,7 @@
 		<property name="score" value="5" />
 		<property name="actor" ref="user1" />
 	</bean>
-	<bean id="valoration3" class="domain.Valoration">
-		<property name="date" value="2018/01/15" />
-		<property name="score" value="2" />
-		<property name="actor" ref="user2" />
-	</bean>
+
 	<bean id="valoration4" class="domain.Valoration">
 		<property name="date" value="2018/01/15" />
 		<property name="score" value="1" />
