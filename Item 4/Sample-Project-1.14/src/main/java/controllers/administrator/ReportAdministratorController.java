@@ -47,7 +47,7 @@ public class ReportAdministratorController extends AbstractController {
 		reports = this.reportService.getReportsByReportedActor(actorId);
 		result = new ModelAndView("report/list");
 		result.addObject("reports", reports);
-		result.addObject("requestURI", "moderator/report/list.do");
+		result.addObject("requestURI", "administrator/report/list.do");
 
 		return result;
 	}
