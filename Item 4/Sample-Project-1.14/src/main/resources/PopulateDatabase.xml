@@ -415,7 +415,7 @@
 		<property name="emailAddress" value="ponsavi@acme.org" />
 		<property name="VATNumber" value="das432-das" />
 		<property name="premium" value="True" />
-		<property name="suspicious" value="true" />
+		<property name="suspicious" value="false" />
 		<property name="verified" value="false" />
 			<property name="softBan" value="false"/>
 		<property name="hardBan" value="false"/>
