@@ -127,20 +127,33 @@ public class AuctionAdvertisementController extends AbstractController {
 	public ModelAndView save(@Valid final AuctionAdvertisement auctionAdvertisement, final BindingResult binding) {
 		ModelAndView result;
 
-		if (binding.hasErrors())
+		if (binding.hasErrors()) {
+			final String message = "advertisement.commit.error";
 			result = this.createEditModelAndView(auctionAdvertisement);
-		else
+		} else
 			try {
 				this.auctionAdvertisementService.save(auctionAdvertisement);
 				result = new ModelAndView("redirect:myList.do");
 			} catch (final Throwable oops) {
 				String errorMessage = "advertisement.commit.error";
-
+				errorMessage = this.error(oops.toString());
 				if (oops.getMessage().contains("message.error"))
 					errorMessage = oops.getMessage();
 
 				result = this.createEditModelAndView(auctionAdvertisement, errorMessage);
 			}
+
+		return result;
+	}
+	private String error(final String s) {
+		String result;
+
+		if (s.contains("shopAdvertisement.tabuError"))
+			result = "shopAdvertisement.tabuError";
+		else if (s.contains("Advertisement.softBanError"))
+			result = "Advertisement.softBanError";
+		else
+			result = "advertisement.commit.error";
 
 		return result;
 	}

@@ -5,6 +5,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -15,6 +16,7 @@ public class ExpressAdvertisement extends Advertisement {
 
 
 	@NotNull
+	@Min(value = 0)
 	public Double getPrice() {
 		return this.price;
 	}
@@ -22,7 +24,7 @@ public class ExpressAdvertisement extends Advertisement {
 	public void setPrice(final Double price) {
 		this.price = price;
 	}
-	
+
 
 	//Relationships
 

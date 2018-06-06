@@ -89,6 +89,7 @@ public class ShopAdvertisementService {
 		Assert.isTrue(this.actorService.isLogged());
 		actor = this.actorService.findByPrincipal();
 		Assert.isTrue(actor instanceof Business);
+		Assert.isTrue(!actor.getSoftBan(), "Advertisement.softBanError");
 		date = new Date();
 		Assert.isTrue(shopAdvertisement.getEndDate().after(date));
 		Assert.isTrue(shopAdvertisement.getStock() > 0, "shopAdvertisement.stockError");

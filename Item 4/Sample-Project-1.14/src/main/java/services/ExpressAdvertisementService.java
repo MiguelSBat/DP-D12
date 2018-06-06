@@ -82,7 +82,7 @@ public class ExpressAdvertisementService {
 				tabu = true;
 				break;
 			}
-	
+
 		return tabu;
 
 	}
@@ -96,6 +96,7 @@ public class ExpressAdvertisementService {
 		Assert.isTrue(this.actorService.isLogged());
 		actor = this.actorService.findByPrincipal();
 		Assert.isTrue(actor instanceof User || actor instanceof Business);
+		Assert.isTrue(!actor.getSoftBan(), "Advertisement.softBanError");
 		date = new Date();
 		Assert.isTrue(expressAdvertisement.getEndDate().after(date));
 		expressAdvertisement.setPublicationDate(new Date(System.currentTimeMillis()));

@@ -21,7 +21,6 @@ import services.ItemService;
 import services.ShopAdvertisementService;
 import services.UserService;
 import domain.Actor;
-import domain.Advertisement;
 import domain.Business;
 import domain.ExpressAdvertisement;
 import domain.Item;
@@ -73,12 +72,10 @@ public class ExpressAdvertisementsController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(final String criteria) {
 		ModelAndView result;
-		
-		
+
 		Collection<ExpressAdvertisement> advertisements;
 		advertisements = this.expressAdvertisementService.findNotPast();
-	
-		
+
 		result = new ModelAndView("expressAdvertisement/list");
 		result.addObject("advertisements", advertisements);
 		result.addObject("requestURI", "expressAdvertisement/list.do");
@@ -90,76 +87,85 @@ public class ExpressAdvertisementsController extends AbstractController {
 	@RequestMapping(value = "/MyList", method = RequestMethod.GET)
 	public ModelAndView MyList() {
 		ModelAndView result;
-		Collection<ExpressAdvertisement> advertisements=new HashSet<>();
-		Actor a=actorService.findByPrincipal();
-		
-		
-		if(a instanceof Business){
-			Business b= (Business) a;
+		Collection<ExpressAdvertisement> advertisements = new HashSet<>();
+		final Actor a = this.actorService.findByPrincipal();
+
+		if (a instanceof Business) {
+			final Business b = (Business) a;
 			advertisements = this.expressAdvertisementService.findExpressByBussiness(b.getId());
 
 		}
-		if(a instanceof User){
-			User u= (User) a;
+		if (a instanceof User) {
+			final User u = (User) a;
 			advertisements = this.expressAdvertisementService.findExpressByUser(u.getId());
 
 		}
 		result = new ModelAndView("expressAdvertisement/list");
 		result.addObject("advertisements", advertisements);
-		boolean delete=true;
-		result.addObject("delete",delete);
+		final boolean delete = true;
+		result.addObject("delete", delete);
 		result.addObject("requestURI", "expressAdvertisement/MyList.do");
 		return result;
 	}
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-		public ModelAndView delete(@RequestParam final int expressAdvertisementId) {
-			ModelAndView result;
-	
-			ExpressAdvertisement expressAdvertisement=expressAdvertisementService.findOne(expressAdvertisementId);
-		
-			try {
-				this.expressAdvertisementService.delete(expressAdvertisement);
-				result = new ModelAndView("redirect:MyList.do");
-			} catch (final Throwable oops) {
-				String errorMessage = "advertisement.commit.error";
-	
-				if (oops.getMessage().contains("message.error"))
-					errorMessage = oops.getMessage();
-				result = this.createEditModelAndView(expressAdvertisement, errorMessage);
-			}
-			return result;
+	public ModelAndView delete(@RequestParam final int expressAdvertisementId) {
+		ModelAndView result;
+
+		final ExpressAdvertisement expressAdvertisement = this.expressAdvertisementService.findOne(expressAdvertisementId);
+
+		try {
+			this.expressAdvertisementService.delete(expressAdvertisement);
+			result = new ModelAndView("redirect:MyList.do");
+		} catch (final Throwable oops) {
+			String errorMessage = "advertisement.commit.error";
+
+			if (oops.getMessage().contains("message.error"))
+				errorMessage = oops.getMessage();
+			result = this.createEditModelAndView(expressAdvertisement, errorMessage);
 		}
+		return result;
+	}
 
 	// Edition ----------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final ExpressAdvertisement expressAdvertisement, final BindingResult binding) {
 		ModelAndView result;
 
-		if (binding.hasErrors()){
-			String message= "advertisement.commit.error";
-			
-			result = this.createEditModelAndView(expressAdvertisement,message);
-		}else
+		if (binding.hasErrors()) {
+			final String message = "advertisement.commit.error";
+
+			result = this.createEditModelAndView(expressAdvertisement, message);
+		} else
 			try {
 				this.expressAdvertisementService.save(expressAdvertisement);
 				result = new ModelAndView("redirect:MyList.do");
 			} catch (final Throwable oops) {
 				String errorMessage = "advertisement.commit.error";
-
+				errorMessage = this.error(oops.toString());
 				if (oops.getMessage().contains("message.error"))
 					errorMessage = oops.getMessage();
-				if(expressAdvertisementService.isTabooThisExpressAdvertisement(expressAdvertisement)){
-					errorMessage= "ExpressAdvertisement.tabuError";
-				}
 				result = this.createEditModelAndView(expressAdvertisement, errorMessage);
 			}
 
 		return result;
 	}
 
+	private String error(final String s) {
+		String result;
+
+		if (s.contains("ExpressAdvertisement.tabuError"))
+			result = "shopAdvertisement.tabuError";
+		else if (s.contains("Advertisement.softBanError"))
+			result = "Advertisement.softBanError";
+		else
+			result = "advertisement.commit.error";
+
+		return result;
+	}
+
 	// Ancillary methods ------------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(final  ExpressAdvertisement expressAdvertisement) {
+	protected ModelAndView createEditModelAndView(final ExpressAdvertisement expressAdvertisement) {
 		ModelAndView result;
 
 		result = this.createEditModelAndView(expressAdvertisement, null);
@@ -167,20 +173,18 @@ public class ExpressAdvertisementsController extends AbstractController {
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final  ExpressAdvertisement expressAdvertisement, final String message) {
+	protected ModelAndView createEditModelAndView(final ExpressAdvertisement expressAdvertisement, final String message) {
 		ModelAndView result;
 		Collection<Item> items;
-		Boolean tabu =false;
-	
-	
+		final Boolean tabu = false;
+
 		result = new ModelAndView("expressAdvertisement/edit");
 		result.addObject("expressAdvertisement", expressAdvertisement);
 		result.addObject("message", message);
 		items = this.itemService.findByPrincipal();
 		result.addObject("items", items);
-	
 
 		return result;
-		
+
 	}
 }

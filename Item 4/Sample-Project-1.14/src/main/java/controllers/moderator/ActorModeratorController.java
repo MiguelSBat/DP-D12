@@ -64,7 +64,7 @@ public class ActorModeratorController extends AbstractController {
 		ModelAndView result;
 
 		this.actorService.softBan(actorId);
-		result = new ModelAndView("redirect:/moderator/actor/list.do");
+		result = new ModelAndView("redirect:/actor/display.do?actorId=" + actorId);
 
 		return result;
 	}
@@ -74,7 +74,7 @@ public class ActorModeratorController extends AbstractController {
 		ModelAndView result;
 
 		this.actorService.hardBan(actorId);
-		result = new ModelAndView("redirect:/moderator/actor/list.do");
+		result = new ModelAndView("redirect:/actor/display.do?actorId=" + actorId);
 
 		return result;
 	}
