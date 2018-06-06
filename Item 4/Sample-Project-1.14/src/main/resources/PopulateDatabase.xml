@@ -957,6 +957,21 @@
 		<property name="weight" value="1" />
 		<property name="actor" ref="user3" />
 	</bean>
+	<bean id="report4" class="domain.Report">
+		<property name="text" value="Me manda foto porno por el chat" />
+		<property name="weight" value="1" />
+		<property name="actor" ref="user3" />
+	</bean>
+	<bean id="report5" class="domain.Report">
+		<property name="text" value="Me manda foto porno por el chat" />
+		<property name="weight" value="1" />
+		<property name="actor" ref="user3" />
+	</bean>
+	<bean id="report6" class="domain.Report">
+		<property name="text" value="Me manda foto porno por el chat" />
+		<property name="weight" value="1" />
+		<property name="actor" ref="user3" />
+	</bean>
 		
 		
 		<!-- Valoration -->
