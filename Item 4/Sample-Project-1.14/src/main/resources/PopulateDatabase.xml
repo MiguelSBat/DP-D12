@@ -1021,6 +1021,11 @@
 		<property name="User" ref="user2" />		
 		<property name="auctionAdvertisement" ref="auctionAdvertisement1" />		
 	</bean>		
+	<bean id="bid2" class="domain.Bid">
+		<property name="amount" value="250.35" />
+		<property name="User" ref="user2" />		
+		<property name="auctionAdvertisement" ref="auctionAdvertisement2" />		
+	</bean>		
 		
 		<!-- Answer -->
 		
