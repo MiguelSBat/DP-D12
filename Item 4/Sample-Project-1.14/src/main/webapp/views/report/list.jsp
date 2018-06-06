@@ -25,7 +25,23 @@
 <!-- Listing grid -->
 <spring:message code="master.page.date.format" var="dateFormat" />
 <display:table pagesize="5" class="displaytag" 
-	name="socialIdentities" requestURI="socialIdentity/list.do" id="row">
+	name="reports" requestURI="${requestURI }" id="row">
+	
+	<spring:message code="actor.name" var="name" />
+	<display:column title="${name}" sortable="false">
+		<a href="actor/display.do?actorId=${row.actor.id }"><jstl:out value="${row.actor.name}" /></a>
+	</display:column>
+	
+	<spring:message code="actor.weight" var="weight" />
+	<display:column title="${weight}" sortable="false">
+		<jstl:out value="${row.weight}" />
+	</display:column>
+	<spring:message code="actor.weight" var="weight" />
+	
+	<spring:message code="actor.text" var="text" />
+	<display:column title="${text}" sortable="false">
+		<jstl:out value="${row.text}" />
+	</display:column>	
 	
 
 </display:table>

@@ -37,6 +37,9 @@
 	</display:column>
 	
 	<security:authorize access="hasRole('MODERATOR')">
+	<display:column>
+	<a href="moderator/report/list.do?actorId=${row.id }"><spring:message code="actor.reports" /></a>
+	</display:column>
 	
 	<display:column>
 	<jstl:if test="${row.softBan=='false'}">
@@ -47,6 +50,9 @@
 	</security:authorize>
 	
 	<security:authorize access="hasRole('ADMIN')">
+	<display:column>
+	<a href="administrator/report/list.do?actorId=${row.id }"><spring:message code="actor.reports" /></a>
+	</display:column>
 	
 	<display:column>
 	<jstl:if test="${row.softBan=='false'}">
