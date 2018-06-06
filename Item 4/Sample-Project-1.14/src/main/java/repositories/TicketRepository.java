@@ -21,4 +21,8 @@ public interface TicketRepository extends JpaRepository<Ticket, Integer> {
 	//select t from Ticket t where t.user=737
 	@Query("select t from Ticket t where t.user.id=?1")
 	Collection<Ticket> findByUserId(int id);
+
+	@Query("select s.ticket from SaleLine s where s.advertisement.id=?1 and s.ticket.user.id=?2")
+	Collection<Ticket> findByAdvertisementsAndUserBuyed(int ID, int IDU);
+
 }

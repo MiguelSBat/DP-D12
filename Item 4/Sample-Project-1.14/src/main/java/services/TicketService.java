@@ -328,4 +328,10 @@ public class TicketService {
 			e.printStackTrace();
 		}
 	}
+
+	public Collection<Ticket> findByAdvertisementsAndUserBuyed(final int ID, final int IDU) {
+		Collection<Ticket> result;
+		result = this.ticketRepository.findByAdvertisementsAndUserBuyed(ID, IDU);
+		return result;
+	}
 }

@@ -17,10 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.ReviewService;
 import services.ShopAdvertisementService;
+import services.TicketService;
 import services.UserService;
 import controllers.AbstractController;
 import domain.Review;
 import domain.ShopAdvertisement;
+import domain.Ticket;
 import domain.User;
 
 @Controller
@@ -40,6 +42,9 @@ public class ReviewUserController extends AbstractController {
 	@Autowired
 	private UserService					userService;
 
+	@Autowired
+	private TicketService				ticketService;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -55,12 +60,16 @@ public class ReviewUserController extends AbstractController {
 		Review review;
 		ShopAdvertisement shopAdvertisement;
 		User user;
-		Collection<User> aux;
-		aux = this.userService.findByAdvertisementsBuyed(advertisementId);
 		shopAdvertisement = this.shopAdvertisementService.findOne(advertisementId);
 		user = this.userService.findByPrincipal();
 
-		Assert.isTrue(aux.contains(user));
+		//		Collection<User> aux;
+		//		aux = this.userService.findByAdvertisementsBuyed(advertisementId);
+		//		Assert.isTrue(aux.contains(user));
+
+		Collection<Ticket> aux;
+		aux = this.ticketService.findByAdvertisementsAndUserBuyed(advertisementId, user.getId());
+		Assert.isTrue(aux.size() > 0);
 
 		review = this.reviewService.create();
 		review.setShopAdvertisement(shopAdvertisement);
