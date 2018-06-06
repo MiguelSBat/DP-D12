@@ -53,7 +53,7 @@
 		<security:intercept-url pattern="/chat/**" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/user/socialIdentity/**" access="hasRole('USER')" /> 
 		<security:intercept-url pattern="/user/shoppingCart/**" access="hasRole('USER')" />
-		<security:intercept-url pattern="/user/payment/**" access="hasRole('USER')" /> 
+		<security:intercept-url pattern="/user/payment/**" access="hasAnyRole('USER','BUSINESS')" /> 
 		<security:intercept-url pattern="/user/review/**" access="hasRole('USER')" />
 		<security:intercept-url pattern="/business/ticket/**" access="hasRole('BUSINESS')" /> 
 		<security:intercept-url pattern="/business/**" access="hasRole('BUSINESS')" /> 
