@@ -124,15 +124,16 @@ public class AdvertisementController extends AbstractController {
 				user = (User) actor;
 				isPremiumUser = user.isPremium();
 				if (!isPremiumUser)
-					result.addObject("isPremium", isPremiumUser);
+					result.addObject("showPremiumAd", isPremiumUser);
 			}
 			if (actor instanceof Business) {
 				business = (Business) actor;
 				isPremiumBusiness = business.isPremium();
 				if (!isPremiumBusiness)
-					result.addObject("isPremium", isPremiumBusiness);
+					result.addObject("showPremiumAd", isPremiumBusiness);
 			}
-		}
+		} else
+			result.addObject("showPremiumAd", false);
 		if (advertisement instanceof AuctionAdvertisement) {
 			advertisementType = "auction";
 			bids = this.bidService.findOrderedByAuction(advertisement.getId());

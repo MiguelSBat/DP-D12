@@ -68,6 +68,7 @@
 
 <fmt:setLocale value="${locale}" />
 	<security:authorize access="hasAnyRole('USER','BUSINESS') || isAnonymous()">
+	<jstl:if test="${showPremiumAd==false}">
 	<a class="premium" href="advertisement/display.do?advertisementId=${premium.getId()}">
 	<div class="solid">
 	<h3 ><spring:message code="advertisement.premium"></spring:message></h3>
@@ -102,6 +103,7 @@
 	</p>
 	</div>
 	</a>
+	</jstl:if>
 	</security:authorize>
 	
 <div id="advertisement">
