@@ -108,7 +108,6 @@ public class BusinessService {
 		result.setPaypalEmail(form.getPaypalEmail());
 		result.setPhotosURL(new HashSet<String>());
 		result.setPremium(false);
-		result.setReputation(3);
 		result.setSuspicious(false);
 		result.setVATNumber(form.getVATNumber());
 		result.setVerified(false);

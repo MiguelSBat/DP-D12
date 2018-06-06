@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -22,7 +21,6 @@ public class User extends Actor {
 	private String				surname;
 	private String				phone;
 	private Boolean				premium;
-	private Integer				reputation;
 	private Boolean				suspicious;
 	private Collection<String>	photosURL;
 
@@ -61,16 +59,6 @@ public class User extends Actor {
 
 	public void setPremium(final Boolean premium) {
 		this.premium = premium;
-	}
-
-	@NotNull
-	@Range(min = 1, max = 5)
-	public Integer getReputation() {
-		return this.reputation;
-	}
-
-	public void setReputation(final Integer reputation) {
-		this.reputation = reputation;
 	}
 
 	public Boolean isSuspicious() {

@@ -206,7 +206,6 @@
 		<property name="emailAddress" value="buyer@acmeshop.org" />
 		<property name="phone" value="656343002" />
 		<property name="premium" value="false" />
-		<property name="reputation" value="5" />
 		<property name="suspicious" value="false" />
 			<property name="softBan" value="false"/>
 		<property name="hardBan" value="false"/>
@@ -260,7 +259,6 @@
 		<property name="emailAddress" value="user2@mail.com" />
 		<property name="phone" value="656222111" />
 		<property name="premium" value="True" />
-		<property name="reputation" value="5" />
 		<property name="suspicious" value="false" />
 			<property name="softBan" value="false"/>
 		<property name="hardBan" value="false"/>
@@ -312,7 +310,6 @@
 		<property name="emailAddress" value="user3@mail.com" />
 		<property name="phone" value="656222113" />
 		<property name="premium" value="true" />
-		<property name="reputation" value="5" />
 		<property name="suspicious" value="True" />
 		<property name="softBan" value="false"/>
 		<property name="hardBan" value="false"/>
@@ -363,7 +360,6 @@
 		<property name="emailAddress" value="ponsavi@acme.org" />
 		<property name="VATNumber" value="das432-das" />
 		<property name="premium" value="True" />
-		<property name="reputation" value="5" />
 		<property name="suspicious" value="false" />
 		<property name="verified" value="true" />
 			<property name="softBan" value="false"/>
@@ -419,7 +415,6 @@
 		<property name="emailAddress" value="ponsavi@acme.org" />
 		<property name="VATNumber" value="das432-das" />
 		<property name="premium" value="True" />
-		<property name="reputation" value="5" />
 		<property name="suspicious" value="true" />
 		<property name="verified" value="false" />
 			<property name="softBan" value="false"/>

@@ -8,10 +8,8 @@ import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -21,7 +19,6 @@ public class Business extends Actor {
 	private String				paypalEmail;
 	private String				VATNumber;
 	private Boolean				premium;
-	private Integer				reputation;
 	private Boolean				suspicious;
 	private Collection<String>	photosURL;
 	private Boolean				verified;
@@ -60,16 +57,6 @@ public class Business extends Actor {
 
 	public void setPremium(final Boolean premium) {
 		this.premium = premium;
-	}
-
-	@NotNull
-	@Range(min = 1, max = 5)
-	public Integer getReputation() {
-		return this.reputation;
-	}
-
-	public void setReputation(final Integer reputation) {
-		this.reputation = reputation;
 	}
 
 	public Boolean isSuspicious() {

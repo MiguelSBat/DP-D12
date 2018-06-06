@@ -115,7 +115,6 @@ public class UserService {
 		result.setPhone(form.getPhone());
 		result.setPhotosURL(new HashSet<String>());
 		result.setPremium(false);
-		result.setReputation(3);
 		result.setSocialIdentities(new HashSet<SocialIdentity>());
 		result.setSurname(form.getSurname());
 		result.setSuspicious(false);
