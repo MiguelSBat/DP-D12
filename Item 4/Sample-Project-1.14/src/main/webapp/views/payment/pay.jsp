@@ -19,21 +19,31 @@
 <h2><spring:message code="payment.shipment"/></h2>
 
 <acme:textbox code="payment.shipment.country" path="shipmentCountry" />
+<span class="hidden error"><spring:message code="payment.validation.notBlank"/></span>
 <acme:textbox code="payment.shipment.city" path="shipmentCity" />
+<span class="hidden error"><spring:message code="payment.validation.notBlank"/></span>
 <acme:textbox code="payment.shipment.postalCode" path="shipmentPostalCode" />
+<span class="hidden error"><spring:message code="payment.validation.notBlank"/></span>
 <acme:textarea code="payment.shipment.address" path="shipmentAdress" />
+<span class="hidden error"><spring:message code="payment.validation.notBlank"/></span>
 
 <h2><spring:message code="payment.facturation"/></h2>
 
 <acme:textbox code="payment.facturation.name" path="name" />
+<span class="hidden error"><spring:message code="payment.validation.notBlank"/></span>
 <acme:textbox code="payment.facturation.surname" path="surname" />
+<span class="hidden error"><spring:message code="payment.validation.notBlank"/></span>
 <acme:textbox code="payment.facturation.country" path="country" />
+<span class="hidden error"><spring:message code="payment.validation.notBlank"/></span>
 <acme:textbox code="payment.facturation.city" path="city" />
+<span class="hidden error"><spring:message code="payment.validation.notBlank"/></span>
 <acme:textbox code="payment.facturation.postalCode" path="postalCode" />
+<span class="hidden error"><spring:message code="payment.validation.notBlank"/></span>
 <acme:textbox code="payment.facturation.idNumber" path="IDNumber" />
-<br>
+<span class="hidden error"><spring:message code="payment.validation.notBlank"/></span>
+<br><br>
 <div id="paypal-button"></div>
-
+<span id="#generalError" class="hidden error"><spring:message code="payment.validation.error"/></span>
 <acme:cancel url="user/shoppingCart/view.do" code="payment.cancel" />
 
 </form:form>
@@ -72,7 +82,16 @@
     	  serialized = $("#payForm").serialize();
     	  return paypal.request.post(CREATE_PAYMENT_URL,$("#payForm").serializeObject())
     	  .then(function(data) {
+    		  jQuery(".error").addClass("hidden");
+    		  if(data.state == "created"){
 				return data.id;
+    		  } else {
+    			  if (data.state == "validationError"){
+    				  for (var error in data.errors){
+    					  $("#" + data.errors[error]).parent().next().removeClass("hidden");
+    				  }
+    			  }
+    		  }
     		});
       },
 
@@ -87,7 +106,7 @@
       },
 
       onError: function(err) {
-        alert('error');
+        $("#generalError").removeClass("hidden");
       }
     }, '#paypal-button');
   </script>

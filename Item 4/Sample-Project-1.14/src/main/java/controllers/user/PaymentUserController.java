@@ -135,7 +135,7 @@ public class PaymentUserController {
 	@RequestMapping(value = "/paypal", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public PaymentResponse paypal(@Valid final PaymentForm body, final BindingResult binding, final HttpServletRequest request, final HttpSession session) {
-		PaymentResponse result = null;
+		PaymentResponse result = new PaymentResponse();
 
 		if (!binding.hasErrors()) {
 
@@ -156,32 +156,43 @@ public class PaymentUserController {
 			} catch (final Exception ex) {
 				return null;
 			}
+		} else {
+			result.setErrors(this.paymentService.parseErrors(binding, request));
+			result.setState("validationError");
 		}
+
 		return result;
 	}
 
 	@RequestMapping(value = "/buyNow", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public PaymentResponse buyNow(@Valid final PaymentForm body, final HttpServletRequest request, final HttpSession session) {
-		PaymentResponse result = null;
-		final AuctionAdvertisement auction = (AuctionAdvertisement) session.getAttribute("auction");
+	public PaymentResponse buyNow(@Valid final PaymentForm body, final BindingResult binding, final HttpServletRequest request, final HttpSession session) {
+		final PaymentResponse result = new PaymentResponse();
 
-		final Payment payment = this.paymentService.buildPayment(request.getLocalName(), auction.getInstantBuyPrice(), auction.getBusiness() != null ? auction.getBusiness().getPaypalEmail() : auction.getUser().getEmailAddress());
+		if (!binding.hasErrors()) {
 
-		try {
-			final APIContext apiContext = new APIContext(PaymentService.clientId, PaymentService.clientSecret, "sandbox");
-			final Payment createdPayment = payment.create(apiContext);
-			System.out.println(createdPayment.toString());
-			if (createdPayment.getState().equals("created")) {
-				result = new PaymentResponse();
-				result.setId(createdPayment.getId());
-				result.setState(createdPayment.getState());
-				session.setAttribute("paymentForm", body);
+			final AuctionAdvertisement auction = (AuctionAdvertisement) session.getAttribute("auction");
+
+			final Payment payment = this.paymentService.buildPayment(request.getLocalName(), auction.getInstantBuyPrice(), auction.getBusiness() != null ? auction.getBusiness().getPaypalEmail() : auction.getUser().getEmailAddress());
+
+			try {
+				final APIContext apiContext = new APIContext(PaymentService.clientId, PaymentService.clientSecret, "sandbox");
+				final Payment createdPayment = payment.create(apiContext);
+				System.out.println(createdPayment.toString());
+				if (createdPayment.getState().equals("created")) {
+					result.setId(createdPayment.getId());
+					result.setState(createdPayment.getState());
+					session.setAttribute("paymentForm", body);
+				}
+			} catch (final PayPalRESTException e) {
+				return null;
+			} catch (final Exception ex) {
+				return null;
 			}
-		} catch (final PayPalRESTException e) {
-			return null;
-		} catch (final Exception ex) {
-			return null;
+
+		} else {
+			result.setErrors(this.paymentService.parseErrors(binding, request));
+			result.setState("validationError");
 		}
 
 		return result;
@@ -189,27 +200,35 @@ public class PaymentUserController {
 
 	@RequestMapping(value = "/buyBid", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public PaymentResponse buyBid(@Valid final PaymentForm body, final HttpServletRequest request, final HttpSession session) {
-		PaymentResponse result = null;
-		final Bid bid = (Bid) session.getAttribute("bid");
+	public PaymentResponse buyBid(@Valid final PaymentForm body, final BindingResult binding, final HttpServletRequest request, final HttpSession session) {
+		final PaymentResponse result = new PaymentResponse();
+		;
 
-		final Payment payment = this.paymentService.buildPayment(request.getLocalName(), bid.getAmount(), bid.getAuctionAdvertisement().getBusiness() != null ? bid.getAuctionAdvertisement().getBusiness().getPaypalEmail() : bid.getAuctionAdvertisement()
-			.getUser().getEmailAddress());
+		if (!binding.hasErrors()) {
 
-		try {
-			final APIContext apiContext = new APIContext(PaymentService.clientId, PaymentService.clientSecret, "sandbox");
-			final Payment createdPayment = payment.create(apiContext);
-			System.out.println(createdPayment.toString());
-			if (createdPayment.getState().equals("created")) {
-				result = new PaymentResponse();
-				result.setId(createdPayment.getId());
-				result.setState(createdPayment.getState());
-				session.setAttribute("paymentForm", body);
+			final Bid bid = (Bid) session.getAttribute("bid");
+
+			final Payment payment = this.paymentService.buildPayment(request.getLocalName(), bid.getAmount(), bid.getAuctionAdvertisement().getBusiness() != null ? bid.getAuctionAdvertisement().getBusiness().getPaypalEmail() : bid
+				.getAuctionAdvertisement().getUser().getEmailAddress());
+
+			try {
+				final APIContext apiContext = new APIContext(PaymentService.clientId, PaymentService.clientSecret, "sandbox");
+				final Payment createdPayment = payment.create(apiContext);
+				System.out.println(createdPayment.toString());
+				if (createdPayment.getState().equals("created")) {
+					result.setId(createdPayment.getId());
+					result.setState(createdPayment.getState());
+					session.setAttribute("paymentForm", body);
+				}
+			} catch (final PayPalRESTException e) {
+				return null;
+			} catch (final Exception ex) {
+				return null;
 			}
-		} catch (final PayPalRESTException e) {
-			return null;
-		} catch (final Exception ex) {
-			return null;
+
+		} else {
+			result.setErrors(this.paymentService.parseErrors(binding, request));
+			result.setState("validationError");
 		}
 
 		return result;

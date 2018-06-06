@@ -8,10 +8,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 
 import com.paypal.api.payments.Amount;
 import com.paypal.api.payments.Currency;
@@ -184,5 +188,14 @@ public class PaymentService {
 		} catch (final PayPalRESTException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public List<String> parseErrors(final BindingResult binding, final HttpServletRequest request) {
+		final List<String> result = new ArrayList<String>();
+		for (final ObjectError error : binding.getAllErrors()) {
+			final FieldError fieldError = (FieldError) error;
+			result.add(fieldError.getField());
+		}
+		return result;
 	}
 }
