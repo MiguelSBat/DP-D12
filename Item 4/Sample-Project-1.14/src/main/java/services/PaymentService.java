@@ -107,6 +107,7 @@ public class PaymentService {
 			amount.setValue("100").setCurrency("EUR");
 			final PayoutItem senderItem = new PayoutItem();
 			senderItem.setRecipientType("Email").setNote("Pago de AcmeShop").setReceiver(t.getSeller() != null ? t.getSeller().getEmailAddress() : t.getBusiness().getPaypalEmail()).setSenderItemId("201404324234").setAmount(amount);
+			items.add(senderItem);
 		}
 
 		payout.setSenderBatchHeader(senderBatchHeader).setItems(items);
