@@ -39,12 +39,13 @@
 		
 		<security:authorize access="isAuthenticated()">
 			<li>
-				<a class="fNiv" href="actor/display.do?"> 
+				<a class="fNiv"> 
 					<spring:message code="master.page.profile" /> 
 			        (<security:authentication property="principal.username" />)
 				</a>
 				<ul>
 					<li class="arrow"></li>
+					<li><a href="actor/display.do?"><spring:message code="master.page.profile" /></a></li>
 					<li><a href='chat/opened.do'><spring:message code="actor.openedChat" /></a></li>
 					<li><a href="actor/message/list.do"><spring:message code="master.page.profile.messages" /></a></li>
 					<security:authorize access="hasAnyRole('USER','BUSINESS')">
@@ -52,6 +53,7 @@
 					<li><a href="expressAdvertisement/MyList.do"><spring:message code="master.page.MyList" /></a></li>
 					<li><a href="auctionAdvertisement/myList.do"><spring:message code="master.page.myAuctions" /></a></li>
 					<li><a href="valoration/list.do"><spring:message code="master.page.valoration" /></a></li>
+					
 					</security:authorize>
 					<security:authorize access="hasRole('USER')">
 						<li><a href="auctionAdvertisement/bidded.do"><spring:message code="master.page.user.bidded" /></a></li>
