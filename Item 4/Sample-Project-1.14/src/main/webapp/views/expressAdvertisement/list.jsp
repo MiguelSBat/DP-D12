@@ -86,4 +86,10 @@
 	
 </display:table>
 
+<security:authorize access="hasAnyRole('USER','BUSINESS')">
+	<a href="expressAdvertisement/create.do"><spring:message
+			code="master.page.createExpress" /></a>
+</security:authorize>
+
+
 
