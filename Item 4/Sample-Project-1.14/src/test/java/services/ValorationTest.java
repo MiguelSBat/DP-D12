@@ -78,7 +78,7 @@ public class ValorationTest extends AbstractTest {
 
 			valoration.setActor(actores.get(0));
 
-			this.valorationService.save(valoration);
+			this.valorationService.save(valoration,actores.get(0).getId());
 
 			this.valorationService.flush();
 			this.unauthenticate();

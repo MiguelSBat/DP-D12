@@ -65,12 +65,8 @@ public class ValorationController extends AbstractController {
 		valoration.setScore(rating);
 		valoration.setActor(actor);
 		
-		valoration=this.valorationService.save(valoration);
-		Actor valorated = this.actorService.findOne(actorId);
-		Collection<Valoration> valorations=valorated.getValorations();
-		valorations.add(valoration);
-		valorated.setValorations(valorations);
-		this.actorService.valorate(valorated.getId());
+		valoration=this.valorationService.save(valoration,actorId);
+		
 	
 		result =  list();
 
@@ -97,7 +93,7 @@ public class ValorationController extends AbstractController {
 			business=this.businessService.findBusinessIbuyThings(u.getId());
 
 		}
-//los meto en set para evitar repetidos
+		//los meto en set para evitar repetidos
 		Set<User> usuariosNoRepetidos= new HashSet<User>();
 		Set<Business> businessNoRepetidos = new HashSet<Business>();
 		usuariosNoRepetidos.addAll(usuarios);

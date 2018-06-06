@@ -3,6 +3,8 @@ package services;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.ValorationRepository;
+import domain.Actor;
 import domain.Business;
 import domain.User;
 import domain.Valoration;
@@ -29,7 +32,11 @@ public class ValorationService {
 	@Autowired
 	private BusinessService			businessService;
 
+	@Autowired
+	private ActorService			actorService;
 
+	@Autowired
+	private ConfigService			ConfigService;
 	//Constructors
 	public ValorationService() {
 		super();
@@ -57,10 +64,30 @@ public class ValorationService {
 
 	}
 
-	public Valoration save(final Valoration valoration) {
+	public Valoration save(final Valoration valoration,final int actorId) {
+		Actor valorated = this.actorService.findOne(actorId);
+		Assert.isTrue(AntiHacking(valorated));
 		Valoration result;
 		valoration.setDate(new Date());
 		result = this.valorationRepository.save(valoration);
+		
+		Collection<Valoration> valorations=valorated.getValorations();
+		valorations.add(result);
+		valorated.setValorations(valorations);
+		if(valorated instanceof Business){
+		
+		}
+		if(valorated instanceof User){
+			if(this.getAverageValorationByUser()<ConfigService.findConfiguration().getReputationTreshold()){
+			((User) valorated).setSuspicious(true);
+			}
+		}
+		if(valorated instanceof Business){
+			if(this.getAverageValorationByBusiness()<ConfigService.findConfiguration().getReputationTreshold()){
+			((Business) valorated).setSuspicious(true);
+			}
+		}
+		this.actorService.save(valorated);
 		return result;
 	}
 
@@ -118,4 +145,67 @@ public class ValorationService {
 		}
 		return res / aux.size();
 	}
+	
+	public Boolean AntiHacking(Actor valorado){
+		boolean result=false;
+		Collection<User> usuarios=new HashSet<User>();
+		Collection<Business> business=new HashSet<Business>();
+		Actor a=actorService.findByPrincipal();
+		if(a instanceof Business){
+			Business businessActor= (Business) a;
+			usuarios = this.userService.findUsersISoldThingsAndIAmABussiness(businessActor.getId());
+
+		}
+		if(a instanceof User){
+			User u= (User) a;
+			usuarios = this.userService.findUsersISoldThingsToThey(u.getId());
+			usuarios.addAll(this.userService.findUsersTheySoldThingsToMy(u.getId()));
+			business=this.businessService.findBusinessIbuyThings(u.getId());
+
+		}
+		//los meto en set para evitar repetidos
+		Set<User> usuariosNoRepetidos= new HashSet<User>();
+		Set<Business> businessNoRepetidos = new HashSet<Business>();
+		usuariosNoRepetidos.addAll(usuarios);
+		businessNoRepetidos.addAll(business);
+		
+		
+		
+		//complejo sistema para que no puedas valorar 2 veces al mismo
+		//aunque parezca que es poco optimo, solo hace for sobre cada columna  de la lista y compara si ya valoro a dicho actor para no mostrarlo
+		Collection<Valoration> valorationsYaValoradas=this.findByActor(a.getId());
+		for(User u: usuariosNoRepetidos){
+			for(Valoration v:valorationsYaValoradas){
+				if(v.getActor().equals(a)){
+					usuariosNoRepetidos.remove(u);
+					break;
+				}
+			}
+					
+		}
+			for(Business b: businessNoRepetidos){
+				for(Valoration v:valorationsYaValoradas){
+					if(v.getActor().equals(a)){
+					
+						businessNoRepetidos.remove(b);
+						
+						break;
+					}
+				}
+						
+			}
+			//comprobacion final
+			if(valorado instanceof User){
+				if(usuariosNoRepetidos.contains(valorado)){
+					return true;
+				}
+			}
+			if(valorado instanceof Business){
+				if(businessNoRepetidos.contains(valorado)){
+					return true;
+				}
+			}
+			return result;
+	}
+
 }
