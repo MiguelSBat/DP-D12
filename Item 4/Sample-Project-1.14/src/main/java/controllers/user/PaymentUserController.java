@@ -176,9 +176,8 @@ public class PaymentUserController {
 
 			final AuctionAdvertisement auction = (AuctionAdvertisement) session.getAttribute("auction");
 
-			final Payment payment = this.paymentService.buildPayment(request.getLocalName(), auction.getInstantBuyPrice(), auction.getBusiness() != null ? auction.getBusiness().getPaypalEmail() : auction.getUser().getEmailAddress());
-
 			try {
+				final Payment payment = this.paymentService.buildPayment(request.getLocalName(), auction.getInstantBuyPrice(), auction.getBusiness() != null ? auction.getBusiness().getPaypalEmail() : auction.getUser().getEmailAddress());
 				final APIContext apiContext = new APIContext(PaymentService.clientId, PaymentService.clientSecret, "sandbox");
 				final Payment createdPayment = payment.create(apiContext);
 				System.out.println(createdPayment.toString());
@@ -211,10 +210,9 @@ public class PaymentUserController {
 
 			final Bid bid = (Bid) session.getAttribute("bid");
 
-			final Payment payment = this.paymentService.buildPayment(request.getLocalName(), bid.getAmount(), bid.getAuctionAdvertisement().getBusiness() != null ? bid.getAuctionAdvertisement().getBusiness().getPaypalEmail() : bid
-				.getAuctionAdvertisement().getUser().getEmailAddress());
-
 			try {
+				final Payment payment = this.paymentService.buildPayment(request.getLocalName(), bid.getAmount(), bid.getAuctionAdvertisement().getBusiness() != null ? bid.getAuctionAdvertisement().getBusiness().getPaypalEmail() : bid
+					.getAuctionAdvertisement().getUser().getEmailAddress());
 				final APIContext apiContext = new APIContext(PaymentService.clientId, PaymentService.clientSecret, "sandbox");
 				final Payment createdPayment = payment.create(apiContext);
 				System.out.println(createdPayment.toString());
@@ -242,9 +240,8 @@ public class PaymentUserController {
 	public PaymentResponse buyBid(final HttpServletRequest request) {
 		PaymentResponse result = null;
 
-		final Payment payment = this.paymentService.buildPayment(request.getLocalName(), this.configService.findConfiguration().getPremiumPrice(), "");
-
 		try {
+			final Payment payment = this.paymentService.buildPayment(request.getLocalName(), this.configService.findConfiguration().getPremiumPrice(), "");
 			final APIContext apiContext = new APIContext(PaymentService.clientId, PaymentService.clientSecret, "sandbox");
 			final Payment createdPayment = payment.create(apiContext);
 			System.out.println(createdPayment.toString());

@@ -28,9 +28,12 @@ import com.paypal.api.payments.PayoutItem;
 import com.paypal.api.payments.PayoutSenderBatchHeader;
 import com.paypal.api.payments.RedirectUrls;
 import com.paypal.api.payments.Transaction;
+import com.paypal.base.exception.PayPalException;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
 
+import domain.Actor;
+import domain.Business;
 import domain.SaleLine;
 import domain.Ticket;
 import domain.User;
@@ -52,7 +55,7 @@ public class PaymentService {
 	private SaleLineService		saleLineService;
 
 	@Autowired
-	private TicketService		ticketService;
+	private ActorService		actorService;
 
 
 	public Payment buildPayment(final String baseUrl) {
@@ -128,8 +131,15 @@ public class PaymentService {
 		}
 	}
 
-	public Payment buildPayment(final String baseUrl, final Double price, final String recipient) {
-		final User user = this.userService.findByPrincipal();
+	@SuppressWarnings("serial")
+	public Payment buildPayment(final String baseUrl, final Double price, final String recipient) throws PayPalException {
+		final Actor actor = this.actorService.findByPrincipal();
+		User user = null;
+		Business business = null;
+		if (actor instanceof User)
+			user = (User) actor;
+		if (actor instanceof Business)
+			business = (Business) actor;
 		final List<Transaction> transactions = new LinkedList<Transaction>();
 
 		final Amount amount = new Amount();
@@ -142,9 +152,16 @@ public class PaymentService {
 		transactions.add(transaction);
 
 		final PayerInfo payerInfo = new PayerInfo();
-		payerInfo.setFirstName(user.getName());
-		payerInfo.setLastName(user.getSurname());
-		payerInfo.setEmail(user.getEmailAddress());
+		if (user != null) {
+			payerInfo.setFirstName(user.getName());
+			payerInfo.setLastName(user.getSurname());
+			payerInfo.setEmail(user.getEmailAddress());
+		} else if (business != null) {
+			payerInfo.setFirstName(business.getName());
+			payerInfo.setEmail(business.getEmailAddress());
+		} else
+			throw new PayPalException("Invalid actor type") {
+			};
 
 		final Payer payer = new Payer();
 		payer.setPaymentMethod("paypal");
@@ -161,7 +178,6 @@ public class PaymentService {
 		payment.setRedirectUrls(redirectUrls);
 		return payment;
 	}
-
 	public void payout(final Double amount, final String email) throws PayPalRESTException {
 		final Payout payout = new Payout();
 
