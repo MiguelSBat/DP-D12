@@ -2,10 +2,8 @@
 package services;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.transaction.Transactional;
-import javax.validation.ConstraintViolationException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,20 +38,23 @@ public class ValorationTest extends AbstractTest {
 	public void createAndSaveDriver() {
 		final Object testingData[][] = {
 			{	//Creacion Valoration correcta
-				"user1", this.fechaValida, 3, null
-			}, {	//Creacion Incorrecta, score nulo
-				"user1", this.fechaValida, null, ConstraintViolationException.class
-			}, {	//Creacion Incorrecta, score demasiado bajo
-				"user1", this.fechaValida, -1, ConstraintViolationException.class
-			}, {	//Creacion Incorrecta, score demasiado alto
-				"user1", this.fechaValida, 100, ConstraintViolationException.class
+				"user1", this.fechaValida, 3, "user3", IllegalArgumentException.class
 			}
+		/*
+		 * , { //Creacion Incorrecta, score nulo
+		 * / "user1", this.fechaValida, null,"user2", ConstraintViolationException.class
+		 * }, { //Creacion Incorrecta, score demasiado bajo
+		 * "user1", this.fechaValida, -1,"user2", ConstraintViolationException.class
+		 * }, { //Creacion Incorrecta, score demasiado alto
+		 * "user1", this.fechaValida, 100,"user2", ConstraintViolationException.class
+		 * }
+		 */
 		};
 
 		for (int i = 0; i < testingData.length; i++)
 			try {
 				super.startTransaction();
-				this.createAndSaveTemplate((String) testingData[i][0], (Date) testingData[i][1], (Integer) testingData[i][2], (Class<?>) testingData[i][3]);
+				this.createAndSaveTemplate((String) testingData[i][0], (Date) testingData[i][1], (Integer) testingData[i][2], (String) testingData[i][3], (Class<?>) testingData[i][4]);
 			} catch (final Throwable oops) {
 				throw new RuntimeException(oops);
 			} finally {
@@ -61,24 +62,22 @@ public class ValorationTest extends AbstractTest {
 			}
 	}
 	// Ancillary methods ------------------------------------------------------
-	protected void createAndSaveTemplate(final String beanName, final Date date, final Integer score, final Class<?> expected) {
+	protected void createAndSaveTemplate(final String beanName, final Date date, final Integer score, final String valorated, final Class<?> expected) {
 		Class<?> caught;
 		caught = null;
 
 		try {
 
 			this.authenticate(beanName);
-
+			final Actor actor = this.actorService.findByPrincipal();
 			Valoration valoration;
-
+			final int actorId = this.getEntityId(valorated);
 			valoration = this.valorationService.create();
 			valoration.setDate(date);
 			valoration.setScore(score);
-			final List<Actor> actores = (List<Actor>) this.actorService.findAll();
+			valoration.setActor(actor);
 
-			valoration.setActor(actores.get(0));
-
-			this.valorationService.save(valoration,actores.get(0).getId());
+			this.valorationService.save(valoration, actorId);
 
 			this.valorationService.flush();
 			this.unauthenticate();
