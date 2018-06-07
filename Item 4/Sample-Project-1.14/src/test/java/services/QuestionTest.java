@@ -51,21 +51,14 @@ public class QuestionTest extends AbstractTest {
 			}, {	//question con texto en blanco
 				"user1", "", "shopAdvertisement1", ConstraintViolationException.class
 
-			}, {	//questin sin shopadvertisement
+			}, {	//question sin shopadvertisement
 				"user1", "test text 1", null, NullPointerException.class
 
-			}, {	//Creacion Question con score negativa
+			}, {	//Creacion fallida sin loguear
 				null, "test text 1", "shopAdvertisement1", IllegalArgumentException.class
 
-			}, {	//Creacion Question con texto en blanco
+			}, {	//Creacion fallida Question sin un shopadvertisement
 				"user1", "test text 1", "auctionAdvertisement1", IllegalArgumentException.class
-			//
-			//			}, {	//Creacion Question con texto null
-			//				"user1", "test text 1", "shopAdvertisement1", null
-			//
-			//			}, {	//Creacion Question con score null
-			//				"user1", "test text 1", "shopAdvertisement1", null
-			//
 			},
 		};
 
