@@ -19,7 +19,7 @@ import domain.ShippingInfo;
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
-public class IcesaShippingInfoTest extends AbstractTest {
+public class ShippingInfoTest extends AbstractTest {
 
 	// System under test ------------------------------------------------------
 	@Autowired

@@ -10,8 +10,6 @@
 
 package services;
 
-import java.util.Date;
-
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
 
@@ -35,37 +33,34 @@ public class ShipmentAddressTest extends AbstractTest {
 	@Autowired
 	private ShipmentAddressService	shipmentAddressService;
 
-//	Date					fechaValida	= new Date();
-
 
 	// Tests ------------------------------------------------------------------
 	@Test
 	public void createAndSaveDriver() {
 		final Object testingData[][] = {
 			{	//Creacion ShipmentAddress correcta
-				"user1", "España", "Sevilla", "41010","micasa", null
+				"user1", "España", "Sevilla", "41010", "micasa", null
 			}, {//Creacion erronea con un usuario que no exista
-				"salmorejo", "España", "Sevilla", "41010","micasa", IllegalArgumentException.class
+				"salmorejo", "España", "Sevilla", "41010", "micasa", IllegalArgumentException.class
 			}, {//Creacion erronea ShipmentAddress titulo en blanco
-				"user1", "", "Sevilla", "41010","micasa",   ConstraintViolationException.class
+				"user1", "", "Sevilla", "41010", "micasa", ConstraintViolationException.class
 			}, {//Creacion erronea ShipmentAddress con ciudad en blanco
-				"user1", "Suecia", "", "41010","micasa",   ConstraintViolationException.class
+				"user1", "Suecia", "", "41010", "micasa", ConstraintViolationException.class
 			}, {//Creacion erronea ShipmentAddress  con codigo postal en blanco
-				"user1", "Mordor", "Sevilla", "","micasa",   ConstraintViolationException.class
+				"user1", "Mordor", "Sevilla", "", "micasa", ConstraintViolationException.class
 			}, {//Creacion erronea ShipmentAddress direcion en blanco
-				"user1", "Zimbabue", "Sevilla", "41010","",   ConstraintViolationException.class
+				"user1", "Zimbabue", "Sevilla", "41010", "", ConstraintViolationException.class
 			}, {//Creacion erronea ShipmentAddress con algo en null
-				"user1", "Zimbabue", "Sevilla", "41010",null,   ConstraintViolationException.class
-			
-			
+				"user1", "Zimbabue", "Sevilla", "41010", null, ConstraintViolationException.class
+
 			}
-			
+
 		};
 
 		for (int i = 0; i < testingData.length; i++)
 			try {
 				super.startTransaction();
-				this.createAndSaveTemplate((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3],(String) testingData[i][4], (Class<?>) testingData[i][5]);
+				this.createAndSaveTemplate((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (Class<?>) testingData[i][5]);
 			} catch (final Throwable oops) {
 				throw new RuntimeException(oops);
 			} finally {
@@ -73,7 +68,7 @@ public class ShipmentAddressTest extends AbstractTest {
 			}
 	}
 	// Ancillary methods ------------------------------------------------------
-	protected void createAndSaveTemplate(final String beanName, final String country,final String city,final String postalCode ,final String address , final Class<?> expected) {
+	protected void createAndSaveTemplate(final String beanName, final String country, final String city, final String postalCode, final String address, final Class<?> expected) {
 		Class<?> caught;
 		caught = null;
 
@@ -89,7 +84,6 @@ public class ShipmentAddressTest extends AbstractTest {
 			shipmentAddress.setPostalCode(postalCode);
 			shipmentAddress.setCity(city);
 			shipmentAddress.setAddress(address);
-		
 
 			this.shipmentAddressService.save(shipmentAddress);
 

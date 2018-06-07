@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.transaction.Transactional;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -57,7 +58,8 @@ public class ShippingInfoService {
 		principal = this.actorService.findByPrincipal();
 		Assert.isTrue(shippingInfo.getticket().getBusiness() == null || shippingInfo.getticket().getBusiness().getId() == principal.getId());
 		Assert.isTrue(shippingInfo.getticket().getSeller() == null || shippingInfo.getticket().getSeller().getId() == principal.getId());
-
+		Assert.notNull(shippingInfo.getTrackingNumber());
+		Assert.isTrue(!StringUtils.isBlank(shippingInfo.getCompany()));
 		result = this.shippingInfoRepository.save(shippingInfo);
 		return result;
 	}
