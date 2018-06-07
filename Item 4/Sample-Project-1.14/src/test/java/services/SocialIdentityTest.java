@@ -31,13 +31,7 @@ public class SocialIdentityTest extends AbstractTest {
 
 	// System under test ------------------------------------------------------
 	@Autowired
-	private SocialIdentityService		socialIdentityService;
-	@Autowired
-	private ActorService				actorService;
-	@Autowired
-	private AuctionAdvertisementService	auctionAdvertisementService;
-	@Autowired
-	private BusinessService				businessService;
+	private SocialIdentityService	socialIdentityService;
 
 
 	// Tests ------------------------------------------------------------------
