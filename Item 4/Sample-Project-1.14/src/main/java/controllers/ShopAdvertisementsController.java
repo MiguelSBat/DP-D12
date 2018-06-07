@@ -92,8 +92,12 @@ public class ShopAdvertisementsController extends AbstractController {
 			result = "shopAdvertisement.tabuError";
 		else if (s.contains("shopAdvertisement.stockError"))
 			result = "shopAdvertisement.stockError";
-		else if (s.contains("Advertisement.softBanError"))
-			result = "Advertisement.softBanError";
+		else if (s.contains("advertisement.softBanError"))
+			result = "advertisement.softBanError";
+		else if (s.contains("advertisement.maxTimeAllowed"))
+			result = "advertisement.maxTimeAllowed";
+		else if (s.contains("advertisement.futureError"))
+			result = "advertisement.futureError";
 		else
 			result = "advertisement.commit.error";
 

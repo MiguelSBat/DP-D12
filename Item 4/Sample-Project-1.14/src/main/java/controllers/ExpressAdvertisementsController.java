@@ -155,8 +155,10 @@ public class ExpressAdvertisementsController extends AbstractController {
 
 		if (s.contains("ExpressAdvertisement.tabuError"))
 			result = "shopAdvertisement.tabuError";
-		else if (s.contains("Advertisement.softBanError"))
-			result = "Advertisement.softBanError";
+		else if (s.contains("advertisement.softBanError"))
+			result = "advertisement.softBanError";
+		else if (s.contains("advertisement.maxTimeAllowed"))
+			result = "advertisement.maxTimeAllowed";
 		else
 			result = "advertisement.commit.error";
 

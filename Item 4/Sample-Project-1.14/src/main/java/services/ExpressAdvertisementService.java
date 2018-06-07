@@ -3,10 +3,10 @@ package services;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
 
 import javax.transaction.Transactional;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -14,6 +14,7 @@ import org.springframework.util.Assert;
 import repositories.ExpressAdvertisementRepository;
 import domain.Actor;
 import domain.Business;
+import domain.Config;
 import domain.ExpressAdvertisement;
 import domain.User;
 
@@ -55,7 +56,7 @@ public class ExpressAdvertisementService {
 	//el delete solo cambia la fecha
 
 	public void delete(final ExpressAdvertisement expressAdvertisement) {
-	
+
 		final Actor a = this.actorService.findByPrincipal();
 		if (a instanceof Business) {
 			final Business b = (Business) a;
@@ -67,7 +68,7 @@ public class ExpressAdvertisementService {
 			Assert.isTrue(expressAdvertisement.getUser().equals(u));
 
 		}
-		
+
 		expressAdvertisement.setEndDate(new Date(System.currentTimeMillis()));
 		this.expressAdvertisementRepository.save(expressAdvertisement);
 
@@ -91,12 +92,21 @@ public class ExpressAdvertisementService {
 		ExpressAdvertisement result;
 		Actor actor;
 		Date date;
+		Config config;
+		DateTime aux, dt, max;
+
+		config = this.configService.findConfiguration();
+		dt = new DateTime();
+		max = dt.plusMonths(config.getAdvertisementExpirationMonths());
+		aux = new DateTime(expressAdvertisement.getEndDate());
+
+		Assert.isTrue(max.isAfter(aux), "advertisement.maxTimeAllowed");
 
 		Assert.isTrue(!this.isTabooThisExpressAdvertisement(expressAdvertisement), "ExpressAdvertisement.tabuError");
 		Assert.isTrue(this.actorService.isLogged());
 		actor = this.actorService.findByPrincipal();
 		Assert.isTrue(actor instanceof User || actor instanceof Business);
-		Assert.isTrue(!actor.getSoftBan(), "Advertisement.softBanError");
+		Assert.isTrue(!actor.getSoftBan(), "advertisement.softBanError");
 		date = new Date();
 		Assert.isTrue(expressAdvertisement.getEndDate().after(date));
 		expressAdvertisement.setPublicationDate(new Date(System.currentTimeMillis()));

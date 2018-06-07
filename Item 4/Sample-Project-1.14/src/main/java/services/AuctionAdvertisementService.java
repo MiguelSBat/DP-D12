@@ -7,6 +7,7 @@ import java.util.HashSet;
 
 import javax.transaction.Transactional;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -17,6 +18,7 @@ import domain.Advertisement;
 import domain.AuctionAdvertisement;
 import domain.Bid;
 import domain.Business;
+import domain.Config;
 import domain.User;
 
 @Service
@@ -84,11 +86,20 @@ public class AuctionAdvertisementService {
 		AuctionAdvertisement result;
 		Actor actor;
 		Date date;
+		Config config;
+		DateTime aux, dt, max;
+
+		config = this.configService.findConfiguration();
+		dt = new DateTime();
+		max = dt.plusMonths(config.getAdvertisementExpirationMonths());
+		aux = new DateTime(auctionAdvertisement.getEndDate());
+
+		Assert.isTrue(max.isAfter(aux), "advertisement.maxTimeAllowed");
 
 		Assert.isTrue(this.actorService.isLogged());
 		actor = this.actorService.findByPrincipal();
 		Assert.isTrue(actor instanceof User || actor instanceof Business);
-		Assert.isTrue(!actor.getSoftBan(), "Advertisement.softBanError");
+		Assert.isTrue(!actor.getSoftBan(), "advertisement.softBanError");
 		date = new Date();
 		Assert.isTrue(auctionAdvertisement.getEndDate().after(date));
 		Assert.isTrue(!this.hasSpam(auctionAdvertisement));

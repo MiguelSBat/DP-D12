@@ -24,7 +24,7 @@
 <!-- Listing grid -->
 
 <display:table pagesize="5" class="displaytag" name="advertisements"
-	requestURI="advertisement/list.do" id="row">
+	requestURI="${requestURI}" id="row">
 
 	<spring:message code="advertisement.item" var="itemHeader" />
 	<display:column title="${itemHeader}">

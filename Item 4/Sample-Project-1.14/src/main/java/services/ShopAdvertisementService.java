@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.transaction.Transactional;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -13,6 +14,7 @@ import org.springframework.util.Assert;
 import repositories.ShopAdvertisementRepository;
 import domain.Actor;
 import domain.Business;
+import domain.Config;
 import domain.Question;
 import domain.ShopAdvertisement;
 
@@ -84,14 +86,23 @@ public class ShopAdvertisementService {
 
 		Actor actor;
 		Date date;
+		Config config;
+		config = this.configService.findConfiguration();
+		final DateTime dt = new DateTime();
+		final DateTime max = dt.plusMonths(config.getAdvertisementExpirationMonths());
+
+		final DateTime aux = new DateTime(shopAdvertisement.getEndDate());
+
+		Assert.isTrue(max.isAfter(aux), "advertisement.maxTimeAllowed");
 
 		Assert.isTrue(!this.isTabooThisShopAdvertisement(shopAdvertisement), "shopAdvertisement.tabuError");
 		Assert.isTrue(this.actorService.isLogged());
 		actor = this.actorService.findByPrincipal();
 		Assert.isTrue(actor instanceof Business);
-		Assert.isTrue(!actor.getSoftBan(), "Advertisement.softBanError");
+		Assert.isTrue(!actor.getSoftBan(), "advertisement.softBanError");
 		date = new Date();
-		Assert.isTrue(shopAdvertisement.getEndDate().after(date));
+
+		Assert.isTrue(shopAdvertisement.getEndDate().after(date), "advertisement.futureError");
 		Assert.isTrue(shopAdvertisement.getStock() > 0, "shopAdvertisement.stockError");
 		shopAdvertisement.setPublicationDate(date);
 		shopAdvertisement.setBusiness((Business) actor);
