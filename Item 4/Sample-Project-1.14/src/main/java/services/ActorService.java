@@ -207,6 +207,8 @@ public class ActorService {
 		result.setMessagesSent(messagesSent);
 		result.setReports(reports);
 		result.setValorations(valorations);
+		result.setSoftBan(false);
+		result.setHardBan(false);
 		return result;
 	}
 
@@ -240,7 +242,6 @@ public class ActorService {
 
 		this.save(result);
 	}
-
 
 	public Collection<Actor> findByReportWeight() {
 		Collection<Actor> result;
