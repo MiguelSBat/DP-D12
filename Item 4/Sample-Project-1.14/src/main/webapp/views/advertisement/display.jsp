@@ -151,7 +151,8 @@
 					</display:column>
 
 					<spring:message code="review.date" var="date" />
-					<display:column property="date" title="${date}" />
+					<spring:message code="master.page.date.format" var="dateFormat" />
+					<display:column property="date" format="{0,date,${dateFormat}}" title="${date}" />
 
 					<spring:message code="review.text" var="text" />
 					<display:column property="text" title="${text}" />
@@ -169,7 +170,8 @@
 					</display:column>
 
 					<spring:message code="review.date" var="date" />
-					<display:column property="date" title="${date}" />
+					<spring:message code="master.page.date.format" var="dateFormat" />
+					<display:column property="date" format="{0,date,${dateFormat}}" title="${date}" />
 
 					<spring:message code="review.text" var="text" />
 					<display:column property="text" title="${text}" />
