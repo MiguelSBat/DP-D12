@@ -113,6 +113,7 @@ public class AuctionAdvertisementService {
 
 		auctionAdvertisement.setPublicationDate(date);
 		if (actor instanceof User) {
+			Assert.isTrue(auctionAdvertisement.getItem().getUser().getId() == actor.getId());
 			auctionAdvertisement.setUser((User) actor);
 			user = (User) actor;
 
@@ -125,7 +126,7 @@ public class AuctionAdvertisementService {
 		} else {
 			auctionAdvertisement.setBusiness((Business) actor);
 			business = (Business) actor;
-
+			Assert.isTrue(auctionAdvertisement.getItem().getBusiness().getId() == actor.getId());
 			if (business.getPremium())
 				Assert.isTrue(advs.size() < config.getPremiumMaxAdvertisements(), "advertisement.maxAdvPError");
 			else

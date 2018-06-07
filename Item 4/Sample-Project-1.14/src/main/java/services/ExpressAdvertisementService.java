@@ -123,7 +123,7 @@ public class ExpressAdvertisementService {
 		if (actor instanceof User) {
 			expressAdvertisement.setUser((User) actor);
 			user = (User) actor;
-
+			Assert.isTrue(expressAdvertisement.getItem().getUser().getId() == actor.getId());
 			if (user.isPremium())
 				Assert.isTrue(advs.size() < config.getPremiumMaxAdvertisements(), "advertisement.maxAdvPError");
 			else
@@ -133,7 +133,7 @@ public class ExpressAdvertisementService {
 		} else {
 			expressAdvertisement.setBusiness((Business) actor);
 			business = (Business) actor;
-
+			Assert.isTrue(expressAdvertisement.getItem().getBusiness().getId() == actor.getId());
 			if (business.getPremium())
 				Assert.isTrue(advs.size() < config.getPremiumMaxAdvertisements(), "advertisement.maxAdvPError");
 			else

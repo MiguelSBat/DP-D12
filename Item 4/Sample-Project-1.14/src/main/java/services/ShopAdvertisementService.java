@@ -104,6 +104,7 @@ public class ShopAdvertisementService {
 		Assert.isTrue(this.actorService.isLogged());
 		actor = this.actorService.findByPrincipal();
 		advs = this.advertisementService.findByActorActive(actor);
+		Assert.isTrue(shopAdvertisement.getItem().getBusiness().getId() == actor.getId());
 
 		Assert.isTrue(actor instanceof Business);
 		business = (Business) actor;
