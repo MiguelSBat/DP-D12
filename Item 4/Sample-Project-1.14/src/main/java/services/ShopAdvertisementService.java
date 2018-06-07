@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 
 import repositories.ShopAdvertisementRepository;
 import domain.Actor;
+import domain.Advertisement;
 import domain.Business;
 import domain.Config;
 import domain.Question;
@@ -30,6 +31,8 @@ public class ShopAdvertisementService {
 	private ActorService				actorService;
 	@Autowired
 	private ConfigService				configService;
+	@Autowired
+	private AdvertisementService		advertisementService;
 
 
 	//Constructors
@@ -87,6 +90,8 @@ public class ShopAdvertisementService {
 		Actor actor;
 		Date date;
 		Config config;
+		Business business;
+		Collection<Advertisement> advs;
 		config = this.configService.findConfiguration();
 		final DateTime dt = new DateTime();
 		final DateTime max = dt.plusMonths(config.getAdvertisementExpirationMonths());
@@ -98,7 +103,16 @@ public class ShopAdvertisementService {
 		Assert.isTrue(!this.isTabooThisShopAdvertisement(shopAdvertisement), "shopAdvertisement.tabuError");
 		Assert.isTrue(this.actorService.isLogged());
 		actor = this.actorService.findByPrincipal();
+		advs = this.advertisementService.findByActorActive(actor);
+
 		Assert.isTrue(actor instanceof Business);
+		business = (Business) actor;
+
+		if (business.getPremium())
+			Assert.isTrue(advs.size() < config.getPremiumMaxAdvertisements(), "advertisement.maxAdvPError");
+		else
+			Assert.isTrue(advs.size() < config.getBusinessMaxAdvertisements(), "advertisement.maxAdvError");
+
 		Assert.isTrue(!actor.getSoftBan(), "advertisement.softBanError");
 		date = new Date();
 

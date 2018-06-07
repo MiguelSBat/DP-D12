@@ -98,6 +98,10 @@ public class ShopAdvertisementsController extends AbstractController {
 			result = "advertisement.maxTimeAllowed";
 		else if (s.contains("advertisement.futureError"))
 			result = "advertisement.futureError";
+		else if (s.contains("advertisement.maxAdvError"))
+			result = "advertisement.maxAdvError";
+		else if (s.contains("advertisement.maxAdvPError"))
+			result = "advertisement.maxAdvPError";
 		else
 			result = "advertisement.commit.error";
 

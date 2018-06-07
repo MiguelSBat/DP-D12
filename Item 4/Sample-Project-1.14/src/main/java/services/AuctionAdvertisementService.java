@@ -41,6 +41,9 @@ public class AuctionAdvertisementService {
 	@Autowired
 	private UserService						userService;
 
+	@Autowired
+	private AdvertisementService			advertisementService;
+
 
 	//Constructors
 	public AuctionAdvertisementService() {
@@ -87,7 +90,10 @@ public class AuctionAdvertisementService {
 		Actor actor;
 		Date date;
 		Config config;
+		final User user;
+		final Business business;
 		DateTime aux, dt, max;
+		final Collection<Advertisement> advs;
 
 		config = this.configService.findConfiguration();
 		dt = new DateTime();
@@ -98,6 +104,7 @@ public class AuctionAdvertisementService {
 
 		Assert.isTrue(this.actorService.isLogged());
 		actor = this.actorService.findByPrincipal();
+		advs = this.advertisementService.findByActorActive(actor);
 		Assert.isTrue(actor instanceof User || actor instanceof Business);
 		Assert.isTrue(!actor.getSoftBan(), "advertisement.softBanError");
 		date = new Date();
@@ -107,9 +114,22 @@ public class AuctionAdvertisementService {
 		auctionAdvertisement.setPublicationDate(date);
 		if (actor instanceof User) {
 			auctionAdvertisement.setUser((User) actor);
+			user = (User) actor;
+
+			if (user.isPremium())
+				Assert.isTrue(advs.size() < config.getPremiumMaxAdvertisements(), "advertisement.maxAdvPError");
+			else
+				Assert.isTrue(advs.size() < config.getUserMaxAdvertisements(), "advertisement.maxAdvError");
 			result = this.auctionAdvertisementRepository.save(auctionAdvertisement);
+
 		} else {
 			auctionAdvertisement.setBusiness((Business) actor);
+			business = (Business) actor;
+
+			if (business.getPremium())
+				Assert.isTrue(advs.size() < config.getPremiumMaxAdvertisements(), "advertisement.maxAdvPError");
+			else
+				Assert.isTrue(advs.size() < config.getBusinessMaxAdvertisements(), "advertisement.maxAdvError");
 			result = this.auctionAdvertisementRepository.save(auctionAdvertisement);
 		}
 

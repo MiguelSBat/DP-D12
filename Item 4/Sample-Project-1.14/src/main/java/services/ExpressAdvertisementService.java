@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 
 import repositories.ExpressAdvertisementRepository;
 import domain.Actor;
+import domain.Advertisement;
 import domain.Business;
 import domain.Config;
 import domain.ExpressAdvertisement;
@@ -31,6 +32,9 @@ public class ExpressAdvertisementService {
 
 	@Autowired
 	private ConfigService					configService;
+
+	@Autowired
+	private AdvertisementService			advertisementService;
 
 
 	//Constructors
@@ -94,6 +98,9 @@ public class ExpressAdvertisementService {
 		Date date;
 		Config config;
 		DateTime aux, dt, max;
+		User user;
+		Business business;
+		Collection<Advertisement> advs;
 
 		config = this.configService.findConfiguration();
 		dt = new DateTime();
@@ -105,6 +112,7 @@ public class ExpressAdvertisementService {
 		Assert.isTrue(!this.isTabooThisExpressAdvertisement(expressAdvertisement), "ExpressAdvertisement.tabuError");
 		Assert.isTrue(this.actorService.isLogged());
 		actor = this.actorService.findByPrincipal();
+		advs = this.advertisementService.findByActorActive(actor);
 		Assert.isTrue(actor instanceof User || actor instanceof Business);
 		Assert.isTrue(!actor.getSoftBan(), "advertisement.softBanError");
 		date = new Date();
@@ -114,9 +122,22 @@ public class ExpressAdvertisementService {
 		expressAdvertisement.setPublicationDate(date);
 		if (actor instanceof User) {
 			expressAdvertisement.setUser((User) actor);
+			user = (User) actor;
+
+			if (user.isPremium())
+				Assert.isTrue(advs.size() < config.getPremiumMaxAdvertisements(), "advertisement.maxAdvPError");
+			else
+				Assert.isTrue(advs.size() < config.getUserMaxAdvertisements(), "advertisement.maxAdvError");
+			;
 			result = this.expressAdvertisementRepository.save(expressAdvertisement);
 		} else {
 			expressAdvertisement.setBusiness((Business) actor);
+			business = (Business) actor;
+
+			if (business.getPremium())
+				Assert.isTrue(advs.size() < config.getPremiumMaxAdvertisements(), "advertisement.maxAdvPError");
+			else
+				Assert.isTrue(advs.size() < config.getBusinessMaxAdvertisements(), "advertisement.maxAdvError");
 			result = this.expressAdvertisementRepository.save(expressAdvertisement);
 		}
 
