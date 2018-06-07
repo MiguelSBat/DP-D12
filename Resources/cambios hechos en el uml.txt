@@ -1,0 +1,11 @@
+ Cambios realizados el  14/05
+
+- cambiado relacion entre advertisement y business de 0.*-1 a 0.*-0..1
+- añadido el parametro systemfolder a folder, e invertido la multiplicidad entre socialidentity y user
+
+- añadida una relación más entre order y user para que pueda ser un vendedor
+- Cambiado el dominio de valoration
+
+-invertido relacion entre user y review
+
+- puesto en el uml la bidireccion que metio willy

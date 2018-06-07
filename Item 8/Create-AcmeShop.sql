@@ -1,3 +1,22 @@
+start transaction;
+
+drop database if exists `acmeshop`;
+create database `acmeshop`;
+
+use `acmeshop`;
+
+create user 'acme-user'@'%' identified by password '*4F10007AADA9EE3DBB2CC36575DFC6F4FDE27577';
+
+create user 'acme-manager'@'%' identified by password '*FDB8CD304EB2317D10C95D797A4BD7492560F55F';
+
+grant select, insert, update, delete 
+	on `acmeshop`.* to 'acme-user'@'%';
+
+grant select, insert, update, delete, create, drop, references, index, alter, 
+        create temporary tables, lock tables, create view, create routine, 
+        alter routine, execute, trigger, show view
+    on `acmeshop`.* to 'acme-manager'@'%';
+
 -- MySQL dump 10.13  Distrib 5.5.29, for Win64 (x86)
 --
 -- Host: localhost    Database: AcmeShop
@@ -65,7 +84,7 @@ CREATE TABLE `actor_folder` (
 
 LOCK TABLES `actor_folder` WRITE;
 /*!40000 ALTER TABLE `actor_folder` DISABLE KEYS */;
-INSERT INTO `actor_folder` VALUES (1398,1405),(1398,1406),(1398,1407),(1398,1408),(1400,1409),(1400,1410),(1400,1411),(1400,1412),(1401,1413),(1401,1414),(1401,1415),(1401,1416),(1402,1417),(1402,1418),(1402,1419),(1402,1420),(1399,1421),(1399,1422),(1399,1423),(1399,1424),(1403,1425),(1403,1426),(1403,1427),(1403,1428),(1404,1429),(1404,1430),(1404,1431),(1404,1432);
+INSERT INTO `actor_folder` VALUES (10,11),(10,12),(10,13),(10,14);
 /*!40000 ALTER TABLE `actor_folder` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +109,6 @@ CREATE TABLE `actor_report` (
 
 LOCK TABLES `actor_report` WRITE;
 /*!40000 ALTER TABLE `actor_report` DISABLE KEYS */;
-INSERT INTO `actor_report` VALUES (1400,1436);
 /*!40000 ALTER TABLE `actor_report` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,7 +133,6 @@ CREATE TABLE `actor_valoration` (
 
 LOCK TABLES `actor_valoration` WRITE;
 /*!40000 ALTER TABLE `actor_valoration` DISABLE KEYS */;
-INSERT INTO `actor_valoration` VALUES (1401,1442),(1403,1443),(1400,1444),(1403,1445);
 /*!40000 ALTER TABLE `actor_valoration` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +162,7 @@ CREATE TABLE `admin` (
 
 LOCK TABLES `admin` WRITE;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
-INSERT INTO `admin` VALUES (1398,0,'ponsavi@acme.org','\0','\0',1390);
+INSERT INTO `admin` VALUES (10,0,'ponsavi@acme.org','\0','\0',8);
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,7 +217,6 @@ CREATE TABLE `advertisement_tags` (
 
 LOCK TABLES `advertisement_tags` WRITE;
 /*!40000 ALTER TABLE `advertisement_tags` DISABLE KEYS */;
-INSERT INTO `advertisement_tags` VALUES (1464,'Consola'),(1465,'Video Juego'),(1466,'Consola'),(1467,'Amibo'),(1468,'Consola'),(1469,'Consola'),(1470,'Consola');
 /*!40000 ALTER TABLE `advertisement_tags` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -229,7 +245,6 @@ CREATE TABLE `answer` (
 
 LOCK TABLES `answer` WRITE;
 /*!40000 ALTER TABLE `answer` DISABLE KEYS */;
-INSERT INTO `answer` VALUES (1478,0,'2018-01-15 00:00:00','No viene en ese color',1477);
 /*!40000 ALTER TABLE `answer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -268,7 +283,6 @@ CREATE TABLE `auctionadvertisement` (
 
 LOCK TABLES `auctionadvertisement` WRITE;
 /*!40000 ALTER TABLE `auctionadvertisement` DISABLE KEYS */;
-INSERT INTO `auctionadvertisement` VALUES (1468,0,'2019-01-15 00:00:00','2018-01-15 00:00:00',NULL,1450,520.5,'\0',220.5,1400),(1469,0,'2018-01-15 00:00:00','2017-01-15 00:00:00',NULL,1450,520.5,'\0',220.5,1400),(1470,0,'2019-01-15 00:00:00','2017-01-15 00:00:00',1403,1453,999.99,'',220.5,NULL);
 /*!40000 ALTER TABLE `auctionadvertisement` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -299,7 +313,6 @@ CREATE TABLE `bid` (
 
 LOCK TABLES `bid` WRITE;
 /*!40000 ALTER TABLE `bid` DISABLE KEYS */;
-INSERT INTO `bid` VALUES (1475,0,250.35,1468,1401),(1476,0,250.35,1469,1401);
 /*!40000 ALTER TABLE `bid` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -335,7 +348,6 @@ CREATE TABLE `business` (
 
 LOCK TABLES `business` WRITE;
 /*!40000 ALTER TABLE `business` DISABLE KEYS */;
-INSERT INTO `business` VALUES (1403,0,'ponsavi@acme.org','\0','\0',1395,'das432-das','business1','ponsavi@paypal.org','','\0',''),(1404,0,'ponsavi@acme.org','\0','\0',1396,'das432-das','business2','ponsavi@acme.org','','\0','\0');
 /*!40000 ALTER TABLE `business` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -362,7 +374,6 @@ CREATE TABLE `business_answer` (
 
 LOCK TABLES `business_answer` WRITE;
 /*!40000 ALTER TABLE `business_answer` DISABLE KEYS */;
-INSERT INTO `business_answer` VALUES (1403,1478);
 /*!40000 ALTER TABLE `business_answer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -389,7 +400,6 @@ CREATE TABLE `business_businessinfo` (
 
 LOCK TABLES `business_businessinfo` WRITE;
 /*!40000 ALTER TABLE `business_businessinfo` DISABLE KEYS */;
-INSERT INTO `business_businessinfo` VALUES (1403,1448);
 /*!40000 ALTER TABLE `business_businessinfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -414,7 +424,6 @@ CREATE TABLE `business_photosurl` (
 
 LOCK TABLES `business_photosurl` WRITE;
 /*!40000 ALTER TABLE `business_photosurl` DISABLE KEYS */;
-INSERT INTO `business_photosurl` VALUES (1403,'\"https://images.vexels.com/media/users/3/140752/isolated/preview/17e31e592ab23bb0e8b2c0e76c0a4361-perfil-masculino-avatar-5-by-vexels.png\"'),(1404,'\"https://images.vexels.com/media/users/3/140752/isolated/preview/17e31e592ab23bb0e8b2c0e76c0a4361-perfil-masculino-avatar-5-by-vexels.png\"');
 /*!40000 ALTER TABLE `business_photosurl` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -442,7 +451,6 @@ CREATE TABLE `businessinfo` (
 
 LOCK TABLES `businessinfo` WRITE;
 /*!40000 ALTER TABLE `businessinfo` DISABLE KEYS */;
-INSERT INTO `businessinfo` VALUES (1448,0,'Vendemos por dinero muchas Nintendo Switch','adv. Shibuya','Tokyo','Japon');
 /*!40000 ALTER TABLE `businessinfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -470,7 +478,6 @@ CREATE TABLE `chat` (
 
 LOCK TABLES `chat` WRITE;
 /*!40000 ALTER TABLE `chat` DISABLE KEYS */;
-INSERT INTO `chat` VALUES (1447,0,'2018-01-15 00:00:00','I want sex with you',1400,1402);
 /*!40000 ALTER TABLE `chat` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -505,7 +512,7 @@ CREATE TABLE `config` (
 
 LOCK TABLES `config` WRITE;
 /*!40000 ALTER TABLE `config` DISABLE KEYS */;
-INSERT INTO `config` VALUES (1397,0,0.21,2,50,'Buy, sell or auction everything that you can imagine',100,20,5,1,'Compra, vende o subasta todo que puedas imaginar',5,10);
+INSERT INTO `config` VALUES (9,0,0.21,2,50,'Buy, sell or auction everything that you can imagine',100,20,5,1,'Compra, vende o subasta todo que puedas imaginar',5,10);
 /*!40000 ALTER TABLE `config` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -530,7 +537,7 @@ CREATE TABLE `config_spamwords` (
 
 LOCK TABLES `config_spamwords` WRITE;
 /*!40000 ALTER TABLE `config_spamwords` DISABLE KEYS */;
-INSERT INTO `config_spamwords` VALUES (1397,'sex'),(1397,'sexo'),(1397,'viagra'),(1397,'cialis');
+INSERT INTO `config_spamwords` VALUES (9,'sex'),(9,'sexo'),(9,'viagra'),(9,'cialis');
 /*!40000 ALTER TABLE `config_spamwords` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -567,7 +574,6 @@ CREATE TABLE `expressadvertisement` (
 
 LOCK TABLES `expressadvertisement` WRITE;
 /*!40000 ALTER TABLE `expressadvertisement` DISABLE KEYS */;
-INSERT INTO `expressadvertisement` VALUES (1466,0,'2030-01-15 00:00:00','2018-01-15 00:00:00',NULL,1450,320.5,1400),(1467,0,'2030-01-15 00:00:00','2018-01-15 00:00:00',NULL,1452,70.5,1400);
 /*!40000 ALTER TABLE `expressadvertisement` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -603,7 +609,6 @@ CREATE TABLE `facturationdata` (
 
 LOCK TABLES `facturationdata` WRITE;
 /*!40000 ALTER TABLE `facturationdata` DISABLE KEYS */;
-INSERT INTO `facturationdata` VALUES (1462,0,'00000001A','Sevilla','España','Xi','41008','Wang-Fen',1457,1400),(1463,0,'00000002B','Madrid','España','Xi','41008','Wang-Fen',1458,1400);
 /*!40000 ALTER TABLE `facturationdata` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -632,7 +637,7 @@ CREATE TABLE `folder` (
 
 LOCK TABLES `folder` WRITE;
 /*!40000 ALTER TABLE `folder` DISABLE KEYS */;
-INSERT INTO `folder` VALUES (1405,0,'Root','',NULL),(1406,0,'Inbox','',1405),(1407,0,'Outbox','',1405),(1408,0,'TrashBox','',1405),(1409,0,'Root','',NULL),(1410,0,'Inbox','',1409),(1411,0,'Outbox','',1409),(1412,0,'TrashBox','',1409),(1413,0,'Root','',NULL),(1414,0,'Inbox','',1413),(1415,0,'Outbox','',1413),(1416,0,'TrashBox','',1413),(1417,0,'Root','',NULL),(1418,0,'Inbox','',1417),(1419,0,'Outbox','',1417),(1420,0,'TrashBox','',1417),(1421,0,'Root','',NULL),(1422,0,'Inbox','',1421),(1423,0,'Outbox','',1421),(1424,0,'TrashBox','',1421),(1425,0,'Root','',NULL),(1426,0,'Inbox','',1425),(1427,0,'Outbox','',1425),(1428,0,'TrashBox','',1425),(1429,0,'Root','',NULL),(1430,0,'Inbox','',1429),(1431,0,'Outbox','',1429),(1432,0,'TrashBox','',1429);
+INSERT INTO `folder` VALUES (11,0,'Root','',NULL),(12,0,'Inbox','',11),(13,0,'Outbox','',11),(14,0,'TrashBox','',11);
 /*!40000 ALTER TABLE `folder` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -659,7 +664,6 @@ CREATE TABLE `folder_message` (
 
 LOCK TABLES `folder_message` WRITE;
 /*!40000 ALTER TABLE `folder_message` DISABLE KEYS */;
-INSERT INTO `folder_message` VALUES (1410,1434),(1411,1433),(1411,1435),(1414,1433),(1415,1434),(1426,1435);
 /*!40000 ALTER TABLE `folder_message` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -715,7 +719,6 @@ CREATE TABLE `item` (
 
 LOCK TABLES `item` WRITE;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
-INSERT INTO `item` VALUES (1449,0,'Totalmente nueva','Nintendo switch','http://www.nintenderos.com/wp-content/uploads/2017/10/nintendo-switch.jpg',1403,NULL),(1450,0,'Totalmente nueva','Item2','http://www.nintenderos.com/wp-content/uploads/2017/10/nintendo-switch.jpg',NULL,1400),(1451,0,'Viene incluido con todos los DLCs','Zelda Breath of the Wild Switch','https://media.vandal.net/m/43030/the-legend-of-zelda-breath-of-the-wild-201732131429_1.jpg',1403,NULL),(1452,0,'Amibo Link Nivel 50 y entrenado para COMPETITIVO SSB','Amibo Link twilight princess','https://images-na.ssl-images-amazon.com/images/I/619sdEL41VL._SX342_.jpg',NULL,1400),(1453,0,'Tiene Todos los juegos instalados','SuperNess Mini','https://images-na.ssl-images-amazon.com/images/I/81dKE5hBovL._SX385_.jpg',1403,NULL);
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -743,7 +746,6 @@ CREATE TABLE `message` (
 
 LOCK TABLES `message` WRITE;
 /*!40000 ALTER TABLE `message` DISABLE KEYS */;
-INSERT INTO `message` VALUES (1433,0,'cuerpo del mensaje 1.','2017-10-01 19:00:00','Asunto1',1400),(1434,0,'cuerpo del mensaje 2.','2017-10-01 19:00:00','Asunto1',1401),(1435,0,'cuerpo del mensaje 3.','2017-10-01 19:00:00','Asunto1',1400);
 /*!40000 ALTER TABLE `message` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -768,7 +770,6 @@ CREATE TABLE `message_actor` (
 
 LOCK TABLES `message_actor` WRITE;
 /*!40000 ALTER TABLE `message_actor` DISABLE KEYS */;
-INSERT INTO `message_actor` VALUES (1433,1401),(1434,1400),(1435,1403);
 /*!40000 ALTER TABLE `message_actor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -798,7 +799,6 @@ CREATE TABLE `moderator` (
 
 LOCK TABLES `moderator` WRITE;
 /*!40000 ALTER TABLE `moderator` DISABLE KEYS */;
-INSERT INTO `moderator` VALUES (1399,0,'ponsavi@acme.org','\0','\0',1392);
 /*!40000 ALTER TABLE `moderator` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -830,7 +830,6 @@ CREATE TABLE `question` (
 
 LOCK TABLES `question` WRITE;
 /*!40000 ALTER TABLE `question` DISABLE KEYS */;
-INSERT INTO `question` VALUES (1477,0,'2018-01-15 00:00:00','¿La tienes en verde?',1464,1400);
 /*!40000 ALTER TABLE `question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -857,7 +856,6 @@ CREATE TABLE `report` (
 
 LOCK TABLES `report` WRITE;
 /*!40000 ALTER TABLE `report` DISABLE KEYS */;
-INSERT INTO `report` VALUES (1436,0,'Me acosa por el chat',1,1402),(1437,0,'Me amenaza por el chat',1,1402),(1438,0,'Me manda foto porno por el chat',1,1402),(1439,0,'Me manda foto porno por el chat',1,1402),(1440,0,'Me manda foto porno por el chat',1,1402),(1441,0,'Me manda foto porno por el chat',1,1402);
 /*!40000 ALTER TABLE `report` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -890,7 +888,6 @@ CREATE TABLE `review` (
 
 LOCK TABLES `review` WRITE;
 /*!40000 ALTER TABLE `review` DISABLE KEYS */;
-INSERT INTO `review` VALUES (1471,0,'2018-01-15 00:00:00',4,'Muy buena pero no lo tienen en verde',1464,1400);
 /*!40000 ALTER TABLE `review` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -922,7 +919,6 @@ CREATE TABLE `saleline` (
 
 LOCK TABLES `saleline` WRITE;
 /*!40000 ALTER TABLE `saleline` DISABLE KEYS */;
-INSERT INTO `saleline` VALUES (1472,0,1,1464,NULL,1457),(1473,0,1,1464,1454,NULL),(1474,0,1,1464,NULL,1458);
 /*!40000 ALTER TABLE `saleline` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -956,7 +952,6 @@ CREATE TABLE `shipmentaddress` (
 
 LOCK TABLES `shipmentaddress` WRITE;
 /*!40000 ALTER TABLE `shipmentaddress` DISABLE KEYS */;
-INSERT INTO `shipmentaddress` VALUES (1459,0,'c\\ Rue 13 del Perzebe','Sevilla','España','41008',1457,1400),(1460,0,'c\\ Rue 13 del Perzebe','Madrid','España','41008',1458,1400);
 /*!40000 ALTER TABLE `shipmentaddress` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -986,7 +981,6 @@ CREATE TABLE `shippinginfo` (
 
 LOCK TABLES `shippinginfo` WRITE;
 /*!40000 ALTER TABLE `shippinginfo` DISABLE KEYS */;
-INSERT INTO `shippinginfo` VALUES (1461,0,'esta en camino','SEUR',123456789,1457);
 /*!40000 ALTER TABLE `shippinginfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1021,7 +1015,6 @@ CREATE TABLE `shopadvertisement` (
 
 LOCK TABLES `shopadvertisement` WRITE;
 /*!40000 ALTER TABLE `shopadvertisement` DISABLE KEYS */;
-INSERT INTO `shopadvertisement` VALUES (1464,0,'2030-01-15 00:00:00','2018-01-15 00:00:00',1403,1449,290.5,100),(1465,0,'2030-01-15 00:00:00','2018-01-15 00:00:00',1403,1451,60,60);
 /*!40000 ALTER TABLE `shopadvertisement` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1048,7 +1041,6 @@ CREATE TABLE `shopadvertisement_question` (
 
 LOCK TABLES `shopadvertisement_question` WRITE;
 /*!40000 ALTER TABLE `shopadvertisement_question` DISABLE KEYS */;
-INSERT INTO `shopadvertisement_question` VALUES (1464,1477);
 /*!40000 ALTER TABLE `shopadvertisement_question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1075,7 +1067,6 @@ CREATE TABLE `shoppingcart` (
 
 LOCK TABLES `shoppingcart` WRITE;
 /*!40000 ALTER TABLE `shoppingcart` DISABLE KEYS */;
-INSERT INTO `shoppingcart` VALUES (1454,0,1400),(1455,0,1401),(1456,0,1402);
 /*!40000 ALTER TABLE `shoppingcart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1102,7 +1093,6 @@ CREATE TABLE `socialidentity` (
 
 LOCK TABLES `socialidentity` WRITE;
 /*!40000 ALTER TABLE `socialidentity` DISABLE KEYS */;
-INSERT INTO `socialidentity` VALUES (1446,0,'http://CambiarPorUnaURL.com','1','http://SeriaUnaURL.com');
 /*!40000 ALTER TABLE `socialidentity` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1137,7 +1127,6 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES (1457,0,'2018-01-15 00:00:00','SENT',1403,NULL,1400),(1458,0,'2017-01-15 00:00:00','SENT',1403,NULL,1400);
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1172,7 +1161,6 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1400,0,'buyer@acmeshop.org','\0','\0',1391,'Pepón','656343002','\0','Samper Villagrán','\0'),(1401,0,'user2@mail.com','\0','\0',1393,'userName2','656222111','','userSurname2','\0'),(1402,0,'user3@mail.com','\0','\0',1394,'userName3','656222113','','userSurname3','');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1197,7 +1185,6 @@ CREATE TABLE `user_photosurl` (
 
 LOCK TABLES `user_photosurl` WRITE;
 /*!40000 ALTER TABLE `user_photosurl` DISABLE KEYS */;
-INSERT INTO `user_photosurl` VALUES (1400,'\"https://images.vexels.com/media/users/3/140752/isolated/preview/17e31e592ab23bb0e8b2c0e76c0a4361-perfil-masculino-avatar-5-by-vexels.png\"'),(1401,'\"https://images.vexels.com/media/users/3/140752/isolated/preview/17e31e592ab23bb0e8b2c0e76c0a4361-perfil-masculino-avatar-5-by-vexels.png\"'),(1402,'\"https://images.vexels.com/media/users/3/140752/isolated/preview/17e31e592ab23bb0e8b2c0e76c0a4361-perfil-masculino-avatar-5-by-vexels.png\"');
 /*!40000 ALTER TABLE `user_photosurl` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1224,7 +1211,6 @@ CREATE TABLE `user_socialidentity` (
 
 LOCK TABLES `user_socialidentity` WRITE;
 /*!40000 ALTER TABLE `user_socialidentity` DISABLE KEYS */;
-INSERT INTO `user_socialidentity` VALUES (1400,1446);
 /*!40000 ALTER TABLE `user_socialidentity` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1252,7 +1238,7 @@ CREATE TABLE `useraccount` (
 
 LOCK TABLES `useraccount` WRITE;
 /*!40000 ALTER TABLE `useraccount` DISABLE KEYS */;
-INSERT INTO `useraccount` VALUES (1390,0,'','21232f297a57a5a743894a0e4a801fc3','admin'),(1391,0,'','24c9e15e52afc47c225b757e7bee1f9d','user1'),(1392,0,'','38caf4a470117125b995f7ce53e6e6b9','moderator1'),(1393,0,'','7e58d63b60197ceb55a1c487989a3720','user2'),(1394,0,'','92877af70a45fd6a2ed7fe81e1236b78','user3'),(1395,0,'','ab36fdc41550db15fd4a47f2e44f0076','business1'),(1396,0,'\0','9bde7258dadf923622274ab89ca3d28d','business2');
+INSERT INTO `useraccount` VALUES (8,0,'','21232f297a57a5a743894a0e4a801fc3','admin');
 /*!40000 ALTER TABLE `useraccount` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1277,7 +1263,7 @@ CREATE TABLE `useraccount_authorities` (
 
 LOCK TABLES `useraccount_authorities` WRITE;
 /*!40000 ALTER TABLE `useraccount_authorities` DISABLE KEYS */;
-INSERT INTO `useraccount_authorities` VALUES (1390,'ADMIN'),(1391,'USER'),(1392,'MODERATOR'),(1393,'USER'),(1394,'USER'),(1395,'BUSINESS'),(1396,'BUSINESS');
+INSERT INTO `useraccount_authorities` VALUES (8,'ADMIN');
 /*!40000 ALTER TABLE `useraccount_authorities` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1304,7 +1290,6 @@ CREATE TABLE `valoration` (
 
 LOCK TABLES `valoration` WRITE;
 /*!40000 ALTER TABLE `valoration` DISABLE KEYS */;
-INSERT INTO `valoration` VALUES (1442,0,'2018-01-15 00:00:00',3,1400),(1443,0,'2018-01-15 00:00:00',5,1400),(1444,0,'2018-01-15 00:00:00',1,1402),(1445,0,'2018-01-15 00:00:00',4,1402);
 /*!40000 ALTER TABLE `valoration` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1317,4 +1302,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-06 22:58:22
+-- Dump completed on 2018-06-07 19:01:02
