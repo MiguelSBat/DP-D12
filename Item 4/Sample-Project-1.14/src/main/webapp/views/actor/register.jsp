@@ -64,7 +64,7 @@
 		<form:errors cssClass="error" path="name" />
 		<br />
 		<form:label path="paypalEmail">
-			<spring:message code="actor.email" />
+			<spring:message code="actor.paypalacc" />
 		</form:label>
 		<form:input type="email" path="paypalEmail" />
 		<form:errors cssClass="error" path="paypalEmail" />

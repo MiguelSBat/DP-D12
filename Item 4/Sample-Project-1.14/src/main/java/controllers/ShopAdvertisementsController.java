@@ -92,8 +92,16 @@ public class ShopAdvertisementsController extends AbstractController {
 			result = "shopAdvertisement.tabuError";
 		else if (s.contains("shopAdvertisement.stockError"))
 			result = "shopAdvertisement.stockError";
-		else if (s.contains("Advertisement.softBanError"))
-			result = "Advertisement.softBanError";
+		else if (s.contains("advertisement.softBanError"))
+			result = "advertisement.softBanError";
+		else if (s.contains("advertisement.maxTimeAllowed"))
+			result = "advertisement.maxTimeAllowed";
+		else if (s.contains("advertisement.futureError"))
+			result = "advertisement.futureError";
+		else if (s.contains("advertisement.maxAdvError"))
+			result = "advertisement.maxAdvError";
+		else if (s.contains("advertisement.maxAdvPError"))
+			result = "advertisement.maxAdvPError";
 		else
 			result = "advertisement.commit.error";
 
@@ -129,7 +137,7 @@ public class ShopAdvertisementsController extends AbstractController {
 		}
 		result = new ModelAndView("shopAdvertisement/list");
 		result.addObject("advertisements", advertisements);
-		result.addObject("requestURI", "business/shopAdvertisement/myList.do");
+		result.addObject("requestURI", "shopAdvertisement/myList.do");
 
 		result.addObject("aID", aID);
 		return result;

@@ -67,6 +67,7 @@ public class TicketUserController extends AbstractController {
 		result = new ModelAndView("ticket/list");
 		result.addObject("tickets", tickets);
 		result.addObject("listType", "myTickets");
+		result.addObject("requestURI", "user/ticket/myTickets.do");
 
 		return result;
 	}
@@ -81,6 +82,7 @@ public class TicketUserController extends AbstractController {
 		result = new ModelAndView("ticket/list");
 		result.addObject("tickets", tickets);
 		result.addObject("listType", "mySales");
+		result.addObject("requestURI", "user/ticket/mySales.do");
 
 		return result;
 	}
@@ -118,6 +120,7 @@ public class TicketUserController extends AbstractController {
 		result.addObject("shippingInfo", shippingInfo);
 		result.addObject("facturationData", facturationData);
 		result.addObject("principal", principal);
+		result.addObject("requestURI", "user/ticket/display.do?ticketId=" + ticketId);
 		return result;
 	}
 

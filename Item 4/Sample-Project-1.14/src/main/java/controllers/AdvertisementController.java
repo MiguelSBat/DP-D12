@@ -2,6 +2,7 @@
 package controllers;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,13 +106,16 @@ public class AdvertisementController extends AbstractController {
 		Boolean isPremiumBusiness = true;
 		User user;
 		Business business;
+		boolean buyable;
 		final Actor actor;
 		final Boolean Verdadero = true;
 		boolean biddable;
 		final Random rnd;
+
 		//		advertisement = this.advertisementService.findOne(advertisementId);
 
 		biddable = false;
+		buyable = false;
 		result = new ModelAndView("advertisement/display");
 		advertisement = this.advertisementService.findOne(advertisementId);
 		premiums = this.advertisementService.findByPremiumBusiness();
@@ -121,6 +125,8 @@ public class AdvertisementController extends AbstractController {
 		if (this.actorService.isLogged()) {
 			actor = this.actorService.findByPrincipal();
 			if (actor instanceof User) {
+				if (!advertisement.getEndDate().before(new Date()))
+					buyable = true;
 				user = (User) actor;
 				isPremiumUser = user.isPremium();
 				if (!isPremiumUser)
@@ -172,6 +178,7 @@ public class AdvertisementController extends AbstractController {
 		result.addObject("advertisement", advertisement);
 		result.addObject("type", advertisementType);
 		result.addObject("biddable", biddable);
+		result.addObject("buyable", buyable);
 		return result;
 	}
 	// Edition ----------------------------------------------------------------

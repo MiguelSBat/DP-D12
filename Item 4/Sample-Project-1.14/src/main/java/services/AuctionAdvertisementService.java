@@ -7,6 +7,7 @@ import java.util.HashSet;
 
 import javax.transaction.Transactional;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -17,6 +18,7 @@ import domain.Advertisement;
 import domain.AuctionAdvertisement;
 import domain.Bid;
 import domain.Business;
+import domain.Config;
 import domain.User;
 
 @Service
@@ -38,6 +40,9 @@ public class AuctionAdvertisementService {
 
 	@Autowired
 	private UserService						userService;
+
+	@Autowired
+	private AdvertisementService			advertisementService;
 
 
 	//Constructors
@@ -84,11 +89,24 @@ public class AuctionAdvertisementService {
 		AuctionAdvertisement result;
 		Actor actor;
 		Date date;
+		Config config;
+		final User user;
+		final Business business;
+		DateTime aux, dt, max;
+		final Collection<Advertisement> advs;
+
+		config = this.configService.findConfiguration();
+		dt = new DateTime();
+		max = dt.plusMonths(config.getAdvertisementExpirationMonths());
+		aux = new DateTime(auctionAdvertisement.getEndDate());
+
+		Assert.isTrue(max.isAfter(aux), "advertisement.maxTimeAllowed");
 
 		Assert.isTrue(this.actorService.isLogged());
 		actor = this.actorService.findByPrincipal();
+		advs = this.advertisementService.findByActorActive(actor);
 		Assert.isTrue(actor instanceof User || actor instanceof Business);
-		Assert.isTrue(!actor.getSoftBan(), "Advertisement.softBanError");
+		Assert.isTrue(!actor.getSoftBan(), "advertisement.softBanError");
 		date = new Date();
 		Assert.isTrue(auctionAdvertisement.getEndDate().after(date));
 		Assert.isTrue(!this.hasSpam(auctionAdvertisement));
@@ -96,9 +114,22 @@ public class AuctionAdvertisementService {
 		auctionAdvertisement.setPublicationDate(date);
 		if (actor instanceof User) {
 			auctionAdvertisement.setUser((User) actor);
+			user = (User) actor;
+
+			if (user.isPremium())
+				Assert.isTrue(advs.size() < config.getPremiumMaxAdvertisements(), "advertisement.maxAdvPError");
+			else
+				Assert.isTrue(advs.size() < config.getUserMaxAdvertisements(), "advertisement.maxAdvError");
 			result = this.auctionAdvertisementRepository.save(auctionAdvertisement);
+
 		} else {
 			auctionAdvertisement.setBusiness((Business) actor);
+			business = (Business) actor;
+
+			if (business.getPremium())
+				Assert.isTrue(advs.size() < config.getPremiumMaxAdvertisements(), "advertisement.maxAdvPError");
+			else
+				Assert.isTrue(advs.size() < config.getBusinessMaxAdvertisements(), "advertisement.maxAdvError");
 			result = this.auctionAdvertisementRepository.save(auctionAdvertisement);
 		}
 

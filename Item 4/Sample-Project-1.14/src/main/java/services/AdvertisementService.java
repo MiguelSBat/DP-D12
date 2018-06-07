@@ -10,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import repositories.AdvertisementRepository;
+import domain.Actor;
 import domain.Advertisement;
 import domain.ExpressAdvertisement;
 import domain.SaleLine;
 import domain.ShopAdvertisement;
 import domain.Ticket;
+import domain.User;
 
 @Service
 @Transactional
@@ -154,5 +156,16 @@ public class AdvertisementService {
 			}
 		}
 
+	}
+
+	public Collection<Advertisement> findByActorActive(final Actor actor) {
+		Collection<Advertisement> result;
+
+		if (actor instanceof User)
+			result = this.advertisementRepository.findByUserActive(actor.getId());
+		else
+			result = this.advertisementRepository.findByBusinessActive(actor.getId());
+
+		return result;
 	}
 }

@@ -37,6 +37,8 @@ public class ValorationService {
 
 	@Autowired
 	private ConfigService			ConfigService;
+
+
 	//Constructors
 	public ValorationService() {
 		super();
@@ -64,29 +66,23 @@ public class ValorationService {
 
 	}
 
-	public Valoration save(final Valoration valoration,final int actorId) {
-		Actor valorated = this.actorService.findOne(actorId);
-		Assert.isTrue(AntiHacking(valorated));
+	public Valoration save(final Valoration valoration, final int actorId) {
+		final Actor valorated = this.actorService.findOne(actorId);
+		Assert.isTrue(this.AntiHacking(valorated));
 		Valoration result;
 		valoration.setDate(new Date());
 		result = this.valorationRepository.save(valoration);
-		
-		Collection<Valoration> valorations=valorated.getValorations();
+
+		final Collection<Valoration> valorations = valorated.getValorations();
 		valorations.add(result);
 		valorated.setValorations(valorations);
-		if(valorated instanceof Business){
-		
-		}
-		if(valorated instanceof User){
-			if(this.getAverageValorationByUser()<ConfigService.findConfiguration().getReputationTreshold()){
-			((User) valorated).setSuspicious(true);
-			}
-		}
-		if(valorated instanceof Business){
-			if(this.getAverageValorationByBusiness()<ConfigService.findConfiguration().getReputationTreshold()){
-			((Business) valorated).setSuspicious(true);
-			}
-		}
+
+		if (valorated instanceof User)
+			if (this.getValorations(valorated.getId()) <= this.ConfigService.findConfiguration().getReputationTreshold())
+				((User) valorated).setSuspicious(true);
+		if (valorated instanceof Business)
+			if (this.getValorations(valorated.getId()) <= this.ConfigService.findConfiguration().getReputationTreshold())
+				((Business) valorated).setSuspicious(true);
 		this.actorService.save(valorated);
 		return result;
 	}
@@ -145,67 +141,55 @@ public class ValorationService {
 		}
 		return res / aux.size();
 	}
-	
-	public Boolean AntiHacking(Actor valorado){
-		boolean result=false;
-		Collection<User> usuarios=new HashSet<User>();
-		Collection<Business> business=new HashSet<Business>();
-		Actor a=actorService.findByPrincipal();
-		if(a instanceof Business){
-			Business businessActor= (Business) a;
+
+	public Boolean AntiHacking(final Actor valorado) {
+		final boolean result = false;
+		Collection<User> usuarios = new HashSet<User>();
+		Collection<Business> business = new HashSet<Business>();
+		final Actor a = this.actorService.findByPrincipal();
+		if (a instanceof Business) {
+			final Business businessActor = (Business) a;
 			usuarios = this.userService.findUsersISoldThingsAndIAmABussiness(businessActor.getId());
 
 		}
-		if(a instanceof User){
-			User u= (User) a;
+		if (a instanceof User) {
+			final User u = (User) a;
 			usuarios = this.userService.findUsersISoldThingsToThey(u.getId());
 			usuarios.addAll(this.userService.findUsersTheySoldThingsToMy(u.getId()));
-			business=this.businessService.findBusinessIbuyThings(u.getId());
+			business = this.businessService.findBusinessIbuyThings(u.getId());
 
 		}
 		//los meto en set para evitar repetidos
-		Set<User> usuariosNoRepetidos= new HashSet<User>();
-		Set<Business> businessNoRepetidos = new HashSet<Business>();
+		final Set<User> usuariosNoRepetidos = new HashSet<User>();
+		final Set<Business> businessNoRepetidos = new HashSet<Business>();
 		usuariosNoRepetidos.addAll(usuarios);
 		businessNoRepetidos.addAll(business);
-		
-		
-		
+
 		//complejo sistema para que no puedas valorar 2 veces al mismo
 		//aunque parezca que es poco optimo, solo hace for sobre cada columna  de la lista y compara si ya valoro a dicho actor para no mostrarlo
-		Collection<Valoration> valorationsYaValoradas=this.findByActor(a.getId());
-		for(User u: usuariosNoRepetidos){
-			for(Valoration v:valorationsYaValoradas){
-				if(v.getActor().equals(a)){
+		final Collection<Valoration> valorationsYaValoradas = this.findByActor(a.getId());
+		for (final User u : usuariosNoRepetidos)
+			for (final Valoration v : valorationsYaValoradas)
+				if (v.getActor().equals(a)) {
 					usuariosNoRepetidos.remove(u);
 					break;
 				}
-			}
-					
-		}
-			for(Business b: businessNoRepetidos){
-				for(Valoration v:valorationsYaValoradas){
-					if(v.getActor().equals(a)){
-					
-						businessNoRepetidos.remove(b);
-						
-						break;
-					}
+		for (final Business b : businessNoRepetidos)
+			for (final Valoration v : valorationsYaValoradas)
+				if (v.getActor().equals(a)) {
+
+					businessNoRepetidos.remove(b);
+
+					break;
 				}
-						
-			}
-			//comprobacion final
-			if(valorado instanceof User){
-				if(usuariosNoRepetidos.contains(valorado)){
-					return true;
-				}
-			}
-			if(valorado instanceof Business){
-				if(businessNoRepetidos.contains(valorado)){
-					return true;
-				}
-			}
-			return result;
+		//comprobacion final
+		if (valorado instanceof User)
+			if (usuariosNoRepetidos.contains(valorado))
+				return true;
+		if (valorado instanceof Business)
+			if (businessNoRepetidos.contains(valorado))
+				return true;
+		return result;
 	}
 
 }

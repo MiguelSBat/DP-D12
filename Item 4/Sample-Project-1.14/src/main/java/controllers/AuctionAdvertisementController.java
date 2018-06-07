@@ -60,6 +60,7 @@ public class AuctionAdvertisementController extends AbstractController {
 
 		result = new ModelAndView("auctionAdvertisement/list");
 		result.addObject("advertisements", advertisements);
+		result.addObject("requestURI", "auctionAdvertisement/list.do");
 
 		return result;
 	}
@@ -80,6 +81,7 @@ public class AuctionAdvertisementController extends AbstractController {
 			else if (actor instanceof Business)
 				result.addObject("businessId", actor.getId());
 		}
+		result.addObject("requestURI", "auctionAdvertisement/myList.do");
 		return result;
 	}
 
@@ -150,8 +152,14 @@ public class AuctionAdvertisementController extends AbstractController {
 
 		if (s.contains("shopAdvertisement.tabuError"))
 			result = "shopAdvertisement.tabuError";
-		else if (s.contains("Advertisement.softBanError"))
-			result = "Advertisement.softBanError";
+		else if (s.contains("advertisement.softBanError"))
+			result = "advertisement.softBanError";
+		else if (s.contains("advertisement.maxTimeAllowed"))
+			result = "advertisement.maxTimeAllowed";
+		else if (s.contains("advertisement.maxAdvError"))
+			result = "advertisement.maxAdvError";
+		else if (s.contains("advertisement.maxAdvPError"))
+			result = "advertisement.maxAdvPError";
 		else
 			result = "advertisement.commit.error";
 
