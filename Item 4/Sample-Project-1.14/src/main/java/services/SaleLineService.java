@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -169,6 +170,10 @@ public class SaleLineService {
 	}
 
 	public Collection<SaleLine> findByPrincipal() {
+		final Collection<SaleLine> lines = this.findByShoppingCart(this.shoppingCartService.findByPrincipalOrCreate());
+		for (final SaleLine line : lines)
+			if (line.getAdvertisement().getEndDate().compareTo(new Date()) <= 0)
+				this.delete(line);
 		return this.findByShoppingCart(this.shoppingCartService.findByPrincipalOrCreate());
 	}
 

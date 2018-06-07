@@ -203,7 +203,7 @@
 	<property name="userAccount" ref="userAccount2" />
 		<property name="name" value="Pepón" />
 		<property name="surname" value="Samper Villagrán" />
-		<property name="emailAddress" value="buyer@acmeshop.org" />
+		<property name="emailAddress" value="user1@acmeshop.com" />
 		<property name="phone" value="656343002" />
 		<property name="premium" value="false" />
 		<property name="suspicious" value="false" />
@@ -256,7 +256,7 @@
 	<property name="userAccount" ref="userAccount4" />
 		<property name="name" value="userName2" />
 		<property name="surname" value="userSurname2" />
-		<property name="emailAddress" value="user2@mail.com" />
+		<property name="emailAddress" value="user2@acmeshop.com" />
 		<property name="phone" value="656222111" />
 		<property name="premium" value="True" />
 		<property name="suspicious" value="false" />
@@ -307,7 +307,7 @@
 	<property name="userAccount" ref="userAccount5" />
 		<property name="name" value="userName3" />
 		<property name="surname" value="userSurname3" />
-		<property name="emailAddress" value="user3@mail.com" />
+		<property name="emailAddress" value="user3@acmeshop.com" />
 		<property name="phone" value="656222113" />
 		<property name="premium" value="true" />
 		<property name="suspicious" value="True" />
@@ -356,8 +356,8 @@
 	<bean id="business1" class="domain.Business">
 		<property name="userAccount" ref="userAccount6" />
 		<property name="name" value="business1" />
-		<property name="paypalEmail" value="ponsavi@paypal.org" />
-		<property name="emailAddress" value="ponsavi@acme.org" />
+		<property name="paypalEmail" value="business1@acmeshop.com" />
+		<property name="emailAddress" value="business1@acmeshop.com" />
 		<property name="VATNumber" value="das432-das" />
 		<property name="premium" value="True" />
 		<property name="suspicious" value="false" />
@@ -411,8 +411,8 @@
 	<bean id="business2" class="domain.Business">
 		<property name="userAccount" ref="userAccount7" />
 		<property name="name" value="business2" />
-		<property name="paypalEmail" value="ponsavi@acme.org" />
-		<property name="emailAddress" value="ponsavi@acme.org" />
+		<property name="paypalEmail" value="business2@acmeshop.com" />
+		<property name="emailAddress" value="business2@acmeshop.com" />
 		<property name="VATNumber" value="das432-das" />
 		<property name="premium" value="True" />
 		<property name="suspicious" value="false" />
