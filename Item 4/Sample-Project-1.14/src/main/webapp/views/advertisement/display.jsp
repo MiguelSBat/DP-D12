@@ -188,7 +188,8 @@
 			</security:authorize>
 
 		</jstl:if>
-		<jstl:if test="${type.equals('express')}">
+		
+		<jstl:if test="${type.equals('express')&&buyable}">
 			<li><b><spring:message code="advertisement.price"></spring:message>:</b>
 				<jstl:out value="${advertisement.price}" /></li>
 			<img src="${advertisement.item.photo}" height="200" width="300" />
@@ -198,9 +199,9 @@
 			<li><b><spring:message code="advertisement.startingPrice"></spring:message>:</b>
 				<jstl:out value="${advertisement.getStartingPrice()}" /></li>
 			<li><b><spring:message code="advertisement.instantBuyPrice"></spring:message>:</b>
-				<jstl:out value="${advertisement.getInstantBuyPrice()}" /> <input type="button" name="cancel"
+				<jstl:out value="${advertisement.getInstantBuyPrice()}" /> <jstl:if test="${buyable}"><input type="button" name="cancel"
 																				value="<spring:message code="advertisement.buy.now" />"
-																				onclick="javascript: relativeRedir('user/payment/payBuyNow.do?auctionId=${advertisement.id}')" /></li>
+																				onclick="javascript: relativeRedir('user/payment/payBuyNow.do?auctionId=${advertisement.id}')" /></li></jstl:if>
 				
 				
 
@@ -245,13 +246,13 @@
 	
 	
 	
-	<jstl:if test="${type.equals('shop')}">
+	<jstl:if test="${type.equals('shop')&&buyable}">
 		<input type="button" name="addToCart"
 			value="<spring:message code="advertisement.addToCart" />"
 			onclick="addToCartAction('${advertisement.id}')" />
 		<input type="number" step="1" min="0" max="${advertisement.stock}" value="1" name="cartAmount" id="cartAmount" />
 	</jstl:if>
-	<jstl:if test="${type.equals('express')}">
+	<jstl:if test="${type.equals('express')&&buyable}">
 		<input type="button" name="addToCart"
 			value="<spring:message code="advertisement.addToCart" />"
 			onclick="addToCartAction('${advertisement.id}')" />

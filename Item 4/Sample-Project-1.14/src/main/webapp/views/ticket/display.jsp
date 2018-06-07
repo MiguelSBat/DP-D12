@@ -119,7 +119,7 @@
 </a>
 </jstl:if>
 <display:table pagesize="5" class="displaytag" 
-	name="saleLines" requestURI="ticket/display.do" id="row">
+	name="saleLines" requestURI="${requestURI }" id="row">
 	
 	<spring:message code="ticket.display.name" var="rowHeader" />
 	<display:column title="${rowHeader}">

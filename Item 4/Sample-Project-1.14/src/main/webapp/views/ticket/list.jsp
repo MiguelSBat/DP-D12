@@ -25,7 +25,7 @@
 <!-- Listing grid -->
 <spring:message code="master.page.date.format" var="dateFormat" />
 <display:table pagesize="5" class="displaytag" 
-	name="tickets" requestURI="ticket/list.do" id="row">
+	name="tickets" requestURI="${requestURI }" id="row">
 	
 	<jstl:if test="${listType=='myTickets' }">
 	<spring:message code="ticket.seller" var="rowHeader" />

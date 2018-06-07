@@ -67,6 +67,7 @@ public class TicketBusinessController extends AbstractController {
 		result = new ModelAndView("ticket/list");
 		result.addObject("tickets", tickets);
 		result.addObject("listType", "mySales");
+		result.addObject("requestURI", "business/ticket/mySales.do");
 
 		return result;
 	}
@@ -104,6 +105,7 @@ public class TicketBusinessController extends AbstractController {
 		result.addObject("shippingInfo", shippingInfo);
 		result.addObject("facturationData", facturationData);
 		result.addObject("principal", principal);
+		result.addObject("requestURI", "business/ticket/display.do?ticketId=" + ticketId);
 		return result;
 	}
 
