@@ -4,6 +4,7 @@ package services;
 import java.util.Date;
 
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,15 +41,15 @@ public class ValorationTest extends AbstractTest {
 			{	//Creacion Valoration correcta
 				"user1", this.fechaValida, 3, "user3", IllegalArgumentException.class
 			}
-		/*
-		 * , { //Creacion Incorrecta, score nulo
-		 * / "user1", this.fechaValida, null,"user2", ConstraintViolationException.class
-		 * }, { //Creacion Incorrecta, score demasiado bajo
-		 * "user1", this.fechaValida, -1,"user2", ConstraintViolationException.class
-		 * }, { //Creacion Incorrecta, score demasiado alto
-		 * "user1", this.fechaValida, 100,"user2", ConstraintViolationException.class
-		 * }
-		 */
+		
+		  , { //Creacion Incorrecta, score nulo
+			  "user1", this.fechaValida, null,"user2", IllegalArgumentException.class
+		  }, { //Creacion Incorrecta, score demasiado bajo
+		  "user1", this.fechaValida, -1,"user2", IllegalArgumentException.class
+		  }, { //Creacion Incorrecta, score demasiado alto
+		  "user1", this.fechaValida, 100,"user2", IllegalArgumentException.class
+		  }
+		 
 		};
 
 		for (int i = 0; i < testingData.length; i++)
