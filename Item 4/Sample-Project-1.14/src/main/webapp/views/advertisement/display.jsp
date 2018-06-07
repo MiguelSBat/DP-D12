@@ -189,7 +189,7 @@
 
 		</jstl:if>
 		
-		<jstl:if test="${type.equals('express')&&buyable}">
+		<jstl:if test="${type.equals('express')}">
 			<li><b><spring:message code="advertisement.price"></spring:message>:</b>
 				<jstl:out value="${advertisement.price}" /></li>
 			<img src="${advertisement.item.photo}" height="200" width="300" />
