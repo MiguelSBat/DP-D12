@@ -62,6 +62,9 @@ public class ActorService {
 	@Autowired
 	private ConfigService			configService;
 
+	@Autowired
+	private FolderService			folderService;
+
 
 	//Constructors
 	public ActorService() {
@@ -197,7 +200,7 @@ public class ActorService {
 		result.setEmailAddress(actorForm.getEmail());
 		result.getUserAccount().setUsername(actorForm.getUsername());
 		result.getUserAccount().setPassword(actorForm.getPassword());
-		final Collection<Folder> folders = new HashSet<>();
+		final Collection<Folder> folders = this.folderService.initSystemFolders();
 		final Collection<Message> messagesSent = new HashSet<>();
 		final Collection<Message> messagesReceived = new HashSet<>();
 		final Collection<Report> reports = new HashSet<>();
