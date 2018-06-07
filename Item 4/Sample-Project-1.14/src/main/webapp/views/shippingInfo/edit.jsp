@@ -22,9 +22,9 @@
   
 	<acme:textbox code="shippingInfo.trackingNumber" path="trackingNumber"/>
 	
-	<acme:textarea code="shippingInfo.company" path="company"/>
+	<acme:textbox code="shippingInfo.company" path="company"/>
 	
-	<acme:textbox code="shippingInfo.additionalInfo" path="additionalInfo"/>
+	<acme:textarea code="shippingInfo.additionalInfo" path="additionalInfo"/>
 	
 	<acme:submit name="save" code="shippingInfo.save"/>
 	
@@ -40,9 +40,9 @@
   
 	<acme:textbox code="shippingInfo.trackingNumber" path="trackingNumber"/>
 	
-	<acme:textarea code="shippingInfo.company" path="company"/>
+	<acme:textbox code="shippingInfo.company" path="company"/>
 	
-	<acme:textbox code="shippingInfo.additionalInfo" path="additionalInfo"/>
+	<acme:textarea code="shippingInfo.additionalInfo" path="additionalInfo"/>
 	
 	<acme:submit name="save" code="shippingInfo.save"/>
 	
