@@ -68,6 +68,7 @@
 
 <fmt:setLocale value="${locale}" />
 	<security:authorize access="hasAnyRole('USER','BUSINESS') || isAnonymous()">
+	<jstl:if test="${premium!=null}">
 	<jstl:if test="${showPremiumAd==false}">
 	<a class="premium" href="advertisement/display.do?advertisementId=${premium.getId()}">
 	<div class="solid">
@@ -103,6 +104,7 @@
 	</p>
 	</div>
 	</a>
+	</jstl:if>
 	</jstl:if>
 	</security:authorize>
 	
