@@ -44,8 +44,9 @@
 		</security:authorize>
 
 		<security:authorize access="isAuthenticated()">
+			<security:authorize access="hasRole('USER')">
 			<li><a class="fNiv"><spring:message code="master.page.record"/></a>
-				<ul><security:authorize access="hasRole('USER')">
+				<ul>
 				<li><a href="auctionAdvertisement/bidded.do"><spring:message
 									code="master.page.user.bidded" /></a></li>
 						<li><a href="auctionAdvertisement/wonBids.do"><spring:message
@@ -56,16 +57,20 @@
 									code="master.page.user.mySales" /></a></li>
 									<li><a href="valoration/list.do"><spring:message
 									code="master.page.valoration" /></a></li>
+									</ul></li>
 				</security:authorize>
 				<security:authorize access="hasRole('BUSINESS')">
+				<li><a class="fNiv"><spring:message code="master.page.record"/></a>
+				<ul>
 				<li><a href="business/ticket/mySales.do"><spring:message
 									code="master.page.user.mySales" /></a></li>
 									<li><a href="valoration/list.do"><spring:message
 									code="master.page.valoration" /></a></li>
 									<li><a href="business/question/list.do"><spring:message
 									code="master.page.business.question" /></a></li>
+									</ul></li>
 				</security:authorize>
-				</ul></li>
+				
 			<li><a class="fNiv"> <spring:message
 						code="master.page.profile" /> (<security:authentication
 						property="principal.username" />)
