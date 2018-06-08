@@ -37,11 +37,11 @@ public class ShoppingCartTest extends AbstractTest {
 			}, {	//Añadir expressAdvertisement correctamente
 				"user1", "expressAdvertisement1", 1, SaleLineService.ADDED
 			}, {	//Añadir shopAdvertisement sin stock
-				"user1", "shopAdvertisement1", 1000, SaleLineService.OUT_OF_STOCK
+				"user1", "shopAdvertisement2", 1000, SaleLineService.OUT_OF_STOCK
 			}, {	//Añadir más de un mismo expressAdvertisement
 				"user1", "expressAdvertisement1", 2, SaleLineService.INVALID_AMOUNT
 			}, {	//Añadir cantidad no válida
-				"user1", "shopAdvertisement1", -1, SaleLineService.INVALID_AMOUNT
+				"user1", "shopAdvertisement2", -1, SaleLineService.INVALID_AMOUNT
 			}, {	//Añadir auctionAdvertisement
 				"user1", "auctionAdvertisement1", 1, SaleLineService.ERROR
 			}, {	// Business no puede añadir
