@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+
+	
+	<definition name="businessInfo/list" extends="master.page">	
+		<put-attribute name="title" value="businessInfo List" />
+		<put-attribute name="body" value="/views/businessInfo/list.jsp" />
+	</definition>
+
+	<definition name="businessInfo/edit" extends="master.page">	
+		<put-attribute name="title" value="business Info edit" />
+		<put-attribute name="body" value="/views/businessInfo/edit.jsp" />
+	</definition>
+
+
+
+</tiles-definitions>

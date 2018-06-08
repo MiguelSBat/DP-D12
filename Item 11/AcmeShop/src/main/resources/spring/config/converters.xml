@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * converters.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd		
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd		
+	">
+
+	<util:list id="converters">
+		<bean class="converters.ActorToStringConverter" />
+		<bean class="converters.StringToActorConverter" />
+		
+		<bean class="converters.AdminToStringConverter" />
+		<bean class="converters.StringToAdminConverter" />
+		
+		<bean class="converters.AdvertisementToStringConverter" />
+		<bean class="converters.StringToAdvertisementConverter" />
+		
+		<bean class="converters.AnswerToStringConverter" />
+		<bean class="converters.StringToAnswerConverter" />
+		
+		<bean class="converters.AuctionAdvertisementToStringConverter" />
+		<bean class="converters.StringToAuctionAdvertisementConverter" />
+		
+		<bean class="converters.BidToStringConverter" />
+		<bean class="converters.StringToBidConverter" />
+		
+		<bean class="converters.BusinessToStringConverter" />
+		<bean class="converters.StringToBusinessConverter" />
+		
+		<bean class="converters.BusinessInfoToStringConverter" />
+		<bean class="converters.StringToBusinessInfoConverter" />
+		
+		<bean class="converters.ChatToStringConverter" />
+		<bean class="converters.StringToChatConverter" />
+		
+		<bean class="converters.ConfigToStringConverter" />
+		<bean class="converters.StringToConfigConverter" />
+		
+		<bean class="converters.ExpressAdvertisementToStringConverter" />
+		<bean class="converters.StringToExpressAdvertisementConverter" />
+		
+		<bean class="converters.FacturationDataToStringConverter" />
+		<bean class="converters.StringToFacturationDataConverter" />
+		
+		<bean class="converters.FolderToStringConverter" />
+		<bean class="converters.StringToFolderConverter" />
+		
+		<bean class="converters.ItemToStringConverter" />
+		<bean class="converters.StringToItemConverter" />
+		
+		<bean class="converters.MessageToStringConverter" />
+		<bean class="converters.StringToMessageConverter" />
+		
+		<bean class="converters.ModeratorToStringConverter" />
+		<bean class="converters.StringToModeratorConverter" />
+		
+		<bean class="converters.TicketToStringConverter" />
+		<bean class="converters.StringToTicketConverter" />
+		
+		<bean class="converters.QuestionToStringConverter" />
+		<bean class="converters.StringToQuestionConverter" />
+		
+		<bean class="converters.ReportToStringConverter" />
+		<bean class="converters.StringToReportConverter" />
+		
+		<bean class="converters.ReviewToStringConverter" />
+		<bean class="converters.StringToReviewConverter" />
+		
+		<bean class="converters.SaleLineToStringConverter" />
+		<bean class="converters.StringToSaleLineConverter" />
+		
+		<bean class="converters.ShipmentAddressToStringConverter" />
+		<bean class="converters.StringToShipmentAddressConverter" />
+		
+		<bean class="converters.ShippingInfoToStringConverter" />
+		<bean class="converters.StringToShippingInfoConverter" />
+		
+		<bean class="converters.ShopAdvertisementToStringConverter" />
+		<bean class="converters.StringToShopAdvertisementConverter" />
+		
+		<bean class="converters.ShoppingCartToStringConverter" />
+		<bean class="converters.StringToShoppingCartConverter" />
+		
+		<bean class="converters.SocialIdentityToStringConverter" />
+		<bean class="converters.StringToSocialIdentityConverter" />
+		
+		<bean class="converters.UserToStringConverter" />
+		<bean class="converters.StringToUserConverter" />
+		
+		<bean class="converters.ValorationToStringConverter" />
+		<bean class="converters.StringToValorationConverter" />
+	</util:list>
+	
+</beans>

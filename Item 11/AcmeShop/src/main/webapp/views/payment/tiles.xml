@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+
+	
+	<definition name="payment/pay" extends="master.page">	
+		<put-attribute name="title" value="Payment" />
+		<put-attribute name="body" value="/views/payment/pay.jsp" />
+	</definition>
+	
+	<definition name="payment/payBuyNow" extends="master.page">	
+		<put-attribute name="title" value="Payment" />
+		<put-attribute name="body" value="/views/payment/payBuyNow.jsp" />
+	</definition>
+	
+	<definition name="payment/payBid" extends="master.page">	
+		<put-attribute name="title" value="Payment" />
+		<put-attribute name="body" value="/views/payment/payBid.jsp" />
+	</definition>
+	
+	<definition name="payment/payPremium" extends="master.page">	
+		<put-attribute name="title" value="Premium" />
+		<put-attribute name="body" value="/views/payment/payPremium.jsp" />
+	</definition>
+	
+	<definition name="payment/confirmation" extends="master.page">	
+		<put-attribute name="title" value="Payment successfully processed" />
+		<put-attribute name="body" value="/views/payment/confirmation.jsp" />
+	</definition>
+	
+</tiles-definitions>
