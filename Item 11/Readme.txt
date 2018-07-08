@@ -1,1 +1,1 @@
-Nuestro proyecto base implemente el A+ así que este proyecto es una copia exacta del item 4.
+Nuestro proyecto base implementa el A+ así que este proyecto es una copia exacta del item 4.
