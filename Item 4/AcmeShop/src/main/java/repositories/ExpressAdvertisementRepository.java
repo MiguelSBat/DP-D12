@@ -23,4 +23,7 @@ public interface ExpressAdvertisementRepository extends JpaRepository<ExpressAdv
 
 	@Query("select avg(s.price) from ExpressAdvertisement s")
 	Double avgPriceExp();
+
+	@Query("select sqrt(sum(s.price*s.price) / count(s.price) - (avg(s.price) * avg(s.price))) from ExpressAdvertisement s")
+	Double stdPriceExp();
 }

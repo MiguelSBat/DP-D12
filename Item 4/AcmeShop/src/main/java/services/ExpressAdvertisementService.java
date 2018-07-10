@@ -181,5 +181,10 @@ public class ExpressAdvertisementService {
 		result = this.expressAdvertisementRepository.avgPriceExp();
 		return result;
 	}
+	public Double stdPriceExp() {
+		Double result;
+		result = this.expressAdvertisementRepository.stdPriceExp();
+		return result;
+	}
 
 }

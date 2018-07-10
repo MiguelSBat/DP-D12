@@ -133,4 +133,10 @@ public class QuestionService {
 		return result;
 	}
 
+	public Double stdQuestionsPerShopAdvertisement() {
+		Double result;
+		result = this.questionRepository.stdQuestionsPerShopAdvertisement();
+		return result;
+	}
+
 }

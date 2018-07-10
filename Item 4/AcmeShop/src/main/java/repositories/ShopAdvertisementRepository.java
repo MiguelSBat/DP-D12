@@ -21,4 +21,7 @@ public interface ShopAdvertisementRepository extends JpaRepository<ShopAdvertise
 	@Query("select avg(s.stock) from ShopAdvertisement s")
 	Double avgStockShop();
 
+	@Query("select sqrt(sum(s.stock*s.stock) / count(s.stock) - (avg(s.stock) * avg(s.stock))) from ShopAdvertisement s")
+	Double stdStockShop();
+
 }

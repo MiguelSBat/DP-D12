@@ -15,20 +15,40 @@
 <b><spring:message code="administrator.avgSS"/></b>
 <fmt:formatNumber value="${avgStockShop}" pattern="####0.00"/>
 <br/>
+<b><spring:message code="administrator.stdSS"/></b>
+<fmt:formatNumber value="${stdStockShop}" pattern="####0.00"/>
+<br/><br/>
+
 <b><spring:message code="administrator.avgPE"/></b>
 <fmt:formatNumber value="${avgPriceExp}" pattern="####0.00"/>
+<br/>
+<b><spring:message code="administrator.stdPE"/></b>
+<fmt:formatNumber value="${stdPriceExp}" pattern="####0.00"/>
+<br/>
+
 <br/><br/><br/>
+
+
 
 <b><spring:message code="administrator.avgVU"/></b>
 <fmt:formatNumber value="${avgValoUser}" pattern="####0.00"/>
 <br/>
+<b><spring:message code="administrator.stdVU"/></b>
+<fmt:formatNumber value="${stdValoUser}" pattern="####0.00"/>
+<br/>
 <b><spring:message code="administrator.avgVB"/></b>
 <fmt:formatNumber value="${avgValoBusiness}" pattern="####0.00"/>
+<br/>
+<b><spring:message code="administrator.stdVB"/></b>
+<fmt:formatNumber value="${stdValoBusiness}" pattern="####0.00"/>
 <br/><br/><br/>
 
 <b><spring:message code="administrator.avgQS"/></b>
 <fmt:formatNumber value="${avgQuestionsShop}" pattern="####0.00"/>
 <br/>
+<b><spring:message code="administrator.stdQS"/></b>
+<fmt:formatNumber value="${stdQuestionsShop}" pattern="####0.00"/>
+<br/><br/>
 <b><spring:message code="administrator.avgRB"/></b>
 <fmt:formatNumber value="${avgReportBusiness}" pattern="####0.00"/>
 <br/><br/><br/>

@@ -168,6 +168,14 @@ public class ShopAdvertisementService {
 		return result;
 	}
 
+	public Double stdStockshop() {
+
+		Double result;
+		result = this.shopAdvertisementRepository.stdStockShop();
+		return result;
+
+	}
+
 	public void addQuestion(final Question question) {
 		ShopAdvertisement shopAdvertisement;
 

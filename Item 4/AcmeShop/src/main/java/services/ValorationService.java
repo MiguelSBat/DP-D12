@@ -129,6 +129,26 @@ public class ValorationService {
 		return res / aux.size();
 	}
 
+	public Double getstdValorationByUser() {
+		Collection<User> aux;
+
+		aux = this.userService.findAll();
+		Double avg, s, sum, count, result;
+		avg = this.getAverageValorationByUser();
+		s = 0.0;
+		sum = 0.0;
+		count = 0.0;
+
+		for (final User u : aux) {
+			if (this.getValorations(u.getId()) != null)
+				s = this.getValorations(u.getId());
+			sum = sum + s * s;
+			count += 1;
+		}
+		result = Math.sqrt(sum / count - avg * avg);
+		return result;
+	}
+
 	public Double getAverageValorationByBusiness() {
 		final Collection<Business> aux = this.businessService.findAll();
 		Double res = 0.0;
@@ -140,6 +160,26 @@ public class ValorationService {
 			res = res + s;
 		}
 		return res / aux.size();
+	}
+
+	public Double getstdValorationByBusiness() {
+		Collection<Business> aux;
+
+		aux = this.businessService.findAll();
+		Double avg, s, sum, count, result;
+		avg = this.getAverageValorationByUser();
+		s = 0.0;
+		sum = 0.0;
+		count = 0.0;
+
+		for (final Business u : aux) {
+			if (this.getValorations(u.getId()) != null)
+				s = this.getValorations(u.getId());
+			sum = sum + s * s;
+			count += 1;
+		}
+		result = Math.sqrt(sum / count - avg * avg);
+		return result;
 	}
 
 	public Boolean AntiHacking(final Actor valorado) {

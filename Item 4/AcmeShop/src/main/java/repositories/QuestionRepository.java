@@ -20,4 +20,7 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
 	@Query("select avg(s.questions.size) from ShopAdvertisement s")
 	Double avgQuestionsPerShopAdvertisement();
+
+	@Query("select sqrt(sum(s.questions.size*s.questions.size) / count(s.questions.size) - (avg(s.questions.size) * avg(s.questions.size))) from ShopAdvertisement s")
+	Double stdQuestionsPerShopAdvertisement();
 }
