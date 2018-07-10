@@ -134,6 +134,8 @@
 									code="master.page.createAdmin" /></a></li>
 						<li><a href="actor/create.do?actorType=MODERATOR"><spring:message
 									code="master.page.createModerator" /></a></li>
+						<li><a href="actor/create.do?actorType=USER"><spring:message
+									code="master.page.createUser.admin" /></a></li>
 					</security:authorize>
 					<li><a href="j_spring_security_logout"><spring:message
 								code="master.page.logout" /> </a></li>

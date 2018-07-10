@@ -10,8 +10,6 @@
 
 package services;
 
-import java.util.Date;
-
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
 
@@ -35,8 +33,8 @@ public class ItemTest extends AbstractTest {
 	@Autowired
 	private ItemService	itemService;
 
-//	Date					fechaValida	= new Date();
 
+	//	Date					fechaValida	= new Date();
 
 	// Tests ------------------------------------------------------------------
 	@Test
@@ -45,22 +43,22 @@ public class ItemTest extends AbstractTest {
 			{	//Creacion Item correcta
 				"user1", "item1", "este objeto es muy bonito", "http://foto.es", null
 			}, {//Creacion erronea con un usuario que no exista
-				"salmorejo", "item1", "este objeto es muy bonito", "http://foto.es",  IllegalArgumentException.class
+				"salmorejo", "item1", "este objeto es muy bonito", "http://foto.es", IllegalArgumentException.class
 			}, {//Creacion erronea Item titulo en blanco
-				"user1", "", "este objeto es muy bonito", "http://foto.es",  ConstraintViolationException.class
+				"user1", "", "este objeto es muy bonito", "http://foto.es", ConstraintViolationException.class
 			}, {//Creacion erronea Item titulo null
-				"user1", null, "este objeto es muy bonito", "http://foto.es",  NullPointerException.class
+				"user1", null, "este objeto es muy bonito", "http://foto.es", NullPointerException.class
 			}, {//Creacion erronea descripcion en blanco
-				"user1", "item1", "", "http://foto.es",  ConstraintViolationException.class
+				"user1", "item1", "", "http://foto.es", ConstraintViolationException.class
 			}, {//Creacion erronea descripcion null
-				"user1", "item1", null, "http://foto.es", ConstraintViolationException.class
+				"user1", "item1", null, "http://foto.es", NullPointerException.class
 			}, {//Creacion con un business
 				"business1", "item2", "soy un business", "http://foto.es", null
 			}, {//Creacion erronea con un business pero con descripcion en null
-				"business1", "item3", null, "http://foto.es", ConstraintViolationException.class
-				
+				"business1", "item3", null, "http://foto.es", NullPointerException.class
+
 			}
-			
+
 		};
 
 		for (int i = 0; i < testingData.length; i++)
@@ -74,7 +72,7 @@ public class ItemTest extends AbstractTest {
 			}
 	}
 	// Ancillary methods ------------------------------------------------------
-	protected void createAndSaveTemplate(final String beanName, final String name,final String description,final String photo , final Class<?> expected) {
+	protected void createAndSaveTemplate(final String beanName, final String name, final String description, final String photo, final Class<?> expected) {
 		Class<?> caught;
 		caught = null;
 
@@ -89,7 +87,6 @@ public class ItemTest extends AbstractTest {
 			item.setName(name);
 			item.setDescription(description);
 			item.setPhoto(photo);
-		
 
 			this.itemService.save(item);
 

@@ -58,7 +58,7 @@ public class ItemService {
 	}
 
 	public Item save(final Item item) {
-		Item result;
+		Item result = null;
 		Actor actor;
 		User user;
 
@@ -67,18 +67,18 @@ public class ItemService {
 		Assert.isTrue(actor instanceof User || actor instanceof Business);
 		if (actor instanceof User) {
 			item.setUser((User) actor);
-			result = this.itemRepository.save(item);
 			user = (User) this.actorService.findByPrincipal();
-			if (this.configService.isTaboo(item.getName()) && this.configService.isTaboo(item.getDescription()) && this.configService.isTaboo(item.getPhoto()))
+			if (this.configService.isTaboo(item.getName()) || this.configService.isTaboo(item.getDescription()) || this.configService.isTaboo(item.getPhoto()))
 				user.setSuspicious(true);
-		} else {
+			else
+				result = this.itemRepository.save(item);
+		} else if (!(this.configService.isTaboo(item.getName()) || this.configService.isTaboo(item.getDescription()) || this.configService.isTaboo(item.getPhoto()))) {
 			item.setBusiness((Business) actor);
 			result = this.itemRepository.save(item);
 		}
 
 		return result;
 	}
-
 	public Collection<Item> findByUser(final int userId) {
 		Collection<Item> result;
 
