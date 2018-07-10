@@ -46,23 +46,23 @@ public class ShopAdvertisementTest extends AbstractTest {
 	public void createAndSaveDriver() {
 		final Object testingData[][] = {
 			{	//Creacion ShopAd correcta
-				"business1", "item1", 2018, 6, 20, "tags", 10, 10.0, null
+				"business1", "item1", 2018, 8, 20, "tags", 10, 10.0, null
 			}, {	//Creacion ShopAd con item incorrecto
-				"business1", "item2", 2018, 6, 20, "tags", 10, 10.0, IllegalArgumentException.class
+				"business1", "item2", 2018, 8, 20, "tags", 10, 10.0, IllegalArgumentException.class
 			}, {	//Creacion con fecha por encima del limite
-				"business1", "item1", 2019, 6, 20, "tags", 10, 10.0, IllegalArgumentException.class
+				"business1", "item1", 2019, 8, 20, "tags", 10, 10.0, IllegalArgumentException.class
 			}, {	//Creacion con fecha en pasado
-				"business1", "item1", 2000, 6, 20, "tags", 10, 10.0, IllegalArgumentException.class
+				"business1", "item1", 2000, 8, 20, "tags", 10, 10.0, IllegalArgumentException.class
 			}, {	//User intenta crear un ShopAd
-				"user1", "item1", 2019, 6, 20, "tags", 10, 10.0, IllegalArgumentException.class
+				"user1", "item1", 2019, 8, 20, "tags", 10, 10.0, IllegalArgumentException.class
 			}, {	//Creacion con precio en 0
-				"business1", "item1", 2018, 6, 20, "tags", 10, 0.0, null
+				"business1", "item1", 2018, 8, 20, "tags", 10, 0.0, null
 			}, {	//Creacion con precio negativo
-				"business1", "item1", 2018, 6, 20, "tags", 10, -10.0, ConstraintViolationException.class
+				"business1", "item1", 2018, 8, 20, "tags", 10, -10.0, ConstraintViolationException.class
 			}, {	//Creacion con stock 0
-				"business1", "item1", 2018, 6, 20, "tags", 0, 10.0, IllegalArgumentException.class
+				"business1", "item1", 2018, 8, 20, "tags", 0, 10.0, IllegalArgumentException.class
 			}, {	//Creacion con stock negativo
-				"business1", "item1", 2018, 6, 20, "tags", -10, 10.0, IllegalArgumentException.class
+				"business1", "item1", 2018, 8, 20, "tags", -10, 10.0, IllegalArgumentException.class
 			}
 		};
 
