@@ -120,18 +120,18 @@ public class AdministratorController extends AbstractController {
 			avgValoBusiness = this.valorationService.getAverageValorationByBusiness();
 			stdValoBusiness = this.valorationService.getstdValorationByBusiness();
 
-			if (this.shopAdvertisementService.findAll().size() > 0)
+			if (this.shopAdvertisementService.findAll().size() > 0) {
 				avgStockShop = this.shopAdvertisementService.avgStockShop();
-			stdStockShop = this.shopAdvertisementService.stdStockshop();
-
-			if (this.expressAdvertisementService.findAll().size() > 0)
+				stdStockShop = this.shopAdvertisementService.stdStockshop();
+			}
+			if (this.expressAdvertisementService.findAll().size() > 0) {
 				avgPriceExp = this.expressAdvertisementService.avgPriceExp();
-			stdPriceExp = this.expressAdvertisementService.stdPriceExp();
-
-			if (this.questionService.findAll().size() > 0)
+				stdPriceExp = this.expressAdvertisementService.stdPriceExp();
+			}
+			if (this.questionService.findAll().size() > 0) {
 				avgQuestionsShop = this.questionService.avgQuestionsPerShopAdvertisement();
-			stdQuestionsShop = this.questionService.stdQuestionsPerShopAdvertisement();
-
+				stdQuestionsShop = this.questionService.stdQuestionsPerShopAdvertisement();
+			}
 			avgReportBusiness = this.reportService.avgReportsPerBusiness();
 			//stdReportBusiness = this.reportService.stdReportsPerBusiness();
 			avgReportUsers = this.reportService.avgReportsPerUser();
