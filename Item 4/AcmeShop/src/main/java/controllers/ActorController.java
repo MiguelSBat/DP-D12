@@ -114,8 +114,10 @@ public class ActorController {
 				}
 			} catch (final Throwable oops) {
 				oops.printStackTrace();
-				result = this.createRegisterModelAndView(actorForm, "actor.commit.error");
-
+				if (actorForm != null && !actorForm.getPhone().matches("^\\+?\\d+$"))
+					result = this.createRegisterModelAndView(actorForm, "actor.commit.error.phone");
+				else
+					result = this.createRegisterModelAndView(actorForm, "actor.commit.error");
 			}
 		return result;
 	}
